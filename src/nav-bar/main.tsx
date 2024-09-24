@@ -15,6 +15,7 @@ function NavBar() {
           <li><a href="#">Officers</a></li>
           <li><a href="#">Society</a></li>
           <li><a href="#">Join</a></li>
+          <li><button className={styles['sign-in-btn']}>Sign In</button></li>
         </ul>
       </nav>
     </div>
