@@ -4,6 +4,7 @@
 	margin: 0 auto;
   position: fixed;
   left: 10%;
+  z-index: 100;
 }
 
 header::after {
@@ -20,6 +21,7 @@ body {
   float: left;
   padding: 10px 0;
   height: 8vh;
+  pointer-events: none;
 }
 
 nav {
@@ -48,19 +50,8 @@ nav a {
   transition: all ease-in-out 250ms;
 }
 
-nav a::before {
-  content: '';
-  display: block;
-  height: 3px;
-  background-color: white;
-
-  width: 0%;
-
-  transition: all ease-in-out 250ms;
-}
-
-nav a:hover::before {
-  width: 100%;
+nav li a:hover {
+  opacity: 75%;
 }
 
 .sign-in-btn {
