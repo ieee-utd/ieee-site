@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import NavBar from "./nav-bar/nav-bar";
-import Notification from "./notification/notification";
 import Footer from "./footer/footer";
 import HomePage from "./home-page/home-page";
 
 import "./index.css";
+import './notification/notification.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,7 +16,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Router>
-      <Notification />
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

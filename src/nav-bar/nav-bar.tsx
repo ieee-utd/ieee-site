@@ -36,8 +36,8 @@ function NavBar() {
                 </a>
               </li>
               <li>
-                <a className={styles.mobileLink} href="/society">
-                  Society
+                <a className={styles.mobileLink} href="/societies">
+                  Societies
                 </a>
               </li>
               <li>
@@ -96,8 +96,8 @@ function NavBar() {
               </a>
             </li>
             <li>
-              <a className={styles.link} href="/society">
-                Society
+              <a className={styles.link} href="/societies">
+                Societies
               </a>
             </li>
             <li>
