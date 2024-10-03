@@ -1,4 +1,5 @@
-import "./x.css";
+import './x.css';
+import TutoringCalendar from '../components/tutoring-calendar';
 
 function HomePage() {
   return (
@@ -7,6 +8,7 @@ function HomePage() {
       <div className="x"></div>
       <div className="x"></div>
       <div className="x"></div>
+      <TutoringCalendar />
     </>
   );
 }
