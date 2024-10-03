@@ -25,8 +25,10 @@ export default function Footer() {
         <div className={styles["news-letter"]}>
           <input
             className={styles["news-letter-input"]}
-            type="text"
-            placeholder="email@email.com"
+            type="email"
+            name="email"
+            autoComplete="off"
+            placeholder="user@domain.com"
           ></input>
           <button className={styles["subscribe-button"]}>
             subscribe

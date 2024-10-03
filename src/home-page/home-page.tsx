@@ -1,13 +1,11 @@
-import './x.css';
+//Use cookies for log in
+
+//https://ieeeutd.org/privacy-policy
 import TutoringCalendar from '../components/tutoring-calendar';
 
 function HomePage() {
   return (
     <>
-      <div className="x"></div>
-      <div className="x"></div>
-      <div className="x"></div>
-      <div className="x"></div>
       <TutoringCalendar />
     </>
   );
