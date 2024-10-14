@@ -2,7 +2,7 @@
 	width: 95%;
   position: fixed;
   left: 2.5%;
-  z-index: 99;
+  z-index: 1000;
   height: 0;
 }
 
@@ -35,7 +35,7 @@
   font-size: 16px;
   font-weight: 500;
   position: relative;
-
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   transition: all ease-in-out 250ms;
 }
 
@@ -283,6 +283,8 @@
   text-decoration: none;
   font-size: 28px;
   font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
 
   position: relative;
 
