@@ -126,6 +126,7 @@
   display: flex;
   font-weight: 600;
   color: black;
+  background-color: #2c6a9b;
 }
 
 .calendar-container {
@@ -133,6 +134,7 @@
   justify-content: center;
   padding: 4rem 0rem;
   z-index: -1;
+  background-color: #2c6a9b;
 }
 .calendar-container > div {
   width: 80vw;
@@ -205,7 +207,7 @@
   text-align: center;
   border: 1px solid #ddd;
   padding: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 1000;
 }
 /* Want to be a tutor? */
