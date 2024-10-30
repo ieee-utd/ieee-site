@@ -14,7 +14,7 @@ const WhoWeAre = () => {
           <div className={styles.titleSection}>
             <div className={styles.titleContent}>
               <h2 className={styles.title}>
-                Who we are
+                Who We Are
                 {/* underline element */}
                 <span className={styles.underline}></span>
               </h2>

@@ -9,9 +9,9 @@ import Landing from "./landing/landing";
 function HomePage() {
   return (
     <>
-      <WhoWeAre />
       <Landing />
       <Sponsors />
+      <WhoWeAre />
       <TutoringCalendar />
     </>
   );

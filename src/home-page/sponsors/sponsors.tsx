@@ -25,7 +25,9 @@ const clients: Client[] = [
 function Sponsors() {
   return (
     <div className={Styles.Container}>
-      <h1>Meet Our Sponsor's</h1>
+      <h2>Our Sponsors {/* underline element */}
+      <span className={Styles.underline}></span>
+      </h2>
       <div className={Styles["Client-list"]}>
         {clients.map((client) => (
           <div key={client.id} className={Styles["Client-item"]}>
