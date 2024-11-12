@@ -12,9 +12,15 @@ const users = [];
 
 // Login route (Manual login)
 router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find((user) => user.username === username);
+  if (user && bcrypt.compareSync(password, user.password)) {
+    req.session.userId = user.id; // Store user ID in session
+    return res.redirect('/');
+  }
+  res.send('Invalid credentials');
     const { username, password } = req.body;
-    const user = users.find((user) => user.username === username);
-
+    const user = users.find(user => user.username === username);
     if (user && bcrypt.compareSync(password, user.password)) {
         req.session.userId = user.id; // Store user ID in session
         console.log(`User logged in: ${username}`);
@@ -55,6 +61,10 @@ router.post('/google-login', async (req, res) => {
 
 // Logout route
 router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) return res.send('Error logging out');
+    res.redirect('/');
+  });
     req.session.destroy((err) => {
         if (err) {
             console.error('Error logging out:', err);
@@ -66,6 +76,10 @@ router.get('/logout', (req, res) => {
 
 // Register route
 router.post('/register', (req, res) => {
+  const { username, password } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  users.push({ id: users.length + 1, username, password: hashedPassword });
+  res.send('User registered');
     const { username, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
     

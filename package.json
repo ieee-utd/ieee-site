@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/timegrid": "^6.1.6",
+    "@fullcalendar/scrollgrid": "^6.1.5",
+    "@fullcalendar/google-calendar": "^6.1.4",
+    "@fullcalendar/react": "^6.1.15",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
