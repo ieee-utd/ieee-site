@@ -8,7 +8,7 @@ const { OAuth2Client } = require('google-auth-library');
 const app = express();
 
 // Google OAuth client set
-const CLIENT_ID = 'PUT_GOOGLE_CLIENT_ID';
+const CLIENT_ID = 'PUT_GOOGLE_CLIENT_ID'; // replace client ID with actual google client ID.
 const client = new OAuth2Client(CLIENT_ID);
 
 // Middleware for parsing request bodies
