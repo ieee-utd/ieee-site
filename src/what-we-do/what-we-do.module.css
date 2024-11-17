@@ -1,0 +1,316 @@
+/* main section container */
+.WhatWeDo {
+  background-color: #2c6a9b;
+  color: white;
+  padding: 4rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* global container*/
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* grid layout for four main sections */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, minmax(300px, auto));
+  gap: 4rem;
+}
+
+/* title section */
+.titleSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.titleContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* title with underline */
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.underline {
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 3px;
+  background-color: #32363d;
+}
+
+/* description text */
+.description {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+/* image section */
+.imageSection {
+  width: 100%;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* content section */
+.contentSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+}
+
+.services {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+/* "Learn More" button styling */
+.learnMoreButton {
+  background-color: white;
+  color: #2c6a9b;
+  text-decoration: none;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.learnMoreButton:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Media queries */
+/* (2400px+) */
+@media screen and (min-width: 2400px) {
+  .container {
+    max-width: 2600px;
+  }
+
+  .title {
+    font-size: 4.5rem;
+  }
+
+  .description {
+    font-size: 2.5rem;
+  }
+
+  .services {
+    font-size: 2.25rem;
+  }
+  .learnMoreButton {
+    padding: 1.25rem 3.25rem;
+    font-size: 2.25rem;
+  }
+}
+
+/* (2000px - 2399px) */
+@media screen and (min-width: 2000px) and (max-width: 2399px) {
+  .container {
+    max-width: 2400px;
+  }
+
+  .gridContainer {
+    gap: 7rem;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .description {
+    font-size: 2.25rem;
+  }
+
+  .services {
+    font-size: 2rem;
+  }
+
+  .learnMoreButton {
+    padding: 1.15rem 3.15rem;
+    font-size: 2.15rem;
+  }
+}
+
+/* (1800px - 1999px) */
+@media screen and (min-width: 1800px) and (max-width: 1999px) {
+  .container {
+    max-width: 2000px;
+  }
+
+  .gridContainer {
+    gap: 6rem;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .description {
+    font-size: 2rem;
+  }
+
+  .services {
+    font-size: 1.75rem;
+  }
+
+  .learnMoreButton {
+    padding: 1rem 3rem;
+    font-size: 2rem;
+  }
+}
+
+/* (1600px - 1799px) */
+@media screen and (min-width: 1600px) and (max-width: 1799px) {
+  .container {
+    max-width: 1800px;
+  }
+
+  .gridContainer {
+    gap: 5rem;
+  }
+
+  .title {
+    font-size: 3.25rem;
+  }
+
+  .description {
+    font-size: 1.875rem;
+  }
+
+  .services {
+    font-size: 1.625rem;
+  }
+  .learnMoreButton {
+    padding: 0.75rem 2.65rem;
+    font-size: 2rem;
+  }
+}
+
+/* (1400px - 1599px) */
+@media screen and (min-width: 1400px) and (max-width: 1599px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  .gridContainer {
+    gap: 4rem;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1.75rem;
+  }
+
+  .services {
+    font-size: 1.5rem;
+  }
+  .learnMoreButton {
+    padding: 0.75rem 2.6rem;
+    font-size: 1.75rem;
+  }
+}
+
+/* (1025px - 1399px) */
+@media screen and (min-width: 1025px) and (max-width: 1399px) {
+  .gridContainer {
+    gap: 4rem;
+  }
+  .learnMoreButton {
+    padding: 0.75rem 2.5rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .WhatWeDo {
+    padding: 2rem;
+  }
+
+  .gridContainer {
+    gap: 3rem;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+  }
+
+  .services {
+    font-size: 1.125rem;
+  }
+}
+
+/* (< 768px) */
+@media screen and (max-width: 768px) {
+  .WhatWeDo {
+    padding: 2rem;
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr; /* stack elements vertically on mobile */
+    grid-template-rows: auto;
+    gap: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description,
+  .services {
+    font-size: 1rem;
+  }
+
+  .imageWrapper {
+    height: 300px; /* fixed height for images on mobile */
+  }
+}
