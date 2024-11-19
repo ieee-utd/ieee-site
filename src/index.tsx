@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./nav-bar/nav-bar";
 import Footer from "./footer/footer";
 import HomePage from "./home-page/home-page";
+import Committees from "./officers/officers"
 
 import "./index.css";
 import './notification/notification.css';
@@ -19,6 +20,7 @@ root.render(
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/Officers" element={<Committees />} />
       </Routes>
       <Footer />
     </Router>
