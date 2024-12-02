@@ -1,17 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import NavBar from "./nav-bar/nav-bar";
-import Footer from "./footer/footer";
-import HomePage from "./home-page/home-page";
-import Committees from "./officers/officers"
+import NavBar from './nav-bar/nav-bar';
+import Footer from './footer/footer';
+import HomePage from './home-page/home-page';
+import Committees from './officers/officers';
+import TutoringPage from './tutoring-page/tutoring-page';
 
-import "./index.css";
+import './index.css';
 import './notification/notification.css';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 
 root.render(
@@ -21,6 +22,7 @@ root.render(
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Officers" element={<Committees />} />
+        <Route path="/Tutoring" element={<TutoringPage />} />
       </Routes>
       <Footer />
     </Router>

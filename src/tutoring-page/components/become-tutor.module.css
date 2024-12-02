@@ -1,0 +1,186 @@
+/* Main section container */
+.become_tutor_section {
+  width: 100%;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Content container */
+.content_container {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Main title styling */
+.main_title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 2rem;
+}
+
+/* Subtitle styling */
+.subtitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+/* Requirements list styling */
+.requirements_list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.5rem 0;
+  font-size: 1.5rem;
+  color: black;
+}
+
+.requirements_list li {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Apply button */
+.apply_button {
+  background-color: #2c6a9b;
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.apply_button:hover {
+  background-color: #344969;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive design */
+@media screen and (min-width: 2400px) {
+  .content_container {
+    max-width: 1200px;
+  }
+
+  .main_title {
+    font-size: 6rem;
+  }
+
+  .subtitle {
+    font-size: 3rem;
+  }
+
+  .requirements_list {
+    font-size: 2.25rem;
+  }
+
+  .apply_button {
+    font-size: 2.25rem;
+    padding: 1.5rem 3.5rem;
+  }
+}
+
+@media screen and (min-width: 1800px) and (max-width: 2399px) {
+  .content_container {
+    max-width: 1000px;
+  }
+
+  .main_title {
+    font-size: 5rem;
+  }
+
+  .subtitle {
+    font-size: 2.5rem;
+  }
+
+  .requirements_list {
+    font-size: 2rem;
+  }
+
+  .apply_button {
+    font-size: 2rem;
+    padding: 1.25rem 3rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .become_tutor_section {
+    padding: 3rem 1.5rem;
+  }
+
+  .main_title {
+    font-size: 3.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.75rem;
+  }
+
+  .requirements_list {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .become_tutor_section {
+    padding: 2.5rem 1rem;
+  }
+
+  .main_title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .requirements_list {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .requirements_list li {
+    margin-bottom: 0.75rem;
+  }
+
+  .apply_button {
+    padding: 0.875rem 2rem;
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .become_tutor_section {
+    padding: 2rem 0.75rem;
+  }
+
+  .main_title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+  }
+
+  .requirements_list {
+    font-size: 1.1rem;
+  }
+
+  .apply_button {
+    padding: 0.75rem 1.75rem;
+    font-size: 1.125rem;
+  }
+}
