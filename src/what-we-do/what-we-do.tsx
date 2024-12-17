@@ -1,64 +1,42 @@
-import React from 'react';
-import styles from './what-we-do.module.css';
-import conferenceImage from '../assets/gridimages/grid3.jpg';
-import matchaImage from '../assets/gridimages/grid4.jpg';
+import React from "react";
+import styles from "./what-we-do.module.css";
 
 const WhatWeDo = () => {
   return (
     // main section container
     <section className={styles.WhatWeDo}>
       <div className={styles.container}>
-        {/* 2x2 Grid layout container */}
+        {/* Top Section: main heading */}
+        <div className={styles.titleSection}>
+          <h2 className={styles.title}>
+            What We Do
+            <span className={styles.underline}></span>
+          </h2>
+        </div>
+
+        {/* White Squares Section */}
         <div className={styles.gridContainer}>
-          {/* Top Left Quadrant: main heading and organization description */}
-          <div className={styles.titleSection}>
-            <div className={styles.titleContent}>
-              <h2 className={styles.title}>
-                What We Do
-                {/* underline element */}
-                <span className={styles.underline}></span>
-              </h2>
-              <p className={styles.description}>
-                IEEE UTD is one of the largest technical professional societies
-                in the region!
-              </p>
-            </div>
+          <div className={styles.squareBox}>
+            <h3>Tutoring</h3>
+            <p>
+              We tutor various CE/CS courses during the week between 10am-4pm.
+            </p>
+            <button className={styles.learnMoreButton}>Learn More</button>
           </div>
-
-          {/* Top Right Quadrant: Conference Image*/}
-          <div className={styles.imageSection}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={conferenceImage}
-                alt="IEEE UTD Conference"
-                className={styles.image}
-              />
-            </div>
+          <div className={styles.squareBox}>
+            <h3>Workshops</h3>
+            <p>Join us for weekly coding and software workshops.</p>
+            <button className={styles.learnMoreButton}>Learn More</button>
           </div>
-
-          {/* Bottom Left Quadrant: Event Image*/}
-          <div className={styles.imageSection}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={matchaImage}
-                alt="Matcha with Murata Event"
-                className={styles.image}
-              />
-            </div>
+          <div className={styles.squareBox}>
+            <h3>Projects</h3>
+            <p>Collaborate on open-source and AI-driven projects.</p>
+            <button className={styles.learnMoreButton}>Learn More</button>
           </div>
-
-          {/* Bottom Right Quadrant: services and CTA button*/}
-          <div className={styles.contentSection}>
-            <div className={styles.contentWrapper}>
-              <p className={styles.services}>
-                We provide tutoring, societies, networking opportunities, and
-                various events throughout the semester
-              </p>
-              {/* "Learn More" button w/placeholder link*/}
-              <a href="about-us" className={styles.learnMoreButton}>
-                Learn More
-              </a>
-            </div>
+          <div className={styles.squareBox}>
+            <h3>Events</h3>
+            <p>Participate in hackathons, seminars, and competitions.</p>
+            <button className={styles.learnMoreButton}>Learn More</button>
           </div>
         </div>
       </div>
