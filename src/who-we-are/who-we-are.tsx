@@ -6,7 +6,7 @@ import matchaImage from '../assets/gridimages/grid4.jpg';
 const WhoWeAre = () => {
   return (
     // main section container
-    <section className={styles.whoWeAre}>
+    <section className={styles.whoWeAre} id='who-we-are'>
       <div className={styles.container}>
         {/* 2x2 Grid layout container */}
         <div className={styles.gridContainer}>

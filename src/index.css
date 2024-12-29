@@ -5,6 +5,8 @@
   font-style: normal;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
   font-family: 'AeonikFono', sans-serif;
