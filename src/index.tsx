@@ -18,12 +18,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Router>
-      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Officers" element={<Committees />} />
         <Route path="/Tutoring" element={<TutoringPage />} />
       </Routes>
+      <NavBar />
       <Footer />
     </Router>
   </React.StrictMode>

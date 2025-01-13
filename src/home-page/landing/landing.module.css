@@ -1,59 +1,119 @@
 .Carousel {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .CarouselImage {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 1s ease-in-out;
-    opacity: 0;
-  }
-  
-  .CarouselImage.active {
-    opacity: 1;
-  }
-  
-  .Container {
-    position: relative;
-    height: 100vh;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    color: #fff;
-    z-index: 1; /* Ensure it appears above the images */
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.CarouselImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+}
+
+.CarouselImage.active {
+  opacity: 1;
+}
+
+.Container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the left */
+  text-align: left; /* Align text to the left */
+  color: #fff;
+  z-index: 1; /* Ensure it appears above the images */
+  padding-left: 6%; /* Adjust padding for positioning */
+  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+}
+
+.Header {
+  font-size: 3.25rem; /* Adjusted font size */
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.Description {
+  font-size: 1.75rem; /* New description style */
+  margin-bottom: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.Button {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #c85b12; /* Adjust color as needed */
+  border: none;
+  border-radius: 25px; /* Increased border-radius to make the button rounder */
+  color: white;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from the link */
+  transition: background-color 0.3s ease;
+}
+
+.Button:hover {
+  background-color: #9d480f; /* Adjust color on hover */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
   .Header {
-    font-size: 3rem; /* Adjust size as needed */
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.5rem; /* Larger font size for smaller screens */
   }
-  
+
+  .Description {
+    font-size: 1.5rem; /* Larger font size for smaller screens */
+  }
+
   .Button {
-    font-size: 1.2rem;
-    padding: 1rem 2rem;
-    background-color: #ff5733; /* Adjust color as needed */
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    text-decoration: none; /* Remove underline from the link */
-    transition: background-color 0.3s ease;
+    font-size: 1.2rem; /* Larger font size for smaller screens */
+    padding: 0.75rem 1.5rem; /* Adjusted padding for smaller screens */
   }
-  
-  .Button:hover {
-    background-color: #e04e2a; /* Adjust color on hover */
+
+  .Logo {
+    width: 40%; /* Adjust logo size for smaller screens */
+    bottom: 15px; /* Adjust as needed */
+    right: -20%; /* Adjust as needed */
   }
-  
+}
+
+@media screen and (max-width: 480px) {
+  .Header {
+    font-size: 2rem; /* Larger font size for mobile screens */
+  }
+
+  .Description {
+    font-size: 1.25rem; /* Larger font size for mobile screens */
+  }
+
+  .Button {
+    font-size: 1rem; /* Larger font size for mobile screens */
+    padding: 0.75rem 1.5rem; /* Adjusted padding for mobile screens */
+  }
+
+  .Logo {
+    width: 35%; /* Adjust logo size for mobile screens */
+    bottom: 10px; /* Adjust as needed */
+    right: -15%; /* Adjust as needed */
+  }
+}
+
+.Cursor {
+  display: inline-block;
+  width: 1px;
+  background-color: white;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}

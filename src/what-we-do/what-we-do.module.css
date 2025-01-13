@@ -1,0 +1,348 @@
+:root {
+    --main-bg-color: #2c6a9b;
+    --main-text-color: white;
+    --link-bg-color: white;
+    --link-text-color: #2c6a9b;
+    --underline-color: #32363d;
+    --max-width: 1400px;
+    --container-padding: 0px 0px 40px 0px;
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+  }
+  
+  /* main section container */
+  .whatWeDo {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--container-padding);
+  }
+  
+  /* global container */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  /* grid layout for sections */
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns by default */
+    gap: 4rem;
+  }
+  
+  /* title section */
+  .titleSection {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2.5rem; /* copied from second one */
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.5rem; /* copied from second one */
+  }
+  
+  .underline {
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 100%;
+    height: 3px;
+    background-color: var(--underline-color);
+  }
+  
+  /* individual section */
+  .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .link {
+    background-color: var(--link-bg-color);
+    color: var(--link-text-color);
+    text-decoration: none;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .link:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Media queries */
+  /* (768px - 1024px) */
+  @media screen and (max-width: 1024px) {
+    .gridContainer {
+      gap: 3rem;
+    }
+  
+    .title {
+      font-size: 2.25rem; /* copied from second one */
+    }
+  
+    .section {
+      flex-direction: column;
+    }
+  
+    .link {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  }
+  
+  /* (< 768px) */
+  @media screen and (max-width: 768px) {
+    .gridContainer {
+      gap: 2rem;
+    }
+  
+    .title {
+      font-size: 2rem; /* copied from second one */
+    }
+  
+    .imageWrapper {
+      height: 150px; /* fixed height for images on mobile */
+    }
+  }
+  
+  /* Media queries */
+  /* (2400px+) */
+  @media screen and (min-width: 2400px) {
+    .container {
+      max-width: 2600px;
+    }
+  
+    .title {
+      font-size: 4.5rem; /* copied from second one */
+    }
+  
+    .description {
+      font-size: 2.5rem; /* copied from second one */
+    }
+  
+    .services {
+      font-size: 2.25rem; /* copied from second one */
+    }
+  
+    .learnMoreButton {
+      padding: 1.25rem 3.25rem;
+      font-size: 2.25rem; /* copied from second one */
+    }
+  }
+  
+  /* (2000px - 2399px) */
+  @media screen and (min-width: 2000px) and (max-width: 2399px) {
+    .container {
+      max-width: 2400px;
+    }
+  
+    .gridContainer {
+      gap: 7rem;
+    }
+  
+    .title {
+      font-size: 4rem; /* copied from second one */
+    }
+  
+    .description {
+      font-size: 2.25rem; /* copied from second one */
+    }
+  
+    .services {
+      font-size: 2rem; /* copied from second one */
+    }
+  
+    .learnMoreButton {
+      padding: 1.15rem 3.15rem;
+      font-size: 2.15rem; /* copied from second one */
+    }
+  }
+  
+  /* (1800px - 1999px) */
+  @media screen and (min-width: 1800px) and (max-width: 1999px) {
+    .container {
+      max-width: 2000px;
+    }
+  
+    .gridContainer {
+      gap: 6rem;
+    }
+  
+    .title {
+      font-size: 3.5rem; /* copied from second one */
+    }
+  
+    .description {
+      font-size: 2rem; /* copied from second one */
+    }
+  
+    .services {
+      font-size: 1.75rem; /* copied from second one */
+    }
+  
+    .learnMoreButton {
+      padding: 1rem 3rem;
+      font-size: 2rem; /* copied from second one */
+    }
+  }
+  
+  /* (1600px - 1799px) */
+  @media screen and (min-width: 1600px) and (max-width: 1799px) {
+    .container {
+      max-width: 1800px;
+    }
+  
+    .gridContainer {
+      gap: 5rem;
+    }
+  
+    .title {
+      font-size: 3.25rem; /* copied from second one */
+    }
+  
+    .description {
+      font-size: 1.875rem; /* copied from second one */
+    }
+  
+    .services {
+      font-size: 1.625rem; /* copied from second one */
+    }
+  
+    .learnMoreButton {
+      padding: 0.75rem 2.65rem;
+      font-size: 2rem; /* copied from second one */
+    }
+  }
+  
+  /* (1400px - 1599px) */
+  @media screen and (min-width: 1400px) and (max-width: 1599px) {
+    .container {
+      max-width: 1600px;
+    }
+  
+    .gridContainer {
+      gap: 4rem;
+    }
+  
+    .title {
+      font-size: 3rem; /* copied from second one */
+    }
+  
+    .description {
+      font-size: 1.75rem; /* copied from second one */
+    }
+  
+    .services {
+      font-size: 1.5rem; /* copied from second one */
+    }
+  
+    .learnMoreButton {
+      padding: 0.75rem 2.6rem;
+      font-size: 1.75rem; /* copied from second one */
+    }
+  }
+  
+  /* (1025px - 1399px) */
+  @media screen and (min-width: 1025px) and (max-width: 1399px) {
+    .gridContainer {
+      gap: 4rem;
+    }
+  
+    .learnMoreButton {
+      padding: 0.75rem 2.5rem;
+      font-size: 1.25rem; /* copied from second one */
+    }
+  }
+  
+  /* (768px - 1024px) */
+  @media screen and (max-width: 1024px) {
+    .whoWeAre {
+      padding: 2rem;
+    }
+  
+    .gridContainer {
+      gap: 3rem;
+    }
+  
+    .title {
+      font-size: 2.25rem; /* copied from second one */
+    }
+  
+    .description {
+      font-size: 1.25rem; /* copied from second one */
+    }
+  
+    .services {
+      font-size: 1.125rem; /* copied from second one */
+    }
+  }
+  
+  /* (< 768px) */
+  @media screen and (max-width: 768px) {
+    .whoWeAre {
+      padding: 2rem;
+    }
+  
+    .gridContainer {
+      grid-template-rows: auto;
+      gap: 2rem;
+    }
+  
+    .title {
+      font-size: 2rem; /* copied from second one */
+    }
+  
+    .description,
+    .services {
+      font-size: 1rem; /* copied from second one */
+    }
+  
+    .imageWrapper {
+      height: 300px; /* fixed height for images on mobile */
+    }
+  }
+  

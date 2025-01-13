@@ -1,60 +1,99 @@
 .Container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background: #ffffff;
-	color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center the sections vertically */
+  justify-content: center; /* Center the sections horizontally */
+  background-color: white;
+  color: black;
   text-align: center;
   height: max-content;
+  width: 100%;
+  z-index: 100;
+  padding-bottom: 40px;
+}
+
+.SponsorSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items */
   justify-content: center;
 }
 
-.Container h2 {
-  font-size: 3.25rem;
-  height: 40px;
+.SponsorSection {
+  width: 80%; /* Ensure Sponsor section and Instagram section have equal width */
 }
 
-@media screen and (max-width: 1000px) {
-  .Container h2 {
-    font-size: 2rem;
-    padding-bottom: 20px;
-  } 
-}
-
-.underline {
-  position: relative;
-  left: 0;
-  margin-bottom: 10%;
-  width: 95%;
-  height: 3px;
-  background-color: #32363d;
-  display: inline-block;
+.SectionDescription {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .Client-list {
-	display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-	width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+  width: 100%;
   align-items: center;
   justify-items: center;
-  padding-bottom: 2.7vh;
 }
 
 .Client-item {
-  width: 80%;
+  width: 100%;
   max-width: 350px; /* Ensures it doesn't get too large */
   flex: 1 auto;
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
   transition: all 0.5s;
-}
-
-.Client-item:hover {
-  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(0%);
+  display: flex;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+  margin: auto; /* Center the image within the container */
 }
 
 .Qorvo {
-  max-width: 60%;
+  max-width: 80%;
+  margin-top: 5px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 2400px) {
+  .SectionTitle {
+    font-size: 4.5rem;
+  }
+  .SectionDescription {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 2000px) {
+  .SectionTitle {
+    font-size: 4rem;
+  }
+  .SectionDescription {
+    font-size: 2.25rem;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .SectionTitle {
+    font-size: 3.5rem;
+  }
+  .SectionDescription {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .SectionTitle {
+    font-size: 3.25rem;
+  }
+  .SectionDescription {
+    font-size: 1.875rem;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .SectionTitle {
+    font-size: 3rem;
+  }
+  .SectionDescription {
+    font-size: 1.75rem;
+  }
 }

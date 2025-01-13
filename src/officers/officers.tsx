@@ -59,8 +59,7 @@ const Committees: React.FC = () => {
       <div className={styles.group__container}>
         <div className={styles.group__content}>
           <div className={styles.group__header}>
-            <h1 className={styles.group__title}>2023-2024</h1>
-            <h1 className={styles.group__subtitle}>IEEE Officers</h1>
+            <h1 className={styles.group__subtitle}>Officers</h1>
           </div>
         </div>
         <img

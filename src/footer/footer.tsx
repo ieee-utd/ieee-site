@@ -18,7 +18,7 @@ export default function Footer() {
     <footer>
       <div className={styles["footer"]}>
         <h1>Sign Up for Our Newsletter to Receive IEEE Updates.</h1>
-        <p>
+        <p className={styles["join"]}>
           Join our IEEE UTD newsletter to stay updated on the latest events,
           workshops, and networking opportunities.
         </p>

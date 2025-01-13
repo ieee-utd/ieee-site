@@ -2,14 +2,14 @@
 	width: 95%;
   position: fixed;
   left: 2.5%;
-  z-index: 1000;
-  height: 0;
+  top: 0;
 }
 
 .logo {
   float: left;
   padding: 10px 0;
   height: 72px;
+  filter: drop-shadow(5px 0px 4px rgba(0, 0, 0, 0.225));
 }
 
 .navDesktop {
@@ -93,11 +93,12 @@
   box-shadow: inset 0 0 0 2px white;
   background-color: transparent;
   height: 48px;
+  filter: drop-shadow(5px 0px 6px rgba(0, 0, 0, 0.525));  
 }
 
 .sign-in-btn:hover{
-  color: black;
   background-color: white;
+  color: black;
 }
 
 .accountIcon {
@@ -189,6 +190,8 @@
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               opacity 0.55s ease;
+              filter: drop-shadow(5px 0px 6px rgba(0, 0, 0, 0.525));  
+
 }
 
 #menuToggle span:first-child
@@ -276,6 +279,8 @@
   height: 10px;
   top: 0;
   margin-top: -12px;
+  filter: drop-shadow(5px 0px 6px rgba(0, 0, 0, 0.525));  
+
 }
 
 .mobileLogoText {

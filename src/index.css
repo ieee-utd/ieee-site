@@ -12,7 +12,7 @@ body {
   font-family: 'AeonikFono', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: #c85b12;
 }
 
 #root {

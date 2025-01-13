@@ -9,6 +9,7 @@ import FullCalendar from "@fullcalendar/react";
 // TutoringCalendar component for displaying tutoring schedule
 const TutoringCalendar: React.FC = () => {
   const [renderCalendar, setRenderCalendar] = useState(false);
+  const [clickedEvent, setClickedEvent] = useState<string | null>(null);
   const calendarComponentRef = React.createRef<FullCalendar>();
 
   useEffect(() => {
@@ -52,17 +53,22 @@ const TutoringCalendar: React.FC = () => {
           slotMaxTime="17:30"
           dayHeaderFormat={{ weekday: "long" }}
           slotEventOverlap={false}
-          height={"44rem"}
+          height={"auto"}
           weekends={false}
           allDaySlot={false}
           contentHeight="auto"
           dayMinWidth={215}
-          stickyFooterScrollbar={true}
+          stickyFooterScrollbar={false}
           // custom event content rendering
           eventContent={(eventInfo) => (
-            <div className={styles.calendarEvent}>
-              <div className={styles.calendarText}>{eventInfo.timeText}</div>
+            <div
+              className={`${styles.calendarEvent} ${
+                clickedEvent === eventInfo.event.id ? styles.clicked : ""
+              }`}
+              onClick={() => setClickedEvent(eventInfo.event.id)}
+            >
               <div className={styles.calendarText}>{eventInfo.event.title}</div>
+              <div className={styles.popup}>{eventInfo.timeText}</div>
             </div>
           )}
           // remove default header toolbar

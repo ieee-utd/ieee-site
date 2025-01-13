@@ -2,9 +2,9 @@
   padding: 30px 0px;
   text-align: center;
   bottom: 0;
-  width: 80%;
-  margin-left: 10%;
+  width: 100%;
   color: white;
+  background-color: #c85b12;
 }
 
 .copyright {
@@ -36,7 +36,7 @@
 /* CSS */
 .subscribe-button {
   align-items: center;
-  background-color: #103153;
+  background-color: #2c6a9b;
   border: 0;
   border-radius: 7px;
   box-sizing: border-box;
@@ -63,11 +63,12 @@
   -webkit-user-select: none;
   vertical-align: middle;
   font-family: "AeonikFono", sans-serif;
+  transition: all 500ms;
 }
 
 .subscribe-button:hover,
 .subscribe-button:focus {
-  background-color: #0b203c;
+  background-color: #205177;
   color: #ffffff;
 }
 
@@ -92,4 +93,9 @@
 
 .socialLogos {
   width: 36px;
+}
+
+.join {
+  padding-left: 20px;
+  padding-right: 20px;
 }
