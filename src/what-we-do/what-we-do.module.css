@@ -5,50 +5,34 @@
     --link-text-color: #2c6a9b;
     --underline-color: #32363d;
     --max-width: 1400px;
-    --container-padding: 0px 0px 40px 0px;
     --border-radius: 8px;
     --transition: all 0.3s ease;
   }
   
-  /* main section container */
   .whatWeDo {
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: var(--container-padding);
+    padding: 2rem;
   }
   
-  /* global container */
   .container {
     max-width: var(--max-width);
     margin: 0 auto;
     width: 100%;
   }
   
-  /* grid layout for sections */
-  .gridContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns by default */
-    gap: 4rem;
-  }
-  
-  /* title section */
   .titleSection {
     grid-column: span 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
   }
   
   .title {
-    font-size: 2.5rem; /* copied from second one */
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: bold;
     position: relative;
-    display: inline-block;
-    margin-bottom: 0.5rem; /* copied from second one */
+    margin-bottom: 1rem;
   }
   
   .underline {
@@ -57,10 +41,9 @@
     bottom: -8px;
     width: 100%;
     height: 3px;
-    background-color: var(--underline-color);
+    background-color: #32363d;
   }
   
-  /* individual section */
   .section {
     display: flex;
     flex-direction: column;
@@ -78,7 +61,7 @@
   
   .imageWrapper {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 16 / 9;
     border-radius: var(--border-radius);
     overflow: hidden;
     margin-bottom: 1rem;
@@ -96,16 +79,25 @@
     align-items: center;
   }
   
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
   .link {
     background-color: var(--link-bg-color);
     color: var(--link-text-color);
     text-decoration: none;
-    border: none;
     border-radius: 9999px;
-    padding: 0.5rem 1.5rem;
+    padding: 0.75rem 2rem;
     font-size: 1rem;
     font-weight: 500;
-    cursor: pointer;
     transition: var(--transition);
   }
   
@@ -113,236 +105,56 @@
     background-color: rgba(255, 255, 255, 0.9);
   }
   
-  /* Media queries */
-  /* (768px - 1024px) */
+/* Default Grid Layout */
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns by default */
+    gap: 2rem;
+  }
+  
+  /* Tablet (max-width: 1024px) */
   @media screen and (max-width: 1024px) {
     .gridContainer {
-      gap: 3rem;
+      grid-template-columns: 1fr; /* Single column layout for tablets */
+      gap: 2rem;
     }
   
     .title {
-      font-size: 2.25rem; /* copied from second one */
+      font-size: clamp(2.5rem, 6vw, 3.5rem); /* Larger titles for better visibility */
     }
   
-    .section {
-      flex-direction: column;
+    h3 {
+      font-size: clamp(1.5rem, 4vw, 2.5rem); /* Larger section titles */
+    }
+  
+    p {
+      font-size: clamp(1.25rem, 3vw, 1.75rem); /* Larger descriptions */
+    }
+  }
+  
+  /* Mobile (max-width: 768px) */
+  @media screen and (max-width: 768px) {
+    .gridContainer {
+      grid-template-columns: 1fr; /* Single column layout for mobile */
+      gap: 1.5rem; /* Reduced gap for tighter layout on smaller screens */
+    }
+  
+    .title {
+      font-size: clamp(2rem, 5vw, 3rem); /* Adjusted title size */
+    }
+  
+    h3 {
+      font-size: clamp(1.5rem, 4vw, 2rem); /* Adjusted section titles */
+    }
+  
+    p {
+      font-size: clamp(1.25rem, 3vw, 1.5rem); /* Adjusted descriptions */
     }
   
     .link {
-      padding: 0.5rem 1rem;
       font-size: 1rem;
+      padding: 0.5rem 1.5rem;
     }
   }
   
-  /* (< 768px) */
-  @media screen and (max-width: 768px) {
-    .gridContainer {
-      gap: 2rem;
-    }
-  
-    .title {
-      font-size: 2rem; /* copied from second one */
-    }
-  
-    .imageWrapper {
-      height: 150px; /* fixed height for images on mobile */
-    }
-  }
-  
-  /* Media queries */
-  /* (2400px+) */
-  @media screen and (min-width: 2400px) {
-    .container {
-      max-width: 2600px;
-    }
-  
-    .title {
-      font-size: 4.5rem; /* copied from second one */
-    }
-  
-    .description {
-      font-size: 2.5rem; /* copied from second one */
-    }
-  
-    .services {
-      font-size: 2.25rem; /* copied from second one */
-    }
-  
-    .learnMoreButton {
-      padding: 1.25rem 3.25rem;
-      font-size: 2.25rem; /* copied from second one */
-    }
-  }
-  
-  /* (2000px - 2399px) */
-  @media screen and (min-width: 2000px) and (max-width: 2399px) {
-    .container {
-      max-width: 2400px;
-    }
-  
-    .gridContainer {
-      gap: 7rem;
-    }
-  
-    .title {
-      font-size: 4rem; /* copied from second one */
-    }
-  
-    .description {
-      font-size: 2.25rem; /* copied from second one */
-    }
-  
-    .services {
-      font-size: 2rem; /* copied from second one */
-    }
-  
-    .learnMoreButton {
-      padding: 1.15rem 3.15rem;
-      font-size: 2.15rem; /* copied from second one */
-    }
-  }
-  
-  /* (1800px - 1999px) */
-  @media screen and (min-width: 1800px) and (max-width: 1999px) {
-    .container {
-      max-width: 2000px;
-    }
-  
-    .gridContainer {
-      gap: 6rem;
-    }
-  
-    .title {
-      font-size: 3.5rem; /* copied from second one */
-    }
-  
-    .description {
-      font-size: 2rem; /* copied from second one */
-    }
-  
-    .services {
-      font-size: 1.75rem; /* copied from second one */
-    }
-  
-    .learnMoreButton {
-      padding: 1rem 3rem;
-      font-size: 2rem; /* copied from second one */
-    }
-  }
-  
-  /* (1600px - 1799px) */
-  @media screen and (min-width: 1600px) and (max-width: 1799px) {
-    .container {
-      max-width: 1800px;
-    }
-  
-    .gridContainer {
-      gap: 5rem;
-    }
-  
-    .title {
-      font-size: 3.25rem; /* copied from second one */
-    }
-  
-    .description {
-      font-size: 1.875rem; /* copied from second one */
-    }
-  
-    .services {
-      font-size: 1.625rem; /* copied from second one */
-    }
-  
-    .learnMoreButton {
-      padding: 0.75rem 2.65rem;
-      font-size: 2rem; /* copied from second one */
-    }
-  }
-  
-  /* (1400px - 1599px) */
-  @media screen and (min-width: 1400px) and (max-width: 1599px) {
-    .container {
-      max-width: 1600px;
-    }
-  
-    .gridContainer {
-      gap: 4rem;
-    }
-  
-    .title {
-      font-size: 3rem; /* copied from second one */
-    }
-  
-    .description {
-      font-size: 1.75rem; /* copied from second one */
-    }
-  
-    .services {
-      font-size: 1.5rem; /* copied from second one */
-    }
-  
-    .learnMoreButton {
-      padding: 0.75rem 2.6rem;
-      font-size: 1.75rem; /* copied from second one */
-    }
-  }
-  
-  /* (1025px - 1399px) */
-  @media screen and (min-width: 1025px) and (max-width: 1399px) {
-    .gridContainer {
-      gap: 4rem;
-    }
-  
-    .learnMoreButton {
-      padding: 0.75rem 2.5rem;
-      font-size: 1.25rem; /* copied from second one */
-    }
-  }
-  
-  /* (768px - 1024px) */
-  @media screen and (max-width: 1024px) {
-    .whoWeAre {
-      padding: 2rem;
-    }
-  
-    .gridContainer {
-      gap: 3rem;
-    }
-  
-    .title {
-      font-size: 2.25rem; /* copied from second one */
-    }
-  
-    .description {
-      font-size: 1.25rem; /* copied from second one */
-    }
-  
-    .services {
-      font-size: 1.125rem; /* copied from second one */
-    }
-  }
-  
-  /* (< 768px) */
-  @media screen and (max-width: 768px) {
-    .whoWeAre {
-      padding: 2rem;
-    }
-  
-    .gridContainer {
-      grid-template-rows: auto;
-      gap: 2rem;
-    }
-  
-    .title {
-      font-size: 2rem; /* copied from second one */
-    }
-  
-    .description,
-    .services {
-      font-size: 1rem; /* copied from second one */
-    }
-  
-    .imageWrapper {
-      height: 300px; /* fixed height for images on mobile */
-    }
-  }
   
