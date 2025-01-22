@@ -20,9 +20,9 @@ const BecomeTutor = () => {
         {/* Requirements list */}
         <ul className={styles.requirements_list}>
           <li>- 2 hours every week</li>
-          <li>- good understanding of course</li>
-          <li>- finished the class</li>
-          <li>- any major, any grade</li>
+          <li>- A good understanding of the course</li>
+          <li>- Finished the class</li>
+          <li>- Any major in any grade</li>
         </ul>
 
         {/* Apply button */}

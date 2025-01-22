@@ -4,9 +4,7 @@ import styles from './courses-section.module.css';
 interface Course {
   id: number;
   name: string;
-  dayTime: string;
-  tutors: string[];
-  playlist?: string;
+  schedules: { tutor: string; times: string[] }[];
 }
 
 const CoursesSection = () => {
@@ -22,21 +20,47 @@ const CoursesSection = () => {
     );
   };
 
-  // Course data - hardcoded for now
+  // Course data - updated with individual tutor schedules
   const courses: Course[] = [
     {
-      id: 1,
-      name: 'Introduction to Programming',
-      dayTime: 'Mon 10AM, Mon 12PM, Tues 2PM, Thur 3PM',
-      tutors: ['Steven Nguyen', 'James Odebiyi'],
-      playlist: '',
+      id: 3,
+      name: 'Electrical Engineering Basics (EE/CE 1202)',
+      schedules: [
+        { tutor: 'Josphin K', times: ['Mon 10AM-11AM'] },
+        { tutor: 'Oliver I', times: ['Tues 1:30PM-3:30PM'] },
+        { tutor: 'Areebah H', times: ['Wed 12PM-2PM'] },
+      ],
     },
     {
-      id: 2,
-      name: 'Introduction to Programming',
-      dayTime: 'Mon 10AM, Mon 12PM, Tues 2PM, Thur 3PM',
-      tutors: ['Steven Nguyen', 'James Odebiyi'],
-      playlist: '',
+      id: 4,
+      name: 'Circuits and Electronics (EE/CE 2310)',
+      schedules: [
+        { tutor: 'Dyanada G', times: ['Mon 4PM-6PM'] },
+        { tutor: 'Alicia P', times: ['Tues 11:30AM-12:30PM', 'Wed 1PM-2PM'] },
+        { tutor: 'Dylan L', times: ['Thur 4PM-5PM'] },
+        { tutor: 'Sai P.', times: ['Thur 3PM-5PM'] },
+      ],
+    },
+    {
+      id: 5,
+      name: 'Advanced Electronics (EE 4301)',
+      schedules: [
+        { tutor: 'Sebastian C.', times: ['Tues 2:30PM-3:30PM', 'Wed 2:30PM-3:30PM'] },
+      ],
+    },
+    {
+      id: 6,
+      name: 'Intermediate Electronics (EE 3302, EE 3301)',
+      schedules: [
+        { tutor: 'Hadeel Cato', times: ['Thur 12PM-1PM', 'Thur 1PM-2PM'] },
+      ],
+    },
+    {
+      id: 7,
+      name: 'Digital Systems Design (EE/CE 3310)',
+      schedules: [
+        { tutor: 'Miguel Q', times: ['Fri 10AM-11AM'] },
+      ],
     },
   ];
 
@@ -60,32 +84,24 @@ const CoursesSection = () => {
                 <span className={styles.status_indicator} />
                 <h3 className={styles.course_name}>{course.name}</h3>
               </div>
-              <div className={styles.course_time_section}>
-                <span className={styles.time_label}>Day/Time:</span>
-                <span className={styles.time_value}>{course.dayTime}</span>
-                <button
-                  className={`${styles.expand_button} ${
-                    expandedCourses.includes(course.id) ? styles.expanded : ''
-                  }`}
-                >
-                  ▼
-                </button>
-              </div>
+              <button
+                className={`${styles.expand_button} ${
+                  expandedCourses.includes(course.id) ? styles.expanded : ''
+                }`}
+              >
+                ▼
+              </button>
             </div>
             {expandedCourses.includes(course.id) && (
               <div className={styles.course_details}>
-                <div className={styles.tutors_section}>
-                  <span className={styles.detail_label}>Tutors:</span>
-                  <span className={styles.detail_value}>
-                    {course.tutors.join(', ')}
-                  </span>
-                </div>
-                <div className={styles.playlist_section}>
-                  <span className={styles.detail_label}>Playlist:</span>
-                  <span className={styles.detail_value}>
-                    {course.playlist || 'N/A'}
-                  </span>
-                </div>
+                {course.schedules.map((schedule, index) => (
+                  <div key={index} className={styles.tutor_row}>
+                    <div>
+                      <strong>{schedule.tutor}</strong>
+                    </div>
+                    <div>{schedule.times.join(', ')}</div>
+                  </div>
+                ))}
               </div>
             )}
           </div>

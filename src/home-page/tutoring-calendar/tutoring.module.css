@@ -2,7 +2,6 @@
   padding: 20px;
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   max-width: 80%;
   border: 1px solid #e0e0e0;
@@ -39,7 +38,7 @@
 .calendarText {
   color: #ffffff;
   padding: 5px 10px;
-  font-size: 1rem;
+  font-size: .85rem;
   font-weight: bold;
   border-radius: 4px;
 }
@@ -84,7 +83,7 @@
   }
 
   .calendarText {
-    font-size: 0.875rem; /* Adjust font size for tablets */
+    font-size: 0.8rem; /* Adjust font size for tablets */
     padding: 4px 8px;
   }
 }
@@ -116,7 +115,7 @@
   }
 
   .calendarText {
-    font-size: 0.625rem; /* Adjust font size for small mobile devices */
+    font-size: .75rem; /* Adjust font size for small mobile devices */
     padding: 2px 4px;
   }
 }

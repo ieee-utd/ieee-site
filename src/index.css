@@ -1,15 +1,10 @@
-@font-face {
-  font-family: 'AeonikFono';
-  src: url('assets/AeonikFono-Regular.woff') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: 'AeonikFono', sans-serif;
+  font-family: 'Montserrat';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #c85b12;

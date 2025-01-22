@@ -1,6 +1,7 @@
 import Styles from "./sponsors.module.css";
 import BurnsMcDonnell from "./assets/burns_mcdonnell.png";
 import TexasInstruments from "./assets/texas_instruments.avif";
+import Murata from './assets/murata.png';
 import Qorvo from "./assets/qorvo.png";
 
 interface Client {
@@ -40,6 +41,10 @@ const clients: Client[] = [
   },
   {
     id: 3,
+    image: <img className={Styles["Client-item"]} src={Murata}></img>,
+  },
+  {
+    id: 4,
     image: (
       <img
         className={`${Styles["Client-item"]} ${Styles.Qorvo}`}
@@ -53,9 +58,9 @@ function Sponsors() {
   return (
     <div className={Styles.Container}>
       <div className={Styles.SponsorSection}>
-        <p className={Styles.SectionDescription}>
+        <h1 className={Styles.SectionDescription}>
           Our Corporate Sponsors
-        </p>
+        </h1>
         <div className={Styles["Client-list"]}>
           {clients.map((client) => (
             <div key={client.id} className={Styles["Client-item"]}>

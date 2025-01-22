@@ -11,9 +11,9 @@ const LocationSection = () => {
         <img src={escnMap} alt="ESCN Floor Plan" className={styles.map_image} />
       </div>
       <p className={styles.location_text}>
-        The tutoring room is located at ECSN 2.318. We are the room in the main
-        lobby with IEEE signs and a big window. The entrance is in the hallway
-        on the other side of the tutoring room.
+      The tutoring room is located at ECSN 2.318. 
+      It is the room in the main lobby with IEEE signs and a large window. 
+      The entrance is in the hallway on the opposite side of the tutoring room.
       </p>
     </section>
   );

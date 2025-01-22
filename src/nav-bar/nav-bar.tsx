@@ -60,7 +60,6 @@ function NavBar() {
           </div>
         </nav>
         <a href="/" className={styles.mobileLogo}>
-          <p className={styles.mobileLogoText}>IEEE UTD</p>
           <img
             className={styles.mobileLogoImg}
             src={ieeeLogo}
@@ -72,7 +71,6 @@ function NavBar() {
         <a href="/">
           <img className={styles.logo} src={ieeeLogo} alt="IEEE Logo" />
         </a>
-
         <nav className={styles.navDesktop}>
           <ul>
             <li>

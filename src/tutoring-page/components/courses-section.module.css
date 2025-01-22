@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Added for vertical centering */
 }
 
 .courses_header {
@@ -42,6 +43,8 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-items: center; /* Center-aligns the courses list */
+  justify-content: center; /* Centers the courses vertically */
 }
 
 /* Course card styling */
@@ -50,6 +53,8 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  width: 100%; /* Ensures consistent width */
+  max-width: 1200px; /* Limit maximum width for better readability */
 }
 
 .course_preview {
@@ -122,8 +127,7 @@
   padding: 2rem;
   border-top: 1px solid #e0e0e0;
   background: #f8f9fa;
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
   box-shadow: inset 0 4px 8px -4px rgba(0, 0, 0, 0.1);
 }
 
@@ -145,74 +149,19 @@
   font-size: 1.1rem;
 }
 
+/* Adjust tutor row for vertical display */
+.tutor_row {
+  display: flex;
+  flex-direction: column; /* Ensure tutors are listed vertically */
+  margin-bottom: 10px;
+  text-align: center; /* Center-align tutor details */
+}
+
+.tutor_row div {
+  margin: 2px 0;
+}
+
 /* Responsive design */
-@media screen and (min-width: 2400px) {
-  .courses_section {
-    padding: 6rem 0;
-  }
-
-  .courses_list {
-    max-width: 2400px;
-    width: 70%;
-  }
-
-  .courses_title {
-    font-size: 7rem;
-  }
-
-  .courses_subtitle {
-    font-size: 3rem;
-  }
-
-  .course_name {
-    font-size: 2rem;
-  }
-
-  .time_label,
-  .time_value,
-  .detail_label,
-  .detail_value {
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (min-width: 1800px) and (max-width: 2399px) {
-  .courses_section {
-    padding: 5rem 0;
-  }
-
-  .courses_list {
-    max-width: 2000px;
-    width: 75%;
-  }
-
-  .courses_title {
-    font-size: 6rem;
-  }
-
-  .courses_subtitle {
-    font-size: 2.5rem;
-  }
-
-  .course_name {
-    font-size: 1.75rem;
-  }
-
-  .time_label,
-  .time_value,
-  .detail_label,
-  .detail_value {
-    font-size: 1.3rem;
-  }
-}
-
-@media screen and (min-width: 1400px) and (max-width: 1799px) {
-  .courses_list {
-    max-width: 1400px;
-    width: 80%;
-  }
-}
-
 @media screen and (max-width: 1024px) {
   .courses_title {
     font-size: 4rem;
@@ -254,23 +203,5 @@
 
   .course_details {
     padding: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .courses_title {
-    font-size: 2.5rem;
-  }
-
-  .courses_subtitle {
-    font-size: 1.25rem;
-  }
-
-  .course_preview {
-    padding: 1rem;
-  }
-
-  .course_details {
-    padding: 1rem;
   }
 }

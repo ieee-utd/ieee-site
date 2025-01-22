@@ -17,27 +17,25 @@
   flex-direction: column;
   align-items: center; /* Center align items */
   justify-content: center;
-}
-
-.SponsorSection {
   width: 80%; /* Ensure Sponsor section and Instagram section have equal width */
 }
 
 .SectionDescription {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
+  font-size: 2rem;
+  margin-top: 3rem;
 }
 
 .Client-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row by default */
+  gap: 20px; /* Adds space between items */
   width: 100%;
   align-items: center;
   justify-items: center;
 }
 
 .Client-item {
-  width: 100%;
+  width: 80%;
   max-width: 350px; /* Ensures it doesn't get too large */
   flex: 1 auto;
   transition: all 0.5s;
@@ -47,53 +45,13 @@
   margin: auto; /* Center the image within the container */
 }
 
-.Qorvo {
-  max-width: 80%;
-  margin-top: 5px;
-}
-
 /* Responsive Styles */
-@media screen and (max-width: 2400px) {
-  .SectionTitle {
-    font-size: 4.5rem;
-  }
-  .SectionDescription {
-    font-size: 2.5rem;
+@media screen and (max-width: 768px) {
+  .Client-list {
+    grid-template-columns: repeat(2, 1fr); /* Always 2 items per row on smaller screens */
   }
 }
 
-@media screen and (max-width: 2000px) {
-  .SectionTitle {
-    font-size: 4rem;
-  }
-  .SectionDescription {
-    font-size: 2.25rem;
-  }
-}
-
-@media screen and (max-width: 1800px) {
-  .SectionTitle {
-    font-size: 3.5rem;
-  }
-  .SectionDescription {
-    font-size: 2rem;
-  }
-}
-
-@media screen and (max-width: 1600px) {
-  .SectionTitle {
-    font-size: 3.25rem;
-  }
-  .SectionDescription {
-    font-size: 1.875rem;
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .SectionTitle {
-    font-size: 3rem;
-  }
-  .SectionDescription {
-    font-size: 1.75rem;
-  }
+.Client-item {
+  max-width: 300px; /* Optional: Adjust size for smaller screens */
 }

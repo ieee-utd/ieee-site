@@ -31,6 +31,7 @@
   color: #fff;
   z-index: 1; /* Ensure it appears above the images */
   padding-left: 6%; /* Adjust padding for positioning */
+  padding-right: 6%; /* Adjust padding for positioning */
   background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
 }
 
