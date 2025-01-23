@@ -2,14 +2,15 @@
 .whoWeAre {
   background-color: #c85b12;
   color: white;
-  padding: 4rem;
+  padding: 4.32rem; /* Increased by 8% */
   display: flex;
   align-items: center;
+  justify-content: center; /* Center horizontally */
 }
 
 /* global container */
 .container {
-  max-width: 1400px;
+  max-width: 1512px; /* Increased by 8% */
   margin: 0 auto;
   width: 100%;
 }
@@ -18,8 +19,9 @@
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, minmax(300px, auto));
-  gap: 4rem;
+  grid-template-rows: auto; /* Remove vertical stretching */
+  gap: 4.32rem; /* Increased by 8% */
+  width: 100%;
 }
 
 /* title section */
@@ -34,31 +36,31 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.16rem; /* Increased by 8% */
 }
 
 /* title with underline */
 .title {
-  font-size: 2.5rem;
+  font-size: 2.7rem; /* Increased by 8% */
   font-weight: bold;
   position: relative;
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.54rem; /* Increased by 8% */
 }
 
 .underline {
   position: absolute;
   left: 0;
-  bottom: -8px;
+  bottom: -8.64px; /* Increased by 8% */
   width: 100%;
-  height: 3px;
+  height: 3.24px; /* Increased by 8% */
   background-color: white;
 }
 
 /* description text */
 .description {
-  font-size: 1.5rem;
-  line-height: 1.5;
+  font-size: 1.62rem; /* Increased by 8% */
+  line-height: 1.62; /* Increased by 8% */
   max-width: 90%;
 }
 
@@ -70,7 +72,7 @@
 /* Animation styles */
 .hidden {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(21.6px); /* Increased by 8% */
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
@@ -81,7 +83,7 @@
 
 .imageWrapper {
   width: 100%;
-  height: 100%;
+  height: 108%; /* Increased by 8% */
   border-radius: 8px;
   overflow: hidden;
 }
@@ -104,12 +106,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 2rem;
+  gap: 2.16rem; /* Increased by 8% */
 }
 
 .services {
-  font-size: 1.25rem;
-  line-height: 1.5;
+  font-size: 1.35rem; /* Increased by 8% */
+  line-height: 1.62; /* Increased by 8% */
   max-width: 90%;
 }
 
@@ -120,8 +122,8 @@
   text-decoration: none;
   border: none;
   border-radius: 9999px;
-  padding: 0.65rem 2rem; /* Increased padding */
-  font-size: 1rem; /* Larger font size */
+  padding: 0.7rem 2.16rem; /* Increased padding by 8% */
+  font-size: 1.08rem; /* Increased font size by 8% */
   font-weight: 500;
   cursor: pointer;
   transition: all 1s ease;
@@ -135,57 +137,80 @@
 /* Media queries for responsiveness */
 @media screen and (min-width: 2400px) {
   .learnMoreButton {
-    padding: 1rem 2.5rem; /* Adjusted for large screens */
-    font-size: 1.25rem;
+    padding: 1.08rem 2.7rem; /* Adjusted for large screens */
+    font-size: 1.35rem; /* Increased by 8% */
   }
 }
 
 @media screen and (min-width: 2000px) and (max-width: 2399px) {
   .learnMoreButton {
-    padding: 0.9rem 2.25rem;
-    font-size: 1.15rem;
+    padding: 0.97rem 2.43rem; /* Adjusted for medium-large screens */
+    font-size: 1.24rem; /* Increased by 8% */
   }
 }
 
 @media screen and (min-width: 1800px) and (max-width: 1999px) {
   .learnMoreButton {
-    padding: 0.85rem 2rem;
-    font-size: 1.1rem;
+    padding: 0.92rem 2.16rem; /* Adjusted for medium screens */
+    font-size: 1.19rem; /* Increased by 8% */
   }
 }
 
 @media screen and (min-width: 1600px) and (max-width: 1799px) {
   .learnMoreButton {
-    padding: 0.8rem 1.9rem;
-    font-size: 1.05rem;
+    padding: 0.86rem 2.05rem; /* Adjusted for smaller medium screens */
+    font-size: 1.14rem; /* Increased by 8% */
   }
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1599px) {
   .learnMoreButton {
-    padding: 0.75rem 1.8rem;
-    font-size: 1rem;
+    padding: 0.81rem 1.94rem; /* Adjusted for smaller screens */
+    font-size: 1.08rem; /* Increased by 8% */
   }
 }
 
 @media screen and (min-width: 1025px) and (max-width: 1399px) {
   .learnMoreButton {
-    padding: 0.7rem 1.75rem;
-    font-size: 0.95rem;
+    padding: 0.75rem 1.89rem; /* Adjusted for medium screens */
+    font-size: 1.03rem; /* Increased by 8% */
   }
 }
 
 @media screen and (max-width: 1024px) {
   .learnMoreButton {
-    padding: 0.65rem 1.7rem; /* Slightly larger for tablets */
-    font-size: 0.9rem;
+    padding: 0.7rem 1.84rem; /* Adjusted for tablets */
+    font-size: 0.97rem; /* Increased by 8% */
   }
 }
 
 @media screen and (max-width: 768px) {
+  .whoWeAre {
+    padding: 2.16rem; /* Increased by 8% */
+    flex-direction: column; /* Stack elements vertically on mobile */
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 2.16rem; /* Increased by 8% */
+  }
+
+  .title {
+    font-size: 2.16rem; /* Increased by 8% */
+  }
+
+  .description,
+  .services {
+    font-size: 1.08rem; /* Increased by 8% */
+  }
+
+  .imageWrapper {
+    height: 324px; /* Adjusted height */
+  }
+
   .learnMoreButton {
-    padding: 0.6rem 1.6rem; /* Adjusted for mobile */
-    font-size: 0.85rem;
+    padding: 0.65rem 1.72rem; /* Adjusted button size */
+    font-size: 1.02rem; /* Increased by 8% */
   }
 }
-
