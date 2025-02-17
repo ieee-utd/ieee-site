@@ -47,7 +47,7 @@ const TutoringCalendar: React.FC = () => {
           googleCalendarApiKey={apiKey}
           events={{ googleCalendarId: calendarId }}
           eventDidMount={handleEventDidMount} // set colors for events
-          initialDate={"2024-01-01"} // Start date for the week
+          initialDate={"2025-01-01"} // Start date for the week
           slotDuration="00:15:00"
           slotMinTime="10:00"
           slotMaxTime="17:30"

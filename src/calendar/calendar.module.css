@@ -1,0 +1,179 @@
+/* calendar.module.css */
+.schedule {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 600px;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+  }
+  
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(var(--row-height) / 2);
+    background: white;
+    border-right: 1px solid #eee;
+  }
+  
+  .timeSlot {
+    height: 50px;
+    font-size: 0.8rem;
+    color: #666;
+    padding-right: 0.5rem;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+  }
+  
+  .timeSlot::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .daysWrapper {
+    position: relative;
+    overflow-x: auto;
+    background: white;
+  }
+  
+  .daysHeader {
+    display: none; /* Visible on mobile */
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .dayTab {
+    padding: 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .dayTab.active {
+    font-weight: bold;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .daysGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    position: relative;
+    background: white;
+  }
+  
+  .dayColumn {
+    position: relative;
+    min-height: calc(var(--row-height) * 18);
+    padding: 0 0.5rem;
+    border-left: 1px solid #eee;
+  }
+  
+  .event {
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .event:hover {
+    transform: scale(1.02);
+    z-index: 1;
+  }
+  
+  .event--1 { background: hsl(27, 87%, 70%); }
+  .event--2 { background: hsl(173, 58%, 70%); }
+  .event--3 { background: hsl(303, 43%, 70%); }
+  
+  .eventTime {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-bottom: 0.25rem;
+  }
+  
+  .eventTitle {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    word-wrap: break-word;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 600px;
+    position: absolute;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2020;
+  }
+  
+  .modalClose {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .modalClose:hover {
+    color: #007bff;
+  }
+  
+  @media (max-width: 768px) {
+    .daysGrid {
+      grid-template-columns: 1fr;
+    }
+    
+    .dayColumn:not(.active) {
+      display: none;
+    }
+
+    .timeline {
+        margin-top: 50px;
+    }
+    .daysHeader {
+      display: flex;
+      justify-content: space-between;
+    }
+  }

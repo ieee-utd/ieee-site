@@ -23,46 +23,79 @@ const CoursesSection = () => {
   // Course data - updated with individual tutor schedules
   const courses: Course[] = [
     {
-      id: 3,
+      id: 1,
       name: 'Electrical Engineering Basics (EE/CE 1202)',
       schedules: [
-        { tutor: 'Josphin K', times: ['Mon 10AM-11AM'] },
-        { tutor: 'Oliver I', times: ['Tues 1:30PM-3:30PM'] },
+        { tutor: 'Aurawyn', times: ['Tues 1PM-2PM'] },
+        { tutor: 'Oliver I', times: ['Tues 1:15PM-3:15PM'] },
         { tutor: 'Areebah H', times: ['Wed 12PM-2PM'] },
+        { tutor: 'Nermin', times: ['Mon 10AM-12PM'] },
+        { tutor: 'Shreya', times: ['Wed 12PM-2PM'] },
+        { tutor: 'Josphin K', times: ['Mon 3PM-5PM'] },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Circuits and Electronics (EE/CE 2310)',
+      schedules: [
+        { tutor: 'Sai P.', times: ['Mon 4PM-6PM', 'Thur 3PM-5PM'] },
+        { tutor: 'Deeksha', times: ['Mon 11AM-1PM'] },
+        { tutor: 'Alicia P', times: ['Tues 12:50PM-2:20PM'] },
+        { tutor: 'Ugonna', times: ['Thur 3PM-5PM'] },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Signals and Systems (EE/CE 2301)',
+      schedules: [
+        { tutor: 'Avinash', times: ['Mon 4PM-6PM'] },
+        { tutor: 'Dyanada G', times: ['Wed 2PM-3PM'] },
       ],
     },
     {
       id: 4,
-      name: 'Circuits and Electronics (EE/CE 2310)',
+      name: 'Intermediate Electronics (EE 3302, EE 3301)',
       schedules: [
-        { tutor: 'Dyanada G', times: ['Mon 4PM-6PM'] },
-        { tutor: 'Alicia P', times: ['Tues 11:30AM-12:30PM', 'Wed 1PM-2PM'] },
-        { tutor: 'Dylan L', times: ['Thur 4PM-5PM'] },
-        { tutor: 'Sai P.', times: ['Thur 3PM-5PM'] },
+        { tutor: 'Aurawyn', times: ['Tues 11:30AM-12:30PM'] },
       ],
     },
     {
       id: 5,
-      name: 'Advanced Electronics (EE 4301)',
+      name: 'Embedded Systems (EE/CE 3320)',
       schedules: [
-        { tutor: 'Sebastian C.', times: ['Tues 2:30PM-3:30PM', 'Wed 2:30PM-3:30PM'] },
+        { tutor: 'Rushil', times: ['Wed 12:30PM-2:15PM'] },
       ],
     },
     {
       id: 6,
-      name: 'Intermediate Electronics (EE 3302, EE 3301)',
+      name: 'Computer Architecture (CE 3303)',
       schedules: [
-        { tutor: 'Hadeel Cato', times: ['Thur 12PM-1PM', 'Thur 1PM-2PM'] },
+        { tutor: 'Rushil', times: ['Mon 10AM-12:15PM'] },
       ],
     },
     {
       id: 7,
-      name: 'Digital Systems Design (EE/CE 3310)',
+      name: 'Power Systems (EE 3202)',
       schedules: [
-        { tutor: 'Miguel Q', times: ['Fri 10AM-11AM'] },
+        { tutor: 'Miguel Q', times: ['Wed 12PM-2PM'] },
       ],
     },
-  ];
+    {
+      id: 8,
+      name: 'Computer Science Fundamentals (CS 1325)',
+      schedules: [
+        { tutor: 'Avinash', times: ['Tues 2:30PM-3:30PM'] },
+        { tutor: 'Minh', times: ['Mon 10AM-12PM'] },
+      ],
+    },
+    {
+      id: 9,
+      name: 'Data Structures and Algorithms (CS 3345)',
+      schedules: [
+        { tutor: 'Minh', times: ['Tues 2:30PM-3:30PM'] },
+      ],
+    },
+  ]
 
   return (
     <section className={styles.courses_section}>
