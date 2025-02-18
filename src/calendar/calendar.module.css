@@ -4,22 +4,66 @@
     display: grid;
     grid-template-columns: auto 1fr;
     min-height: 600px;
-    background: white;
+    background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 0;
-  }
-  
-  .timeline {
+}
+
+.timeline {
     display: flex;
     flex-direction: column;
     padding-top: calc(var(--row-height) / 2);
-    background: white;
+    background: linear-gradient(to right, white 95%, rgba(255, 255, 255, 0));
     border-right: 1px solid #eee;
-  }
-  
-  .timeSlot {
+}
+
+.event {
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    border-radius: 10px;
+    padding: 0.8rem;
+    cursor: pointer;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid white;
+    outline-offset: -2px;
+    transition: transform 0.2s;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.event:hover {
+    transform: scale(1.02);
+    z-index: 1;
+}
+
+/* Gradient color classes */
+.event--1 { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); }
+.event--2 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+.event--3 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+.event--4 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+.event--5 { background: linear-gradient(135deg, #a3bded 0%, #6991c7 100%); }
+.event--6 { background: linear-gradient(135deg, #9890e3 0%, #b1f4cf 100%); }
+.event--7 { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); }
+.event--8 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.event--9 { background: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%); }
+.event--10 { background: linear-gradient(135deg, #e0fb96 0%, #f9f586 100%); }
+
+
+.modalContent {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep original styles for other elements */
+.timeSlot {
     height: 50px;
     font-size: 0.8rem;
     color: #666;
@@ -29,106 +73,92 @@
     align-items: center;
     justify-content: flex-end;
     position: relative;
-  }
-  
-  .timeSlot::after {
+}
+
+.timeSlot::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     border-bottom: 1px solid #eee;
-  }
-  
-  .daysWrapper {
+}
+
+.daysWrapper {
     position: relative;
     overflow-x: auto;
+    overflow-y: hidden;
     background: white;
-  }
-  
-  .daysHeader {
+    z-index: 0;
+}
+
+.daysHeader {
     display: none; /* Visible on mobile */
     position: sticky;
     top: 0;
     background: white;
     z-index: 2;
     border-bottom: 1px solid #eee;
-  }
-  
-  .dayTab {
+    white-space: nowrap;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.dayTab {
     padding: 1rem;
     border: none;
     background: none;
     cursor: pointer;
     font-size: 0.9rem;
     color: #333;
-  }
-  
-  .dayTab.active {
+    font-family: 'Montserrat';
+}
+
+.dayTab.active {
     font-weight: bold;
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
-  }
-  
-  .daysGrid {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+}
+
+.daysGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
     position: relative;
     background: white;
-  }
-  
-  .dayColumn {
+}
+
+.dayColumn {
     position: relative;
     min-height: calc(var(--row-height) * 18);
     padding: 0 0.5rem;
     border-left: 1px solid #eee;
-  }
-  
-  .event {
-    position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
-    background: #f0f0f0;
-    border-radius: 4px;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .event:hover {
-    transform: scale(1.02);
-    z-index: 1;
-  }
-  
-  .event--1 { background: hsl(27, 87%, 70%); }
-  .event--2 { background: hsl(173, 58%, 70%); }
-  .event--3 { background: hsl(303, 43%, 70%); }
-  
-  .eventTime {
-    font-size: 0.8rem;
-    opacity: 0.8;
+}
+
+.dayColumn:first-child {
+    border-left: none; /* Remove border for the first column to align with timeline */
+}
+
+.eventTime {
+    font-size: 0.9rem;
     margin-bottom: 0.25rem;
-  }
-  
-  .eventTitle {
+    font-weight: 500;
+}
+
+.eventTitle {
     font-size: 0.9rem;
     font-weight: bold;
-    color: #333;
     word-wrap: break-word;
-  }
-  
-  .modal {
+}
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -136,44 +166,100 @@
   }
   
   .modalContent {
+    position: relative; /* Required for absolute positioning of .modalClose */
     background: white;
     padding: 2rem;
     border-radius: 8px;
     max-width: 600px;
-    position: absolute;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 2020;
   }
   
   .modalClose {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: none;
-    background: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #333;
+    top: 1rem; /* Distance from the top of the modal content */
+    right: 1rem; /* Distance from the right edge of the modal content */
+    border: none; /* Remove default button styling */
+    background: none; /* Ensure no background color */
+    font-size: 2rem; /* Size of the "×" symbol */
+    cursor: pointer; /* Pointer cursor for better UX */
+    color: #333; /* Default color */
+    padding: 0; /* Remove padding */
+    line-height: 1; /* Align the "×" symbol properly */
   }
   
   .modalClose:hover {
-    color: #007bff;
+    color: #007bff; /* Change color on hover for better UX */
   }
-  
-  @media (max-width: 768px) {
-    .daysGrid {
-      grid-template-columns: 1fr;
+.gridLines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Make grid lines not interfere with events */
+}
+
+.gridLine {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    min-width: 1620px;
+}
+
+@media (max-width: 1620px) {
+    .schedule {
+        overflow-x: scroll; /* Enable horizontal scrolling */
+        overflow-y: hidden;
     }
-    
+
+    .daysGrid {
+        grid-template-columns: repeat(5, minmax(300px, 1fr)); /* Ensure each column has a minimum width */
+    }
+}
+
+@media (max-width: 1000px) {
+    .daysGrid {
+        grid-template-columns: 1fr;
+    }
+
     .dayColumn:not(.active) {
-      display: none;
+        display: none;
     }
 
     .timeline {
         margin-top: 50px;
     }
+
     .daysHeader {
-      display: flex;
-      justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
     }
-  }
+
+    .schedule {
+        overflow-x: none; /* Enable horizontal scrolling */
+        overflow-y: auto;
+    }
+
+    .dayLabel {
+        display: none;
+    }
+    .gridLine {
+        width: 100%;
+        min-width: 0px;
+    }
+}
+
+.dayLabel {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    color: rgb(247, 247, 247);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}

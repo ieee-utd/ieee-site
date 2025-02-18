@@ -6,7 +6,8 @@ import WhatWeDo from "what-we-do/what-we-do";
 import Sponsors from "./sponsors/sponsors";
 import Landing from "./landing/landing";
 import Chatbot from "../chatbot/components/chatbot";
-import TutoringCalendar from "./tutoring-calendar/tutoring-calendar";
+import Calendar from "../calendar/calendar";
+import tutoringSchedule from "../calendar/calendar-data"; 
 import styles from './home-page.module.css'
 
 function HomePage() {
@@ -14,7 +15,10 @@ function HomePage() {
     <>
       <Landing />
       <section className={styles.calendar_section}>
-        <TutoringCalendar />
+      <Calendar
+              events={tutoringSchedule}
+              config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
+            />
       </section>
       <WhoWeAre />
       <WhatWeDo />

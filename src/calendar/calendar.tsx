@@ -43,7 +43,20 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
   const totalMinutes = (endHour * 60 + endMinute) - (startHour * 60 + startMinute);
   const [activeDay, setActiveDay] = useState('mon');
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
-  const [hoveredEventId, setHoveredEventId] = useState<string | null>(null); // State to track hovered event ID
+  const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
+
+  const courseColorMap: { [key: string]: number } = {
+    '1202': 1,
+    '2301': 2,
+    '2310': 3,
+    '3320': 4,
+    '3303': 5,
+    '3325': 6,
+    '3910': 7,
+    '3345': 8,
+    '1325': 9,
+    '3310': 10,
+  };
 
   const convertTo12HourFormat = (hour: number, minute: number): string => {
     const period = hour >= 12 ? 'PM' : 'AM';
@@ -58,7 +71,6 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
     const minute = minutes % 60;
     return convertTo12HourFormat(hour, minute);
   });
-
 
   const processDayEvents = (events: CalendarEvent[]): EventLayout[] => {
     const parseTime = (time: string) => {
@@ -86,6 +98,7 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
         clusterEnd = end;
       }
     }
+
     if (currentCluster.length > 0) clusters.push(currentCluster);
 
     return clusters.flatMap(cluster => {
@@ -100,14 +113,24 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
           const otherStart = parseTime(otherEvent.startTime);
           const otherDuration = parseDurationToMinutes(otherEvent.duration);
           const otherEnd = otherStart + otherDuration;
-
           if (eventEnd > otherStart && eventStart < otherEnd && otherDuration > eventDuration) {
             hasOverlappingLonger = true;
             break;
           }
         }
 
-        return { ...event, hasOverlappingLonger };
+        let colorClass = 0;
+        for (const prefix in courseColorMap) {
+          if (event.title.includes(prefix)) {
+            colorClass = courseColorMap[prefix];
+            break;
+          }
+        }
+        if (colorClass === 0) {
+          colorClass = 5;
+        }
+
+        return { ...event, hasOverlappingLonger, colorClass };
       });
 
       const columns: CalendarEvent[][] = [];
@@ -128,25 +151,27 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
       }
 
       const totalCols = columns.length;
-      return columns.flatMap((col, colIndex) => col.map(event => {
-        const start = parseTime(event.startTime);
-        const duration = parseDurationToMinutes(event.duration);
-        let zIndex = 1000 - parseDurationToMinutes(event.startTime); // Default zIndex
 
-        if (event.id === hoveredEventId) {
-          zIndex = 1001; // Higher zIndex for hovered event
-        }
-
-        return {
-          ...event,
-          top: (start / 15) * (rowHeight / 2),
-          height: `${(duration / 15 + 2) * (rowHeight / 2)}px`,
-          left: (colIndex / totalCols) * 100,
-          width: 100 / totalCols,
-          zIndex,
-          hasOverlappingLonger: event.hasOverlappingLonger || false,
-        };
-      }));
+      return columns.flatMap((col, colIndex) =>
+        col.map(event => {
+          const start = parseTime(event.startTime);
+          const duration = parseDurationToMinutes(event.duration);
+          let zIndex = 1000 - parseDurationToMinutes(event.startTime);
+          if (event.id === hoveredEventId) {
+            zIndex = 1001;
+          }
+          return {
+            ...event,
+            top: (start / 15) * (rowHeight / 2),
+            height: `${(duration / 15 + 2) * (rowHeight / 2)}px`,
+            left: (colIndex / totalCols) * 100,
+            width: 100 / totalCols,
+            zIndex,
+            hasOverlappingLonger: event.hasOverlappingLonger || false,
+            colorClass: event.colorClass,
+          };
+        })
+      );
     });
   };
 
@@ -188,37 +213,57 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
               key={day.id}
               className={`${styles.dayColumn} ${activeDay === day.id ? styles.active : ''}`}
             >
-              {processDayEvents(events.filter(e => e.id.startsWith(day.id))).map(event => (
-                <div
-                  key={event.id}
-                  className={`${styles.event} ${styles[`event--${event.colorClass}`]} ${
-                    event.hasOverlappingLonger ? styles.hasOutline : ''
-                  }`}
-                  style={{
-                    top: `${event.top}px`,
-                    height: event.height,
-                    left: `calc(${event.left}% - 2px)`,
-                    width: `calc(${event.width}% - 2px)`,
-                    zIndex: event.zIndex,
-                  }}
-                  onClick={() => setSelectedEvent(event)}
-                  onMouseEnter={() => setHoveredEventId(event.id)} // Set hovered event id on mouse enter
-                  onMouseLeave={() => setHoveredEventId(null)}     // Clear hovered event id on mouse leave
-                >
-                  <div className={styles.eventTime}>
-                    {convertEventTimeTo12HourFormat(event.startTime)}
+              {/* Add Day Label */}
+              <div className={styles.dayLabel}>{day.label}</div>
+
+              {processDayEvents(events.filter(e => e.id.startsWith(day.id))).map(event => {
+                const eventColorClass =
+                  event.colorClass <= 16 && event.colorClass >= 1 ? event.colorClass : 1;
+
+                return (
+                  <div
+                    key={event.id}
+                    className={`${styles.event} ${styles[`event--${eventColorClass}`]} ${
+                      event.hasOverlappingLonger ? styles.hasOutline : ''
+                    }`}
+                    style={{
+                      top: `${event.top}px`,
+                      height: event.height,
+                      left: `calc(${event.left}% - 2px)`,
+                      width: `calc(${event.width}% - 2px)`,
+                      zIndex: event.zIndex,
+                    }}
+                    onClick={() => setSelectedEvent(event)}
+                    onMouseEnter={() => setHoveredEventId(event.id)}
+                    onMouseLeave={() => setHoveredEventId(null)}
+                  >
+                    <div className={styles.eventTime}>
+                      {convertEventTimeTo12HourFormat(event.startTime)}
+                    </div>
+                    <div className={styles.eventTitle}>{event.title}</div>
                   </div>
-                  <div className={styles.eventTitle}>{event.title}</div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+          ))}
+        </div>
+        {/* Grid lines here */}
+        <div className={styles.gridLines}>
+          {timeSlots.map((_, index) => (
+            <div
+              key={`grid-line-${index}`}
+              className={styles.gridLine}
+              style={{ top: `${index * 50}px` }}
+            />
           ))}
         </div>
       </div>
       {selectedEvent && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <button className={styles.modalClose} onClick={() => setSelectedEvent(null)}>×</button>
+            <button className={styles.modalClose} onClick={() => setSelectedEvent(null)}>
+              ×
+            </button>
             <h3>{selectedEvent.title}</h3>
             <div dangerouslySetInnerHTML={{ __html: selectedEvent.content }} />
           </div>
