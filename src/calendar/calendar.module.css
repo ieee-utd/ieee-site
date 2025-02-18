@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     min-height: 600px;
-    background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+    background: white;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
