@@ -7,14 +7,6 @@ interface Course {
   schedules: { tutor: string; times: string[] }[];
 }
 
-// New data parsed into the Course structure
-interface Course {
-  id: number;
-  name: string;
-  schedules: { tutor: string; times: string[] }[];
-}
-
-// Updated data parsed into the Course structure
 const courses = [
   {
     id: 5,
@@ -27,9 +19,7 @@ const courses = [
   {
     id: 7,
     name: 'Electrical and Computer Engineering Fundamentals (EE 3202)',
-    schedules: [
-      { tutor: 'Miguel', times: ['Mon 12PM-2PM'] },
-    ],
+    schedules: [{ tutor: 'Miguel', times: ['Mon 12PM-2PM'] }],
   },
   {
     id: 1,
@@ -66,9 +56,7 @@ const courses = [
   {
     id: 6,
     name: 'Discrete-Time Signals and Systems (CE 3303)',
-    schedules: [
-      { tutor: 'Rushil', times: ['Tue 10:30AM-12:45PM'] },
-    ],
+    schedules: [{ tutor: 'Rushil', times: ['Tue 10:30AM-12:45PM'] }],
   },
   {
     id: 9,
@@ -81,18 +69,13 @@ const courses = [
   {
     id: 8,
     name: 'Introduction to Programming (CS 1325)',
-    schedules: [
-      { tutor: 'Minh', times: ['Fri 10AM-12PM'] },
-    ],
+    schedules: [{ tutor: 'Minh', times: ['Fri 10AM-12PM'] }],
   },
 ];
 
-
 const CoursesSection = () => {
-  // Track expanded course cards
   const [expandedCourses, setExpandedCourses] = useState<number[]>([]);
 
-  // Toggle course expansion
   const toggleCourse = (courseId: number) => {
     setExpandedCourses((prev) =>
       prev.includes(courseId)
@@ -113,6 +96,7 @@ const CoursesSection = () => {
       <div className={styles.courses_list}>
         {courses.map((course) => (
           <div key={course.id} className={styles.course_card}>
+            {/* Course preview (clickable header) */}
             <div
               className={styles.course_preview}
               onClick={() => toggleCourse(course.id)}
@@ -129,16 +113,18 @@ const CoursesSection = () => {
                 ▼
               </button>
             </div>
+
+            {/* Expanded course details (grid layout) */}
             {expandedCourses.includes(course.id) && (
               <div className={styles.course_details}>
-                {course.schedules.map((schedule, index) => (
-                  <div key={index} className={styles.tutor_row}>
-                    <div>
+                <div className={styles.tutors_grid}>
+                  {course.schedules.map((schedule, index) => (
+                    <div key={index} className={styles.tutor_card}>
                       <strong>{schedule.tutor}</strong>
+                      <div>{schedule.times.join(', ')}</div>
                     </div>
-                    <div>{schedule.times.join(', ')}</div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
           </div>
