@@ -42,16 +42,16 @@
 }
 
 /* Gradient color classes */
-.event--1 { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); }
-.event--2 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
-.event--3 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
-.event--4 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-.event--5 { background: linear-gradient(135deg, #a3bded 0%, #6991c7 100%); }
-.event--6 { background: linear-gradient(135deg, #9890e3 0%, #b1f4cf 100%); }
-.event--7 { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); }
-.event--8 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-.event--9 { background: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%); }
-.event--10 { background: linear-gradient(135deg, #e0fb96 0%, #f9f586 100%); }
+.event--1 { background: linear-gradient(135deg, #00629B 0%, #00A8E8 100%); } /* Blue Gradient */
+.event--2 { background: linear-gradient(135deg, #0072CE 0%, #00BFFF 100%); } /* Light Blue Gradient */
+.event--3 { background: linear-gradient(135deg, #003F87 0%, #0072CE 100%); } /* Dark Blue Gradient */
+.event--4 { background: linear-gradient(135deg, #00A8E8 0%, #FFFFFF 100%); } /* White-to-Blue Gradient */
+.event--5 { background: linear-gradient(135deg, #00629B 0%, #FFFFFF 100%); } /* White-to-Dark Blue Gradient */
+.event--6 { background: linear-gradient(135deg, #00BFFF 0%, #0072CE 100%); } /* Reverse Blue Gradient */
+.event--7 { background: linear-gradient(135deg, #0072CE 0%, #00A8E8 100%); } /* Smooth Blue Gradient */
+.event--8 { background: linear-gradient(135deg, #003F87 0%, #00A8E8 100%); } /* Bold Blue Gradient */
+.event--9 { background: linear-gradient(135deg, #FFFFFF 0%, #0072CE 100%); } /* White-to-Medium Blue Gradient */
+.event--10 { background: linear-gradient(135deg, #00A8E8 0%, #003F87 100%); } /* Reverse Bold Blue Gradient */
 
 
 .modalContent {
@@ -124,8 +124,7 @@
 
 .daysGrid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(350px, 1fr)); /* Ensure each column has a minimum width */
     position: relative;
     background: white;
 }
@@ -213,10 +212,6 @@
     .schedule {
         overflow-x: scroll; /* Enable horizontal scrolling */
         overflow-y: hidden;
-    }
-
-    .daysGrid {
-        grid-template-columns: repeat(5, minmax(300px, 1fr)); /* Ensure each column has a minimum width */
     }
 }
 

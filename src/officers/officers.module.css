@@ -204,7 +204,6 @@
 }
 
 .group__subtitle {
-  font-size: 2em;
   text-align: center; /* Center the text */
 }
 
@@ -304,4 +303,36 @@
 
 .email_icon:hover {
   fill: blue;
+}
+
+
+/* Responsive design */
+@media screen and (min-width: 2400px) {
+  .group__header {
+    font-size: 7rem;
+  }
+}
+
+@media screen and (min-width: 1800px) and (max-width: 2399px) {
+  .group__header {
+    font-size: 6rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .group__header {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .group__header {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .group__header {
+    font-size: 2rem;
+  }
 }

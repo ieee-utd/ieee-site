@@ -214,7 +214,6 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
               className={`${styles.dayColumn} ${activeDay === day.id ? styles.active : ''}`}
             >
               {/* Add Day Label */}
-              <div className={styles.dayLabel}>{day.label}</div>
 
               {processDayEvents(events.filter(e => e.id.startsWith(day.id))).map(event => {
                 const eventColorClass =
@@ -253,7 +252,7 @@ const Calendar: React.FC<CalendarProps> = ({ events, config = {} }) => {
             <div
               key={`grid-line-${index}`}
               className={styles.gridLine}
-              style={{ top: `${index * 50}px` }}
+              style={{ top: `${index * 50 - 1}px` }}
             />
           ))}
         </div>
