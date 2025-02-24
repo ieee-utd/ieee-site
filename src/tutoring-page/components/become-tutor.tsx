@@ -13,20 +13,22 @@ const BecomeTutor = () => {
       <div className={styles.content_container}>
         {/* Main title */}
         <h2 className={styles.main_title}>Want to be a tutor?</h2>
-
-        {/* Requirements subtitle */}
+        {/* Subtitle */}
         <h3 className={styles.subtitle}>Tutor Requirements</h3>
-
         {/* Requirements list */}
         <ul className={styles.requirements_list}>
-          <li>- 2 hours every week</li>
-          <li>- A good understanding of the course</li>
-          <li>- Finished the class</li>
-          <li>- Any major in any grade</li>
+          {[
+            'Atleast TWO hours every week',
+            'A good understanding of the course',
+            'Finished the course',
+            'Any major in any grade',
+          ].map((requirement, index) => (
+            <li key={index} className={styles.requirement_item}>
+              <span className={styles.checkmark}>✓</span> {requirement}
+            </li>
+          ))}
         </ul>
-
         {/* Apply button */}
-        {/* Doesn't go anywhere for now - embed app later*/}
         <button
           className={styles.apply_button}
           onClick={handleApplyClick}
