@@ -36,9 +36,10 @@
 }
 
 .Header {
-  font-size: 3.25rem; /* Adjusted font size */
-  margin-bottom: 1rem;
+  font-size: 3.5rem; /* Adjusted font size */
+  margin-bottom: -1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  width: 69%;
 }
 
 .Description {
@@ -48,7 +49,7 @@
 }
 
 .Button {
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.75rem 1.5rem;
   background-color: #c85b12; /* Adjust color as needed */
   border: none;
@@ -117,4 +118,12 @@
 @keyframes blink {
   0%, 50% { opacity: 1; }
   50.1%, 100% { opacity: 0; }
+}
+
+.Logo {
+  position: absolute;
+  width: 15rem; /* Adjust the width as needed */
+  z-index: -1; /* Keep it behind other content if desired */
+  right: 0; /* Position it on the left side */
+  bottom: 0;
 }

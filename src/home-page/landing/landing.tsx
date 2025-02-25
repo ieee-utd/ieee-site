@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Styles from "./landing.module.css";
-import image1 from '../../assets/carousel1.jpg';
-import image4 from '../../assets/carousel2.png';
-import image3 from '../../assets/carousel3.png';
-import image2 from '../../assets/carousel4.jpg';
-
+import image1 from "../../assets/carousel1.jpg";
+import image4 from "../../assets/carousel3.png";
+import image3 from "../../assets/4.jpg";
+import image2 from "../../assets/carousel4.jpg";
+import UTDLogo from "../../assets/UTDallasLogo.webp";
+import Logo from "../../assets/UTDLogo.png";
 
 const images = [image1, image2, image3];
 
 const useTypewriter = (text: string, speed: number = 50): string => {
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState("");
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -18,7 +19,7 @@ const useTypewriter = (text: string, speed: number = 50): string => {
       if (index > 0) {
         const timeout = setTimeout(() => {
           setDisplayedText(text.slice(0, index - 1));
-          setIndex(prev => prev - 1);
+          setIndex((prev) => prev - 1);
         }, speed);
         return () => clearTimeout(timeout);
       } else {
@@ -30,8 +31,8 @@ const useTypewriter = (text: string, speed: number = 50): string => {
     } else {
       if (index < text.length) {
         const timeout = setTimeout(() => {
-          setDisplayedText(prev => prev + text[index]);
-          setIndex(prev => prev + 1);
+          setDisplayedText((prev) => prev + text[index]);
+          setIndex((prev) => prev + 1);
         }, speed);
         return () => clearTimeout(timeout);
       } else {
@@ -48,7 +49,7 @@ const useTypewriter = (text: string, speed: number = 50): string => {
 
 const Carousel: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const typewriterText = useTypewriter('Advancing Technology for Humanity');
+  const typewriterText = useTypewriter("Advancing Technology for Humanity");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,12 +63,17 @@ const Carousel: React.FC = () => {
       {images.map((image, index) => (
         <div
           key={index}
-          className={`${Styles.CarouselImage} ${index === currentImageIndex ? Styles.active : ''}`}
+          className={`${Styles.CarouselImage} ${
+            index === currentImageIndex ? Styles.active : ""
+          }`}
           style={{ backgroundImage: `url(${image})` }}
         ></div>
       ))}
       <div className={Styles.Container}>
-        <h2 className={Styles.Header}>Institute of Electrical and Electronics Engineers at UTD</h2>
+        <h2 className={Styles.Header}>
+          Institute of Electrical and Electronics Engineers at The University of Texas at Dallas
+        </h2>
+        <img className={Styles.Logo} src={Logo}/>
         <p className={Styles.Description}>
           {typewriterText}
           <span className={Styles.Cursor}>‎</span>
@@ -76,6 +82,6 @@ const Carousel: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Carousel;
