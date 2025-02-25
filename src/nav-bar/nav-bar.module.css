@@ -96,9 +96,16 @@
   filter: drop-shadow(5px 0px 6px rgba(0, 0, 0, 0.525));  
 }
 
-.sign-in-btn:hover{
-  background-color: white;
+.id {
+  background: white;
   color: black;
+  mix-blend-mode: multiply;
+}
+
+.sign-in-btn:hover{
+  background: white;
+  color: black;
+  mix-blend-mode: multiply;
 }
 
 .accountIcon {

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Styles from "./landing.module.css";
-import image1 from '../../assets/carousel1.png';
-import image2 from '../../assets/carousel2.png';
+import image1 from '../../assets/carousel1.jpg';
+import image4 from '../../assets/carousel2.png';
 import image3 from '../../assets/carousel3.png';
+import image2 from '../../assets/carousel4.jpg';
+
 
 const images = [image1, image2, image3];
 
