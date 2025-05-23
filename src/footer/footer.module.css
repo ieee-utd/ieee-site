@@ -25,7 +25,6 @@
   background-color: rgb(255, 255, 255);
   outline: none;
   border-style: none;
-  font-family: "AeonikFono", sans-serif;
 }
 
 .news-letter {
@@ -63,7 +62,6 @@
   user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
-  font-family: "AeonikFono", sans-serif;
   transition: all 500ms;
 }
 
