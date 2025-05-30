@@ -14,10 +14,10 @@ export default function Footer() {
     { src: instagramLogo, alt: "Instagram Logo", href: "https://www.instagram.com/ieeeutd/"},
   ];
 
-  return (
-    <footer>
-      <div className={styles["footer"]}>
-        <h1>Sign Up for Our Newsletter to Receive IEEE Updates.</h1>
+  /*
+
+
+  <h1>Sign Up for Our Newsletter to Receive IEEE Updates.</h1>
         <p className={styles["join"]}>
           Join our IEEE UTD newsletter to stay updated on the latest events,
           workshops, and networking opportunities.
@@ -34,6 +34,12 @@ export default function Footer() {
             subscribe
           </button>
         </div>
+
+  */
+  return (
+    <footer>
+      <div className={styles["footer"]}>
+
         <ul className={styles.ul}>
           {images.map((image, index) => (
             <li key={index}>
