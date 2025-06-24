@@ -1,5 +1,6 @@
 import React from "react";
-import ImageBox from "./ImageBox"; 
+import ImageBox from "./ImageBox";
+import EventCalendar from "./eventcalendar"; 
 
 const Events: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const Events: React.FC = () => {
         food="Pizza and Drinks"
         description="Join us for an engaging discussion on artificial intelligence and future tech trends."
       />
+      <EventCalendar /> 
     </div>
   );
 };
