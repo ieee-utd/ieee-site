@@ -8,9 +8,11 @@ import HomePage from "./home-page/home-page";
 import Committees from "./officers/officers";
 import TutoringPage from "./tutoring-page/tutoring-page";
 import Calendar from "./calendar/calendar";
+import Events from "./events/events";
 
 import "./index.css";
 import "./notification/notification.css";
+import NotFound from "NotFound/NotFound";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -24,6 +26,8 @@ root.render(
         <Route path="/" element={<HomePage />} />
         <Route path="/Officers" element={<Committees />} />
         <Route path="/Tutoring" element={<TutoringPage />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <NavBar />
       <Footer />
