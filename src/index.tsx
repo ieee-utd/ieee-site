@@ -7,6 +7,8 @@ import Footer from "./footer/footer";
 import HomePage from "./home-page/home-page";
 import Committees from "./officers/officers";
 import TutoringPage from "./tutoring-page/tutoring-page";
+import SignIn from "signin/signin";
+import Volunteer from "volunteer-page/volunteer-page";
 import Calendar from "./calendar/calendar";
 
 import "./index.css";
@@ -24,6 +26,8 @@ root.render(
         <Route path="/" element={<HomePage />} />
         <Route path="/Officers" element={<Committees />} />
         <Route path="/Tutoring" element={<TutoringPage />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/Volunteer" element={<Volunteer />} />
       </Routes>
       <NavBar />
       <Footer />

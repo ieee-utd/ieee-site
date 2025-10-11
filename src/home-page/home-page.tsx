@@ -14,12 +14,6 @@ function HomePage() {
   return (
     <>
       <Landing />
-      <section className={styles.calendar_section}>
-      <Calendar
-              events={tutoringSchedule}
-              config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
-            />
-      </section>
       <WhoWeAre />
       <WhatWeDo />
       <Sponsors />
@@ -27,5 +21,15 @@ function HomePage() {
     </>
   );
 }
+
+/*
+      <section className={styles.calendar_section}>
+      <Calendar
+              events={tutoringSchedule}
+              config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
+            />
+      </section>
+
+*/
 
 export default HomePage;
