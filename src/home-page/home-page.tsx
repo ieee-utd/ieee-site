@@ -7,7 +7,6 @@ import Sponsors from "./sponsors/sponsors";
 import Landing from "./landing/landing";
 import Chatbot from "../chatbot/components/chatbot";
 import Calendar from "../calendar/calendar";
-import tutoringSchedule from "../calendar/calendar-data"; 
 import styles from './home-page.module.css'
 
 function HomePage() {

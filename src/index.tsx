@@ -25,6 +25,7 @@ root.render(
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Officers" element={<Committees />} />
+        <Route path="/Tutoring" element={<TutoringPage />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Volunteer" element={<Volunteer />} />
       </Routes>

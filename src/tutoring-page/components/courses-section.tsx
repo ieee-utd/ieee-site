@@ -9,67 +9,74 @@ interface Course {
 
 const courses = [
   {
-    id: 5,
-    name: 'Digital Circuits (EE/CE 3320)',
-    schedules: [
-      { tutor: 'Aurawyn', times: ['Mon 11:30AM-12:30PM', 'Tue 1PM-2PM'] },
-      { tutor: 'Rushil', times: ['Fri 12:30PM-2:15PM'] },
-    ],
-  },
-  {
-    id: 7,
-    name: 'Electrical and Computer Engineering Fundamentals (EE 3202)',
-    schedules: [{ tutor: 'Miguel', times: ['Mon 12PM-2PM'] }],
-  },
-  {
     id: 1,
-    name: 'Introduction to Electrical and Computer Engineering (EE/CE 1202)',
+    name: 'Introduction to Electrical and Computer Engineering II (EE/CE 1202)',
     schedules: [
-      { tutor: 'David', times: ['Mon 2PM-3:30PM', 'Tue 5PM-6PM', 'Thu 5PM-6PM'] },
-      { tutor: 'Jenny', times: ['Tue 11AM-1PM'] },
-      { tutor: 'Nermin', times: ['Wed 10AM-12PM'] },
-      { tutor: 'Oliver', times: ['Wed 1:15PM-3:15PM'] },
-      { tutor: 'Areebah', times: ['Thu 12PM-2PM'] },
-      { tutor: 'Shreya', times: ['Thu 12PM-2PM'] },
-      { tutor: 'Josphin', times: ['Fri 3PM-5PM'] },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Electrical Network Analysis (EE/CE 2301)',
-    schedules: [
-      { tutor: 'Avinash', times: ['Mon 2:15PM-3:15PM', 'Tue 4PM-5PM', 'Wed 3:15PM-4PM'] },
-      { tutor: 'Dyanada', times: ['Tue 2PM-3PM', 'Thu 2PM-3PM'] },
+      { tutor: 'Josphin', times: ['Mon 4PM-6PM'] },
+      { tutor: 'Kaushik', times: ['Tue 1:30PM-2:30PM', 'Thu 1:30PM-2:30PM'] },
+      { tutor: 'Danish', times: ['Tue 3PM-5PM'] },
+      { tutor: 'Jenny', times: ['Thu 3PM-5PM'] },
+      { tutor: 'Nermin', times: ['Wed 1PM-3PM'] },
+      { tutor: 'Armaan', times: ['Wed 4PM-6PM'] },
     ],
   },
   {
     id: 2,
+    name: 'Electrical Network Analysis (EE/CE 2301)',
+    schedules: [
+      { tutor: 'Jesus', times: ['Wed 10AM-12PM'] },
+      { tutor: 'Avinash', times: ['Wed 10AM-12PM'] },
+    ],
+  },
+  {
+    id: 3,
     name: 'Introduction to Digital Systems (EE/CE 2310)',
     schedules: [
-      { tutor: 'Alicia', times: ['Tue 12:50PM-2:20PM', 'Thu 1:50PM-2:20PM'] },
-      { tutor: 'Deeksha', times: ['Fri 11AM-1PM'] },
-      { tutor: 'Sai', times: ['Wed 4PM-6PM'] },
-      { tutor: 'Ugonna', times: ['Wed 3PM-5PM'] },
-      { tutor: 'Vishal', times: ['Thu 4PM-5PM', 'Fri 4PM-5PM'] },
+      { tutor: 'Shreya', times: ['Mon 11AM-1PM'] },
+      { tutor: 'Kasish', times: ['Mon 3:15PM-5:15PM'] },
+      { tutor: 'Deeksha', times: ['Tue 10AM-12PM'] },
+      { tutor: 'Alicia', times: ['Tue 1PM-2PM', 'Thu 1PM-2PM'] },
+      { tutor: 'Tessa', times: ['Fri 12PM-2PM'] },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Discrete-Time Signals and Systems (CE 3303)',
+    schedules: [
+      { tutor: 'Jayne', times: ['Mon 1:30PM-2:30PM', 'Thu 1PM-2PM'] },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Electronic Devices (EE/CE 3310)',
+    schedules: [
+      { tutor: 'Dyanada', times: ['Mon 11:30AM-1:30PM'] },
+      { tutor: 'Avinash', times: ['Wed 10AM-12PM'] },
     ],
   },
   {
     id: 6,
-    name: 'Discrete-Time Signals and Systems (CE 3303)',
-    schedules: [{ tutor: 'Rushil', times: ['Tue 10:30AM-12:45PM'] }],
+    name: 'Electronic Circuits (EE/CE 3311)',
+    schedules: [
+      { tutor: 'Sebastian', times: ['Mon 4:30PM-5:30PM', 'Wed 4:30PM-5:30PM'] },
+      { tutor: 'Jenny', times: ['Tue 3PM-5PM'] },
+    ],
   },
   {
-    id: 9,
-    name: 'Data Structures and Introduction to Algorithmic Analysis (CS 3345)',
+    id: 7,
+    name: 'Digital Circuits (EE/CE 3320)',
     schedules: [
-      { tutor: 'Minh', times: ['Mon 2:30PM-3:30PM', 'Wed 2:30PM-3:30PM'] },
-      { tutor: 'Rushil', times: ['Tue 10:30AM-12:45PM'] },
+      { tutor: 'Rushil', times: ['Tue 11AM-1PM'] },
+      { tutor: 'Onyeze', times: ['Tue 1PM-2PM', 'Wed 2:30PM-3:30PM'] },
+      { tutor: 'Karla', times: ['Wed 10:30AM-12:30PM'] },
     ],
   },
   {
     id: 8,
-    name: 'Introduction to Programming (CS 1325)',
-    schedules: [{ tutor: 'Minh', times: ['Fri 10AM-12PM'] }],
+    name: 'Electromagnetic Engineering I (EE 4301)',
+    schedules: [
+      { tutor: 'Aarnav', times: ['Mon 11:30AM-1:30PM'] },
+    ],
   },
 ];
 
