@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./nav-bar/nav-bar";
 import Footer from "./footer/footer";
 import HomePage from "./home-page/home-page";
-import Committees from "./officers/officers";
+import Committees from "./officers-page/officers";
 import TutoringPage from "./tutoring-page/tutoring-page";
-import SignIn from "signin/signin";
+import SignIn from "signin-page/signin";
 import Volunteer from "volunteer-page/volunteer-page";
 import Calendar from "./calendar/calendar";
 

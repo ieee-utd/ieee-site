@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import styles from "./what-we-do.module.css";
-import eventsImage from "../assets/gridimages/events.png";
-import tutoringImage from "../assets/gridimages/tutoring.png";
-import workshopsImage from "../assets/gridimages/workshops.png";
-import societiesImage from "../assets/gridimages/Societies.png";
+import eventsImage from "../../assets/gridimages/events.png";
+import tutoringImage from "../../assets/gridimages/tutoring.png";
+import workshopsImage from "../../assets/gridimages/workshops.png";
+import societiesImage from "../../assets/gridimages/Societies.png";
 
 const WhatWeDo = () => {
   useEffect(() => {

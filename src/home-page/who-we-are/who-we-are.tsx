@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './who-we-are.module.css';
-import conferenceImage from '../assets/gridimages/grid3.jpg';
-import matchaImage from '../assets/gridimages/grid4.jpg';
+import conferenceImage from '../../assets/gridimages/grid3.jpg';
+import matchaImage from '../../assets/gridimages/grid4.jpg';
 
 const WhoWeAre = () => {
   useEffect(() => {

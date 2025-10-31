@@ -137,7 +137,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
         startTime,
         duration: duration || 'PT1H',
         colorClass: 0,
-        content: event.description ? `<p>${event.description.replace(/\n/g, '<br>')}</p>` : '<p>No description</p>',
+        content: event.description ? `<p>${event.description.replace(/\n/g, '<br>')}</p>` : startTime,
         date: dateStr,
       };
     }).filter(Boolean) as CalendarEvent[];
