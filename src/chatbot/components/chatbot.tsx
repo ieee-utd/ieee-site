@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../../src/chatbot/styles/chatbot.css";
+//import "../../../src/chatbot/styles/chatbot.css";
 import { RiRobot3Fill, RiSendPlane2Fill, RiCloseFill } from "react-icons/ri";
 
 interface ChatMessage {

@@ -33,15 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
 const clients: Client[] = [
   {
     id: 1,
-    image: <img className={Styles["Client-item"]} src={BurnsMcDonnell}></img>,
+    image: <img className={Styles["Client-item"]} src={BurnsMcDonnell} alt="Burns McDonnell" ></img>,
   },
   {
     id: 2,
-    image: <img className={Styles["Client-item"]} src={TexasInstruments}></img>,
+    image: <img className={Styles["Client-item"]} src={TexasInstruments} alt="Texas Instruments" ></img>,
   },
   {
     id: 3,
-    image: <img className={Styles["Client-item"]} src={Murata}></img>,
+    image: <img className={Styles["Client-item"]} src={Murata} alt="Murata" ></img>,
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ const clients: Client[] = [
       <img
         className={`${Styles["Client-item"]} ${Styles.Qorvo}`}
         src={Qorvo}
-      ></img>
+      alt="Qorvo" ></img>
     ),
   },
 ];
