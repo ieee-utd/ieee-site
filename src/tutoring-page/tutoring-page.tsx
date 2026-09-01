@@ -9,35 +9,36 @@ import Calendar from "../calendar/calendar";
 const TutoringPage = () => {
   return (
     <div className={styles.container}>
-      {/* Hero Section */}
-      <div className={styles.hero_container}>
+      <section className={styles.hero_container}>
         <div className={styles.hero_content}>
-          <div className={styles.hero_header}>
-            <h1>Tutoring</h1>
-          </div>
+          <p className={styles.eyebrow}>IEEE at UT Dallas</p>
+          <h1 className={styles.hero_header}>Tutoring</h1>
+          <a className={styles.hero_cta} href="#courses">Explore available courses</a>
         </div>
         <img
           className={styles.hero_img}
           src={tutorialImage}
           alt="Tutoring Session"
         />
-      </div>
-      {/* Tutoring Room Title Section */}
-      <div className={styles.title_container}>
-        <h1 className={styles.title}>Tutoring Room</h1>
-      </div>
-      {/* Location Section */}
+      </section>
+      <section className={styles.title_container}>
+        <p className={styles.section_label}>Your study space</p>
+        <h2 className={styles.title}>Find the tutoring room</h2>
+        <p className={styles.title_copy}>Come by ECSN 2.318 for help, study time, and a welcoming community of fellow engineers.</p>
+      </section>
       <LocationSection />
-      {/* Courses Section */}
       <CoursesSection />
 
-      {/* Calendar Section */}
       <section className={styles.calendar_section}>
+        <div className={styles.calendar_heading}>
+          <p className={styles.section_label}>Plan your visit</p>
+          <h2>Tutoring hours this week</h2>
+          <p>Choose a time that works for you and stop by the tutoring room.</p>
+        </div>
         <Calendar
           config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
         />
       </section>
-      {/* "Want to be a tutor?" Section */}
       <BecomeTutor />
     </div>
   );

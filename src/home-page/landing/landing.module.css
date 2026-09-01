@@ -182,31 +182,9 @@
 
 .primaryBtn:focus-visible,
 .secondaryBtn:focus-visible,
-.dot:focus-visible,
-.scrollHint:focus-visible {
+.dot:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 3px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  margin: 1.6rem 0 0;
-  padding: 0;
-}
-
-.tags li {
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  background: rgba(44, 106, 155, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .watermark {
@@ -251,27 +229,6 @@
 .dotActive {
   width: 2.8rem;
   background: #ffffff;
-}
-
-.scrollHint {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.scrollHint::after {
-  content: "";
-  width: 1px;
-  height: 1.6rem;
-  background: linear-gradient(180deg, #ffffff, transparent);
-  animation: drop 1.6s ease-in-out infinite;
 }
 
 @keyframes drop {
@@ -331,8 +288,7 @@
     transform: none;
   }
 
-  .cursor,
-  .scrollHint::after {
+  .cursor {
     animation: none;
   }
 }

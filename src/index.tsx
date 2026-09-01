@@ -10,10 +10,11 @@ import TutoringPage from "./tutoring-page/tutoring-page";
 import SignIn from "signin-page/signin";
 import Volunteer from "volunteer-page/volunteer-page";
 import DocumentationPage from "documentation-page/documentation-page";
-import Calendar from "./calendar/calendar";
+import EventsPage from "./events-page/events-page";
+//import Calendar from "./calendar/calendar";
 
 import "./index.css";
-import "./notification/notification.css";
+//import "./notification/notification.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -30,6 +31,7 @@ root.render(
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Volunteer" element={<Volunteer />} />
         <Route path="/documentation" element={<DocumentationPage />} />
+        <Route path="/events" element={<EventsPage />} />
       </Routes>
       <NavBar />
       <Footer />

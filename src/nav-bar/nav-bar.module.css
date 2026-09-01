@@ -3,6 +3,7 @@
   position: fixed;
   left: 2.5%;
   top: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -158,6 +159,7 @@
   Display: flex;
   position: fixed;
   top: 0;
+  z-index: 1000;
 }
 
 #menuToggle {

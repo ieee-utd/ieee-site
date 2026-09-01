@@ -59,7 +59,9 @@ const Committees: React.FC = () => {
       <div className={styles.group__container}>
         <div className={styles.group__content}>
           <div className={styles.group__header}>
-            <h1 className={styles.group__subtitle}>Officers</h1>
+            <p className={styles.eyebrow}>IEEE at UT Dallas</p>
+            <h1 className={styles.group__subtitle}>Meet the officers</h1>
+            <p className={styles.group__description}>The student leaders building opportunities, community, and hands-on experiences for IEEE at UT Dallas.</p>
           </div>
         </div>
         <img
@@ -68,7 +70,13 @@ const Committees: React.FC = () => {
           alt="ieee-officer-group"
         />
       </div>
-      <div className={styles.member__grid}>{mappedMembers}</div>
+      <section className={styles.officers_section}>
+        <div className={styles.section_heading}>
+          <p>Our team</p>
+          <h2>Leadership with a shared purpose.</h2>
+        </div>
+        <div className={styles.member__grid}>{mappedMembers}</div>
+      </section>
     </>
   );
 };

@@ -2,7 +2,6 @@ import styles from "./officers.module.css";
 import { FaLinkedin } from "react-icons/fa";
 import { SiMicrosoftoutlook } from "react-icons/si";
 import officerData from "./officerData";
-import { useEffect, useRef, useState } from "react";
 import blank from "../assets/IEEE/placeholder.jpeg";
 
 export default function Member({
@@ -18,40 +17,17 @@ export default function Member({
   linkedin: string;
   image: any;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
-
   if (image === "") {
     image = blank;
   }
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      });
-    });
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-    return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current);
-      }
-    };
-  }, []);
 
   return (
     <div className={styles.member__container}>
       <div className={styles.outer_image}>
         <div className={styles.image_wrapper}>
           <img
-            ref={imgRef}
             src={image}
-            alt="pic"
+            alt={`${name}, ${title}`}
             className={styles.member__image}
           />
         </div>
@@ -59,14 +35,14 @@ export default function Member({
       <div className={styles.member__info}>
         <p className={styles.member__name}>{name}</p>
         <p className={styles.member__title}>{title}</p>
-        <div className={styles.member__links}>
-          <a href={linkedin}>
+        {(linkedin || email) && <div className={styles.member__links}>
+          {linkedin && <a href={linkedin} aria-label={`${name} on LinkedIn`}>
             <FaLinkedin className={styles.linkedin_icon} />
-          </a>
-          <a href={`mailto:${email}`}>
+          </a>}
+          {email && <a href={`mailto:${email}`} aria-label={`Email ${name}`}>
             <SiMicrosoftoutlook className={styles.email_icon} />
-          </a>
-        </div>
+          </a>}
+        </div>}
       </div>
     </div>
   );

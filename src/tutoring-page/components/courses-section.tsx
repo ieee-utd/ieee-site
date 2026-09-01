@@ -92,34 +92,35 @@ const CoursesSection = () => {
   };
 
   return (
-    <section className={styles.courses_section}>
+    <section className={styles.courses_section} id="courses">
       <div className={styles.courses_header}>
+        <p className={styles.eyebrow}>Find your course</p>
         <h2 className={styles.courses_title}>Courses</h2>
         <p className={styles.courses_subtitle}>
           We currently provide tutoring in the following courses
         </p>
-        <div className={styles.divider} />
       </div>
       <div className={styles.courses_list}>
         {courses.map((course) => (
           <div key={course.id} className={styles.course_card}>
             {/* Course preview (clickable header) */}
-            <div
+            <button
+              type="button"
               className={styles.course_preview}
               onClick={() => toggleCourse(course.id)}
+              aria-expanded={expandedCourses.includes(course.id)}
             >
               <div className={styles.course_main_info}>
                 <span className={styles.status_indicator} />
                 <h3 className={styles.course_name}>{course.name}</h3>
               </div>
-              <button
+              <span
                 className={`${styles.expand_button} ${
                   expandedCourses.includes(course.id) ? styles.expanded : ''
                 }`}
-              >
-                ▼
-              </button>
-            </div>
+                aria-hidden="true"
+              >+</span>
+            </button>
 
             {/* Expanded course details (grid layout) */}
             {expandedCourses.includes(course.id) && (

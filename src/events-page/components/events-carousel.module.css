@@ -1,0 +1,124 @@
+.carouselWrap {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.instruction {
+  margin: 0 0 1rem;
+  color: #e4e6ec;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 2rem max(1rem, calc((100% - 370px) / 2)) 3rem 1rem;
+  margin: -2rem -1rem -3rem;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: #c85b12 transparent;
+  scrollbar-width: thin;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #c85b12;
+  border-radius: 99px;
+}
+
+.card {
+  flex: 0 0 min(370px, calc(100vw - 3rem));
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 35px rgba(5, 30, 48, 0.2);
+  scroll-snap-align: center;
+  transform: scale(0.88);
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.card.active {
+  transform: scale(1);
+  box-shadow: 0 24px 42px rgba(5, 30, 48, 0.32);
+}
+
+.imagePlaceholder {
+  min-height: 190px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.35rem;
+  background: linear-gradient(130deg, #2c6a9b, #1f537d);
+  color: white;
+}
+
+.imagePlaceholder span {
+  align-self: flex-start;
+  margin-bottom: auto;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 99px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+.imagePlaceholder p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.82rem;
+}
+
+.cardBody {
+  padding: 1.5rem;
+}
+
+.time {
+  margin: 0;
+  color: #c85b12;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 0.7rem 0;
+  color: #2c6a9b;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.description {
+  margin: 0;
+  color: #627696;
+  font-size: 0.93rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    gap: 0.9rem;
+    padding-left: 1rem;
+    padding-right: calc((100% - min(290px, calc(100vw - 3rem))) / 2);
+    scroll-padding-inline: 1rem;
+  }
+
+  .card {
+    flex-basis: min(290px, calc(100vw - 3rem));
+  }
+
+  .imagePlaceholder {
+    min-height: 150px;
+  }
+}

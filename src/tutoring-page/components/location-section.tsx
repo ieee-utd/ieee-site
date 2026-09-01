@@ -6,6 +6,10 @@ import escnMap from '../../assets/gridimages/escnmap.png';
 const LocationSection = () => {
   return (
     <section className={styles.location_section}>
+      <div className={styles.location_heading}>
+        <p>Where to find us</p>
+        <h2>ECSN 2.318</h2>
+      </div>
       <div className={styles.maps_container}>
         <img src={utdMap} alt="UTD Campus Map" className={styles.map_image} />
         <img src={escnMap} alt="ESCN Floor Plan" className={styles.map_image} />

@@ -186,12 +186,6 @@ const Landing: React.FC = () => {
           </a>
         </div>
 
-        <ul className={Styles.tags} aria-label="What we offer">
-          <li>Tutoring</li>
-          <li>Events</li>
-          <li>Workshops</li>
-          <li>Societies</li>
-        </ul>
       </div>
 
       <img
@@ -222,10 +216,6 @@ const Landing: React.FC = () => {
             />
           ))}
         </div>
-
-        <a href="#who-we-are" className={Styles.scrollHint}>
-          <span>Scroll</span>
-        </a>
       </div>
     </section>
   );
