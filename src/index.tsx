@@ -11,6 +11,7 @@ import SignIn from "signin-page/signin";
 import Volunteer from "volunteer-page/volunteer-page";
 import DocumentationPage from "documentation-page/documentation-page";
 import EventsPage from "./events-page/events-page";
+import SocietiesPage from "societies/societies";
 //import Calendar from "./calendar/calendar";
 
 import "./index.css";
@@ -26,12 +27,13 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/Officers" element={<Committees />} />
-        <Route path="/Tutoring" element={<TutoringPage />} />
-        <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/Volunteer" element={<Volunteer />} />
+        <Route path="/officers" element={<Committees />} />
+        <Route path="/tutoring" element={<TutoringPage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/documentation" element={<DocumentationPage />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/societies" element={<SocietiesPage />} />
       </Routes>
       <NavBar />
       <Footer />

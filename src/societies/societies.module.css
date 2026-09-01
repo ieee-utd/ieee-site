@@ -1,0 +1,224 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c85b12, #c85b12);
+  padding: 3rem 1.5rem;
+  font-family: system-ui, sans-serif;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ieeeLogo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  max-width: 600px;
+  margin: 0.75rem auto 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Search */
+
+.searchContainer {
+  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 1.4rem;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 52px;
+  padding: 0 1rem 0 2.75rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.searchInput::placeholder {
+  color: #94a3b8;
+}
+
+.searchInput:focus {
+  box-shadow:
+    0 0 0 3px rgba(0, 98, 155, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Society grid */
+
+.results {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.societyCard {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.societyCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Category */
+
+.cardTop {
+  margin-bottom: 0.75rem;
+}
+
+.category {
+  display: inline-block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #e8f3f8;
+  color: #00629b;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Card content */
+
+.societyName {
+  margin: 0 0 0.75rem;
+  color: #1e293b;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 750;
+}
+
+.description {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Button */
+
+.viewButton {
+  margin-top: auto;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 0.7rem;
+  background: #00629b;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.viewButton:hover {
+  background: #004d7a;
+}
+
+.viewButton:active {
+  transform: scale(0.98);
+}
+
+.arrow {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+/* No results */
+
+.noResults {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.noResults h2 {
+  margin: 0 0 0.5rem;
+  color: #1e293b;
+}
+
+.noResults p {
+  margin: 0;
+  color: #64748b;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .page {
+    padding: 2rem 1rem;
+  }
+
+  .ieeeLogo {
+    width: 120px;
+    margin-bottom: 1.25rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .results {
+    grid-template-columns: 1fr;
+  }
+
+  .societyCard {
+    min-height: 220px;
+  }
+}

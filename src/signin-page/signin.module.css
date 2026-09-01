@@ -1,100 +1,114 @@
 .page {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #c85b12, #c85b12);
-    padding: 1rem;
-    font-family: system-ui, sans-serif;
-  }
-  
-  .card {
-    width: 100%;
-    max-width: 400px;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  }
-  
-  .title {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #1e293b; /* slate-like */
-    margin-bottom: 1.5rem;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .input {
-    padding: 0.75rem 1rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 0.75rem;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  
-  .input:focus {
-    border-color: #00629b; /* IEEE Blue */
-    box-shadow: 0 0 0 2px rgba(0, 98, 155, 0.3);
-  }
-  
-  .buttonRow {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .loginBtn,
-  .signupBtn {
-    flex: 1;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, opacity 0.2s;
-  }
-  
-  .loginBtn {
-    background: #00629b; /* IEEE Blue */
-    color: white;
-  }
-  
-  .loginBtn:hover:not(:disabled) {
-    background: #004d7a;
-  }
-  
-  .signupBtn {
-    background: #e2e8f0;
-    color: #334155;
-  }
-  
-  .signupBtn:hover:not(:disabled) {
-    background: #cbd5e1;
-  }
-  
-  .loginBtn:disabled,
-  .signupBtn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  
-  .message {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #475569;
-    margin-top: 0.5rem;
-  }
-  
-  /* Existing styles stay the same... */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #c85b12, #c85b12);
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+}
 
-/* Button for main action */
+.container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ieeeLogo {
+  width: 100px;
+  height: auto;
+  margin-top: -10.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.card {
+  width: 100%;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.input:focus {
+  border-color: #00629b;
+  box-shadow: 0 0 0 2px rgba(0, 98, 155, 0.3);
+}
+
+.buttonRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.loginBtn,
+.signupBtn {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.loginBtn {
+  background: #00629b;
+  color: white;
+}
+
+.loginBtn:hover:not(:disabled) {
+  background: #004d7a;
+}
+
+.signupBtn {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.signupBtn:hover:not(:disabled) {
+  background: #cbd5e1;
+}
+
+.loginBtn:disabled,
+.signupBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #475569;
+  margin-top: 0.5rem;
+}
+
 .primaryBtn {
   width: 100%;
   padding: 0.75rem;
@@ -102,7 +116,7 @@
   border-radius: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  background: #00629b; /* IEEE Blue */
+  background: #00629b;
   color: white;
   transition: background 0.2s, opacity 0.2s;
 }
@@ -116,7 +130,6 @@
   cursor: not-allowed;
 }
 
-/* Toggle text + link button */
 .toggleText {
   text-align: center;
   font-size: 0.85rem;
@@ -127,7 +140,7 @@
 .linkBtn {
   background: none;
   border: none;
-  color: #e87511; /* UTD orange */
+  color: #e87511;
   font-weight: 600;
   cursor: pointer;
   padding: 0;

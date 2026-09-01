@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./signin.module.css";
+import ieeeLogo from "assets/ieeelogotransparent.png";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -12,7 +13,8 @@ export default function SignIn() {
   const API_BASE_URL = process.env.REACT_APP_AWS_BASE_URL;
 
   // Simple regex for email validation
-  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   async function handleSubmit() {
     setMessage("");
@@ -42,11 +44,10 @@ export default function SignIn() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Api-Key": API_KEY || "", // fallback ensures string
+          "Api-Key": API_KEY || "",
         },
         body: JSON.stringify({ email, password }),
       });
-      
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
@@ -61,7 +62,6 @@ export default function SignIn() {
           : "Account created successfully!"
       );
 
-      // Optionally store session token
       if (data.sessionToken) {
         localStorage.setItem("sessionToken", data.sessionToken);
       }
@@ -75,67 +75,75 @@ export default function SignIn() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>
-          {mode === "signin" ? "Sign In" : "Sign Up"}
-        </h1>
+      <div className={styles.container}>
+        <img
+          src={ieeeLogo}
+          alt="IEEE Logo"
+          className={styles.ieeeLogo}
+        />
 
-        <div className={styles.form}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
-          />
+        <div className={styles.card}>
+          <h1 className={styles.title}>
+            {mode === "signin" ? "Sign In" : "Sign Up"}
+          </h1>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-          />
+          <div className={styles.form}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+            />
 
-          <button
-            className={styles.primaryBtn}
-            disabled={isLoading}
-            onClick={handleSubmit}
-          >
-            {isLoading
-              ? "Loading..."
-              : mode === "signin"
-              ? "Sign In"
-              : "Sign Up"}
-          </button>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+            />
 
-          <p className={styles.toggleText}>
-            {mode === "signin" ? (
-              <>
-                Don’t have an account?{" "}
-                <button
-                  type="button"
-                  className={styles.linkBtn}
-                  onClick={() => setMode("signup")}
-                >
-                  Sign Up
-                </button>
-              </>
-            ) : (
-              <>
-                Already have an account?{" "}
-                <button
-                  type="button"
-                  className={styles.linkBtn}
-                  onClick={() => setMode("signin")}
-                >
-                  Sign In
-                </button>
-              </>
-            )}
-          </p>
+            <button
+              className={styles.primaryBtn}
+              disabled={isLoading}
+              onClick={handleSubmit}
+            >
+              {isLoading
+                ? "Loading..."
+                : mode === "signin"
+                ? "Sign In"
+                : "Sign Up"}
+            </button>
 
-          {message && <p className={styles.message}>{message}</p>}
+            <p className={styles.toggleText}>
+              {mode === "signin" ? (
+                <>
+                  Don’t have an account?{" "}
+                  <button
+                    type="button"
+                    className={styles.linkBtn}
+                    onClick={() => setMode("signup")}
+                  >
+                    Sign Up
+                  </button>
+                </>
+              ) : (
+                <>
+                  Already have an account?{" "}
+                  <button
+                    type="button"
+                    className={styles.linkBtn}
+                    onClick={() => setMode("signin")}
+                  >
+                    Sign In
+                  </button>
+                </>
+              )}
+            </p>
+
+            {message && <p className={styles.message}>{message}</p>}
+          </div>
         </div>
       </div>
     </div>
