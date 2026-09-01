@@ -41,7 +41,7 @@ const courses = [
   },
   {
     id: 4,
-    name: 'Discrete-Time Signals and Systems (CE 3303)',
+    name: 'Advance Engineering Math (EE/CE 3300)',
     schedules: [
       { tutor: 'Jayne', times: ['Mon 1:30PM-2:30PM', 'Thu 1PM-2PM'] },
     ],
