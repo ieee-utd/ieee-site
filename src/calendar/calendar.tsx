@@ -145,7 +145,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
 
   useEffect(() => {
     fetchCalendarEvents();
-  }, []);
+  }, [fetchCalendarEvents]);
 
   const courseColorMap: { [key: string]: number } = {
     '1202': 1,
