@@ -73,7 +73,7 @@ const Committees: React.FC = () => {
       <section className={styles.officers_section}>
         <div className={styles.section_heading}>
           <p>Our team</p>
-          <h2>Leadership with a shared purpose.</h2>
+          <h2>Meet the officers</h2>
         </div>
         <div className={styles.member__grid}>{mappedMembers}</div>
       </section>
