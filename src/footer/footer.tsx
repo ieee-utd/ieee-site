@@ -10,7 +10,7 @@ export default function Footer() {
     { src: discordLogo, alt: "Discord Logo", href: "https://discord.gg/8SXQe9pGu9"},
     { src: facebookLogo, alt: "Facebook Logo", href: "https://www.facebook.com/IEEEUTD/"},
     { src: linkedinLogo, alt: "LinkedIn Logo", href: "https://www.linkedin.com/company/ieee-utd/"},
-    { src: youtubeLogo, alt: "YouTube Logo", href: "https://www.youtube.com/@ieeeutdallas1989"},
+    { src: youtubeLogo, alt: "YouTube Logo", href: "https://www.youtube.com/channel/UCvJGaNTtvCTX8kcpKVgo9rQ"},
     { src: instagramLogo, alt: "Instagram Logo", href: "https://www.instagram.com/ieeeutd/"},
   ];
 
