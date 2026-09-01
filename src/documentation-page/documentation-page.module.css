@@ -1,0 +1,286 @@
+.page {
+  min-height: 100vh;
+  background-color: #c85b12;
+  color: #ffffff;
+  padding: 7.5rem 1.5rem 4rem;
+  box-sizing: border-box;
+}
+
+.hero {
+  max-width: 920px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.lede {
+  margin: 0 auto;
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 920px;
+  margin: 0 auto 2.5rem;
+}
+
+.toc a {
+  color: #ffffff;
+  text-decoration: none;
+  background: #2c6a9b;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.toc a:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.content {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section {
+  background: #2c6a9b;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  scroll-margin-top: 6.5rem;
+}
+
+.section h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.section h3 {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.section h3:first-of-type {
+  margin-top: 0;
+}
+
+.section h4 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.section p,
+.section li {
+  line-height: 1.65;
+}
+
+.section p {
+  margin: 0 0 0.85rem;
+}
+
+.section a {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.steps,
+.list,
+.flow {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.steps li,
+.list li,
+.flow li {
+  margin-bottom: 0.7rem;
+}
+
+.flow {
+  counter-reset: flow;
+  list-style: none;
+  padding-left: 0;
+}
+
+.flow li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.flow li::before {
+  counter-increment: flow;
+  content: counter(flow);
+  flex-shrink: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2c6a9b;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  padding: 0.9rem 1rem;
+  background: #1b3f5c;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #f8fafc;
+}
+
+.section code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}
+
+.callout {
+  background: rgba(0, 0, 0, 0.18);
+  border-left: 4px solid #ffffff;
+  padding: 0.9rem 1rem;
+  border-radius: 0 10px 10px 0;
+  margin: 0 0 1rem;
+  line-height: 1.65;
+}
+
+.optionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+.optionCard {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.recommended {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.badge,
+.badgeMuted {
+  display: inline-block;
+  margin: 0 0 0.65rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge {
+  background: #ffffff;
+  color: #2c6a9b;
+}
+
+.badgeMuted {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.optionSub {
+  margin: 0 0 0.9rem !important;
+  font-size: 0.92rem;
+  opacity: 0.9;
+}
+
+.optionCard .steps {
+  margin-bottom: 0;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.table th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 6.5rem 1rem 3rem;
+  }
+
+  .section {
+    padding: 1.4rem;
+  }
+
+  .optionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.45rem;
+  }
+}

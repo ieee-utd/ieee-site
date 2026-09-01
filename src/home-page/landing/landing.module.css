@@ -1,129 +1,338 @@
-.Carousel {
+.hero {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   z-index: 0;
+  color: #fff;
 }
 
-.CarouselImage {
+.slide {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  transition: opacity 1s ease-in-out;
   opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.1s ease;
 }
 
-.CarouselImage.active {
+.slide.active {
   opacity: 1;
+  animation: kenBurns 8s ease-out forwards;
 }
 
-.Container {
+@keyframes kenBurns {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      105deg,
+      rgba(8, 18, 32, 0.82) 0%,
+      rgba(8, 18, 32, 0.52) 42%,
+      rgba(8, 18, 32, 0.22) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.38) 0%,
+      transparent 28%,
+      transparent 62%,
+      rgba(44, 106, 155, 0.55) 100%
+    );
+}
+
+.content {
   position: relative;
-  height: 100vh;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; /* Align items to the left */
-  text-align: left; /* Align text to the left */
-  color: #fff;
-  z-index: 1; /* Ensure it appears above the images */
-  padding-left: 6%; /* Adjust padding for positioning */
-  padding-right: 6%; /* Adjust padding for positioning */
-  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+  align-items: flex-start;
+  padding: 7.5rem 8% 6rem;
+  max-width: 65rem;
+  box-sizing: border-box;
 }
 
-.Header {
-  font-size: 3.5rem; /* Adjusted font size */
-  margin-bottom: -1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  width: 87%;
+.brandMark {
+  height: 52px;
+  width: auto;
+  margin-bottom: 1.25rem;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
 }
 
-.Description {
-  font-size: 1.75rem; /* New description style */
-  margin-bottom: 3rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffd2a8;
 }
 
-.Button {
-  font-size: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #c85b12; /* Adjust color as needed */
+.title {
+  margin: 0;
+  margin-left: -0.05em;
+  width: 100%;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.subhead {
+  margin: 0.85rem 0 0;
+  width: 100%;
+  max-width: 28rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+
+.motto {
+  margin: 0.5rem 0 0;
+  min-height: 2.2rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  background-color: #e87511;
+  vertical-align: text-bottom;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.75rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.45rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.primaryBtn {
+  background-color: #c85b12;
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(200, 91, 18, 0.38);
+}
+
+.primaryBtn:hover {
+  background-color: #a84b0f;
+  transform: translateY(-1px);
+}
+
+.secondaryBtn {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.primaryBtn:focus-visible,
+.secondaryBtn:focus-visible,
+.dot:focus-visible,
+.scrollHint:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+}
+
+.tags li {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(44, 106, 155, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.watermark {
+  position: absolute;
+  right: 4%;
+  bottom: 7%;
+  width: min(18rem, 34vw);
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+.controls {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 1.6rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dots {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.dot {
+  width: 2.1rem;
+  height: 4px;
+  padding: 0;
   border: none;
-  border-radius: 25px; /* Increased border-radius to make the button rounder */
-  color: white;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
-  text-decoration: none; /* Remove underline from the link */
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease, width 0.2s ease;
 }
 
-.Button:hover {
-  background-color: #9d480f; /* Adjust color on hover */
+.dotActive {
+  width: 2.8rem;
+  background: #ffffff;
 }
 
-/* Responsive Styles */
+.scrollHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.scrollHint::after {
+  content: "";
+  width: 1px;
+  height: 1.6rem;
+  background: linear-gradient(180deg, #ffffff, transparent);
+  animation: drop 1.6s ease-in-out infinite;
+}
+
+@keyframes drop {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleY(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .Header {
-    font-size: 2.5rem; /* Larger font size for smaller screens */
+  .content {
+    padding: 6.5rem 6% 5.5rem;
+    max-width: 100%;
   }
 
-  .Description {
-    font-size: 1.5rem; /* Larger font size for smaller screens */
+  .brandMark {
+    height: 42px;
   }
 
-  .Button {
-    font-size: 1.2rem; /* Larger font size for smaller screens */
-    padding: 0.75rem 1.5rem; /* Adjusted padding for smaller screens */
+  .watermark {
+    width: 42vw;
+    opacity: 0.12;
   }
 
-  .Logo {
-    width: 40%; /* Adjust logo size for smaller screens */
-    bottom: 15px; /* Adjust as needed */
-    right: -20%; /* Adjust as needed */
+  .controls {
+    left: 6%;
+    right: 6%;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .Header {
-    font-size: 2rem; /* Larger font size for mobile screens */
+  .title {
+    font-size: 2.35rem;
   }
 
-  .Description {
-    font-size: 1.25rem; /* Larger font size for mobile screens */
+  .actions {
+    width: 100%;
   }
 
-  .Button {
-    font-size: 1rem; /* Larger font size for mobile screens */
-    padding: 0.75rem 1.5rem; /* Adjusted padding for mobile screens */
-  }
-
-  .Logo {
-    width: 35%; /* Adjust logo size for mobile screens */
-    bottom: 10px; /* Adjust as needed */
-    right: -15%; /* Adjust as needed */
+  .primaryBtn,
+  .secondaryBtn {
+    flex: 1 1 auto;
+    text-align: center;
   }
 }
 
-.Cursor {
-  display: inline-block;
-  width: 1px;
-  background-color: white;
-  margin-left: 2px;
-  animation: blink 1s infinite;
-}
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .slide.active {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  50.1%, 100% { opacity: 0; }
-}
-
-.Logo {
-  position: absolute;
-  width: 15rem; /* Adjust the width as needed */
-  z-index: -1; /* Keep it behind other content if desired */
-  right: 0; /* Position it on the left side */
-  bottom: 0;
+  .cursor,
+  .scrollHint::after {
+    animation: none;
+  }
 }

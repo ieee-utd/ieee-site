@@ -9,6 +9,7 @@ import Committees from "./officers-page/officers";
 import TutoringPage from "./tutoring-page/tutoring-page";
 import SignIn from "signin-page/signin";
 import Volunteer from "volunteer-page/volunteer-page";
+import DocumentationPage from "documentation-page/documentation-page";
 import Calendar from "./calendar/calendar";
 
 import "./index.css";
@@ -28,6 +29,7 @@ root.render(
         <Route path="/Tutoring" element={<TutoringPage />} />
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/Volunteer" element={<Volunteer />} />
+        <Route path="/documentation" element={<DocumentationPage />} />
       </Routes>
       <NavBar />
       <Footer />

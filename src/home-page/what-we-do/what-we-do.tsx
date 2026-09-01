@@ -1,109 +1,100 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./what-we-do.module.css";
 import eventsImage from "../../assets/gridimages/events.png";
 import tutoringImage from "../../assets/gridimages/tutoring.png";
 import workshopsImage from "../../assets/gridimages/workshops.png";
 import societiesImage from "../../assets/gridimages/Societies.png";
 
-const WhatWeDo = () => {
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll(`.${styles.section}`);
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          section.classList.add(styles.visible);
-        } else {
-          section.classList.remove(styles.visible);
-        }
-      });
-    };
+const offerings = [
+  {
+    title: "Events",
+    image: eventsImage,
+    href: "/events",
+    alt: "IEEE UTD event",
+    description:
+      "Talks, mixers, and socials throughout the semester so you can learn and meet people.",
+  },
+  {
+    title: "Tutoring",
+    image: tutoringImage,
+    href: "/tutoring",
+    alt: "IEEE UTD tutoring",
+    description:
+      "Peer tutoring for core courses, with a room and calendar you can actually use.",
+  },
+  {
+    title: "Workshops",
+    image: workshopsImage,
+    href: "/workshops",
+    alt: "IEEE UTD workshop",
+    description:
+      "Hands-on sessions to build skills you can put on a project or a resume.",
+  },
+  {
+    title: "Societies",
+    image: societiesImage,
+    href: "/societies",
+    alt: "IEEE UTD societies",
+    description:
+      "Join a technical society and work with students who care about the same topics.",
+  },
+];
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+const WhatWeDo = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className={styles.whatWeDo} id="what-we-do">
+    <section
+      className={`${styles.whatWeDo} ${revealed ? styles.revealed : ""}`}
+      id="what-we-do"
+      ref={sectionRef}
+    >
       <div className={styles.container}>
-        <div className={styles.gridContainer}>
-          <div className={`${styles.section} ${styles.hidden}`}>
-            <div className={styles.imageWrapper}>
-              <img src={eventsImage} alt="Events" className={styles.image} />
-            </div>
-            <div className={styles.contentWrapper}>
-              <h3>Events</h3>
-              <p>
-                From talks to networking events, we organize numerous events to
-                keep you engaged and learning.
-              </p>
-              <a href="/events" className={styles.link}>
-                Find Out More
-              </a>
-            </div>
-          </div>
+        <header className={styles.header}>
+          <p className={styles.eyebrow}>Get involved</p>
+          <h2 className={styles.title}>What we do</h2>
+          <p className={styles.lede}>
+            Four ways to plug in, whether you want help in a class, a project
+            team, or a reason to show up on campus.
+          </p>
+        </header>
 
-          <div className={`${styles.section} ${styles.hidden}`}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={tutoringImage}
-                alt="Tutoring"
-                className={styles.image}
-              />
-            </div>
-            <div className={styles.contentWrapper}>
-              <h3>Tutoring</h3>
-              <p>
-                Offering peer tutoring sessions to help you excel in your
-                studies.
-              </p>
-              <a href="/tutoring" className={styles.link}>
-                Find Out More
-              </a>
-            </div>
-          </div>
-
-          <div className={`${styles.section} ${styles.hidden}`}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={workshopsImage}
-                alt="Workshops"
-                className={styles.image}
-              />
-            </div>
-            <div className={styles.contentWrapper}>
-              <h3>Workshops</h3>
-              <p>
-                Hands-on workshops to build skills and gain practical
-                experience.
-              </p>
-              <a href="/workshops" className={styles.link}>
-                Find Out More
-              </a>
-            </div>
-          </div>
-
-          <div className={`${styles.section} ${styles.hidden}`}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={societiesImage}
-                alt="Societies"
-                className={styles.image}
-              />
-            </div>
-            <div className={styles.contentWrapper}>
-              <h3>Societies</h3>
-              <p>
-                Join one of our many societies to connect with like-minded
-                individuals.
-              </p>
-              <a href="/societies" className={styles.link}>
-                Find Out More
-              </a>
-            </div>
-          </div>
+        <div className={styles.grid}>
+          {offerings.map((item) => (
+            <article className={styles.card} key={item.title}>
+              <div className={styles.imageWrap}>
+                <img src={item.image} alt={item.alt} />
+              </div>
+              <div className={styles.cardBody}>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <p className={styles.cardCopy}>{item.description}</p>
+                <a href={item.href} className={styles.link}>
+                  Find out more
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

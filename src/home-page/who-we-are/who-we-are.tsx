@@ -1,72 +1,71 @@
-import React, { useEffect } from 'react';
-import styles from './who-we-are.module.css';
-import conferenceImage from '../../assets/gridimages/grid3.jpg';
-import matchaImage from '../../assets/gridimages/grid4.jpg';
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./who-we-are.module.css";
+import conferenceImage from "../../assets/gridimages/grid3.jpg";
+import matchaImage from "../../assets/gridimages/grid4.jpg";
+
+const highlights = [
+  "Peer tutoring",
+  "Technical societies",
+  "Industry networking",
+  "Events all semester",
+];
 
 const WhoWeAre = () => {
-  useEffect(() => {
-    const handleScroll = () => {
-      const imageSections = document.querySelectorAll(`.${styles.imageSection}`);
-      imageSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          section.classList.add(styles.visible);
-        } else {
-          section.classList.remove(styles.visible);
-        }
-      });
-    };
+  const sectionRef = useRef<HTMLElement>(null);
+  const [revealed, setRevealed] = useState(false);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className={styles.whoWeAre} id='who-we-are'>
+    <section
+      className={`${styles.whoWeAre} ${revealed ? styles.revealed : ""}`}
+      id="who-we-are"
+      ref={sectionRef}
+    >
       <div className={styles.container}>
-        <div className={styles.gridContainer}>
-          <div className={styles.titleSection}>
-            <div className={styles.titleContent}>
-              <h2 className={styles.title}>
-                Who We Are
-                <span className={styles.underline}></span>
-              </h2>
-              <p className={styles.description}>
-                IEEE UTD is one of the largest technical professional societies in the region!
-              </p>
-            </div>
+        <div className={styles.layout}>
+          <div className={styles.copy}>
+            <p className={styles.eyebrow}>About the branch</p>
+            <h2 className={styles.title}>Who we are</h2>
+            <p className={styles.description}>
+              IEEE UTD is one of the largest technical professional societies
+              in the region. Students come here to learn with peers, meet
+              people in the field, and take part in events all semester.
+            </p>
+            <ul className={styles.highlights}>
+              {highlights.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <a href="#what-we-do" className={styles.learnMoreButton}>
+              See what we do
+            </a>
           </div>
 
-          <div className={`${styles.imageSection} ${styles.hidden}`}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={conferenceImage}
-                alt="IEEE UTD Conference"
-                className={styles.image}
-              />
+          <div className={styles.photos}>
+            <div className={`${styles.photo} ${styles.photoPrimary}`}>
+              <img src={conferenceImage} alt="IEEE UTD members at a conference" />
             </div>
-          </div>
-
-          <div className={`${styles.imageSection} ${styles.hidden}`}>
-            <div className={styles.imageWrapper}>
-              <img
-                src={matchaImage}
-                alt="Matcha with Murata Event"
-                className={styles.image}
-              />
-            </div>
-          </div>
-
-          <div className={styles.contentSection}>
-            <div className={styles.contentWrapper}>
-              <p className={styles.services}>
-                We provide tutoring, societies, networking opportunities, and various events throughout the semester
-              </p>
-              <a href="#what-we-do" className={styles.learnMoreButton}>
-                Learn More
-              </a>
+            <div className={`${styles.photo} ${styles.photoSecondary}`}>
+              <img src={matchaImage} alt="IEEE UTD Matcha with Murata event" />
             </div>
           </div>
         </div>
