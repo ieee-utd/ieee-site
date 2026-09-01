@@ -4,7 +4,7 @@ import image1 from "../../assets/carousel1.jpg";
 import image2 from "../../assets/carousel4.jpg";
 import image3 from "../../assets/4.jpg";
 import UtdSeal from "../../assets/UTDLogo.png";
-import ieeeLogo from "../../assets/ieeelogotransparent.png";
+import ieeeLogo from "../../assets/ieeeutdlogo.png";
 
 const images = [image1, image2, image3];
 
