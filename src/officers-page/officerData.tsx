@@ -121,7 +121,7 @@ const officerData = [
         ]
     },
     {
-        section: "Other",
+        section: "Society Directors",
         members: [
             {
                 name: "James Dao",
