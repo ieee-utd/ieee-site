@@ -17,7 +17,7 @@ const formatDisplayTime = (date: string, startTime: string) => {
 
 const extractTutorName = (title: string) => {
   const normalized = title.replace(/\s+/g, ' ').trim();
-  return normalized.split(/\s*-\s*/)[0].trim();
+  return normalized.split(/\s*\(/)[0].trim();
 };
 
 const matchCourseCode = (title: string) =>
