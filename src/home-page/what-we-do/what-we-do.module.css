@@ -104,7 +104,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(44, 106, 155, 0.35);
+  background: rgba(44, 106, 155, 0.65);
   z-index: 1;
   pointer-events: none;
 }
