@@ -128,6 +128,12 @@
   background: white;
   border-radius: 14px;
   box-shadow: 0 14px 28px rgba(0, 40, 85, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight:hover {
+  transform: scale(1.06);
+  box-shadow: 0 20px 40px rgba(0, 40, 85, 0.15);
 }
 
 .highlightNumber {
