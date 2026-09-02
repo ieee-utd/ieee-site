@@ -90,8 +90,16 @@
   gap: 20px;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .ul li:hover .socialLogos {
+    transform: scale(1.15);
+  }
+}
+
 .socialLogos {
   width: 36px;
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1);
+  cursor: pointer;
 }
 
 .join {
