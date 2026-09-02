@@ -20,8 +20,10 @@ const extractTutorName = (title: string) => {
   return normalized.split(/\s*\(/)[0].trim();
 };
 
-const matchCourseCode = (title: string) =>
-  courseCodePatterns.find(({ pattern }) => pattern.test(title))?.code ?? null;
+const matchCourseCode = (title: string) => {
+  const match = courseCodePatterns.find(({ pattern }) => pattern.test(title));
+  return match ? match.code : null;
+};
 
 const groupSchedules = (events: { title: string; startTime: string; date: string }[]) => {
   const grouped: Record<string, TutorSchedule[]> = {};
@@ -136,7 +138,7 @@ const CoursesSection = () => {
 
             {expandedCourses.includes(course.id) && (
               <div className={styles.course_details}>
-                {schedulesByCourse[course.code]?.length > 0 ? (
+                {schedulesByCourse[course.code] && schedulesByCourse[course.code].length > 0 ? (
                   <div className={styles.tutors_grid}>
                     {schedulesByCourse[course.code].map((schedule) => (
                       <div key={schedule.tutor} className={styles.tutor_card}>
