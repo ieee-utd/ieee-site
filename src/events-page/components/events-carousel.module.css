@@ -22,7 +22,7 @@
   margin: -2rem -1rem -3rem;
   scroll-padding-inline: 1rem;
   scroll-snap-type: x mandatory;
-  scrollbar-color: #003300 transparent;
+  scrollbar-color: #c85b12 transparent;
   scrollbar-width: thin;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .carousel::-webkit-scrollbar-thumb {
-  background: #003300;
+  background: #c85b12;
   border-radius: 99px;
 }
 
