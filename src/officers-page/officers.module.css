@@ -9,6 +9,8 @@
 .section_heading { width: min(1150px, 100%); margin: 0 auto 2.5rem; }
 .section_heading p { margin: 0 0 .8rem; color: #c85b12; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .section_heading h2 { max-width: 620px; margin: 0; color: #2c6a9b; font-size: clamp(2.35rem, 4vw, 3.8rem); line-height: 1.05; letter-spacing: -.04em; }
+.section_subheading { width: min(1150px, 100%); margin: 3rem auto 1.5rem; }
+.section_subheading h3 { margin: 0; color: #2c6a9b; font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; }
 .member__grid { width: min(1150px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
 .fade-in-section { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
 .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }

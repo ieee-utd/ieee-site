@@ -41,17 +41,26 @@ const FadeInSection: React.FC<FadeInSectionProps> = (props) => {
 };
 
 const Committees: React.FC = () => {
-  const mappedMembers = officerData.map((member) => (
-    <FadeInSection key={member.name}>
-      <Member
-        name={member.name}
-        title={member.title}
-        image={member.image}
-        linkedin={member.linkedin}
-        email={member.email}
-        key={member.name}
-      />
-    </FadeInSection>
+  const sections = officerData.map((section) => (
+    <div key={section.section}>
+      <div className={styles.section_subheading}>
+        <h3>{section.section}</h3>
+      </div>
+      <div className={styles.member__grid}>
+        {section.members.map((member) => (
+          <FadeInSection key={member.name}>
+            <Member
+              name={member.name}
+              title={member.title}
+              image={member.image}
+              linkedin={member.linkedin}
+              email={member.email}
+              key={member.name}
+            />
+          </FadeInSection>
+        ))}
+      </div>
+    </div>
   ));
 
   return (
@@ -75,7 +84,7 @@ const Committees: React.FC = () => {
           <p>Our team</p>
           <h2>Meet the officers</h2>
         </div>
-        <div className={styles.member__grid}>{mappedMembers}</div>
+        {sections}
       </section>
     </>
   );
