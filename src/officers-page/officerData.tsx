@@ -30,13 +30,6 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Sarah Azeem",
-                title: "Treasurer",
-                image: '',
-                linkedin: '',
-                email: '',
-            },
-            {
                name: "Waziha Khan",
                 title: "Director of Engineering",
                 image: '',
