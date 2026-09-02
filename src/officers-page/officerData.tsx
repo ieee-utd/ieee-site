@@ -17,7 +17,7 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Rushil Sivaiah",
+                name: "Cathy Saldaña",
                 title: "Secretary",
                 image: "",
                 linkedin: '',
