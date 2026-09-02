@@ -97,6 +97,16 @@
 .imageWrap {
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  position: relative;
+}
+
+.imageWrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 106, 155, 0.35);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .imageWrap img {
@@ -105,7 +115,6 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.55s ease;
-  filter: hue-rotate(20deg) saturate(1.15) brightness(0.95) contrast(1.1);
 }
 
 .card:hover .imageWrap img {
