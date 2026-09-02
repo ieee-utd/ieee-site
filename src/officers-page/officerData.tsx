@@ -30,8 +30,8 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Dyanada Gavande",
-                title: "Director of Tutoring",
+                name: "Muneeb Shahid",
+                title: "Director of Engineering",
                 image: '',
                 linkedin: '',
                 email: '',
@@ -51,8 +51,8 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Muneeb Shahid",
-                title: "Director of Engineering",
+                name: "Dyanada Gavande",
+                title: "Director of Tutoring",
                 image: '',
                 linkedin: '',
                 email: '',
