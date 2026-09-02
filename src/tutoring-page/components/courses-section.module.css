@@ -18,6 +18,7 @@
 .tutor_card { padding: 1rem; border-radius: 9px; background: #fff; border: 1px solid #e2eaf0; }
 .tutor_card strong { display: block; margin-bottom: .35rem; color: #2c6a9b; font-size: .96rem; }
 .tutor_card div { color: #627d98; font-size: .86rem; line-height: 1.45; }
+.emptyState { color: #627d98; font-size: .92rem; line-height: 1.6; }
 @media (max-width: 700px) { .courses_section { padding: 4rem 1.5rem; } .course_preview { padding: 1rem; } .course_name { font-size: .95rem; } .course_main_info { gap: .75rem; } .course_details { padding: 1rem; } }
 
 @media (hover: hover) and (pointer: fine) {
