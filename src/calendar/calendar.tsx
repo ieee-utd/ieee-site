@@ -339,6 +339,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
       {!loading && !error && (
         <>
           <div className={styles.timeline}>
+            <div className={styles.timeSlot}></div>
             {timeSlots.map((time, index) => (
               <div key={index} className={styles.timeSlot}>{time}</div>
             ))}
@@ -356,6 +357,13 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
               ))}
             </div>
             <div className={styles.daysGrid}>
+              <div className={styles.dayHeaderRow}>
+                {days.map(day => (
+                  <div key={`header-${day.id}`} className={styles.dayHeaderCell}>
+                    {day.label.substring(0, 3)}
+                  </div>
+                ))}
+              </div>
               {days.map(day => (
                 <div
                   key={day.id}
@@ -397,7 +405,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
                 <div
                   key={`grid-line-${index}`}
                   className={styles.gridLine}
-                  style={{ top: `${index * 50 - 1}px` }}
+                  style={{ top: `${index * 50 + 50 - 1}px` }}
                 />
               ))}
             </div>
