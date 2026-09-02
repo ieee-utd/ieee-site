@@ -125,7 +125,7 @@
 
 .highlight {
   padding: 2rem;
-  background: white;
+  background: #c85b12;
   border-radius: 14px;
   box-shadow: 0 14px 28px rgba(0, 40, 85, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -137,7 +137,7 @@
 }
 
 .highlightNumber {
-  color: #c85b12;
+  color: #ffffff;
   font-size: 0.85rem;
   font-weight: 750;
 }
@@ -145,11 +145,12 @@
 .highlight h3 {
   margin: 1.2rem 0 0.7rem;
   font-size: 1.25rem;
+  color: #ffffff;
 }
 
 .highlight p {
   margin: 0;
-  color: #627696;
+  color: #ffffff;
   font-size: 0.94rem;
   line-height: 1.65;
 }
