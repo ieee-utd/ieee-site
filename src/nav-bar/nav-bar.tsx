@@ -41,7 +41,7 @@ function NavBar() {
                 </a>
               </li>
               <li>
-                <a className={styles.mobileLink} href="/join">
+                <a className={styles.mobileLink} target="_blank" rel="noopener noreferrer" href="https://discord.gg/8SXQe9pGu9">
                   Join
                 </a>
               </li>
@@ -99,7 +99,7 @@ function NavBar() {
               </a>
             </li>
             <li>
-              <a className={styles.link} href="/join">
+              <a className={styles.link} target="_blank" rel="noopener noreferrer" href="https://discord.gg/8SXQe9pGu9">
                 Join
               </a>
             </li>

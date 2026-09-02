@@ -36,7 +36,7 @@
 /* CSS */
 .subscribe-button {
   align-items: center;
-  background-color: #2c6a9b;
+  background-color: #191d1f;
   border: 0;
   border-radius: 7px;
   box-sizing: border-box;
@@ -90,8 +90,16 @@
   gap: 20px;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .ul li:hover .socialLogos {
+    transform: scale(1.15);
+  }
+}
+
 .socialLogos {
   width: 36px;
+  transition: transform 180ms cubic-bezier(.2,.9,.2,1);
+  cursor: pointer;
 }
 
 .join {

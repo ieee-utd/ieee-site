@@ -1,0 +1,180 @@
+.whoWeAre {
+  background-color: #c85b12;
+  color: #ffffff;
+  padding: 6rem 6%;
+  scroll-margin-top: 5.5rem;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.copy,
+.photos {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.revealed .copy,
+.revealed .photos {
+  opacity: 1;
+  transform: none;
+}
+
+.revealed .photos {
+  transition-delay: 0.12s;
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffd2a8;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.description {
+  margin: 1.15rem 0 0;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.highlights li {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.learnMoreButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.75rem;
+  background-color: #ffffff;
+  color: #c85b12;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.learnMoreButton:hover {
+  background-color: #fff4ea;
+  transform: translateY(-1px);
+}
+
+.learnMoreButton:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.photos {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1rem;
+  align-items: end;
+}
+
+.photo {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.photo:hover img {
+  transform: scale(1.04);
+}
+
+.photoPrimary {
+  aspect-ratio: 4 / 5;
+}
+
+.photoSecondary {
+  aspect-ratio: 1;
+  margin-bottom: 2.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  .whoWeAre {
+    padding: 4.5rem 6%;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .photos {
+    max-width: 36rem;
+  }
+
+  .photoSecondary {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .photos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .photoPrimary,
+  .photoSecondary {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy,
+  .photos,
+  .photo img {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

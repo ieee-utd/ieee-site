@@ -1,0 +1,199 @@
+.page {
+  background: #ffffff;
+  color: #2c6a9b;
+}
+
+.hero {
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+  background: #2c6a9b;
+  color: white;
+}
+
+.heroContent {
+  box-sizing: border-box;
+  max-width: 760px;
+  padding: 8.5rem 10% 6rem;
+  align-self: center;
+}
+
+.eyebrow,
+.sectionLabel {
+  margin: 0 0 1rem;
+  color: #c85b12;
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.intro h2,
+.calendarHeading h2 {
+  margin: 0;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.hero h1 {
+  max-width: 620px;
+  font-size: clamp(3.3rem, 6vw, 5.6rem);
+  line-height: 0.98;
+}
+
+.heroCopy {
+  max-width: 560px;
+  margin: 1.75rem 0 2.25rem;
+  color: #e4e6ec;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.calendarLink {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.9rem 1.35rem;
+  background: #c85b12;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.calendarLink:hover {
+  background: #a84b0f;
+  transform: translateY(-2px);
+}
+
+.heroVisual {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  background: #2c6a9b;
+}
+
+.heroVisual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+
+.heroVisual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 106, 155, 0.42);
+  pointer-events: none;
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 6rem 2rem 4rem;
+}
+
+.intro h2,
+.calendarHeading h2 {
+  font-size: clamp(2.3rem, 4vw, 3.6rem);
+  line-height: 1.05;
+}
+
+.intro > p {
+  margin: 1.6rem 0 0;
+  color: #627696;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+.highlight {
+  padding: 2rem;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 14px 28px rgba(0, 40, 85, 0.08);
+}
+
+.highlightNumber {
+  color: #c85b12;
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
+.highlight h3 {
+  margin: 1.2rem 0 0.7rem;
+  font-size: 1.25rem;
+}
+
+.highlight p {
+  margin: 0;
+  color: #627696;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.calendarSection {
+  padding: 5.5rem clamp(1rem, 5vw, 4rem) 6rem;
+  background: #2c6a9b;
+}
+
+.calendarHeading {
+  max-width: 1120px;
+  margin: 0 auto 2.25rem;
+  color: white;
+}
+
+.calendarHeading h2 {
+  color: white;
+}
+
+.calendarHeading > p:last-child {
+  margin: 1rem 0 0;
+  color: #e4e6ec;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroContent {
+    padding: 7.5rem 1.5rem 4rem;
+  }
+
+  .heroVisual {
+    min-height: 250px;
+    max-height: 330px;
+  }
+
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 4rem 1.5rem 2.5rem;
+  }
+
+  .highlights {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .calendarSection {
+    padding: 4rem 1rem;
+  }
+}

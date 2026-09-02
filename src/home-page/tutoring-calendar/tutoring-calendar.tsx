@@ -19,6 +19,7 @@ const TutoringCalendar: React.FC = () => {
   // environment variables for API key and calendar ID
   const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
   const calendarId = process.env.REACT_APP_TUTORING_CALENDAR_ID;
+  
   const colors = [
     TUTORING_COLORS.eventColorOne,
     TUTORING_COLORS.eventColorTwo,
