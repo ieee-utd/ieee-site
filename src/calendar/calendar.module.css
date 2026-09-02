@@ -134,8 +134,8 @@
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(5, minmax(350px, 1fr));
-    background: white;
-    border-bottom: 2px solid #eee;
+    background: #c85b12;
+    border-bottom: none;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -145,9 +145,10 @@
     padding: 1rem 0.5rem;
     text-align: center;
     font-weight: 600;
-    color: #2c6a9b;
+    color: white;
     font-size: 0.95rem;
-    border-left: 1px solid #eee;
+    border-left: 1px solid white;
+    background-color: #c85b12;
 }
 
 .dayHeaderCell:first-child {
