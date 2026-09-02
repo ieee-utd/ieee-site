@@ -1,8 +1,8 @@
 .Container {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Center the sections vertically */
-  justify-content: center; /* Center the sections horizontally */
+  align-items: center;
+  justify-content: center;
   background-color: white;
   color: black;
   text-align: center;
@@ -15,64 +15,70 @@
 .SponsorSection {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align items */
+  align-items: center;
   justify-content: center;
-  width: 80%; /* Ensure Sponsor section and Instagram section have equal width */
+  width: 100%;
 }
 
 .SectionDescription {
   font-size: 2rem;
   margin-top: 3rem;
   color: #c85b12;
+  width: 80%;
 }
 
-.Client-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items per row by default */
-  gap: 20px; /* Adds space between items */
+.carousel-container {
   width: 100%;
-  align-items: center;
-  justify-items: center;
+  overflow: hidden;
+  margin-top: 2rem;
 }
 
-.Client-item {
-  width: 80%;
-  max-width: 350px; /* Ensures it doesn't get too large */
-  flex: 1 auto;
-  transition: all 0.5s;
+.carousel-track {
   display: flex;
-  justify-content: center; /* Center the image horizontally */
-  align-items: center; /* Center the image vertically */
-  margin: auto; /* Center the image within the container */
+  gap: 20px;
+  animation: scroll 20s linear infinite;
+  padding: 0 20px;
 }
 
-.Client-wrapper {
-  width: 80%;
-  max-width: 350px;
-  flex: 1 auto;
+.carousel-item {
+  flex: 0 0 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  animation: fadeIn 0.6s ease-in-out;
 }
 
-@keyframes fadeIn {
+@keyframes scroll {
   from {
-    opacity: 0;
+    transform: translateX(0);
   }
   to {
-    opacity: 1;
+    transform: translateX(-50%);
   }
+}
+
+.Client-item {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-  .Client-list {
-    grid-template-columns: repeat(2, 1fr); /* Always 2 items per row on smaller screens */
+  .carousel-item {
+    flex: 0 0 200px;
   }
-}
 
-.Client-item {
-  max-width: 300px; /* Optional: Adjust size for smaller screens */
+  .SectionDescription {
+    font-size: 1.5rem;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
