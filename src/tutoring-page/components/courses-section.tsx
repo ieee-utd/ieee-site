@@ -80,7 +80,7 @@ const courses = [
   },
   {
     id: 9,
-    name: 'Analog Integrated Circuit Analysis and Design (EE4340)',
+    name: 'Analog Integrated Circuit Analysis and Design (EE 4340)',
     schedules: [],
   },
 ];
