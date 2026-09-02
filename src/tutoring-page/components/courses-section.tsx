@@ -78,6 +78,11 @@ const courses = [
       { tutor: 'Aarnav', times: ['Mon 11:30AM-1:30PM'] },
     ],
   },
+  {
+    id: 9,
+    name: 'Analog Integrated Circuit Analysis and Design (EE4340)',
+    schedules: [],
+  },
 ];
 
 const CoursesSection = () => {
@@ -125,14 +130,20 @@ const CoursesSection = () => {
             {/* Expanded course details (grid layout) */}
             {expandedCourses.includes(course.id) && (
               <div className={styles.course_details}>
-                <div className={styles.tutors_grid}>
-                  {course.schedules.map((schedule, index) => (
-                    <div key={index} className={styles.tutor_card}>
-                      <strong>{schedule.tutor}</strong>
-                      <div>{schedule.times.join(', ')}</div>
-                    </div>
-                  ))}
-                </div>
+                {course.schedules.length > 0 ? (
+                  <div className={styles.tutors_grid}>
+                    {course.schedules.map((schedule, index) => (
+                      <div key={index} className={styles.tutor_card}>
+                        <strong>{schedule.tutor}</strong>
+                        <div>{schedule.times.join(', ')}</div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className={styles.emptyState}>
+                    Tutor assignments for this course will be posted soon.
+                  </div>
+                )}
               </div>
             )}
           </div>
