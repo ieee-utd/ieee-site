@@ -28,7 +28,7 @@
 }
 
 .carousel-container {
-  width: 80%;
+  width: 100%;
   overflow: hidden;
   margin-top: 2rem;
 }
@@ -74,6 +74,6 @@
   }
 
   .carousel-container {
-    width: 95%;
+    width: 100%;
   }
 }
