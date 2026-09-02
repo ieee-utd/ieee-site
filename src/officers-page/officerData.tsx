@@ -1,13 +1,13 @@
 const officerData = [
     {
-        name: "Shruthigna Chandupatla",
+        name: "Alya Mansoor",
         title: "President",
         image: '',
         linkedin: '',
         email: '',
     },
     {
-        name: "Minh Nguyen",
+        name: "Sidrah Rashad",
         title: "Vice President",
         image: '',
         linkedin: '',
