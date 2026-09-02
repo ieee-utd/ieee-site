@@ -38,7 +38,7 @@ const officerData = [
             },
             {
                 name: "Deston Muo",
-                title: "Head of Web Development",
+                title: "Director of Web Development",
                 image: '',
                 linkedin: '',
                 email: '',
