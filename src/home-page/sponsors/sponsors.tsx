@@ -3,7 +3,6 @@ import BurnsMcDonnell from "./assets/burns_mcdonnell.png";
 import TexasInstruments from "./assets/texas_instruments.avif";
 import Murata from './assets/murata.png';
 import Qorvo from "./assets/qorvo.png";
-import { useState, useEffect } from "react";
 
 interface Client {
   id: number;
@@ -56,22 +55,7 @@ const clients: Client[] = [
 ];
 
 function Sponsors() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % clients.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const visibleClients = [
-    clients[currentIndex],
-    clients[(currentIndex + 1) % clients.length],
-    clients[(currentIndex + 2) % clients.length],
-    clients[(currentIndex + 3) % clients.length],
-  ];
+  const duplicatedClients = [...clients, ...clients];
 
   return (
     <div className={Styles.Container}>
@@ -79,12 +63,14 @@ function Sponsors() {
         <h1 className={Styles.SectionDescription}>
           Our Corporate Sponsors
         </h1>
-        <div className={Styles["Client-list"]}>
-          {visibleClients.map((client, index) => (
-            <div key={`${client.id}-${currentIndex}-${index}`} className={Styles["Client-wrapper"]}>
-              {client.image}
-            </div>
-          ))}
+        <div className={Styles["carousel-container"]}>
+          <div className={Styles["carousel-track"]}>
+            {duplicatedClients.map((client, index) => (
+              <div key={index} className={Styles["carousel-item"]}>
+                {client.image}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
