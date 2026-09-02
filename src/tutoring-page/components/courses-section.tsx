@@ -136,15 +136,9 @@ const CoursesSection = () => {
 
             {expandedCourses.includes(course.id) && (
               <div className={styles.course_details}>
-                {(schedulesByCourse[course.code]?.length > 0
-                  ? schedulesByCourse[course.code]
-                  : fallbackSchedulesByCourse[course.code] || []
-                ).length > 0 ? (
+                {schedulesByCourse[course.code]?.length > 0 ? (
                   <div className={styles.tutors_grid}>
-                    {(schedulesByCourse[course.code]?.length > 0
-                      ? schedulesByCourse[course.code]
-                      : fallbackSchedulesByCourse[course.code] || []
-                    ).map((schedule) => (
+                    {schedulesByCourse[course.code].map((schedule) => (
                       <div key={schedule.tutor} className={styles.tutor_card}>
                         <strong>{schedule.tutor}</strong>
                         <div>{schedule.times.join(', ')}</div>
@@ -153,7 +147,7 @@ const CoursesSection = () => {
                   </div>
                 ) : (
                   <div className={styles.emptyState}>
-                    Tutor assignments for this course will be posted soon.
+                    Match course titles in the calendar as Tutor Name ({course.code}) to show tutors here.
                   </div>
                 )}
               </div>
