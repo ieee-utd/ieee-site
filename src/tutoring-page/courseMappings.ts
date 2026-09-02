@@ -7,19 +7,19 @@ export interface CourseCard {
   id: number;
   name: string;
   code: string;
-  schedules: TutorSchedule[];
+  fallbackSchedules: TutorSchedule[];
 }
 
 export const COURSES: CourseCard[] = [
-  { id: 1, name: 'Introduction to Electrical and Computer Engineering II', code: 'EE/CE 1202', schedules: [] },
-  { id: 2, name: 'Electrical Network Analysis', code: 'EE/CE 2301', schedules: [] },
-  { id: 3, name: 'Introduction to Digital Systems', code: 'EE/CE 2310', schedules: [] },
-  { id: 4, name: 'Advance Engineering Math', code: 'EE/CE 3300', schedules: [] },
-  { id: 5, name: 'Electronic Devices', code: 'EE/CE 3310', schedules: [] },
-  { id: 6, name: 'Electronic Circuits', code: 'EE/CE 3311', schedules: [] },
-  { id: 7, name: 'Digital Circuits', code: 'EE/CE 3320', schedules: [] },
-  { id: 8, name: 'Electromagnetic Engineering I', code: 'EE 4301', schedules: [] },
-  { id: 9, name: 'Analog Integrated Circuit Analysis and Design', code: 'EE 4340', schedules: [] },
+  { id: 1, name: 'Introduction to Electrical and Computer Engineering II', code: 'EE/CE 1202', fallbackSchedules: [] },
+  { id: 2, name: 'Electrical Network Analysis', code: 'EE/CE 2301', fallbackSchedules: [] },
+  { id: 3, name: 'Introduction to Digital Systems', code: 'EE/CE 2310', fallbackSchedules: [] },
+  { id: 4, name: 'Advance Engineering Math', code: 'EE/CE 3300', fallbackSchedules: [] },
+  { id: 5, name: 'Electronic Devices', code: 'EE/CE 3310', fallbackSchedules: [] },
+  { id: 6, name: 'Electronic Circuits', code: 'EE/CE 3311', fallbackSchedules: [] },
+  { id: 7, name: 'Digital Circuits', code: 'EE/CE 3320', fallbackSchedules: [] },
+  { id: 8, name: 'Electromagnetic Engineering I', code: 'EE 4301', fallbackSchedules: [] },
+  { id: 9, name: 'Analog Integrated Circuit Analysis and Design', code: 'EE 4340', fallbackSchedules: [] },
 ];
 
 export const courseCodePatterns: Array<{ code: string; pattern: RegExp }> = [

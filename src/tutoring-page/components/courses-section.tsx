@@ -49,6 +49,43 @@ const groupSchedules = (events: { title: string; startTime: string; date: string
   return grouped;
 };
 
+const fallbackSchedulesByCourse: Record<string, TutorSchedule[]> = {
+  'EE/CE 1202': [
+    { tutor: 'Josphin', times: ['Mon 4PM-6PM'] },
+    { tutor: 'Kaushik', times: ['Tue 1:30PM-2:30PM', 'Thu 1:30PM-2:30PM'] },
+    { tutor: 'Danish', times: ['Tue 3PM-5PM'] },
+    { tutor: 'Jenny', times: ['Thu 3PM-5PM'] },
+    { tutor: 'Nermin', times: ['Wed 1PM-3PM'] },
+    { tutor: 'Armaan', times: ['Wed 4PM-6PM'] },
+  ],
+  'EE/CE 2301': [
+    { tutor: 'Jesus', times: ['Wed 10AM-12PM'] },
+    { tutor: 'Avinash', times: ['Wed 10AM-12PM'] },
+  ],
+  'EE/CE 2310': [
+    { tutor: 'Shreya', times: ['Mon 11AM-1PM'] },
+    { tutor: 'Kasish', times: ['Mon 3:15PM-5:15PM'] },
+    { tutor: 'Deeksha', times: ['Tue 10AM-12PM'] },
+    { tutor: 'Alicia', times: ['Tue 1PM-2PM', 'Thu 1PM-2PM'] },
+    { tutor: 'Tessa', times: ['Fri 12PM-2PM'] },
+  ],
+  'EE/CE 3300': [{ tutor: 'Jayne', times: ['Mon 1:30PM-2:30PM', 'Thu 1PM-2PM'] }],
+  'EE/CE 3310': [
+    { tutor: 'Dyanada', times: ['Mon 11:30AM-1:30PM'] },
+    { tutor: 'Avinash', times: ['Wed 10AM-12PM'] },
+  ],
+  'EE/CE 3311': [
+    { tutor: 'Sebastian', times: ['Mon 4:30PM-5:30PM', 'Wed 4:30PM-5:30PM'] },
+    { tutor: 'Jenny', times: ['Tue 3PM-5PM'] },
+  ],
+  'EE/CE 3320': [
+    { tutor: 'Rushil', times: ['Tue 11AM-1PM'] },
+    { tutor: 'Onyeze', times: ['Tue 1PM-2PM', 'Wed 2:30PM-3:30PM'] },
+    { tutor: 'Karla', times: ['Wed 10:30AM-12:30PM'] },
+  ],
+  'EE 4301': [{ tutor: 'Aarnav', times: ['Mon 11:30AM-1:30PM'] }],
+};
+
 const CoursesSection = () => {
   const [expandedCourses, setExpandedCourses] = useState<number[]>([]);
   const { events } = useCalendarEvents();
@@ -99,9 +136,15 @@ const CoursesSection = () => {
 
             {expandedCourses.includes(course.id) && (
               <div className={styles.course_details}>
-                {schedulesByCourse[course.code]?.length > 0 ? (
+                {(schedulesByCourse[course.code]?.length > 0
+                  ? schedulesByCourse[course.code]
+                  : fallbackSchedulesByCourse[course.code] || []
+                ).length > 0 ? (
                   <div className={styles.tutors_grid}>
-                    {schedulesByCourse[course.code].map((schedule) => (
+                    {(schedulesByCourse[course.code]?.length > 0
+                      ? schedulesByCourse[course.code]
+                      : fallbackSchedulesByCourse[course.code] || []
+                    ).map((schedule) => (
                       <div key={schedule.tutor} className={styles.tutor_card}>
                         <strong>{schedule.tutor}</strong>
                         <div>{schedule.times.join(', ')}</div>
