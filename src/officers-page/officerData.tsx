@@ -23,7 +23,7 @@ const officerData = [
                 linkedin: '',
             },
             {
-                name: "Gabrielle Tobias",
+                name: "Toluwalase Adeyemi",
                 title: "Treasurer",
                 image: '',
                 linkedin: '',
