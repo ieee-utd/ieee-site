@@ -17,17 +17,17 @@ const officerData = [
                 email: '',
             },
             {
+                name: "Rushil Sivaiah",
+                title: "Secretary",
+                image: "",
+                linkedin: '',
+            },
+            {
                 name: "Gabrielle Tobias",
                 title: "Treasurer",
                 image: '',
                 linkedin: '',
                 email: '',
-            },
-            {
-                name: "Rushil Sivaiah",
-                title: "Secretary",
-                image: "",
-                linkedin: '',
             },
             {
                 name: "Dyanada Gavande",
