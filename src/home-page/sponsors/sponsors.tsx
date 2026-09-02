@@ -3,6 +3,7 @@ import BurnsMcDonnell from "./assets/burns_mcdonnell.png";
 import TexasInstruments from "./assets/texas_instruments.avif";
 import Murata from './assets/murata.png';
 import Qorvo from "./assets/qorvo.png";
+import { useState, useEffect } from "react";
 
 interface Client {
   id: number;
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('animated');
-        observer.unobserve(entry.target); // Stop observing once the animation is triggered
+        observer.unobserve(entry.target);
       }
     });
   }, options);
@@ -55,6 +56,23 @@ const clients: Client[] = [
 ];
 
 function Sponsors() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % clients.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const visibleClients = [
+    clients[currentIndex],
+    clients[(currentIndex + 1) % clients.length],
+    clients[(currentIndex + 2) % clients.length],
+    clients[(currentIndex + 3) % clients.length],
+  ];
+
   return (
     <div className={Styles.Container}>
       <div className={Styles.SponsorSection}>
@@ -62,8 +80,8 @@ function Sponsors() {
           Our Corporate Sponsors
         </h1>
         <div className={Styles["Client-list"]}>
-          {clients.map((client) => (
-            <div key={client.id} className={Styles["Client-item"]}>
+          {visibleClients.map((client, index) => (
+            <div key={`${client.id}-${currentIndex}-${index}`} className={Styles["Client-item"]}>
               {client.image}
             </div>
           ))}
