@@ -28,20 +28,20 @@
 }
 
 .carousel-container {
-  width: 100%;
+  width: 80%;
   overflow: hidden;
   margin-top: 2rem;
 }
 
 .carousel-track {
   display: flex;
-  gap: 20px;
-  animation: scroll 20s linear infinite;
-  padding: 0 20px;
+  gap: 40px;
+  animation: scroll 30s linear infinite;
+  padding: 20px 0;
 }
 
 .carousel-item {
-  flex: 0 0 300px;
+  flex: 0 0 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +58,7 @@
 
 .Client-item {
   width: 100%;
-  max-width: 250px;
+  max-width: 350px;
   height: auto;
   object-fit: contain;
 }
@@ -66,19 +66,14 @@
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .carousel-item {
-    flex: 0 0 200px;
+    flex: 0 0 250px;
   }
 
   .SectionDescription {
     font-size: 1.5rem;
   }
 
-  @keyframes scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
+  .carousel-container {
+    width: 95%;
   }
 }
