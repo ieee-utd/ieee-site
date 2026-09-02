@@ -64,9 +64,56 @@ const officerData = [
                 linkedin: '',
                 email: '',
             },
-            {
+             {
                 name: "place holder",
                 title: "Director of Initiatives",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+        ]
+    },
+    {
+        section: "Coordinators",
+        members: [
+            {
+                name: "Place Holder 2",
+                title: "Engineering Coordinator",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+            {
+                name: "Place Holder 3",
+                title: "Engineering Coordinator",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+            {
+                name: "Place Holder 4",
+                title: "Web Development Coordinator",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+            {
+                name: "Place Holder 5",
+                title: "Outreach Coordinator",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+            {
+                name: "Place Holder 6",
+                title: "Marketing Coordinator",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+            {
+                name: "Place Holder 7",
+                title: "Initiatives Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
