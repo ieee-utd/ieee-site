@@ -61,7 +61,7 @@ function Sponsors() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % clients.length);
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -81,7 +81,7 @@ function Sponsors() {
         </h1>
         <div className={Styles["Client-list"]}>
           {visibleClients.map((client, index) => (
-            <div key={`${client.id}-${currentIndex}-${index}`} className={Styles["Client-item"]}>
+            <div key={`${client.id}-${currentIndex}-${index}`} className={Styles["Client-wrapper"]}>
               {client.image}
             </div>
           ))}
