@@ -98,8 +98,8 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Place Holder 5",
-                title: "Outreach Coordinator",
+                name: "Place Holder 7",
+                title: "Initiatives Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
@@ -112,8 +112,8 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Place Holder 7",
-                title: "Initiatives Coordinator",
+                name: "Place Holder 5",
+                title: "Outreach Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
