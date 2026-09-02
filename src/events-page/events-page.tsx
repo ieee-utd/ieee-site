@@ -65,7 +65,7 @@ function EventsPage() {
       <section className={styles.calendarSection} id="upcoming-events">
         <div className={styles.calendarHeading}>
           <p className={styles.sectionLabel}>Plan your week</p>
-          <h2>Upcoming events</h2>
+          <h2>Upcoming Events</h2>
           <p>Find your next workshop, social, or opportunity to get involved.</p>
         </div>
         <EventsCarousel />
