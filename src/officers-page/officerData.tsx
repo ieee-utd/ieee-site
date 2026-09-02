@@ -64,6 +64,13 @@ const officerData = [
                 linkedin: '',
                 email: '',
             },
+            {
+                name: "place holder",
+                title: "Director of Initiatives",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
         ]
     },
     {
