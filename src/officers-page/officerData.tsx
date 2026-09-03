@@ -45,13 +45,6 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Deston Muo",
-                title: "Director of Web Development",
-                image: '',
-                linkedin: '',
-                email: '',
-            },
-            {
                 name: "Ugonna Anyalemechi",
                 title: "Director of Initiatives",
                 image: "", 
@@ -79,6 +72,13 @@ const officerData = [
                 linkedin: '',
                 email: '',
             },
+            {
+                name: "Deston Muo",
+                title: "Director of Web Development",
+                image: '',
+                linkedin: '',
+                email: '',
+            },
         ]
     },
     {
@@ -99,28 +99,28 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Danish Ejaz",
-                title: "Web Development Coordinator",
+                name: "Keenan Hawkins",
+                title: "Engineering Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
             },
             {
-                name: "Varsha Shashishekar",
+                name: "Arjun Krishnan",
                 title: "Initiatives Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
             },
             {
-                name: "Yusra Zainab",
+                name: "Rachit Singhal",
                 title: "Marketing Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
             },
             {
-                name: "Emilio Mijares",
+                name: "Jennifer Vega",
                 title: "Outreach Coordinator",
                 image: "",
                 linkedin: '',
@@ -132,40 +132,33 @@ const officerData = [
         section: "Society Directors",
         members: [
             {
-                name: "Shradha Gupta",
-                title: "Director of CI",
+                name: "Bhavesh Panchal",
+                title: "ACM Director",
                 image: "",
                 linkedin: '',
                 email: '',
             },
             {
-                name: "Jake",
-                title: "Director of PES",
-                image: '',
-                linkedin: '',
-                email: '',
-            },
-            {
-                name: "Nevin Sunil",
-                title: "Director of RAS",
-                image: '',
-                linkedin: '',
-                email: '',
-            },
-            {
-                name: "Swaroop Kamble",
-                title: "Director of RF",
-                image: '',
-                linkedin: '',
-                email: '',
-            },
-            {
-                name: "Varun",
-                title: "Director of SSCS",
+                name: "Jerry Cheng",
+                title: "ComSoc Director",
                 image: "",
                 linkedin: '',
                 email: '',
-            }
+            },
+            {
+                name: "Hao Ren",
+                title: "PES Director",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
+            {
+                name: "Shreya Reddy",
+                title: "WIE Director",
+                image: "",
+                linkedin: '',
+                email: '',
+            },
         ]
     }
 ];
