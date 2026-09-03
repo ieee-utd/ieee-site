@@ -99,8 +99,8 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Keenan Hawkins",
-                title: "Engineering Coordinator",
+                name: "Danish Ejaz",
+                title: "Web Development Coordinator",
                 image: "",
                 linkedin: '',
                 email: '',
