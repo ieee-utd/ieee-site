@@ -16,7 +16,7 @@
     padding-top: calc(var(--row-height) / 2);
     background: linear-gradient(to right, white 95%, rgba(255, 255, 255, 0));
     border-right: 1px solid #eee;
-}
+}   
 
 .event {
     position: absolute;
@@ -112,14 +112,14 @@
     background: none;
     cursor: pointer;
     font-size: 0.9rem;
-    color: #333;
+    color: #2c6a9b;
     font-family: 'Montserrat';
 }
 
 .dayTab.active {
     font-weight: bold;
-    color: #000000;
-    border-bottom: 2px solid #000000;
+    color: #2c6a9b;
+    border-bottom: 2px solid #2c6a9b;
 }
 
 .daysGrid {
@@ -145,9 +145,9 @@
     padding: 1rem 0.5rem;
     text-align: center;
     font-weight: 600;
-    color: #c85b12;
+    color: #2c6a9b;
     font-size: 0.95rem;
-    border-left: 1px solid #c85b12;
+    border-left: 1px solid #2c6a9b;
     background-color: white;
 }
 
@@ -269,6 +269,10 @@
     }
 
     .dayLabel {
+        display: none;
+    }
+
+    .dayHeaderRow {
         display: none;
     }
     .gridLine {

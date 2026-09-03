@@ -21,6 +21,7 @@ const officerData = [
                 title: "Secretary",
                 image: "",
                 linkedin: '',
+                email: '',
             },
             {
                 name: "Toluwalase Adeyemi",
