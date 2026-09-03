@@ -124,7 +124,6 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(200, 91, 18, 0.45);
   z-index: 1;
   pointer-events: none;
 }
