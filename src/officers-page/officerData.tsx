@@ -44,12 +44,6 @@ const officerData = [
                 email: '',
             },
             {
-                name: "Deston Muo",
-                title: "Director of Web Development",
-                image: '',
-                linkedin: '',
-                email: '',
-            },
             {
                name: "Ugonna Anyalemechi",
                title: "Director of Initiatives",
@@ -78,7 +72,13 @@ const officerData = [
                 linkedin: '',
                 email: '',
             },
-        ]
+            {
+                name: "Deston Muo",
+                title: "Director of Web Development",
+                image: '',
+                linkedin: '',
+                email: '',
+            },
     },
     {
         section: "Coordinators",
