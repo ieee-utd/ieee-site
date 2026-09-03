@@ -93,23 +93,6 @@ const CoursesSection = () => {
   const { events } = useCalendarEvents();
 
   const schedulesByCourse = useMemo(() => groupSchedules(events), [events]);
-  const sortedCourses = useMemo(() => {
-    const getCourseNumber = (code: string) => {
-      const match = code.match(/\d+/);
-      return match ? Number(match[0]) : Number.MAX_SAFE_INTEGER;
-    };
-
-    return [...COURSES].sort((a, b) => {
-      const aHasTutors = (schedulesByCourse[a.code]?.length ?? 0) > 0;
-      const bHasTutors = (schedulesByCourse[b.code]?.length ?? 0) > 0;
-
-      if (aHasTutors !== bHasTutors) {
-        return aHasTutors ? -1 : 1;
-      }
-
-      return getCourseNumber(a.code) - getCourseNumber(b.code);
-    });
-  }, [schedulesByCourse]);
 
   const toggleCourse = (courseId: number) => {
     setExpandedCourses((prev) =>
@@ -129,7 +112,7 @@ const CoursesSection = () => {
         </p>
       </div>
       <div className={styles.courses_list}>
-        {sortedCourses.map((course) => (
+        {COURSES.map((course) => (
           <div key={course.id} className={styles.course_card}>
             <button
               type="button"
@@ -138,13 +121,7 @@ const CoursesSection = () => {
               aria-expanded={expandedCourses.includes(course.id)}
             >
               <div className={styles.course_main_info}>
-                <span
-                  className={`${styles.status_indicator} ${
-                    (schedulesByCourse[course.code]?.length ?? 0) > 0
-                      ? styles.status_indicator_green
-                      : styles.status_indicator_orange
-                  }`}
-                />
+                <span className={styles.status_indicator} />
                 <h3 className={styles.course_name}>
                   {course.name} ({course.code})
                 </h3>
