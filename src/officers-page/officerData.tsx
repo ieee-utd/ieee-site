@@ -17,7 +17,7 @@ const officerData = [
                 email: 'sxr230168@utdallas.edu',
             },
             {
-                name: "Cathy Saldaña",
+                name: "Cathryn Saldaña",
                 title: "Secretary",
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/cathryn-salda%C3%B1a-b33a6436b/',
@@ -158,6 +158,13 @@ const officerData = [
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/nevin-sunil/r',
                 email: 'njs220004@utdallas.edu',
+            },
+            {
+                name: "Swaroop Kamble",
+                title: "RF Director",
+                image: "",
+                linkedin: 'https://www.linkedin.com/in/swaroop-kamble/',
+                email: 'Swaroop.Kamble@utdallas.edu',
             },
             {
                 name: "Varun Shiralkar",
