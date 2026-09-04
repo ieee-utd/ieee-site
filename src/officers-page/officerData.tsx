@@ -6,7 +6,7 @@ const officerData = [
                 name: "Alya Mansoor",
                 title: "President",
                 image: '',
-                linkedin: '',
+                linkedin: 'https://www.linkedin.com/in/alya-mansoor/',
                 email: '',
             },
             {
