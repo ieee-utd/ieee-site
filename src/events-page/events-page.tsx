@@ -1,5 +1,6 @@
 import eventImage from "../assets/gridimages/events.png";
 import EventsCarousel from "./components/events-carousel";
+import RevealOnScroll from "../shared/reveal-on-scroll";
 import styles from "./events-page.module.css";
 
 const eventHighlights = [
@@ -40,36 +41,42 @@ function EventsPage() {
         </div>
       </section>
 
-      <section className={styles.intro}>
-        <div>
-          <p className={styles.sectionLabel}>More than a meeting</p>
-          <h2>Why Should You Come?</h2>
-        </div>
-        <p>
-          IEEE events are open spaces for students to explore new technology,
-          meet people with shared interests, and turn a spark of curiosity into
-          something tangible.
-        </p>
-      </section>
+      <RevealOnScroll>
+        <section className={styles.intro}>
+          <div>
+            <p className={styles.sectionLabel}>More than a meeting</p>
+            <h2>Why Should You Come?</h2>
+          </div>
+          <p>
+            IEEE events are open spaces for students to explore new technology,
+            meet people with shared interests, and turn a spark of curiosity into
+            something tangible.
+          </p>
+        </section>
+      </RevealOnScroll>
 
-      <section className={styles.highlights} aria-label="What to expect at IEEE events">
-        {eventHighlights.map((highlight, index) => (
-          <article className={styles.highlight} key={highlight.title}>
-            <span className={styles.highlightNumber}>0{index + 1}</span>
-            <h3>{highlight.title}</h3>
-            <p>{highlight.description}</p>
-          </article>
-        ))}
-      </section>
+      <RevealOnScroll>
+        <section className={styles.highlights} aria-label="What to expect at IEEE events">
+          {eventHighlights.map((highlight, index) => (
+            <article className={styles.highlight} key={highlight.title}>
+              <span className={styles.highlightNumber}>0{index + 1}</span>
+              <h3>{highlight.title}</h3>
+              <p>{highlight.description}</p>
+            </article>
+          ))}
+        </section>
+      </RevealOnScroll>
 
-      <section className={styles.calendarSection} id="upcoming-events">
-        <div className={styles.calendarHeading}>
-          <p className={styles.sectionLabel}>Plan your week</p>
-          <h2>Upcoming Events</h2>
-          <p>Find your next workshop, social, or opportunity to get involved.</p>
-        </div>
-        <EventsCarousel />
-      </section>
+      <RevealOnScroll>
+        <section className={styles.calendarSection} id="upcoming-events">
+          <div className={styles.calendarHeading}>
+            <p className={styles.sectionLabel}>Plan your week</p>
+            <h2>Upcoming Events</h2>
+            <p>Find your next workshop, social, or opportunity to get involved.</p>
+          </div>
+          <EventsCarousel />
+        </section>
+      </RevealOnScroll>
     </main>
   );
 }

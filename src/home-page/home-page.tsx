@@ -7,20 +7,29 @@ import Sponsors from "./sponsors/sponsors";
 import Landing from "./landing/landing";
 //import Chatbot from "../chatbot/components/chatbot";
 import Calendar from "../calendar/calendar";
+import RevealOnScroll from "../shared/reveal-on-scroll";
 import styles from './home-page.module.css'
 
 function HomePage() {
   return (
     <>
       <Landing />
-      <section className={styles.calendar_section}>
-      <Calendar
-              config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
-            />
-      </section>
-      <WhoWeAre />
-      <WhatWeDo />
-      <Sponsors />
+      <RevealOnScroll>
+        <section className={styles.calendar_section}>
+        <Calendar
+                config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
+              />
+        </section>
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <WhoWeAre />
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <WhatWeDo />
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <Sponsors />
+      </RevealOnScroll>
     </>
   );
 }

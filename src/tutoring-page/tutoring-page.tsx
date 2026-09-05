@@ -5,6 +5,7 @@ import CoursesSection from "./components/courses-section";
 import LocationSection from "./components/location-section";
 import BecomeTutor from "./components/become-tutor";
 import Calendar from "../calendar/calendar";
+import RevealOnScroll from "../shared/reveal-on-scroll";
 
 const TutoringPage = () => {
   return (
@@ -21,25 +22,35 @@ const TutoringPage = () => {
           alt="Tutoring Session"
         />
       </section>
-      <section className={styles.title_container}>
-        <p className={styles.section_label}>Your study space</p>
-        <h2 className={styles.title}>Find the tutoring room</h2>
-        <p className={styles.title_copy}>Come by ECSN 2.318 for help, study time, and a welcoming community of fellow engineers.</p>
-      </section>
-      <LocationSection />
-      <CoursesSection />
+      <RevealOnScroll>
+        <section className={styles.title_container}>
+          <p className={styles.section_label}>Your study space</p>
+          <h2 className={styles.title}>Find the tutoring room</h2>
+          <p className={styles.title_copy}>Come by ECSN 2.318 for help, study time, and a welcoming community of fellow engineers.</p>
+        </section>
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <LocationSection />
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <CoursesSection />
+      </RevealOnScroll>
 
-      <section className={styles.calendar_section}>
-        <div className={styles.calendar_heading}>
-          <p className={styles.section_label}>Plan your visit</p>
-          <h2>Tutoring hours this week</h2>
-          <p>Choose a time that works for you and stop by the tutoring room.</p>
-        </div>
-        <Calendar
-          config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
-        />
-      </section>
-      <BecomeTutor />
+      <RevealOnScroll>
+        <section className={styles.calendar_section}>
+          <div className={styles.calendar_heading}>
+            <p className={styles.section_label}>Plan your visit</p>
+            <h2>Tutoring hours this week</h2>
+            <p>Choose a time that works for you and stop by the tutoring room.</p>
+          </div>
+          <Calendar
+            config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
+          />
+        </section>
+      </RevealOnScroll>
+      <RevealOnScroll>
+        <BecomeTutor />
+      </RevealOnScroll>
     </div>
   );
 };

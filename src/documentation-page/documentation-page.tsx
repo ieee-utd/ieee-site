@@ -1,4 +1,5 @@
 import React from "react";
+import RevealOnScroll from "../shared/reveal-on-scroll";
 import styles from "./documentation-page.module.css";
 
 const CodeBlock = ({ children }: { children: React.ReactNode }) => (
@@ -27,6 +28,7 @@ const DocumentationPage = () => {
       </nav>
 
       <div className={styles.content}>
+        <RevealOnScroll>
         <section id="github" className={styles.section}>
           <h2>1. GitHub</h2>
 
@@ -126,7 +128,9 @@ git commit -m "short description of the change"`}
             </li>
           </ol>
         </section>
+        </RevealOnScroll>
 
+        <RevealOnScroll>
         <section id="vercel" className={styles.section}>
           <h2>2. Vercel</h2>
 
@@ -194,7 +198,9 @@ git commit -m "short description of the change"`}
             a Vercel team member.
           </p>
         </section>
+        </RevealOnScroll>
 
+        <RevealOnScroll>
         <section id="aws" className={styles.section}>
           <h2>3. AWS</h2>
 
@@ -298,7 +304,9 @@ git commit -m "short description of the change"`}
             on AWS (deployed through GitHub Actions).
           </p>
         </section>
+        </RevealOnScroll>
 
+        <RevealOnScroll>
         <section id="quick-reference" className={styles.section}>
           <h2>4. Who controls what</h2>
           <div className={styles.tableWrap}>
@@ -335,6 +343,7 @@ git commit -m "short description of the change"`}
             </table>
           </div>
         </section>
+        </RevealOnScroll>
       </div>
     </div>
   );
