@@ -17,6 +17,7 @@ interface EventLayout extends CalendarEvent {
   width: number;
   zIndex: number;
   hasOverlappingLonger: boolean;
+  tutorGradient: string;
 }
 
 const parseDurationToMinutes = (duration: string): number => {
@@ -24,6 +25,31 @@ const parseDurationToMinutes = (duration: string): number => {
   const hours = matches && matches[1] ? parseInt(matches[1], 10) : 0;
   const minutes = matches && matches[2] ? parseInt(matches[2], 10) : 0;
   return hours * 60 + minutes;
+};
+
+const extractTutorName = (title: string): string => {
+  const normalized = title.replace(/\s+/g, ' ').trim();
+  return normalized.split(/\s*\(/)[0].trim();
+};
+
+const hashString = (value: string): number => {
+  let hash = 0;
+  for (let i = 0; i < value.length; i++) {
+    hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+};
+
+// Deterministic per-tutor gradient: hue stays in the blue family, only the
+// hue and the two lightness stops shift, so each tutor reads as a distinct
+// shade of blue without ever fading toward white.
+const getTutorGradient = (tutorName: string): string => {
+  const hash = hashString(tutorName);
+  const hue = 195 + (hash % 55);
+  const saturation = 65 + ((hash >> 3) % 20);
+  const lightnessStart = 28 + ((hash >> 6) % 12);
+  const lightnessEnd = lightnessStart + 18;
+  return `linear-gradient(135deg, hsl(${hue}, ${saturation}%, ${lightnessStart}%) 0%, hsl(${hue}, ${saturation}%, ${lightnessEnd}%) 100%)`;
 };
 
 const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
@@ -35,19 +61,6 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const { events, loading, error, rateLimited, refetch } = useCalendarEvents();
-
-  const courseColorMap: { [key: string]: number } = {
-    '1202': 1,
-    '2301': 2,
-    '2310': 3,
-    '3320': 4,
-    '3303': 5,
-    '3325': 6,
-    '3910': 7,
-    '3345': 8,
-    '1325': 9,
-    '3310': 10,
-  };
 
   const convertTo12HourFormat = (hour: number, minute: number): string => {
     const period = hour >= 12 ? 'PM' : 'AM';
@@ -110,21 +123,12 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
           }
         }
 
-        let colorClass = 0;
-        for (const prefix in courseColorMap) {
-          if (event.title.includes(prefix)) {
-            colorClass = courseColorMap[prefix];
-            break;
-          }
-        }
-        if (colorClass === 0) {
-          colorClass = 5;
-        }
+        const tutorGradient = getTutorGradient(extractTutorName(event.title));
 
-        return { ...event, hasOverlappingLonger, colorClass };
+        return { ...event, hasOverlappingLonger, tutorGradient };
       });
 
-      const columns: CalendarEvent[][] = [];
+      const columns: (CalendarEvent & { hasOverlappingLonger: boolean; tutorGradient: string })[][] = [];
       const endTimes: number[] = [];
 
       for (const event of eventsWithOverlapInfo) {
@@ -159,7 +163,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
             width: 100 / totalCols,
             zIndex,
             hasOverlappingLonger: event.hasOverlappingLonger || false,
-            colorClass: event.colorClass,
+            tutorGradient: event.tutorGradient,
           };
         })
       );
@@ -232,13 +236,10 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
                   className={`${styles.dayColumn} ${activeDay === day.id ? styles.active : ''}`}
                 >
                   {processDayEvents(events.filter(e => e.id.startsWith(day.id))).map(event => {
-                    const eventColorClass =
-                      event.colorClass <= 16 && event.colorClass >= 1 ? event.colorClass : 1;
-
                     return (
                       <div
                         key={event.id}
-                        className={`${styles.event} ${styles[`event--${eventColorClass}`]} ${
+                        className={`${styles.event} ${
                           event.hasOverlappingLonger ? styles.hasOutline : ''
                         }`}
                         style={{
@@ -247,6 +248,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
                           left: `calc(${event.left}% - 2px)`,
                           width: `calc(${event.width}% - 2px)`,
                           zIndex: event.zIndex,
+                          backgroundImage: event.tutorGradient,
                         }}
                         onClick={() => setSelectedEvent(event)}
                         onMouseEnter={() => setHoveredEventId(event.id)}

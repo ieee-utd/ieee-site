@@ -41,18 +41,6 @@
     z-index: 1;
 }
 
-/* Gradient color classes */
-.event--1 { background: linear-gradient(135deg, #00629B 0%, #00A8E8 100%); } /* Blue Gradient */
-.event--2 { background: linear-gradient(135deg, #0072CE 0%, #00BFFF 100%); } /* Light Blue Gradient */
-.event--3 { background: linear-gradient(135deg, #003F87 0%, #0072CE 100%); } /* Dark Blue Gradient */
-.event--4 { background: linear-gradient(135deg, #00A8E8 0%, #FFFFFF 100%); } /* White-to-Blue Gradient */
-.event--5 { background: linear-gradient(135deg, #00629B 0%, #FFFFFF 100%); } /* White-to-Dark Blue Gradient */
-.event--6 { background: linear-gradient(135deg, #00BFFF 0%, #0072CE 100%); } /* Reverse Blue Gradient */
-.event--7 { background: linear-gradient(135deg, #0072CE 0%, #00A8E8 100%); } /* Smooth Blue Gradient */
-.event--8 { background: linear-gradient(135deg, #003F87 0%, #00A8E8 100%); } /* Bold Blue Gradient */
-.event--9 { background: linear-gradient(135deg, #FFFFFF 0%, #0072CE 100%); } /* White-to-Medium Blue Gradient */
-.event--10 { background: linear-gradient(135deg, #00A8E8 0%, #003F87 100%); } /* Reverse Bold Blue Gradient */
-
 
 .modalContent {
     background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);

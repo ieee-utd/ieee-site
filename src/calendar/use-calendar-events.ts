@@ -5,7 +5,6 @@ export interface CalendarEvent {
   title: string;
   startTime: string;
   duration: string;
-  colorClass: number;
   content: string;
   hasOverlappingLonger?: boolean;
   date: string;
@@ -71,7 +70,6 @@ const transformGoogleEvents = (googleEvents: GoogleCalendarEvent[]): CalendarEve
         title: event.summary || 'Untitled Event',
         startTime,
         duration: duration || 'PT1H',
-        colorClass: 0,
         content: event.description ? `<p>${event.description.replace(/\n/g, '<br>')}</p>` : startTime,
         date: dateStr,
       };
