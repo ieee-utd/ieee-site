@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import styles from './courses-section.module.css';
-import { COURSES, courseCodePatterns, TutorSchedule } from '../courseMappings';
+import { COURSES, courseCodePatterns, CourseCard, TutorSchedule } from '../courseMappings';
 import { useCalendarEvents } from '../../calendar/use-calendar-events';
 
 const formatDisplayTime = (date: string, startTime: string) => {
@@ -88,11 +88,34 @@ const fallbackSchedulesByCourse: Record<string, TutorSchedule[]> = {
   'EE 4301': [{ tutor: 'Aarnav', times: ['Mon 11:30AM-1:30PM'] }],
 };
 
+const getNumericCode = (code: string) => {
+  const match = code.match(/(\d+)/);
+  return match ? parseInt(match[0], 10) : 0;
+};
+
 const CoursesSection = () => {
   const [expandedCourses, setExpandedCourses] = useState<number[]>([]);
   const { events } = useCalendarEvents();
 
   const schedulesByCourse = useMemo(() => groupSchedules(events), [events]);
+
+  const { activeCourses, inactiveCourses } = useMemo(() => {
+    const active: CourseCard[] = [];
+    const inactive: CourseCard[] = [];
+
+    for (const course of COURSES) {
+      if (schedulesByCourse[course.code] && schedulesByCourse[course.code].length > 0) {
+        active.push(course);
+      } else {
+        inactive.push(course);
+      }
+    }
+
+    active.sort((a, b) => getNumericCode(a.code) - getNumericCode(b.code));
+    inactive.sort((a, b) => getNumericCode(a.code) - getNumericCode(b.code));
+
+    return { activeCourses: active, inactiveCourses: inactive };
+  }, [schedulesByCourse]);
 
   const toggleCourse = (courseId: number) => {
     setExpandedCourses((prev) =>
@@ -101,6 +124,55 @@ const CoursesSection = () => {
         : [...prev, courseId]
     );
   };
+
+  const renderCourseCard = (course: CourseCard, hasTutors: boolean) => (
+    <div key={course.id} className={styles.course_card}>
+      <button
+        type="button"
+        className={styles.course_preview}
+        onClick={() => toggleCourse(course.id)}
+        aria-expanded={expandedCourses.includes(course.id)}
+      >
+        <div className={styles.course_main_info}>
+          <span
+            className={`${styles.status_indicator} ${
+              hasTutors ? styles.active : styles.inactive
+            }`}
+          />
+          <h3 className={styles.course_name}>
+            {course.name} ({course.code})
+          </h3>
+        </div>
+        <span
+          className={`${styles.expand_button} ${
+            expandedCourses.includes(course.id) ? styles.expanded : ''
+          }`}
+          aria-hidden="true"
+        >
+          +
+        </span>
+      </button>
+
+      {expandedCourses.includes(course.id) && (
+        <div className={styles.course_details}>
+          {hasTutors ? (
+            <div className={styles.tutors_grid}>
+              {schedulesByCourse[course.code].map((schedule) => (
+                <div key={schedule.tutor} className={styles.tutor_card}>
+                  <strong>{schedule.tutor}</strong>
+                  <div>{schedule.times.join(', ')}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.emptyState}>
+              Match course titles in the calendar as Tutor Name ({course.code}) to show tutors here.
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <section className={styles.courses_section} id="courses">
@@ -112,50 +184,11 @@ const CoursesSection = () => {
         </p>
       </div>
       <div className={styles.courses_list}>
-        {COURSES.map((course) => (
-          <div key={course.id} className={styles.course_card}>
-            <button
-              type="button"
-              className={styles.course_preview}
-              onClick={() => toggleCourse(course.id)}
-              aria-expanded={expandedCourses.includes(course.id)}
-            >
-              <div className={styles.course_main_info}>
-                <span className={styles.status_indicator} />
-                <h3 className={styles.course_name}>
-                  {course.name} ({course.code})
-                </h3>
-              </div>
-              <span
-                className={`${styles.expand_button} ${
-                  expandedCourses.includes(course.id) ? styles.expanded : ''
-                }`}
-                aria-hidden="true"
-              >
-                +
-              </span>
-            </button>
-
-            {expandedCourses.includes(course.id) && (
-              <div className={styles.course_details}>
-                {schedulesByCourse[course.code] && schedulesByCourse[course.code].length > 0 ? (
-                  <div className={styles.tutors_grid}>
-                    {schedulesByCourse[course.code].map((schedule) => (
-                      <div key={schedule.tutor} className={styles.tutor_card}>
-                        <strong>{schedule.tutor}</strong>
-                        <div>{schedule.times.join(', ')}</div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className={styles.emptyState}>
-                    Match course titles in the calendar as Tutor Name ({course.code}) to show tutors here.
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+        {activeCourses.map((course) => renderCourseCard(course, true))}
+        {activeCourses.length > 0 && inactiveCourses.length > 0 && (
+          <div className={styles.section_spacer} aria-hidden="true" />
+        )}
+        {inactiveCourses.map((course) => renderCourseCard(course, false))}
       </div>
     </section>
   );
