@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './calendar.module.css';
 import { CalendarEvent, useCalendarEvents } from './use-calendar-events';
 
@@ -32,23 +32,22 @@ const extractTutorName = (title: string): string => {
   return normalized.split(/\s*\(/)[0].trim();
 };
 
-const hashString = (value: string): number => {
-  let hash = 0;
-  for (let i = 0; i < value.length; i++) {
-    hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
-  }
-  return hash;
-};
+// Golden-ratio conjugates give a low-discrepancy sequence: consecutive
+// indices land far apart in hue/lightness instead of clustering, so every
+// tutor's slot stays visually distinct no matter how many tutors there are.
+const HUE_STEP = 0.6180339887498949;
+const LIGHTNESS_STEP = 0.4142135623730951;
 
-// Deterministic per-tutor gradient: hue stays in the blue family, only the
-// hue and the two lightness stops shift, so each tutor reads as a distinct
-// shade of blue without ever fading toward white.
-const getTutorGradient = (tutorName: string): string => {
-  const hash = hashString(tutorName);
-  const hue = 195 + (hash % 55);
-  const saturation = 65 + ((hash >> 3) % 20);
-  const lightnessStart = 28 + ((hash >> 6) % 12);
-  const lightnessEnd = lightnessStart + 18;
+// Deterministic per-tutor gradient keyed by that tutor's position in the
+// full, sorted tutor roster. Hue stays in the blue family and lightness is
+// kept mid-range (never dips toward navy or fades toward white).
+const getTutorGradient = (tutorIndex: number): string => {
+  const hueFraction = (tutorIndex * HUE_STEP) % 1;
+  const lightnessFraction = (tutorIndex * LIGHTNESS_STEP) % 1;
+  const hue = 195 + hueFraction * 55;
+  const saturation = 70 + lightnessFraction * 10;
+  const lightnessStart = 40 + lightnessFraction * 10;
+  const lightnessEnd = lightnessStart + 14;
   return `linear-gradient(135deg, hsl(${hue}, ${saturation}%, ${lightnessStart}%) 0%, hsl(${hue}, ${saturation}%, ${lightnessEnd}%) 100%)`;
 };
 
@@ -61,6 +60,11 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const { events, loading, error, rateLimited, refetch } = useCalendarEvents();
+
+  const tutorIndexByName = useMemo(() => {
+    const uniqueTutors = Array.from(new Set(events.map(event => extractTutorName(event.title)))).sort();
+    return new Map(uniqueTutors.map((tutor, index) => [tutor, index]));
+  }, [events]);
 
   const convertTo12HourFormat = (hour: number, minute: number): string => {
     const period = hour >= 12 ? 'PM' : 'AM';
@@ -123,7 +127,8 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
           }
         }
 
-        const tutorGradient = getTutorGradient(extractTutorName(event.title));
+        const foundTutorIndex = tutorIndexByName.get(extractTutorName(event.title));
+        const tutorGradient = getTutorGradient(foundTutorIndex !== undefined ? foundTutorIndex : 0);
 
         return { ...event, hasOverlappingLonger, tutorGradient };
       });
