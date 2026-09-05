@@ -55,7 +55,7 @@ const clients: Client[] = [
 ];
 
 function Sponsors() {
-  const duplicatedClients = [...clients, ...clients];
+  const duplicatedClients = [...clients, ...clients, ...clients];
 
   return (
     <div className={Styles.Container}>

@@ -35,13 +35,14 @@
 
 .carousel-track {
   display: flex;
-  gap: 40px;
   animation: scroll 30s linear infinite;
   padding: 20px 0;
+  width: max-content;
 }
 
 .carousel-item {
   flex: 0 0 400px;
+  margin-right: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +53,10 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    /* Exactly one duplicated set's width (of the three rendered), so the
+       loop point lines up seamlessly instead of jumping or leaving a gap
+       on wide screens. */
+    transform: translateX(-33.3333%);
   }
 }
 
