@@ -13,7 +13,7 @@
 .status_indicator.active { background: #1f9d55; box-shadow: 0 0 0 5px rgba(31,157,85,.13); animation: statusPulseActive 3s ease-in-out infinite; }
 .status_indicator.inactive { background: #c85b12; box-shadow: 0 0 0 5px rgba(200,91,18,.13); animation: statusPulseInactive 3s ease-in-out infinite; }
 .inactive_courses_list { display: flex; flex-direction: column; gap: .65rem; }
-.inactive_dropdown { margin-top: 0.5rem; }
+.inactive_dropdown { margin-top: 1.25rem; }
 .course_name { margin: 0; color: #244f72; font-size: 1.05rem; line-height: 1.45; }
 .expand_button { margin-left: 1rem; color: #2c6a9b; font-size: 1.8rem; font-weight: 400; line-height: 1; transition: transform .2s ease; }
 .expand_button.expanded { transform: rotate(45deg); }
