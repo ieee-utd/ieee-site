@@ -24,12 +24,8 @@ function HomePage() {
       <RevealOnScroll>
         <WhoWeAre />
       </RevealOnScroll>
-      <RevealOnScroll>
-        <WhatWeDo />
-      </RevealOnScroll>
-      <RevealOnScroll>
-        <Sponsors />
-      </RevealOnScroll>
+      <WhatWeDo />
+      <Sponsors />
     </>
   );
 }
