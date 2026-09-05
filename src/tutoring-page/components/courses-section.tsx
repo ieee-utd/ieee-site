@@ -166,7 +166,7 @@ const CoursesSection = () => {
             </div>
           ) : (
             <div className={styles.emptyState}>
-              Match course titles in the calendar as Tutor Name ({course.code}) to show tutors here.
+              Inactive, please return again.
             </div>
           )}
         </div>
