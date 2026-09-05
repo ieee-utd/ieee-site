@@ -181,7 +181,9 @@ const CoursesSection = () => {
               {schedulesByCourse[course.code].map((schedule) => (
                 <div key={schedule.tutor} className={styles.tutor_card}>
                   <strong>{schedule.tutor}</strong>
-                  <div>{schedule.times.join(', ')}</div>
+                  {schedule.times.map((time) => (
+                    <div key={time}>{time}</div>
+                  ))}
                 </div>
               ))}
             </div>
