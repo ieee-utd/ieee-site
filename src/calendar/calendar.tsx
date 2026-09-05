@@ -39,15 +39,16 @@ const HUE_STEP = 0.6180339887498949;
 const LIGHTNESS_STEP = 0.4142135623730951;
 
 // Deterministic per-tutor gradient keyed by that tutor's position in the
-// full, sorted tutor roster. Hue stays in the blue family and lightness is
-// kept mid-range (never dips toward navy or fades toward white).
+// full, sorted tutor roster. Hue stays in the navy family; the two stops
+// are spread far enough apart in lightness that the gradient reads clearly
+// instead of looking like a flat fill.
 const getTutorGradient = (tutorIndex: number): string => {
   const hueFraction = (tutorIndex * HUE_STEP) % 1;
   const lightnessFraction = (tutorIndex * LIGHTNESS_STEP) % 1;
-  const hue = 195 + hueFraction * 55;
-  const saturation = 70 + lightnessFraction * 10;
-  const lightnessStart = 40 + lightnessFraction * 10;
-  const lightnessEnd = lightnessStart + 14;
+  const hue = 210 + hueFraction * 25;
+  const saturation = 55 + lightnessFraction * 15;
+  const lightnessStart = 15 + lightnessFraction * 10;
+  const lightnessEnd = lightnessStart + 22;
   return `linear-gradient(135deg, hsl(${hue}, ${saturation}%, ${lightnessStart}%) 0%, hsl(${hue}, ${saturation}%, ${lightnessEnd}%) 100%)`;
 };
 
