@@ -3,16 +3,36 @@ import styles from './courses-section.module.css';
 import { COURSES, courseCodePatterns, CourseCard, TutorSchedule } from '../courseMappings';
 import { useCalendarEvents } from '../../calendar/use-calendar-events';
 
-const formatDisplayTime = (date: string, startTime: string) => {
-  const [hours, minutes] = startTime.split(':').map(Number);
+const parseDurationToMinutes = (duration: string): number => {
+  const matches = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?/);
+  const hours = matches && matches[1] ? parseInt(matches[1], 10) : 0;
+  const minutes = matches && matches[2] ? parseInt(matches[2], 10) : 0;
+  return hours * 60 + minutes;
+};
+
+const addMinutesToTime = (time: string, minutesToAdd: number): string => {
+  const [hours, minutes] = time.split(':').map(Number);
+  const totalMinutes = hours * 60 + minutes + minutesToAdd;
+  const endHours = Math.floor(totalMinutes / 60) % 24;
+  const endMinutes = totalMinutes % 60;
+  return `${endHours.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
+};
+
+const formatTimeOfDay = (time: string) => {
+  const [hours, minutes] = time.split(':').map(Number);
   const period = hours >= 12 ? 'PM' : 'AM';
   const displayHour = hours % 12 || 12;
   const displayMinute = minutes.toString().padStart(2, '0');
+  return `${displayHour}:${displayMinute} ${period}`;
+};
+
+const formatDisplayTime = (date: string, startTime: string, duration: string) => {
   const day = new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
     weekday: 'short',
   });
+  const endTime = addMinutesToTime(startTime, parseDurationToMinutes(duration));
 
-  return `${day} ${displayHour}:${displayMinute} ${period}`;
+  return `${day} ${formatTimeOfDay(startTime)} - ${formatTimeOfDay(endTime)}`;
 };
 
 const extractTutorName = (title: string) => {
@@ -25,7 +45,7 @@ const matchCourseCode = (title: string) => {
   return match ? match.code : null;
 };
 
-const groupSchedules = (events: { title: string; startTime: string; date: string }[]) => {
+const groupSchedules = (events: { title: string; startTime: string; date: string; duration: string }[]) => {
   const grouped: Record<string, TutorSchedule[]> = {};
 
   for (const course of COURSES) {
@@ -37,7 +57,7 @@ const groupSchedules = (events: { title: string; startTime: string; date: string
     if (!courseCode) continue;
 
     const tutor = extractTutorName(event.title);
-    const time = formatDisplayTime(event.date, event.startTime);
+    const time = formatDisplayTime(event.date, event.startTime, event.duration);
     const scheduleList = grouped[courseCode];
     const existing = scheduleList.find((item) => item.tutor === tutor);
 
