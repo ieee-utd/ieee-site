@@ -188,7 +188,7 @@ const CoursesSection = () => {
         {activeCourses.map((course) => renderCourseCard(course, true))}
 
         {inactiveCourses.length > 0 && (
-          <div className={styles.course_card}>
+          <div className={`${styles.course_card} ${styles.inactive_dropdown}`}>
             <button
               type="button"
               className={styles.course_preview}
