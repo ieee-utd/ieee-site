@@ -146,7 +146,7 @@ const officerData = [
                 email: 'sxg220208@utdallas.edu',
             },
             {
-                name: "Jacob Ball",
+                name: "Jake Ball",
                 title: "PES Director",
                 image: "",
                 linkedin: '',

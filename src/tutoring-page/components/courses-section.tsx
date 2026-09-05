@@ -166,7 +166,7 @@ const CoursesSection = () => {
             </div>
           ) : (
             <div className={styles.emptyState}>
-              Inactive, please return again.
+              Inactive, please return later.
             </div>
           )}
         </div>
