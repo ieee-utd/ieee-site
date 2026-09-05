@@ -95,6 +95,7 @@ const getNumericCode = (code: string) => {
 
 const CoursesSection = () => {
   const [expandedCourses, setExpandedCourses] = useState<number[]>([]);
+  const [isInactiveOpen, setIsInactiveOpen] = useState(false);
   const { events } = useCalendarEvents();
 
   const schedulesByCourse = useMemo(() => groupSchedules(events), [events]);
@@ -185,10 +186,36 @@ const CoursesSection = () => {
       </div>
       <div className={styles.courses_list}>
         {activeCourses.map((course) => renderCourseCard(course, true))}
-        {activeCourses.length > 0 && inactiveCourses.length > 0 && (
-          <div className={styles.section_spacer} aria-hidden="true" />
+
+        {inactiveCourses.length > 0 && (
+          <div className={styles.course_card}>
+            <button
+              type="button"
+              className={styles.course_preview}
+              onClick={() => setIsInactiveOpen((prev) => !prev)}
+              aria-expanded={isInactiveOpen}
+            >
+              <div className={styles.course_main_info}>
+                <span className={`${styles.status_indicator} ${styles.inactive}`} />
+                <h3 className={styles.course_name}>Inactive Courses</h3>
+              </div>
+              <span
+                className={`${styles.expand_button} ${isInactiveOpen ? styles.expanded : ''}`}
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </button>
+
+            {isInactiveOpen && (
+              <div className={styles.course_details}>
+                <div className={styles.inactive_courses_list}>
+                  {inactiveCourses.map((course) => renderCourseCard(course, false))}
+                </div>
+              </div>
+            )}
+          </div>
         )}
-        {inactiveCourses.map((course) => renderCourseCard(course, false))}
       </div>
     </section>
   );
