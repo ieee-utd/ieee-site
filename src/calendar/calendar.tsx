@@ -32,23 +32,55 @@ const extractTutorName = (title: string): string => {
   return normalized.split(/\s*\(/)[0].trim();
 };
 
-// Golden-ratio conjugates give a low-discrepancy sequence: consecutive
-// indices land far apart in hue/lightness instead of clustering, so every
-// tutor's slot stays visually distinct no matter how many tutors there are.
-const HUE_STEP = 0.6180339887498949;
-const LIGHTNESS_STEP = 0.4142135623730951;
+const TUTOR_COLOR_PALETTE = [
+  '#b0e2ff', // light sky blue
+  '#87ceff', // sky blue
+  '#6495ed', // cornflower blue
+  '#246bce', // celtic blue
+  '#2e2d88', // cobalt
+  '#27408b', // royal blue
+  '#000f89', // phthalo blue
+];
+
+const hexToHsl = (hex: string): [number, number, number] => {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  let h = 0;
+  let s = 0;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      default:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  return [h * 360, s * 100, l * 100];
+};
 
 // Deterministic per-tutor gradient keyed by that tutor's position in the
-// full, sorted tutor roster. Hue stays in the navy family; the two stops
-// are spread far enough apart in lightness that the gradient reads clearly
-// instead of looking like a flat fill.
+// full, sorted tutor roster. Each tutor is assigned one of the named colors
+// in TUTOR_COLOR_PALETTE, then a light/dark pair of that same hue is used
+// as the gradient stops so the gradient stays clearly visible.
 const getTutorGradient = (tutorIndex: number): string => {
-  const hueFraction = (tutorIndex * HUE_STEP) % 1;
-  const lightnessFraction = (tutorIndex * LIGHTNESS_STEP) % 1;
-  const hue = 210 + hueFraction * 25;
-  const saturation = 55 + lightnessFraction * 15;
-  const lightnessStart = 15 + lightnessFraction * 10;
-  const lightnessEnd = lightnessStart + 22;
+  const baseColor = TUTOR_COLOR_PALETTE[tutorIndex % TUTOR_COLOR_PALETTE.length];
+  const [hue, saturation, lightness] = hexToHsl(baseColor);
+  const lightnessStart = Math.max(0, lightness - 10);
+  const lightnessEnd = Math.min(100, lightness + 10);
   return `linear-gradient(135deg, hsl(${hue}, ${saturation}%, ${lightnessStart}%) 0%, hsl(${hue}, ${saturation}%, ${lightnessEnd}%) 100%)`;
 };
 
