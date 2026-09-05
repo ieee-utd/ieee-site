@@ -59,7 +59,7 @@ const officerData = [
                 email: 'bak230003@utdallas.edu',
             },
             {
-                name: "Charles Wang",
+                name: "Charlie Wang",
                 title: "Director of Outreach",
                 image: '',
                 linkedin: 'https://www.linkedin.com/in/charlieewangg/',
@@ -165,6 +165,13 @@ const officerData = [
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/swaroop-kamble/',
                 email: 'Swaroop.Kamble@utdallas.edu',
+            },
+            {
+                name: "Varun Shiralkar",
+                title: "SSCS Director",
+                image: "",
+                linkedin: 'https://www.linkedin.com/in/varun-j-shiralkar/',
+                email: 'vjs230002@utdallas.edu',
             },
             {
                 name: "Varun Shiralkar",
