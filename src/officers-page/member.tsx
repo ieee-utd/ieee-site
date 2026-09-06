@@ -3,17 +3,40 @@ import { FaLinkedin } from "react-icons/fa";
 import { SiMicrosoftoutlook } from "react-icons/si";
 import officerData from "./officerData";
 import blank from "../assets/IEEE/placeholder.jpeg";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 interface Supervisor {
   label?: string;
   name: string;
 }
 
-const LONG_TEXT_THRESHOLD = 12;
+const MIN_FIT_FONT_SIZE_REM = 0.55;
+const FIT_FONT_STEP_REM = 0.05;
 
-const supervisorTextClass = (text: string) =>
-  text.length > LONG_TEXT_THRESHOLD ? styles.supervisor_text_compact : "";
+// Shrinks its own font-size in small steps until the text no longer
+// overflows its box, so any label/name fits on one line regardless of
+// how long it is.
+const FitText: React.FC<{ text: string; baseSizeRem: number }> = ({ text, baseSizeRem }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let size = baseSizeRem;
+    el.style.fontSize = `${size}rem`;
+    while (el.scrollWidth > el.clientWidth && size > MIN_FIT_FONT_SIZE_REM) {
+      size -= FIT_FONT_STEP_REM;
+      el.style.fontSize = `${size}rem`;
+    }
+  }, [text, baseSizeRem]);
+
+  return (
+    <span ref={ref} className={styles.supervisor_fit_text}>
+      {text}
+    </span>
+  );
+};
 
 export default function Member({
   name = "default",
@@ -75,10 +98,12 @@ export default function Member({
           <div className={styles.supervisor_grid}>
             {supervisors.map((supervisor, index) => (
               <div key={index} className={styles.supervisor_card}>
-                <strong className={supervisorTextClass(supervisor.label || "Supervisor")}>
-                  {supervisor.label || "Supervisor"}
+                <strong>
+                  <FitText text={supervisor.label || "Supervisor"} baseSizeRem={0.9} />
                 </strong>
-                <div className={supervisorTextClass(supervisor.name)}>{supervisor.name}</div>
+                <div>
+                  <FitText text={supervisor.name} baseSizeRem={0.84} />
+                </div>
               </div>
             ))}
           </div>

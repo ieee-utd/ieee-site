@@ -34,6 +34,6 @@
 .supervisor_card { padding: .85rem; border-radius: 9px; background: #f9fbfc; border: 1px solid #e2eaf0; }
 .supervisor_card strong { display: block; margin-bottom: .3rem; color: #2c6a9b; font-size: .9rem; }
 .supervisor_card div { color: #627d98; font-size: .84rem; line-height: 1.4; }
-.supervisor_text_compact { font-size: .74rem; }
+.supervisor_fit_text { display: block; white-space: nowrap; overflow: hidden; }
 @media (max-width: 900px) { .member__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 650px) { .group__container { min-height: 570px; } .group__container::after { background: linear-gradient(90deg, rgba(12,44,70,.86), rgba(12,44,70,.55)); } .group__content { margin-left: 1.5rem; padding: 7rem 0 5rem; } .officers_section { padding: 4rem 1.5rem; } .member__grid { grid-template-columns: 1fr; gap: 1rem; } .image_wrapper { aspect-ratio: 16 / 10; } }
