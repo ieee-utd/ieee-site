@@ -40,6 +40,40 @@ const FadeInSection: React.FC<FadeInSectionProps> = (props) => {
   );
 };
 
+const SupervisorDropdown: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className={styles.director_dropdown}>
+      <button
+        type="button"
+        className={styles.director_dropdown_preview}
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+      >
+        <span className={styles.director_dropdown_label}>Supervisor</span>
+        <span
+          className={`${styles.director_expand_button} ${isOpen ? styles.expanded : ""}`}
+          aria-hidden="true"
+        >
+          +
+        </span>
+      </button>
+
+      {isOpen && (
+        <div className={styles.director_dropdown_details}>
+          <div className={styles.supervisor_grid}>
+            <div className={styles.supervisor_card}>
+              <strong>Supervisor</strong>
+              <div>filler</div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Committees: React.FC = () => {
   const sections = officerData.map((section) => (
     <div key={section.section}>
@@ -57,6 +91,7 @@ const Committees: React.FC = () => {
               email={member.email}
               key={member.name}
             />
+            {section.section === "Society Directors" && <SupervisorDropdown />}
           </FadeInSection>
         ))}
       </div>
