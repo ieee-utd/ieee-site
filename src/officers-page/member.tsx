@@ -10,6 +10,11 @@ interface Supervisor {
   name: string;
 }
 
+const LONG_TEXT_THRESHOLD = 12;
+
+const supervisorTextClass = (text: string) =>
+  text.length > LONG_TEXT_THRESHOLD ? styles.supervisor_text_compact : "";
+
 export default function Member({
   name = "default",
   title,
@@ -70,8 +75,10 @@ export default function Member({
           <div className={styles.supervisor_grid}>
             {supervisors.map((supervisor, index) => (
               <div key={index} className={styles.supervisor_card}>
-                <strong>{supervisor.label || "Supervisor"}</strong>
-                <div>{supervisor.name}</div>
+                <strong className={supervisorTextClass(supervisor.label || "Supervisor")}>
+                  {supervisor.label || "Supervisor"}
+                </strong>
+                <div className={supervisorTextClass(supervisor.name)}>{supervisor.name}</div>
               </div>
             ))}
           </div>
