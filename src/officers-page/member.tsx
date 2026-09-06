@@ -3,6 +3,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { SiMicrosoftoutlook } from "react-icons/si";
 import officerData from "./officerData";
 import blank from "../assets/IEEE/placeholder.jpeg";
+import { useState } from "react";
 
 export default function Member({
   name = "default",
@@ -10,19 +11,34 @@ export default function Member({
   email,
   linkedin,
   image = officerData[officerData.length - 1],
+  showSupervisor = false,
 }: {
   name: string;
   title: string;
   email: any;
   linkedin: string;
   image: any;
+  showSupervisor?: boolean;
 }) {
+  const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
+
   if (image === "") {
     image = blank;
   }
 
   return (
     <div className={styles.member__container}>
+      {showSupervisor && (
+        <button
+          type="button"
+          className={`${styles.supervisor_toggle} ${isSupervisorOpen ? styles.expanded : ""}`}
+          onClick={() => setIsSupervisorOpen((prev) => !prev)}
+          aria-expanded={isSupervisorOpen}
+          aria-label="Toggle supervisor"
+        >
+          +
+        </button>
+      )}
       <div className={styles.outer_image}>
         <div className={styles.image_wrapper}>
           <img
@@ -43,6 +59,9 @@ export default function Member({
             <SiMicrosoftoutlook className={styles.email_icon} />
           </a>}
         </div>}
+        {showSupervisor && isSupervisorOpen && (
+          <p className={styles.supervisor_info}>Supervisor: filler</p>
+        )}
       </div>
     </div>
   );
