@@ -63,17 +63,6 @@ export default function Member({
 
   return (
     <div className={styles.member__container}>
-      {showSupervisor && (
-        <button
-          type="button"
-          className={`${styles.supervisor_toggle} ${isSupervisorOpen ? styles.expanded : ""}`}
-          onClick={() => setIsSupervisorOpen((prev) => !prev)}
-          aria-expanded={isSupervisorOpen}
-          aria-label="Toggle supervisor"
-        >
-          +
-        </button>
-      )}
       <div className={styles.outer_image}>
         <div className={styles.image_wrapper}>
           <img
@@ -84,6 +73,17 @@ export default function Member({
         </div>
       </div>
       <div className={styles.member__info}>
+        {showSupervisor && (
+          <button
+            type="button"
+            className={`${styles.supervisor_toggle} ${isSupervisorOpen ? styles.expanded : ""}`}
+            onClick={() => setIsSupervisorOpen((prev) => !prev)}
+            aria-expanded={isSupervisorOpen}
+            aria-label="Toggle supervisor"
+          >
+            +
+          </button>
+        )}
         <p className={styles.member__name}>{name}</p>
         <p className={styles.member__title}>{title}</p>
         {(linkedin || email) && <div className={styles.member__links}>

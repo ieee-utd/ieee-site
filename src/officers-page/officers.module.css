@@ -20,7 +20,7 @@
 .image_wrapper { aspect-ratio: 4 / 3; }
 .image_wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
 .member__container:hover .image_wrapper img { transform: scale(1.04); }
-.member__info { min-height: 115px; padding: 1.35rem 1.4rem 1.5rem; display: flex; flex-direction: column; align-items: flex-start; }
+.member__info { position: relative; min-height: 115px; padding: 1.35rem 1.4rem 1.5rem; display: flex; flex-direction: column; align-items: flex-start; }
 .member__name { margin: 0; color: #2c6a9b; font-size: 1.16rem; font-weight: 800; line-height: 1.3; }
 .member__title { margin: .35rem 0 0; color: #627d98; font-size: .92rem; font-weight: 600; line-height: 1.45; }
 .member__links { display: flex; gap: .7rem; margin-top: 1.1rem; }
