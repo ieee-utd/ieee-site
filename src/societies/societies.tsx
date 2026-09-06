@@ -100,10 +100,10 @@ export default function Societies() {
                   {society.description}
                 </p>
 
-                <button className={styles.viewButton}>
+                {/* <button className={styles.viewButton}>
                   View Society
                   <span className={styles.arrow}>→</span>
-                </button>
+                </button>*/}
               </div>
             ))
           ) : (
