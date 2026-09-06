@@ -60,7 +60,16 @@ export default function Member({
           </a>}
         </div>}
         {showSupervisor && isSupervisorOpen && (
-          <p className={styles.supervisor_info}>Supervisor: filler</p>
+          <div className={styles.supervisor_grid}>
+            <div className={styles.supervisor_card}>
+              <strong>Supervisor</strong>
+              <div>filler</div>
+            </div>
+            <div className={styles.supervisor_card}>
+              <strong>Supervisor</strong>
+              <div>filler</div>
+            </div>
+          </div>
         )}
       </div>
     </div>

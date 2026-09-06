@@ -30,6 +30,9 @@
 .supervisor_toggle { position: absolute; top: .75rem; right: .75rem; z-index: 2; width: 2rem; height: 2rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #2c6a9b; font-size: 1.4rem; font-weight: 400; line-height: 1; cursor: pointer; box-shadow: none; transition: transform .2s ease, background-color .18s ease, color .18s ease, box-shadow .18s ease; }
 .supervisor_toggle:hover { background: #c85b12; color: #fff; box-shadow: 0 2px 8px rgba(18,62,95,.18); }
 .supervisor_toggle.expanded { transform: rotate(45deg); }
-.supervisor_info { margin: .6rem 0 0; color: #627d98; font-size: .88rem; font-weight: 600; line-height: 1.4; }
+.supervisor_grid { margin-top: .8rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: .7rem; }
+.supervisor_card { padding: .85rem; border-radius: 9px; background: #f9fbfc; border: 1px solid #e2eaf0; }
+.supervisor_card strong { display: block; margin-bottom: .3rem; color: #2c6a9b; font-size: .9rem; }
+.supervisor_card div { color: #627d98; font-size: .84rem; line-height: 1.4; }
 @media (max-width: 900px) { .member__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 650px) { .group__container { min-height: 570px; } .group__container::after { background: linear-gradient(90deg, rgba(12,44,70,.86), rgba(12,44,70,.55)); } .group__content { margin-left: 1.5rem; padding: 7rem 0 5rem; } .officers_section { padding: 4rem 1.5rem; } .member__grid { grid-template-columns: 1fr; gap: 1rem; } .image_wrapper { aspect-ratio: 16 / 10; } }
