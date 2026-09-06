@@ -3,36 +3,32 @@ import styles from "./events-carousel.module.css";
 
 const upcomingEvents = [
   {
-    title: "IEEE General Meeting",
-    time: "Wednesday, 7:00 PM",
-    description:
-      "Hear what IEEE is planning this semester, meet the team, and connect with fellow members over snacks.",
-    imageLabel: "Event photo placeholder",
-    location: "Location / Building",
+    title: "Event Title 1",
+    time: "Day, Time",
+    description: "Brief description for Event 1 goes here.",
+    imageLabel: "Placeholder Image 1",
+    location: "Location / Venue 1",
   },
   {
-    title: "Introduction to Embedded Systems",
-    time: "Thursday, 6:30 PM",
-    description:
-      "A beginner-friendly workshop covering the building blocks behind small, intelligent hardware projects.",
-    imageLabel: "Workshop photo placeholder",
-    location: "Location / Building",
+    title: "Event Title 2",
+    time: "Day, Time",
+    description: "Brief description for Event 2 goes here.",
+    imageLabel: "Placeholder Image 2",
+    location: "Location / Venue 2",
   },
   {
-    title: "Industry Speaker Night",
-    time: "Friday, 5:30 PM",
-    description:
-      "Join an engineer from industry for an honest conversation about internships, careers, and building your path.",
-    imageLabel: "Speaker event photo placeholder",
-    location: "Location / Building",
+    title: "Event Title 3",
+    time: "Day, Time",
+    description: "Brief description for Event 3 goes here.",
+    imageLabel: "Placeholder Image 3",
+    location: "Location / Venue 3",
   },
   {
-    title: "Project Build Night",
-    time: "Saturday, 2:00 PM",
-    description:
-      "Bring your ideas and make progress alongside a room full of students who love to build.",
-    imageLabel: "Project showcase photo placeholder",
-    location: "Location / Building",
+    title: "Event Title 4",
+    time: "Day, Time",
+    description: "Brief description for Event 4 goes here.",
+    imageLabel: "Placeholder Image 4",
+    location: "Location / Venue 4",
   },
 ];
 
@@ -86,7 +82,7 @@ function EventsCarousel() {
   return (
     <div className={styles.carouselWrap}>
       <p className={styles.instruction}>Scroll to explore</p>
-      <div className={styles.carousel} ref={carouselRef} aria-label="Upcoming IEEE events">
+      <div className={styles.carousel} ref={carouselRef} aria-label="Upcoming events">
         {upcomingEvents.map((event, index) => (
           <article
             className={`${styles.card} ${activeIndex === index ? styles.active : ""}`}

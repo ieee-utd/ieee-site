@@ -40,7 +40,6 @@
   overflow: hidden;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 18px 35px rgba(5, 30, 48, 0.2);
   scroll-snap-align: center;
   transform: scale(0.88);
   transition: transform 240ms ease, box-shadow 240ms ease;
@@ -48,7 +47,6 @@
 
 .card.active {
   transform: scale(1);
-  box-shadow: 0 24px 42px rgba(5, 30, 48, 0.32);
 }
 
 .imagePlaceholder {
