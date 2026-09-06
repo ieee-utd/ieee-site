@@ -5,6 +5,11 @@ import officerData from "./officerData";
 import blank from "../assets/IEEE/placeholder.jpeg";
 import { useState } from "react";
 
+interface Supervisor {
+  label?: string;
+  name: string;
+}
+
 export default function Member({
   name = "default",
   title,
@@ -12,7 +17,7 @@ export default function Member({
   linkedin,
   image = officerData[officerData.length - 1],
   showSupervisor = false,
-  supervisors = ["filler", "filler"],
+  supervisors = [{ name: "filler" }, { name: "filler" }],
 }: {
   name: string;
   title: string;
@@ -20,7 +25,7 @@ export default function Member({
   linkedin: string;
   image: any;
   showSupervisor?: boolean;
-  supervisors?: string[];
+  supervisors?: Supervisor[];
 }) {
   const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
 
@@ -65,8 +70,8 @@ export default function Member({
           <div className={styles.supervisor_grid}>
             {supervisors.map((supervisor, index) => (
               <div key={index} className={styles.supervisor_card}>
-                <strong>Supervisor</strong>
-                <div>{supervisor}</div>
+                <strong>{supervisor.label || "Supervisor"}</strong>
+                <div>{supervisor.name}</div>
               </div>
             ))}
           </div>

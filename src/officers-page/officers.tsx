@@ -56,7 +56,10 @@ const Committees: React.FC = () => {
               linkedin={member.linkedin}
               email={member.email}
               showSupervisor={section.section === "Society Directors"}
-              supervisors={(member as { supervisors?: string[] }).supervisors}
+              supervisors={
+                (member as { supervisors?: { label?: string; name: string }[] })
+                  .supervisors
+              }
               key={member.name}
             />
           </FadeInSection>

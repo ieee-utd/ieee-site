@@ -151,7 +151,7 @@ const officerData = [
                 image: "",
                 linkedin: '',
                 email: 'dal760164@utdallas.edu',
-                supervisors: ["Thomas Russo", "Johnathan Barrera"],
+                supervisors: [{ name: "Thomas Russo" }, { name: "Johnathan Barrera" }],
             },
             {
                 name: "Nevin Sunil",
@@ -159,6 +159,10 @@ const officerData = [
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/nevin-sunil/r',
                 email: 'njs220004@utdallas.edu',
+                supervisors: [
+                    { label: "Electrical Lead", name: "Sameer Khan" },
+                    { label: "Mechanical Lead", name: "Aarushi Gadkari" },
+                ],
             },
             {
                 name: "Swaroop Kamble",
@@ -166,6 +170,7 @@ const officerData = [
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/swaroop-kamble/',
                 email: 'Swaroop.Kamble@utdallas.edu',
+                supervisors: [{ name: "Aarush Sarkar" }, { name: "Presley Churchman" }],
             },
             {
                 name: "Varun Shiralkar",
@@ -173,6 +178,7 @@ const officerData = [
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/varun-j-shiralkar/',
                 email: 'vjs230002@utdallas.edu',
+                supervisors: [{ name: "Anindya Rahman" }],
             },
             {
                 name: "Varun Shiralkar",
@@ -180,6 +186,7 @@ const officerData = [
                 image: "",
                 linkedin: 'https://www.linkedin.com/in/varun-j-shiralkar/',
                 email: 'vjs230002@utdallas.edu',
+                supervisors: [{ name: "Anindya Rahman" }],
             },
         ]
     }
