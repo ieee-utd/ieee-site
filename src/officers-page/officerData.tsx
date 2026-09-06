@@ -180,14 +180,6 @@ const officerData = [
                 email: 'vjs230002@utdallas.edu',
                 supervisors: [{ name: "Anindya Rahman" }],
             },
-            {
-                name: "Varun Shiralkar",
-                title: "SSCS Director",
-                image: "",
-                linkedin: 'https://www.linkedin.com/in/varun-j-shiralkar/',
-                email: 'vjs230002@utdallas.edu',
-                supervisors: [{ name: "Anindya Rahman" }],
-            },
         ]
     }
 ];
