@@ -1,5 +1,5 @@
 import styles from "./officers.module.css";
-import Officers from "../assets/IEEE/Officers.jpeg";
+import Officers from "../assets/IEEE/Officers.jpg";
 import officerData from "./officerData";
 import Member from "./member";
 import React, { useState, useRef, useEffect } from "react";

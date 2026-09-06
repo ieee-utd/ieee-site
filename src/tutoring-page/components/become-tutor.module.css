@@ -1,12 +1,87 @@
-.hidden { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
-.visible { opacity: 1; transform: translateY(0); }
-.become_tutor_section { padding: 6rem 2rem; background: #fff; }
-.content_container { width: min(0, 100%); margin: 0 auto; padding: clamp(2rem, 5vw, 4rem); border-radius: 18px; background: #2c6a9b; color: #fff; box-shadow: 0 20px 45px rgba(18,62,95,.2); }
-.main_title { margin: 0; font-size: clamp(2.4rem, 4.5vw, 4rem); line-height: 1; letter-spacing: -.04em; }
-.subtitle { margin: 1rem 0 1.6rem; color: #f5bd86; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; }
-.requirements_list { display: grid; margin: 0 0 2.4rem; padding: 0; list-style: none; }
-.requirement_item { display: flex; align-items: center; color: rgba(255,255,255,.9); line-height: 1.45; }
-.checkmark { margin-right: .65rem; color: #f5bd86; font-size: 1.1rem; font-weight: 800; }
-.apply_button { padding: .9rem 1.35rem; border: 0; border-radius: 999px; background: #c85b12; color: #fff; font-size: .92rem; font-weight: 750; cursor: pointer; transition: transform .18s ease, background-color .18s ease; }
-.apply_button:hover { background: #a84b0f; transform: translateY(-2px); }
-@media (max-width: 650px) { .become_tutor_section { padding: 4rem 1.5rem; } .requirements_list { grid-template-columns: 1fr; } }
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.become_tutor_section {
+  padding: 6rem 2rem;
+  background: #fff;
+}
+.content_container {
+  width: min(0, 100%);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 18px;
+  background: #2c6a9b;
+  color: #fff;
+  box-shadow: 0 20px 45px rgba(18, 62, 95, 0.2);
+}
+.main_title {
+  margin: 0;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.subtitle {
+  margin: 1rem 0 1.6rem;
+  color: #f5bd86;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.requirements_list {
+  display: grid;
+  margin: 0 0 2.4rem;
+  padding: 0;
+  list-style: none;
+}
+.requirement_item {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.45;
+}
+.checkmark {
+  margin-right: 0.65rem;
+  color: #f5bd86;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+.apply_button {
+  padding: 0.9rem 1.35rem;
+  border: 0;
+  border-radius: 999px;
+  background: #c85b12;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
+}
+.apply_button:hover {
+  background: #a84b0f;
+  transform: translateY(-2px);
+}
+@media (max-width: 650px) {
+  .become_tutor_section {
+    padding: 4rem 1.5rem;
+  }
+  .requirements_list {
+    grid-template-columns: 1fr;
+  }
+}
+.apply_notice {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #c85b12;
+}

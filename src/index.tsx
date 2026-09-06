@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import "./index.css";
+
 import NavBar from "./nav-bar/nav-bar";
 import Footer from "./footer/footer";
 import HomePage from "./home-page/home-page";
@@ -14,7 +16,6 @@ import EventsPage from "./events-page/events-page";
 import SocietiesPage from "societies/societies";
 //import Calendar from "./calendar/calendar";
 
-import "./index.css";
 //import "./notification/notification.css";
 
 const root = ReactDOM.createRoot(

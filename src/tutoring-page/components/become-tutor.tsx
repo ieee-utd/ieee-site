@@ -8,9 +8,10 @@ const BecomeTutor = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Handle application button click
-  const handleApplyClick = () => {
-    window.open(TUTOR_APPLICATION_FORM_URL, '_blank', 'noopener,noreferrer');
-  };
+  // const handleApplyClick = () => {
+  //   // Add later: Add application form link
+  //   console.log('Apply button clicked');
+  // };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,13 +60,16 @@ const BecomeTutor = () => {
           ))}
         </ul>
         {/* Apply button */}
-        <button
+        {/* <button
           className={styles.apply_button}
           onClick={handleApplyClick}
           aria-label="Apply to become a tutor"
         >
           Apply Now
-        </button>
+        </button> */}
+        <p className={styles.apply_notice}>
+          Applications will open for Spring 2027 later, keep an eye out for these!
+        </p>
       </div>
     </section>
   );

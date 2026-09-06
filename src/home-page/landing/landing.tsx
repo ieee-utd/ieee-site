@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Styles from "./landing.module.css";
 import image1 from "../../assets/carousel1.jpg";
-import image2 from "../../assets/carousel4.jpg";
-import image3 from "../../assets/4.jpg";
+import image2 from "../../assets/carousel2.jpg";
+import image3 from "../../assets/carousel3.jpg";
+import image4 from "../../assets/IEEE/Officers.jpg";
 import UtdSeal from "../../assets/UTDLogo.png";
 import ieeeLogo from "../../assets/ieeeutdlogo.png";
 
-const images = [image1, image2, image3];
+const images = [image1, image2, image3, image4];
 
 const MOTTOS = [
   "Advancing Technology for Humanity",

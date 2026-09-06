@@ -25,7 +25,7 @@ const offerings = [
   {
     title: "Workshops",
     image: workshopsImage,
-    href: "/workshops",
+    href: "/events",
     alt: "IEEE UTD workshop",
     description:
       "Hands-on sessions to build skills you can put on a project or a resume.",

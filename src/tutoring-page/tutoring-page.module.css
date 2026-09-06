@@ -12,7 +12,7 @@
 .title_container .section_label { color: #c85b12; }
 .title { margin: 0; font-size: clamp(2.5rem, 4.5vw, 4.2rem); line-height: 1.05; letter-spacing: -.04em; }
 .title_copy { max-width: 600px; margin: 1.25rem auto 0; color: #627d98; font-size: 1.05rem; line-height: 1.7; }
-.calendar_section { padding: 5.5rem clamp(1rem, 5vw, 4rem) 6rem; background: #2c6a9b; }
+.calendar_section { padding: 3.5rem clamp(1rem, 5vw, 4rem) 6rem; background: #2c6a9b; }
 .calendar_heading { max-width: 1120px; margin: 0 auto 2.25rem; color: #fff; }
 .calendar_heading h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 3.6rem); letter-spacing: -.04em; }
 .calendar_heading > p:last-child { margin: 1rem 0 0; color: #dcebf5; }
