@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './become-tutor.module.css';
 
+const TUTOR_APPLICATION_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSfBX0GF0a5xtKr7OiCXoCn1Wc0zm9lBc6-ZJms-0n5QiOhu_Q/closedform';
+
 const BecomeTutor = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   // Handle application button click
   const handleApplyClick = () => {
-    // Add later: Add application form link
-    console.log('Apply button clicked');
+    window.open(TUTOR_APPLICATION_FORM_URL, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
