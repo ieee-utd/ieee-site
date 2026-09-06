@@ -27,8 +27,8 @@
 .member__links a { display: grid; width: 2.15rem; height: 2.15rem; place-items: center; border-radius: 50%; background: #edf4f8; color: #2c6a9b; transition: color .18s ease, background-color .18s ease, transform .18s ease; }
 .member__links a:hover { background: #c85b12; color: #fff; transform: translateY(-2px); }
 .linkedin_icon, .email_icon { font-size: 1.15rem; }
-.supervisor_toggle { position: absolute; top: .75rem; right: .75rem; z-index: 2; width: 2rem; height: 2rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); color: #2c6a9b; font-size: 1.4rem; font-weight: 400; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(18,62,95,.18); transition: transform .2s ease, background-color .18s ease, color .18s ease; }
-.supervisor_toggle:hover { background: #c85b12; color: #fff; }
+.supervisor_toggle { position: absolute; top: .75rem; right: .75rem; z-index: 2; width: 2rem; height: 2rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #2c6a9b; font-size: 1.4rem; font-weight: 400; line-height: 1; cursor: pointer; box-shadow: none; transition: transform .2s ease, background-color .18s ease, color .18s ease, box-shadow .18s ease; }
+.supervisor_toggle:hover { background: #c85b12; color: #fff; box-shadow: 0 2px 8px rgba(18,62,95,.18); }
 .supervisor_toggle.expanded { transform: rotate(45deg); }
 .supervisor_info { margin: .6rem 0 0; color: #627d98; font-size: .88rem; font-weight: 600; line-height: 1.4; }
 @media (max-width: 900px) { .member__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
