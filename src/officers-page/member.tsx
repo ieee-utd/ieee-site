@@ -12,6 +12,7 @@ export default function Member({
   linkedin,
   image = officerData[officerData.length - 1],
   showSupervisor = false,
+  supervisors = ["filler", "filler"],
 }: {
   name: string;
   title: string;
@@ -19,6 +20,7 @@ export default function Member({
   linkedin: string;
   image: any;
   showSupervisor?: boolean;
+  supervisors?: string[];
 }) {
   const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
 
@@ -61,14 +63,12 @@ export default function Member({
         </div>}
         {showSupervisor && isSupervisorOpen && (
           <div className={styles.supervisor_grid}>
-            <div className={styles.supervisor_card}>
-              <strong>Supervisor</strong>
-              <div>filler</div>
-            </div>
-            <div className={styles.supervisor_card}>
-              <strong>Supervisor</strong>
-              <div>filler</div>
-            </div>
+            {supervisors.map((supervisor, index) => (
+              <div key={index} className={styles.supervisor_card}>
+                <strong>Supervisor</strong>
+                <div>{supervisor}</div>
+              </div>
+            ))}
           </div>
         )}
       </div>

@@ -151,6 +151,7 @@ const officerData = [
                 image: "",
                 linkedin: '',
                 email: 'dal760164@utdallas.edu',
+                supervisors: ["Thomas Russo", "Johnathan Barrera"],
             },
             {
                 name: "Nevin Sunil",
