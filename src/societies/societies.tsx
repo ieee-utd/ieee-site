@@ -16,7 +16,7 @@ const societies: Society[] = [
     category: "Power & Energy",
   },
   {
-    name: "Radio Frequency Society",
+    name: "Radio Frequencies Society - MTT-S/AP-S",
     description:
       "Learn about radio frequency technology, wireless communication, antennas, and high-frequency electronic systems.",
     category: "Radio Frequencies",
