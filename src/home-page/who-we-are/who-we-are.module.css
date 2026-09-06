@@ -145,6 +145,10 @@
   aspect-ratio: 4 / 5;
 }
 
+.photoSecondary img {
+  object-position: 20%;
+}
+
 .photos:has(.photoPrimary:hover) .photoPrimary {
   transform: scale(1.08);
 }
