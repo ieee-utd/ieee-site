@@ -63,6 +63,7 @@
 .officers_section {
   padding: 6rem 2rem;
   background: #f4f8fb;
+  scroll-snap-align: start;
 }
 .section_heading {
   width: min(1150px, 100%);
