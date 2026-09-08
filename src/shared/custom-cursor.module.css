@@ -12,4 +12,10 @@
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.hidden {
+  opacity: 0;
 }
