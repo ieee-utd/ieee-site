@@ -1,11 +1,14 @@
 .group__container {
   position: relative;
-  min-height: 560px;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   overflow: hidden;
   color: #fff;
   background: #2c6a9b;
+  scroll-snap-align: start;
 }
 .group__container::after {
   content: "";
