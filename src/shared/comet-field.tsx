@@ -12,7 +12,7 @@ interface CometFieldProps {
 // section's real content (see comet-field.module.css: it's absolutely
 // positioned with a negative z-index, so the section it's dropped into
 // must have position: relative for the stacking to clip/layer correctly).
-const CometField: React.FC<CometFieldProps> = ({ count = 2, cycleSeconds = 9 }) => {
+const CometField: React.FC<CometFieldProps> = ({ count = 1000, cycleSeconds = 1 }) => {
   const comets = useMemo(
     () =>
       Array.from({ length: count }, () => {
