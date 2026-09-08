@@ -13,8 +13,6 @@
   position: relative;
   padding: 6rem 2rem;
   background: var(--surface-page);
-  min-height: 100vh;
-  min-height: 100svh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -22,7 +20,7 @@
   scroll-snap-align: start;
 }
 .content_container {
-  width: min(0, 100%);
+  width: min(88%, 100%);
   margin: 0 auto;
   padding: clamp(2rem, 5vw, 4rem);
   border-radius: 18px;
