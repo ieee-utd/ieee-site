@@ -27,7 +27,7 @@ function EventsPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>IEEE at UT Dallas</p>
-          <h1>Events</h1>
+          <h1 className={styles.heroHeader}>Events</h1>
           <p className={styles.heroCopy}>
             From workshops to tech talks, there is always a
             place to learn, connect, and create with IEEE.
@@ -36,9 +36,11 @@ function EventsPage() {
             View this week&apos;s events
           </a>
         </div>
-        <div className={styles.heroVisual}>
-          <img src={eventImage} alt="Students attending an IEEE event" />
-        </div>
+        <img
+          className={styles.heroImg}
+          src={eventImage}
+          alt="Students attending an IEEE event"
+        />
       </section>
 
       <RevealOnScroll>

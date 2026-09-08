@@ -4,21 +4,38 @@
 }
 
 .hero {
+  position: relative;
   min-height: 100vh;
   min-height: 100svh;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
   background: #2c6a9b;
-  color: white;
   scroll-snap-align: start;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 44, 70, 0.9) 0%,
+    rgba(12, 44, 70, 0.62) 49%,
+    rgba(12, 44, 70, 0.18) 100%
+  );
+}
+
 .heroContent {
+  position: relative;
+  z-index: 1;
   box-sizing: border-box;
-  max-width: 760px;
-  padding: 8.5rem 10% 6rem;
-  align-self: center;
+  width: min(700px, 84%);
+  margin-left: clamp(1.5rem, 9vw, 10rem);
+  padding: 7rem 0 5.5rem;
 }
 
 .eyebrow,
@@ -31,7 +48,10 @@
   text-transform: uppercase;
 }
 
-.hero h1,
+.heroContent .eyebrow {
+  color: #f5bd86;
+}
+
 .intro h2,
 .calendarHeading h2 {
   margin: 0;
@@ -39,22 +59,26 @@
   letter-spacing: -0.04em;
 }
 
-.hero h1 {
-  max-width: 620px;
-  font-size: clamp(3.3rem, 6vw, 5.6rem);
+.heroHeader {
+  max-width: 660px;
+  margin: 0;
+  font-size: clamp(3.25rem, 6vw, 5.7rem);
+  font-weight: 750;
   line-height: 0.98;
+  letter-spacing: -0.05em;
 }
 
 .heroCopy {
-  max-width: 560px;
-  margin: 1.75rem 0 2.25rem;
-  color: #e4e6ec;
+  max-width: 530px;
+  margin: 1.5rem 0 2rem;
+  color: rgba(255, 255, 255, 0.87);
   font-size: 1.1rem;
   line-height: 1.7;
 }
 
 .calendarLink {
   display: inline-block;
+  margin-top: 2rem;
   border-radius: 999px;
   padding: 0.9rem 1.35rem;
   background: #c85b12;
@@ -70,29 +94,13 @@
   transform: translateY(-2px);
 }
 
-.heroVisual {
-  position: relative;
-  min-height: 420px;
-  overflow: hidden;
-  background: #2c6a9b;
-}
-
-.heroVisual img {
+.heroImg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  display: block;
-  mix-blend-mode: normal;
-  opacity: 1;
-}
-
-.heroVisual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(44, 106, 155, 0.42);
-  pointer-events: none;
 }
 
 .introScene {
@@ -193,17 +201,13 @@
 }
 
 @media (max-width: 800px) {
-  .hero {
-    grid-template-columns: 1fr;
+  .hero::after {
+    background: linear-gradient(90deg, rgba(12, 44, 70, 0.85), rgba(12, 44, 70, 0.52));
   }
 
   .heroContent {
-    padding: 7.5rem 1.5rem 4rem;
-  }
-
-  .heroVisual {
-    min-height: 250px;
-    max-height: 330px;
+    margin-left: 1.5rem;
+    padding: 7rem 0 5rem;
   }
 
   .introScene {
