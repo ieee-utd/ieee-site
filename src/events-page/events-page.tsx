@@ -46,7 +46,7 @@ function EventsPage() {
 
       <RevealOnScroll>
         <section className={styles.introScene} data-nav-surface="light">
-          <CometField count={100} cycleSeconds={1} />
+          <CometField count={2} cycleSeconds={9} />
           <div className={styles.intro}>
             <div>
               <p className={styles.sectionLabel}>More than a meeting</p>
