@@ -12,7 +12,7 @@ const officerData = [
             {
                 name: "Sidrah Rashad",
                 title: "Vice President",
-                image: '/Officer_Photos/Sidrah_Rashad.png',
+                image: '/Officer_Photos/Sidrah_Rashad.jpg',
                 linkedin: 'https://www.linkedin.com/in/sidrahrashad/',
                 email: 'sxr230168@utdallas.edu',
             },
@@ -47,7 +47,7 @@ const officerData = [
             {
                 name: "Ugonna Anyalemechi",
                 title: "Director of Initiatives",
-                image: "/Officer_Photos/Ugonna_Anyalemechi.png",
+                image: "/Officer_Photos/Ugonna_Anyalemechi.jpg",
                 linkedin: 'https://www.linkedin.com/in/ugonna-anyalemechi/',
                 email: 'uaa220000@utdallas.edu',
             },
@@ -61,7 +61,7 @@ const officerData = [
             {
                 name: "Charlie Wang",
                 title: "Director of Outreach",
-                image: '/Officer_Photos/Charlie_Wang.png',
+                image: '/Officer_Photos/Charlie_Wang.jpg',
                 linkedin: 'https://www.linkedin.com/in/charlieewangg/',
                 email: 'dal282052@utdallas.edu',
             },
@@ -101,21 +101,21 @@ const officerData = [
             {
                 name: "Varsha Shashishekar",
                 title: "Initiatives Coordinator",
-                image: "/Officer_Photos/Varsha_Shashishekar.png",
+                image: "/Officer_Photos/Varsha_Shashishekar.jpg",
                 linkedin: 'https://www.linkedin.com/in/varsha-shashishekar-860b6a263/',
                 email: 'dal148885@utdallas.edu',
             },
             {
                 name: "Yusra Zainab",
                 title: "Marketing Coordinator",
-                image: "/Officer_Photos/Yusra_Zainab.png",
+                image: "/Officer_Photos/Yusra_Zainab.jpg",
                 linkedin: 'https://www.linkedin.com/in/yusra-zainab-ce07/',
                 email: 'dal641136@utdallas.edu',
             },
             {
                 name: "Emilio Aguirre Mijares",
                 title: "Outreach Coordinator",
-                image: "/Officer_Photos/Emilio_Aguirre_Mijares.png",
+                image: "/Officer_Photos/Emilio_Aguirre_Mijares.jpg",
                 linkedin: 'https://www.linkedin.com/in/emilioaguirremijares/',
                 email: 'dal336509@utdallas.edu',
             },
