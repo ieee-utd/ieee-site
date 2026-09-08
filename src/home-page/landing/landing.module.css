@@ -81,7 +81,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffd2a8;
+  color: var(--brand-peach);
 }
 
 .title {
@@ -120,7 +120,7 @@
   width: 2px;
   height: 1em;
   margin-left: 4px;
-  background-color: #e87511;
+  background-color: var(--brand-orange-alt);
   vertical-align: text-bottom;
   animation: blink 1s steps(1) infinite;
 }
@@ -159,13 +159,13 @@
 }
 
 .primaryBtn {
-  background-color: #c85b12;
+  background-color: var(--brand-orange);
   color: #ffffff;
   box-shadow: 0 10px 28px rgba(200, 91, 18, 0.38);
 }
 
 .primaryBtn:hover {
-  background-color: #a84b0f;
+  background-color: var(--brand-orange-strong);
   transform: translateY(-1px);
 }
 

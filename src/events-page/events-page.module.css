@@ -1,6 +1,6 @@
 .page {
   background: var(--surface-page);
-  color: #2c6a9b;
+  color: var(--brand-blue);
 }
 
 .hero {
@@ -12,7 +12,7 @@
   align-items: center;
   overflow: hidden;
   color: #fff;
-  background: #2c6a9b;
+  background: var(--brand-blue);
   scroll-snap-align: start;
 }
 
@@ -41,7 +41,7 @@
 .eyebrow,
 .sectionLabel {
   margin: 0 0 1rem;
-  color: #c85b12;
+  color: var(--brand-orange);
   font-size: 0.8rem;
   font-weight: 750;
   letter-spacing: 0.14em;
@@ -49,7 +49,7 @@
 }
 
 .heroContent .eyebrow {
-  color: #f5bd86;
+  color: var(--brand-gold);
 }
 
 .intro h2,
@@ -81,7 +81,7 @@
   margin-top: 2rem;
   border-radius: 999px;
   padding: 0.9rem 1.35rem;
-  background: #c85b12;
+  background: var(--brand-orange);
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 750;
@@ -90,7 +90,7 @@
 }
 
 .calendarLink:hover {
-  background: #a84b0f;
+  background: var(--brand-orange-strong);
   transform: translateY(-2px);
 }
 
@@ -146,7 +146,7 @@
 
 .highlight {
   padding: 2rem;
-  background: #c85b12;
+  background: var(--brand-orange);
   border-radius: 14px;
   box-shadow: 0 14px 28px rgba(0, 40, 85, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -178,7 +178,7 @@
 
 .calendarSection {
   padding: 5.5rem clamp(1rem, 5vw, 4rem) 6rem;
-  background: #2c6a9b;
+  background: var(--brand-blue);
   min-height: 100vh;
   min-height: 100svh;
   box-sizing: border-box;

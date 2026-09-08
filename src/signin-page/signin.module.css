@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #c85b12, #c85b12);
+  background: linear-gradient(135deg, var(--brand-orange), var(--brand-orange));
   padding: 1rem;
   font-family: system-ui, sans-serif;
 }
@@ -58,7 +58,7 @@
 }
 
 .input:focus {
-  border-color: #00629b;
+  border-color: var(--brand-blue-strong);
   box-shadow: 0 0 0 2px rgba(0, 98, 155, 0.3);
 }
 
@@ -79,12 +79,12 @@
 }
 
 .loginBtn {
-  background: #00629b;
+  background: var(--brand-blue-strong);
   color: white;
 }
 
 .loginBtn:hover:not(:disabled) {
-  background: #004d7a;
+  background: var(--brand-blue-hover);
 }
 
 .signupBtn {
@@ -93,7 +93,7 @@
 }
 
 .signupBtn:hover:not(:disabled) {
-  background: #cbd5e1;
+  background: var(--border-input);
 }
 
 .loginBtn:disabled,
@@ -116,13 +116,13 @@
   border-radius: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  background: #00629b;
+  background: var(--brand-blue-strong);
   color: white;
   transition: background 0.2s, opacity 0.2s;
 }
 
 .primaryBtn:hover:not(:disabled) {
-  background: #004d7a;
+  background: var(--brand-blue-hover);
 }
 
 .primaryBtn:disabled {
@@ -140,7 +140,7 @@
 .linkBtn {
   background: none;
   border: none;
-  color: #e87511;
+  color: var(--brand-orange-alt);
   font-weight: 600;
   cursor: pointer;
   padding: 0;

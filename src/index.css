@@ -22,6 +22,22 @@ html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
   --border-subtle-alt: #e2eaf0;
   --border-card: #dce7ee;
   --border-input: #cbd5e1;
+
+  /* Brand blue family */
+  --brand-blue: #2c6a9b;
+  --brand-blue-strong: #00629b;
+  --brand-blue-hover: #004d7a;
+  --brand-blue-deep: #205177;
+  --brand-blue-deepest: #1b3f5c;
+  --brand-blue-navy: #09223b;
+
+  /* Brand orange family */
+  --brand-orange: #c85b12;
+  --brand-orange-strong: #a84b0f;
+  --brand-orange-alt: #e87511;
+  --brand-gold: #f5bd86;
+  --brand-peach: #ffd2a8;
+  --brand-sky: #cde5f5;
 }
 
 html[data-theme="dark"] {
@@ -32,14 +48,30 @@ html[data-theme="dark"] {
   --surface-hover: #202a33;
   --surface-chip: #202a33;
   --text-primary: #e6edf3;
-  --text-primary-alt: #cfe0ee;
-  --text-secondary: #9fb2c4;
-  --text-secondary-alt: #8fa8bc;
+  --text-primary-alt: #d7dde2;
+  --text-secondary: #a7adb3;
+  --text-secondary-alt: #9aa0a6;
   --text-muted: #93a2b1;
   --border-subtle: #2a3540;
   --border-subtle-alt: #2a3540;
   --border-card: #2a3540;
   --border-input: #3a4650;
+
+  /* Brand colors flatten to distinct dark greys so blue- and
+     orange-family elements stay tell-apart-able without any hue. */
+  --brand-blue: #4b5259;
+  --brand-blue-strong: #565e66;
+  --brand-blue-hover: #40474d;
+  --brand-blue-deep: #363c42;
+  --brand-blue-deepest: #2b3035;
+  --brand-blue-navy: #23272b;
+
+  --brand-orange: #5a534c;
+  --brand-orange-strong: #6b6259;
+  --brand-orange-alt: #6b6259;
+  --brand-gold: #8a8175;
+  --brand-peach: #9a948c;
+  --brand-sky: #9aa3ab;
 }
 
 body {
@@ -47,7 +79,7 @@ body {
   font-family: 'Montserrat';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #c85b12;
+  background-color: var(--brand-orange);
 }
 
 #root {

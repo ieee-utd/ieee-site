@@ -1,5 +1,5 @@
 .whoWeAre {
-  background-color: #c85b12;
+  background-color: var(--brand-orange);
   color: #ffffff;
   padding: 6rem 6%;
   scroll-margin-top: 5.5rem;
@@ -47,7 +47,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffd2a8;
+  color: var(--brand-peach);
 }
 
 .title {
@@ -91,7 +91,7 @@
   justify-content: center;
   margin-top: 1.75rem;
   background-color: #ffffff;
-  color: #c85b12;
+  color: var(--brand-orange);
   text-decoration: none;
   border-radius: 999px;
   padding: 0.85rem 1.5rem;

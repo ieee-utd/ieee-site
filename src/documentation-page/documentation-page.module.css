@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background-color: #c85b12;
+  background-color: var(--brand-orange);
   color: #ffffff;
   padding: 7.5rem 1.5rem 4rem;
   box-sizing: border-box;
@@ -55,7 +55,7 @@
 .toc a {
   color: #ffffff;
   text-decoration: none;
-  background: #2c6a9b;
+  background: var(--brand-blue);
   padding: 0.55rem 1rem;
   border-radius: 999px;
   font-size: 0.9rem;
@@ -78,7 +78,7 @@
 }
 
 .section {
-  background: #2c6a9b;
+  background: var(--brand-blue);
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -158,7 +158,7 @@
   height: 1.7rem;
   border-radius: 50%;
   background: #ffffff;
-  color: #2c6a9b;
+  color: var(--brand-blue);
   font-weight: 700;
   font-size: 0.85rem;
   display: flex;
@@ -170,7 +170,7 @@
   display: block;
   margin: 0.75rem 0 0.25rem;
   padding: 0.9rem 1rem;
-  background: #1b3f5c;
+  background: var(--brand-blue-deepest);
   border-radius: 10px;
   overflow-x: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -228,7 +228,7 @@
 
 .badge {
   background: #ffffff;
-  color: #2c6a9b;
+  color: var(--brand-blue);
 }
 
 .badgeMuted {

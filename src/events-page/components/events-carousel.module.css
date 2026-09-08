@@ -22,7 +22,7 @@
   margin: -2rem -1rem -3rem;
   scroll-padding-inline: 1rem;
   scroll-snap-type: x mandatory;
-  scrollbar-color: #c85b12 transparent;
+  scrollbar-color: var(--brand-orange) transparent;
   scrollbar-width: thin;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .carousel::-webkit-scrollbar-thumb {
-  background: #c85b12;
+  background: var(--brand-orange);
   border-radius: 99px;
 }
 
@@ -56,7 +56,7 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 1.35rem;
-  background: linear-gradient(130deg, #2c6a9b, #1f537d);
+  background: linear-gradient(130deg, var(--brand-blue), #1f537d);
   color: white;
 }
 
@@ -83,7 +83,7 @@
 
 .time {
   margin: 0;
-  color: #c85b12;
+  color: var(--brand-orange);
   font-size: 0.78rem;
   font-weight: 750;
   letter-spacing: 0.08em;
@@ -92,14 +92,14 @@
 
 .card h3 {
   margin: 0.7rem 0;
-  color: #2c6a9b;
+  color: var(--brand-blue);
   font-size: 1.35rem;
   line-height: 1.2;
 }
 
 .description {
   margin: 0;
-  color: #627696;
+  color: var(--text-secondary);
   font-size: 0.93rem;
   line-height: 1.65;
 }

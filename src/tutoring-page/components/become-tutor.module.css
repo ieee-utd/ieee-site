@@ -25,7 +25,7 @@
   margin: 0 auto;
   padding: clamp(2rem, 5vw, 4rem);
   border-radius: 18px;
-  background: #2c6a9b;
+  background: var(--brand-blue);
   color: #fff;
   box-shadow: 0 20px 45px rgba(18, 62, 95, 0.2);
 }
@@ -37,7 +37,7 @@
 }
 .subtitle {
   margin: 1rem 0 1.6rem;
-  color: #f5bd86;
+  color: var(--brand-gold);
   font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -56,7 +56,7 @@
 }
 .checkmark {
   margin-right: 0.65rem;
-  color: #f5bd86;
+  color: var(--brand-gold);
   font-size: 1.1rem;
   font-weight: 800;
 }
@@ -64,7 +64,7 @@
   padding: 0.9rem 1.35rem;
   border: 0;
   border-radius: 999px;
-  background: #c85b12;
+  background: var(--brand-orange);
   color: #fff;
   font-size: 0.92rem;
   font-weight: 750;
@@ -74,7 +74,7 @@
     background-color 0.18s ease;
 }
 .apply_button:hover {
-  background: #a84b0f;
+  background: var(--brand-orange-strong);
   transform: translateY(-2px);
 }
 @media (max-width: 650px) {
@@ -90,5 +90,5 @@
   font-size: 0.95rem;
   font-weight: 600;
   font-style: italic;
-  color: #c85b12;
+  color: var(--brand-orange);
 }

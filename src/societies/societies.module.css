@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #c85b12, #c85b12);
+  background: linear-gradient(135deg, var(--brand-orange), var(--brand-orange));
   padding: 3rem 1.5rem;
   font-family: system-ui, sans-serif;
   box-sizing: border-box;
@@ -123,7 +123,7 @@
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
   background: var(--surface-chip);
-  color: #00629b;
+  color: var(--brand-blue-strong);
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -152,7 +152,7 @@
   padding: 0.7rem 1rem;
   border: none;
   border-radius: 0.7rem;
-  background: #00629b;
+  background: var(--brand-blue-strong);
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
@@ -161,7 +161,7 @@
 }
 
 .viewButton:hover {
-  background: #004d7a;
+  background: var(--brand-blue-hover);
 }
 
 .viewButton:active {

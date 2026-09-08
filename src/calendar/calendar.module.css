@@ -100,14 +100,14 @@
     background: none;
     cursor: pointer;
     font-size: 0.9rem;
-    color: #2c6a9b;
+    color: var(--brand-blue);
     font-family: 'Montserrat';
 }
 
 .dayTab.active {
     font-weight: bold;
-    color: #2c6a9b;
-    border-bottom: 2px solid #2c6a9b;
+    color: var(--brand-blue);
+    border-bottom: 2px solid var(--brand-blue);
 }
 
 .daysGrid {
@@ -133,9 +133,9 @@
     padding: 1rem 0.5rem;
     text-align: center;
     font-weight: 600;
-    color: #2c6a9b;
+    color: var(--brand-blue);
     font-size: 0.95rem;
-    border-left: 1px solid #2c6a9b;
+    border-left: 1px solid var(--brand-blue);
     background-color: var(--surface-page);
 }
 
@@ -202,7 +202,7 @@
   }
   
   .modalClose:hover {
-    color: #007bff; /* Change color on hover for better UX */
+    color: var(--brand-blue-strong); /* Change color on hover for better UX */
   }
 .gridLines {
     position: absolute;

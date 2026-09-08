@@ -24,7 +24,7 @@
 .SectionDescription {
   font-size: 2rem;
   margin-top: 3rem;
-  color: #c85b12;
+  color: var(--brand-orange);
   width: 80%;
 }
 

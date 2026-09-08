@@ -4,7 +4,7 @@
   bottom: 0;
   width: 80%;
   color: white;
-  background-color: #c85b12;
+  background-color: var(--brand-orange);
   margin: 0 auto;
 }
 
@@ -67,12 +67,12 @@
 
 .subscribe-button:hover,
 .subscribe-button:focus {
-  background-color: #205177;
+  background-color: var(--brand-blue-deep);
   color: #ffffff;
 }
 
 .subscribe-button:active {
-  background: #09223b;
+  background: var(--brand-blue-navy);
   color: rgb(255, 255, 255, 0.7);
 }
 

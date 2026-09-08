@@ -1,5 +1,5 @@
 .whatWeDo {
-  background-color: #2c6a9b;
+  background-color: var(--brand-blue);
   color: #ffffff;
   padding: 6rem 6%;
   scroll-margin-top: 5.5rem;
@@ -36,7 +36,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #cde5f5;
+  color: var(--brand-sky);
 }
 
 .title {
@@ -152,7 +152,7 @@
   display: inline-flex;
   align-items: center;
   background-color: #ffffff;
-  color: #2c6a9b;
+  color: var(--brand-blue);
   text-decoration: none;
   border-radius: 999px;
   padding: 0.65rem 1.15rem;

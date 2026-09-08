@@ -1,6 +1,6 @@
 .calendar_section {
   padding: 2rem;
-  background-color: #2c6a9b;
+  background-color: var(--brand-blue);
   min-height: 100vh;
   min-height: 100svh;
   box-sizing: border-box;
@@ -20,7 +20,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #c85b12;
+  color: var(--brand-orange);
 }
 
 .calendar_heading {
