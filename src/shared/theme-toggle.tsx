@@ -5,6 +5,7 @@ import styles from "./theme-toggle.module.css";
 type Theme = "light" | "dark";
 
 const THEME_STORAGE_KEY = "theme";
+const THEME_CHANGE_EVENT = "ieee-theme-change";
 
 const getInitialTheme = (): Theme => {
   const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
@@ -20,16 +21,28 @@ interface ThemeToggleProps {
   isOnLight?: boolean;
 }
 
+// The nav renders this twice (desktop + mobile layouts), each with its own
+// component instance. A same-tab custom event keeps both icons in sync
+// regardless of which one the user actually clicked.
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ className, isOnLight }) => {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-  }, [theme]);
+    const handleThemeChange = (event: Event) => {
+      const nextTheme = (event as CustomEvent<Theme>).detail;
+      setTheme(nextTheme);
+    };
+
+    window.addEventListener(THEME_CHANGE_EVENT, handleThemeChange);
+    return () => window.removeEventListener(THEME_CHANGE_EVENT, handleThemeChange);
+  }, []);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    window.dispatchEvent(new CustomEvent(THEME_CHANGE_EVENT, { detail: nextTheme }));
+    setTheme(nextTheme);
   };
 
   return (

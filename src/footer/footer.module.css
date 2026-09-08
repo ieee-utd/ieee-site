@@ -6,6 +6,7 @@
   color: white;
   background-color: var(--brand-orange);
   margin: 0 auto;
+  scroll-snap-align: start;
 }
 
 .copyright {
