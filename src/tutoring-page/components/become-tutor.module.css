@@ -10,6 +10,7 @@
   transform: translateY(0);
 }
 .become_tutor_section {
+  position: relative;
   padding: 6rem 2rem;
   background: var(--surface-page);
   min-height: 100vh;

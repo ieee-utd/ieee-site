@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import styles from './courses-section.module.css';
 import { COURSES, courseCodePatterns, CourseCard, TutorSchedule } from '../courseMappings';
 import { useCalendarEvents } from '../../calendar/use-calendar-events';
+import CometField from '../../shared/comet-field';
 
 const parseDurationToMinutes = (duration: string): number => {
   const matches = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?/);
@@ -199,6 +200,7 @@ const CoursesSection = () => {
 
   return (
     <section className={styles.courses_section} id="courses">
+      <CometField count={2} cycleSeconds={11} />
       <div className={styles.courses_header}>
         <p className={styles.eyebrow}>Find your course</p>
         <h2 className={styles.courses_title}>Courses</h2>

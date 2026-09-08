@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './location-section.module.css';
 import utdMap from '../../assets/gridimages/utdmap.png';
 import escnMap from '../../assets/gridimages/escnmap.png';
+import CometField from '../../shared/comet-field';
 
 const LocationSection = () => {
   return (
     <section className={styles.location_section}>
+      <CometField count={2} cycleSeconds={10} />
       <div className={styles.location_heading}>
         <p>Where to find us</p>
         <h2>ECSN 2.318</h2>

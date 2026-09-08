@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './become-tutor.module.css';
+import CometField from '../../shared/comet-field';
 
 const TUTOR_APPLICATION_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSfBX0GF0a5xtKr7OiCXoCn1Wc0zm9lBc6-ZJms-0n5QiOhu_Q/closedform';
@@ -41,6 +42,7 @@ const BecomeTutor = () => {
 
   return (
     <section ref={sectionRef} className={`${styles.become_tutor_section} ${styles.hidden}`}>
+      <CometField count={2} cycleSeconds={10} />
       <div className={styles.content_container}>
         {/* Main title */}
         <h2 className={styles.main_title}>Want to be a tutor?</h2>

@@ -8,7 +8,7 @@
 .hero_cta { display: inline-block; margin-top: 2rem; padding: .9rem 1.35rem; border-radius: 999px; background: var(--brand-orange); color: #fff; font-size: .9rem; font-weight: 750; text-decoration: none; transition: transform .18s ease, background-color .18s ease; }
 .hero_cta:hover { background: var(--brand-orange-strong); transform: translateY(-2px); }
 .hero_img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.title_container { max-width: 980px; margin: 0 auto; padding: 6rem 2rem 3rem; text-align: center; min-height: 100vh; min-height: 100svh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; scroll-snap-align: start; }
+.title_container { position: relative; max-width: 980px; margin: 0 auto; padding: 6rem 2rem 3rem; text-align: center; min-height: 100vh; min-height: 100svh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; scroll-snap-align: start; }
 .title_container .section_label { color: var(--brand-orange); }
 .title { margin: 0; font-size: clamp(2.5rem, 4.5vw, 4.2rem); line-height: 1.05; letter-spacing: -.04em; }
 .title_copy { max-width: 600px; margin: 1.25rem auto 0; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }

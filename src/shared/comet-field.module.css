@@ -1,0 +1,70 @@
+.field {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.comet {
+  --comet-dx: -60vw;
+  --comet-dy: 60vh;
+  --comet-rot: -45deg;
+  --comet-scale: 1;
+  position: absolute;
+  width: calc(3px * var(--comet-scale));
+  height: calc(3px * var(--comet-scale));
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 6px 2px rgba(245, 189, 134, 0.85);
+  opacity: 0;
+  animation-name: comet-shoot;
+  animation-timing-function: cubic-bezier(0.3, 0.1, 0.25, 1);
+  animation-iteration-count: infinite;
+}
+
+.comet::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(70px * var(--comet-scale));
+  height: calc(1.5px * var(--comet-scale));
+  transform-origin: left center;
+  transform: translateY(-50%) rotate(var(--comet-rot)) scaleX(var(--comet-scale));
+  background: linear-gradient(to right, rgba(245, 189, 134, 0.65), transparent);
+}
+
+@keyframes comet-shoot {
+  0% {
+    transform: translate(0, 0) scale(var(--comet-scale));
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  6% {
+    opacity: 0.55;
+  }
+  9% {
+    opacity: 0.9;
+  }
+  16% {
+    transform: translate(var(--comet-dx), var(--comet-dy)) scale(var(--comet-scale));
+    opacity: 0;
+  }
+  100% {
+    transform: translate(var(--comet-dx), var(--comet-dy)) scale(var(--comet-scale));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field {
+    display: none;
+  }
+}

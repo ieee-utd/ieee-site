@@ -6,6 +6,7 @@ import LocationSection from "./components/location-section";
 import BecomeTutor from "./components/become-tutor";
 import Calendar from "../calendar/calendar";
 import RevealOnScroll from "../shared/reveal-on-scroll";
+import CometField from "../shared/comet-field";
 
 const TutoringPage = () => {
   return (
@@ -24,6 +25,7 @@ const TutoringPage = () => {
       </section>
       <RevealOnScroll>
         <section className={styles.title_container}>
+          <CometField count={2} cycleSeconds={9} />
           <p className={styles.section_label}>Your study space</p>
           <h2 className={styles.title}>Find the tutoring room</h2>
           <p className={styles.title_copy}>Come by ECSN 2.318 for help, study time, and a welcoming community of fellow engineers.</p>

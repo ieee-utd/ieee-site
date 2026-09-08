@@ -1,4 +1,4 @@
-.courses_section { padding: 5.5rem 2rem 6rem; background: var(--surface-muted); min-height: 100vh; min-height: 100svh; box-sizing: border-box; scroll-snap-align: start; }
+.courses_section { position: relative; padding: 5.5rem 2rem 6rem; background: var(--surface-muted); min-height: 100vh; min-height: 100svh; box-sizing: border-box; scroll-snap-align: start; }
 .courses_header { max-width: 1080px; margin: 0 auto 2.5rem; }
 .eyebrow { margin: 0 0 .8rem; color: var(--brand-orange); font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .courses_title { margin: 0; color: var(--brand-blue); font-size: clamp(2.6rem, 4.5vw, 4.1rem); line-height: 1; letter-spacing: -.04em; }
