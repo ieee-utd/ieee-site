@@ -28,12 +28,18 @@
       (function () {
         try {
           var stored = window.localStorage.getItem("theme");
-          var theme =
-            stored === "light" || stored === "dark"
-              ? stored
-              : window.matchMedia("(prefers-color-scheme: dark)").matches
+          var theme;
+          if (stored === "light" || stored === "dark") {
+            theme = stored;
+          } else {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches
               ? "dark"
               : "light";
+            // Lock in the resolved theme on first visit so every later page
+            // load reads this stored choice instead of re-checking the OS
+            // preference each time (which can vary between page loads).
+            window.localStorage.setItem("theme", theme);
+          }
           document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {}
       })();

@@ -10,9 +10,16 @@ const THEME_CHANGE_EVENT = "ieee-theme-change";
 const getInitialTheme = (): Theme => {
   const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
   if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
+
+  // In normal use the inline script in index.html already locks a resolved
+  // theme into storage before React ever mounts, so this branch shouldn't
+  // run — but if it ever does, lock it in here too rather than leaving the
+  // theme to be recomputed from system preference on every future page load.
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
+  window.localStorage.setItem(THEME_STORAGE_KEY, systemTheme);
+  return systemTheme;
 };
 
 interface ThemeToggleProps {
