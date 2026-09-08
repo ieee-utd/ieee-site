@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import styles from "./nav-bar.module.css";
 import ieeeLogo from "../assets/ieeelogotransparent.png";
 import accountIcon from "../assets/account-white-icon.png";
-import ThemeToggle from "../shared/theme-toggle";
-import { useIsDarkMode } from "../shared/use-is-dark-mode";
 
 // Roughly the nav bar's own height, used to place the IntersectionObserver's
 // detection line where the bar actually sits rather than at the viewport top.
@@ -11,13 +9,11 @@ const NAV_DETECTION_OFFSET_PX = 80;
 
 function NavBar() {
   const signedIn = false;
-  const isDarkMode = useIsDarkMode();
   const [isOverLightSection, setIsOverLightSection] = useState(false);
 
   // Sections marked data-nav-surface="light" (white/off-white backgrounds)
   // make the nav switch to dark grey text/icons while scrolled behind them,
-  // so it stays readable instead of white-on-white. Only relevant in light
-  // theme — in dark theme those same surfaces render dark, not white.
+  // so it stays readable instead of white-on-white.
   useEffect(() => {
     const targets = Array.from(
       document.querySelectorAll('[data-nav-surface="light"]')
@@ -43,7 +39,7 @@ function NavBar() {
     return () => observer.disconnect();
   }, []);
 
-  const isOnLight = isOverLightSection && !isDarkMode;
+  const isOnLight = isOverLightSection;
 
   return (
     <header className={isOnLight ? styles.onLight : undefined}>
@@ -95,9 +91,6 @@ function NavBar() {
                     Sign In
                   </a>
                 )}
-              </li>
-              <li>
-                <ThemeToggle isOnLight={isOnLight} />
               </li>
             </ul>
           </div>
@@ -160,9 +153,6 @@ function NavBar() {
                   <button className={styles["sign-in-btn"]}>Sign In</button>
                 </a>
               )}
-            </li>
-            <li>
-              <ThemeToggle isOnLight={isOnLight} />
             </li>
           </ul>
         </nav>

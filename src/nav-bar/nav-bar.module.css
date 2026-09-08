@@ -13,10 +13,6 @@
   filter: drop-shadow(5px 0px 4px rgba(0, 0, 0, 0.225));
 }
 
-:global([data-theme="dark"]) .logo {
-  filter: brightness(0) invert(0.55) drop-shadow(5px 0px 4px rgba(0, 0, 0, 0.225));
-}
-
 .navDesktop {
   float: right;
 }
@@ -310,10 +306,6 @@
 .mobileLogoImg {
   float: left;
   height: 48px;
-}
-
-:global([data-theme="dark"]) .mobileLogoImg {
-  filter: brightness(0) invert(0.55);
 }
 
 /* Nav switches to dark grey while scrolled over a white/light section

@@ -40,40 +40,6 @@ html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
   --brand-sky: #cde5f5;
 }
 
-html[data-theme="dark"] {
-  --surface-page: #12181f;
-  --surface-card: #1b232c;
-  --surface-muted: #161d24;
-  --surface-muted-alt: #1a222a;
-  --surface-hover: #202a33;
-  --surface-chip: #202a33;
-  --text-primary: #e6edf3;
-  --text-primary-alt: #d7dde2;
-  --text-secondary: #a7adb3;
-  --text-secondary-alt: #9aa0a6;
-  --text-muted: #93a2b1;
-  --border-subtle: #2a3540;
-  --border-subtle-alt: #2a3540;
-  --border-card: #2a3540;
-  --border-input: #3a4650;
-
-  /* Brand colors flatten to distinct dark greys so blue- and
-     orange-family elements stay tell-apart-able without any hue. */
-  --brand-blue: #4b5259;
-  --brand-blue-strong: #565e66;
-  --brand-blue-hover: #40474d;
-  --brand-blue-deep: #363c42;
-  --brand-blue-deepest: #2b3035;
-  --brand-blue-navy: #23272b;
-
-  --brand-orange: #5a534c;
-  --brand-orange-strong: #6b6259;
-  --brand-orange-alt: #6b6259;
-  --brand-gold: #8a8175;
-  --brand-peach: #9a948c;
-  --brand-sky: #9aa3ab;
-}
-
 body {
   margin: 0;
   font-family: 'Montserrat';
