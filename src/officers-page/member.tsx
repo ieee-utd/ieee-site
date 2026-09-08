@@ -1,7 +1,6 @@
 import styles from "./officers.module.css";
 import { FaLinkedin } from "react-icons/fa";
 import { SiMicrosoftoutlook } from "react-icons/si";
-import officerData from "./officerData";
 import blank from "../assets/IEEE/placeholder.jpeg";
 import { useLayoutEffect, useRef, useState } from "react";
 
@@ -10,12 +9,20 @@ interface Supervisor {
   name: string;
 }
 
+interface MemberProps {
+  name: string;
+  title: string;
+  email?: string;
+  linkedin?: string;
+  image?: string;
+  showSupervisor?: boolean;
+  supervisors?: Supervisor[];
+}
+
 const MIN_FIT_FONT_SIZE_REM = 0.55;
 const FIT_FONT_STEP_REM = 0.05;
 
-// Shrinks its own font-size in small steps until the text no longer
-// overflows its box, so any label/name fits on one line regardless of
-// how long it is.
+// Shrinks font size in steps to fit text on a single line
 const FitText: React.FC<{ text: string; baseSizeRem: number }> = ({ text, baseSizeRem }) => {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -43,24 +50,12 @@ export default function Member({
   title,
   email,
   linkedin,
-  image = officerData[officerData.length - 1],
+  image,
   showSupervisor = false,
   supervisors = [{ name: "filler" }, { name: "filler" }],
-}: {
-  name: string;
-  title: string;
-  email: any;
-  linkedin: string;
-  image: any;
-  showSupervisor?: boolean;
-  supervisors?: Supervisor[];
-}) {
+}: MemberProps) {
   const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
-
-  if (image === "") {
-    image = blank;
-  }
-
+  
   return (
     <div className={styles.member__container}>
       <div className={styles.outer_image}>
@@ -69,9 +64,16 @@ export default function Member({
             src={image}
             alt={`${name}, ${title}`}
             className={styles.member__image}
+            onError={(e) => {
+              // Swap to alternative imported placeholder image on error
+              if (e.currentTarget.src !== blank) {
+                e.currentTarget.src = blank;
+              }
+            }}
           />
         </div>
       </div>
+
       <div className={styles.member__info}>
         {showSupervisor && (
           <button
@@ -84,16 +86,25 @@ export default function Member({
             +
           </button>
         )}
+
         <p className={styles.member__name}>{name}</p>
         <p className={styles.member__title}>{title}</p>
-        {(linkedin || email) && <div className={styles.member__links}>
-          {linkedin && <a href={linkedin} aria-label={`${name} on LinkedIn`}>
-            <FaLinkedin className={styles.linkedin_icon} />
-          </a>}
-          {email && <a href={`mailto:${email}`} aria-label={`Email ${name}`}>
-            <SiMicrosoftoutlook className={styles.email_icon} />
-          </a>}
-        </div>}
+
+        {(linkedin || email) && (
+          <div className={styles.member__links}>
+            {linkedin && (
+              <a href={linkedin} aria-label={`${name} on LinkedIn`}>
+                <FaLinkedin className={styles.linkedin_icon} />
+              </a>
+            )}
+            {email && (
+              <a href={`mailto:${email}`} aria-label={`Email ${name}`}>
+                <SiMicrosoftoutlook className={styles.email_icon} />
+              </a>
+            )}
+          </div>
+        )}
+
         {showSupervisor && isSupervisorOpen && (
           <div className={styles.supervisor_grid}>
             {supervisors.map((supervisor, index) => (
