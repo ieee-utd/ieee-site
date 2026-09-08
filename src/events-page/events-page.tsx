@@ -1,4 +1,4 @@
-import eventImage from "../assets/gridimages/events.png";
+import eventImage from "../assets/gridimages/events.jpg";
 import EventsCarousel from "./components/events-carousel";
 import RevealOnScroll from "../shared/reveal-on-scroll";
 import CometField from "../shared/comet-field";
@@ -30,8 +30,8 @@ function EventsPage() {
           <p className={styles.eyebrow}>IEEE at UT Dallas</p>
           <h1 className={styles.heroHeader}>Events</h1>
           <p className={styles.heroCopy}>
-            From workshops to tech talks, there is always a
-            place to learn, connect, and create with IEEE.
+            From workshops to tech talks, there is always a place to learn,
+            connect, and create with IEEE.
           </p>
           <a className={styles.calendarLink} href="#upcoming-events">
             View this week&apos;s events
@@ -53,13 +53,16 @@ function EventsPage() {
               <h2>Why Should You Come?</h2>
             </div>
             <p>
-              IEEE events are open spaces for students to explore new technology,
-              meet people with shared interests, and turn a spark of curiosity into
-              something tangible.
+              IEEE events are open spaces for students to explore new
+              technology, meet people with shared interests, and turn a spark of
+              curiosity into something tangible.
             </p>
           </div>
 
-          <div className={styles.highlights} aria-label="What to expect at IEEE events">
+          <div
+            className={styles.highlights}
+            aria-label="What to expect at IEEE events"
+          >
             {eventHighlights.map((highlight, index) => (
               <article className={styles.highlight} key={highlight.title}>
                 <span className={styles.highlightNumber}>0{index + 1}</span>
@@ -76,7 +79,9 @@ function EventsPage() {
           <div className={styles.calendarHeading}>
             <p className={styles.sectionLabel}>Plan your week</p>
             <h2>Upcoming Events</h2>
-            <p>Find your next workshop, social, or opportunity to get involved.</p>
+            <p>
+              Find your next workshop, social, or opportunity to get involved.
+            </p>
           </div>
           <EventsCarousel />
         </section>
