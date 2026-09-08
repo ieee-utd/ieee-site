@@ -84,7 +84,7 @@ const Committees: React.FC = () => {
           alt="ieee-officer-group"
         />
       </div>
-      <section className={styles.officers_section}>
+      <section className={styles.officers_section} data-nav-surface="light">
         <div className={styles.section_heading}>
           <p>Our team</p>
           <h2>Meet the officers</h2>

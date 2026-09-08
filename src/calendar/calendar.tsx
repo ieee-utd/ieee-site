@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './calendar.module.css';
 import { CalendarEvent, useCalendarEvents } from './use-calendar-events';
+import { useIsDarkMode } from '../shared/use-is-dark-mode';
 
 interface CalendarProps {
   config?: {
@@ -52,23 +53,6 @@ const TUTOR_COLOR_PALETTE_DARK = [
   '#4b3621', // bistre
   '#2e1f14', // espresso
 ];
-
-const useIsDarkMode = (): boolean => {
-  const [isDark, setIsDark] = useState(
-    () => document.documentElement.getAttribute('data-theme') === 'dark'
-  );
-
-  useEffect(() => {
-    const target = document.documentElement;
-    const observer = new MutationObserver(() => {
-      setIsDark(target.getAttribute('data-theme') === 'dark');
-    });
-    observer.observe(target, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => observer.disconnect();
-  }, []);
-
-  return isDark;
-};
 
 const hexToHsl = (hex: string): [number, number, number] => {
   const r = parseInt(hex.slice(1, 3), 16) / 255;

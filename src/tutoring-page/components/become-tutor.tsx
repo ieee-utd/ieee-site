@@ -41,7 +41,11 @@ const BecomeTutor = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className={`${styles.become_tutor_section} ${styles.hidden}`}>
+    <section
+      ref={sectionRef}
+      className={`${styles.become_tutor_section} ${styles.hidden}`}
+      data-nav-surface="light"
+    >
       <CometField count={2} cycleSeconds={10} />
       <div className={styles.content_container}>
         {/* Main title */}

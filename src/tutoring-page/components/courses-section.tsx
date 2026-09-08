@@ -199,7 +199,7 @@ const CoursesSection = () => {
   );
 
   return (
-    <section className={styles.courses_section} id="courses">
+    <section className={styles.courses_section} id="courses" data-nav-surface="light">
       <CometField count={2} cycleSeconds={11} />
       <div className={styles.courses_header}>
         <p className={styles.eyebrow}>Find your course</p>

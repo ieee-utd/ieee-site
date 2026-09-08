@@ -6,7 +6,7 @@ import CometField from '../../shared/comet-field';
 
 const LocationSection = () => {
   return (
-    <section className={styles.location_section}>
+    <section className={styles.location_section} data-nav-surface="light">
       <CometField count={2} cycleSeconds={10} />
       <div className={styles.location_heading}>
         <p>Where to find us</p>

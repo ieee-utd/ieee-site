@@ -58,7 +58,7 @@ function Sponsors() {
   const duplicatedClients = [...clients, ...clients, ...clients];
 
   return (
-    <div className={Styles.Container}>
+    <div className={Styles.Container} data-nav-surface="light">
       <div className={Styles.SponsorSection}>
         <h1 className={Styles.SectionDescription}>
           Our Corporate Sponsors

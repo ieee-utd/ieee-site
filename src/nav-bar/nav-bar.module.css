@@ -315,3 +315,33 @@
 :global([data-theme="dark"]) .mobileLogoImg {
   filter: brightness(0) invert(0.55);
 }
+
+/* Nav switches to dark grey while scrolled over a white/light section
+   (see NavBar's IntersectionObserver on [data-nav-surface="light"]), so
+   text and icons stay readable instead of white-on-white. */
+.onLight .link {
+  color: #3a3f45;
+  text-shadow: none;
+}
+
+.onLight .link::before {
+  background-color: #3a3f45;
+}
+
+.onLight .logo {
+  filter: brightness(0) invert(0.22) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+.onLight .sign-in-btn {
+  color: #3a3f45;
+  box-shadow: inset 0 0 0 2px #3a3f45;
+  filter: none;
+}
+
+.onLight .mobileLogoImg {
+  filter: brightness(0) invert(0.22);
+}
+
+.onLight #menuToggle span {
+  background: #3a3f45;
+}

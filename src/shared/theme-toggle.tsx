@@ -16,9 +16,11 @@ const getInitialTheme = (): Theme => {
 
 interface ThemeToggleProps {
   className?: string;
+  /** True when the fixed nav is scrolled over a light/white section. */
+  isOnLight?: boolean;
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ className, isOnLight }) => {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
   return (
     <button
       type="button"
-      className={`${styles.themeToggle} ${className || ""}`}
+      className={`${styles.themeToggle} ${isOnLight ? styles.onLight : ""} ${className || ""}`}
       onClick={toggleTheme}
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
     >

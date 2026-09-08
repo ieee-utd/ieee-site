@@ -45,7 +45,7 @@ function EventsPage() {
       </section>
 
       <RevealOnScroll>
-        <section className={styles.introScene}>
+        <section className={styles.introScene} data-nav-surface="light">
           <CometField count={2} cycleSeconds={9} />
           <div className={styles.intro}>
             <div>

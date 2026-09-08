@@ -24,7 +24,7 @@ const TutoringPage = () => {
         />
       </section>
       <RevealOnScroll>
-        <section className={styles.title_container}>
+        <section className={styles.title_container} data-nav-surface="light">
           <CometField count={2} cycleSeconds={9} />
           <p className={styles.section_label}>Your study space</p>
           <h2 className={styles.title}>Find the tutoring room</h2>
