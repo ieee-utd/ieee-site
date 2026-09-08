@@ -120,7 +120,7 @@ const officerData = [
                 email: 'dal336509@utdallas.edu',
             },
             {
-                name: "vacant",
+                name: " ",
                 title: "Tutoring Coordinator",
                 image: "/Officer_Photos/placeholder.png",
                 linkedin: '',
