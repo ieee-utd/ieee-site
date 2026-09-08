@@ -11,19 +11,5 @@
   mix-blend-mode: difference;
   pointer-events: none;
   z-index: 9999;
-  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease,
-    background-color 0.2s ease, backdrop-filter 0.2s ease;
   will-change: transform;
-}
-
-.cursor.xray {
-  width: 120px;
-  height: 120px;
-  margin-left: -60px;
-  margin-top: -60px;
-  background: transparent;
-  mix-blend-mode: normal;
-  backdrop-filter: invert(1) grayscale(0.3) contrast(1.35);
-  -webkit-backdrop-filter: invert(1) grayscale(0.3) contrast(1.35);
-  border: 1px solid rgba(255, 255, 255, 0.35);
 }

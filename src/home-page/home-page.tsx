@@ -12,7 +12,7 @@ import styles from "./home-page.module.css";
 
 function HomePage() {
   return (
-    <div data-cursor-ignore>
+    <>
       <Landing />
       <section className={styles.calendar_section}>
         <div className={styles.calendar_header}>
@@ -35,7 +35,7 @@ function HomePage() {
       </RevealOnScroll>
       <WhatWeDo />
       <Sponsors />
-    </div>
+    </>
   );
 }
 
