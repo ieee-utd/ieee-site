@@ -52,7 +52,7 @@ export default function Member({
   linkedin,
   image,
   showSupervisor = false,
-  supervisors = [{ name: "filler" }, { name: "filler" }],
+  supervisors = [{ name: "Filler" }, { name: "Filler" }],
 }: MemberProps) {
   const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
   
