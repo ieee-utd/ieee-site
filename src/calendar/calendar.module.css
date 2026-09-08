@@ -29,7 +29,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    outline: 2px solid white;
+    outline: 2px solid var(--surface-page);
     outline-offset: -2px;
     transition: transform 0.2s;
     color: white;
