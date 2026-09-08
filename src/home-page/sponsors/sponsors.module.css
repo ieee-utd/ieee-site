@@ -49,12 +49,6 @@
   box-sizing: border-box;
 }
 
-:global([data-theme="dark"]) .carousel-item {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 1rem 1.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-}
 
 @keyframes scroll {
   from {
@@ -73,6 +67,10 @@
   max-width: 350px;
   height: auto;
   object-fit: contain;
+}
+
+:global([data-theme="dark"]) .Client-item {
+  filter: brightness(0) invert(1);
 }
 
 /* Responsive Styles */
