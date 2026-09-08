@@ -95,18 +95,25 @@
   pointer-events: none;
 }
 
-.intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-content: center;
-  gap: 4rem;
+.introScene {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 6rem 2rem 4rem;
+  padding: 6rem 2rem;
   min-height: 100vh;
   min-height: 100svh;
   box-sizing: border-box;
   scroll-snap-align: start;
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  width: 100%;
 }
 
 .intro h2,
@@ -125,15 +132,8 @@
 .highlights {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-content: center;
   gap: 1.25rem;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 2rem 6rem;
-  min-height: 100vh;
-  min-height: 100svh;
-  box-sizing: border-box;
-  scroll-snap-align: start;
+  width: 100%;
 }
 
 .highlight {
@@ -206,15 +206,18 @@
     max-height: 330px;
   }
 
+  .introScene {
+    gap: 2rem;
+    padding: 4rem 1.5rem;
+  }
+
   .intro {
     grid-template-columns: 1fr;
     gap: 0.5rem;
-    padding: 4rem 1.5rem 2.5rem;
   }
 
   .highlights {
     grid-template-columns: 1fr;
-    padding: 0 1.5rem 4rem;
   }
 
   .calendarSection {

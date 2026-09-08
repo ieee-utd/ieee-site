@@ -42,28 +42,28 @@ function EventsPage() {
       </section>
 
       <RevealOnScroll>
-        <section className={styles.intro}>
-          <div>
-            <p className={styles.sectionLabel}>More than a meeting</p>
-            <h2>Why Should You Come?</h2>
+        <section className={styles.introScene}>
+          <div className={styles.intro}>
+            <div>
+              <p className={styles.sectionLabel}>More than a meeting</p>
+              <h2>Why Should You Come?</h2>
+            </div>
+            <p>
+              IEEE events are open spaces for students to explore new technology,
+              meet people with shared interests, and turn a spark of curiosity into
+              something tangible.
+            </p>
           </div>
-          <p>
-            IEEE events are open spaces for students to explore new technology,
-            meet people with shared interests, and turn a spark of curiosity into
-            something tangible.
-          </p>
-        </section>
-      </RevealOnScroll>
 
-      <RevealOnScroll>
-        <section className={styles.highlights} aria-label="What to expect at IEEE events">
-          {eventHighlights.map((highlight, index) => (
-            <article className={styles.highlight} key={highlight.title}>
-              <span className={styles.highlightNumber}>0{index + 1}</span>
-              <h3>{highlight.title}</h3>
-              <p>{highlight.description}</p>
-            </article>
-          ))}
+          <div className={styles.highlights} aria-label="What to expect at IEEE events">
+            {eventHighlights.map((highlight, index) => (
+              <article className={styles.highlight} key={highlight.title}>
+                <span className={styles.highlightNumber}>0{index + 1}</span>
+                <h3>{highlight.title}</h3>
+                <p>{highlight.description}</p>
+              </article>
+            ))}
+          </div>
         </section>
       </RevealOnScroll>
 
