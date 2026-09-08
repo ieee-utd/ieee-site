@@ -6,13 +6,10 @@
   background-color: white;
   color: black;
   text-align: center;
-  min-height: 100vh;
-  min-height: 100svh;
-  box-sizing: border-box;
+  height: max-content;
   width: 100%;
   z-index: 100;
   padding-bottom: 40px;
-  scroll-snap-align: start;
 }
 
 .SponsorSection {
