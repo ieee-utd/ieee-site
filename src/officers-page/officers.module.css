@@ -133,15 +133,19 @@
 .image_wrapper {
   aspect-ratio: 4 / 3;
 }
+
 .image_wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Set a baseline scale > 1 to zoom in (e.g., 1.25 for 25% zoom) */
+  transform: scale(1.5);
   transition: transform 0.35s ease;
 }
+
 .member__container:hover .image_wrapper img {
-  transform: scale(1.04);
+  transform: scale(1.6);
 }
 .member__info {
   position: relative;
