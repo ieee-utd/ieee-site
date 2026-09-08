@@ -321,7 +321,7 @@
    text and icons stay readable instead of white-on-white. */
 .onLight .link {
   color: #3a3f45;
-  text-shadow: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.18);
 }
 
 .onLight .link::before {
