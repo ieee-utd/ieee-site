@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './calendar.module.css';
 import { CalendarEvent, useCalendarEvents } from './use-calendar-events';
 
@@ -42,6 +42,34 @@ const TUTOR_COLOR_PALETTE = [
   '#000f89', // phthalo blue
 ];
 
+// Same 7-shade progression from light to dark, swapped in for dark mode.
+const TUTOR_COLOR_PALETTE_DARK = [
+  '#d8b98c', // light tan
+  '#c19a6b', // sandy brown
+  '#a67c52', // camel
+  '#8b5e3c', // chestnut
+  '#6f4e37', // coffee
+  '#4b3621', // bistre
+  '#2e1f14', // espresso
+];
+
+const useIsDarkMode = (): boolean => {
+  const [isDark, setIsDark] = useState(
+    () => document.documentElement.getAttribute('data-theme') === 'dark'
+  );
+
+  useEffect(() => {
+    const target = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setIsDark(target.getAttribute('data-theme') === 'dark');
+    });
+    observer.observe(target, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+};
+
 const hexToHsl = (hex: string): [number, number, number] => {
   const r = parseInt(hex.slice(1, 3), 16) / 255;
   const g = parseInt(hex.slice(3, 5), 16) / 255;
@@ -74,10 +102,12 @@ const hexToHsl = (hex: string): [number, number, number] => {
 
 // Deterministic per-tutor gradient keyed by that tutor's position in the
 // full, sorted tutor roster. Each tutor is assigned one of the named colors
-// in TUTOR_COLOR_PALETTE, then a light/dark pair of that same hue is used
-// as the gradient stops so the gradient stays clearly visible.
-const getTutorGradient = (tutorIndex: number): string => {
-  const baseColor = TUTOR_COLOR_PALETTE[tutorIndex % TUTOR_COLOR_PALETTE.length];
+// in TUTOR_COLOR_PALETTE (or its dark-mode brown equivalent), then a
+// light/dark pair of that same hue is used as the gradient stops so the
+// gradient stays clearly visible.
+const getTutorGradient = (tutorIndex: number, isDarkMode: boolean): string => {
+  const palette = isDarkMode ? TUTOR_COLOR_PALETTE_DARK : TUTOR_COLOR_PALETTE;
+  const baseColor = palette[tutorIndex % palette.length];
   const [hue, saturation, lightness] = hexToHsl(baseColor);
   const lightnessStart = Math.max(0, lightness - 10);
   const lightnessEnd = Math.min(100, lightness + 10);
@@ -93,6 +123,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const { events, loading, error, rateLimited, refetch } = useCalendarEvents();
+  const isDarkMode = useIsDarkMode();
 
   const tutorIndexByName = useMemo(() => {
     const uniqueTutors = Array.from(new Set(events.map(event => extractTutorName(event.title)))).sort();
@@ -161,7 +192,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
         }
 
         const foundTutorIndex = tutorIndexByName.get(extractTutorName(event.title));
-        const tutorGradient = getTutorGradient(foundTutorIndex !== undefined ? foundTutorIndex : 0);
+        const tutorGradient = getTutorGradient(foundTutorIndex !== undefined ? foundTutorIndex : 0, isDarkMode);
 
         return { ...event, hasOverlappingLonger, tutorGradient };
       });
