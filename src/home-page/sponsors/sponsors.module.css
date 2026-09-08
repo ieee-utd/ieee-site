@@ -11,6 +11,7 @@
   z-index: 100;
   padding-bottom: 40px;
   scroll-snap-align: start;
+  border-top: 1px solid color-mix(in srgb, var(--text-primary) 12%, transparent);
 }
 
 .SponsorSection {
@@ -19,18 +20,38 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animated {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .SectionDescription {
   font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-top: 3rem;
+  margin-bottom: 0.5rem;
   color: var(--brand-orange);
   width: 80%;
+}
+
+.SectionSubtext {
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--text-primary) 65%, transparent);
+  margin: 0 0 2.5rem;
+  max-width: 32rem;
 }
 
 .carousel-container {
   width: 100%;
   overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
 .carousel-track {
@@ -49,7 +70,6 @@
   box-sizing: border-box;
 }
 
-
 @keyframes scroll {
   from {
     transform: translateX(0);
@@ -67,6 +87,12 @@
   max-width: 350px;
   height: auto;
   object-fit: contain;
+  filter: opacity(0.7);
+  transition: all 0.3s ease;
+}
+
+.carousel-item:hover .Client-item {
+  filter: opacity(1);
 }
 
 /* Responsive Styles */
@@ -79,7 +105,23 @@
     font-size: 1.5rem;
   }
 
+  .SectionSubtext {
+    font-size: 0.9rem;
+  }
+
   .carousel-container {
     width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    animation: none;
+  }
+
+  .SponsorSection {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Styles from "./sponsors.module.css";
 import BurnsMcDonnell from "./assets/burns_mcdonnell.png";
 import TexasInstruments from "./assets/texas_instruments.avif";
@@ -9,39 +10,18 @@ interface Client {
   image: React.JSX.Element;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  let elementsToAnimate = document.querySelectorAll('.SponsorSection, .InstagramSection');
-  let options = {
-    threshold: 0.1
-  };
-
-  let observer = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, options);
-
-  elementsToAnimate.forEach(element => {
-    observer.observe(element);
-  });
-});
-
-
 const clients: Client[] = [
   {
     id: 1,
-    image: <img className={Styles["Client-item"]} src={BurnsMcDonnell} alt="Burns McDonnell" ></img>,
+    image: <img className={Styles["Client-item"]} src={BurnsMcDonnell} alt="Burns McDonnell" />,
   },
   {
     id: 2,
-    image: <img className={Styles["Client-item"]} src={TexasInstruments} alt="Texas Instruments" ></img>,
+    image: <img className={Styles["Client-item"]} src={TexasInstruments} alt="Texas Instruments" />,
   },
   {
     id: 3,
-    image: <img className={Styles["Client-item"]} src={Murata} alt="Murata" ></img>,
+    image: <img className={Styles["Client-item"]} src={Murata} alt="Murata" />,
   },
   {
     id: 4,
@@ -49,7 +29,8 @@ const clients: Client[] = [
       <img
         className={`${Styles["Client-item"]} ${Styles.Qorvo}`}
         src={Qorvo}
-      alt="Qorvo" ></img>
+        alt="Qorvo"
+      />
     ),
   },
 ];
@@ -57,12 +38,32 @@ const clients: Client[] = [
 function Sponsors() {
   const duplicatedClients = [...clients, ...clients, ...clients];
 
+  useEffect(() => {
+    const elementsToAnimate = document.querySelectorAll<HTMLElement>("[data-animate]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(Styles.animated);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    elementsToAnimate.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={Styles.Container} data-nav-surface="light">
-      <div className={Styles.SponsorSection}>
-        <h1 className={Styles.SectionDescription}>
-          Our Corporate Sponsors
-        </h1>
+      <div className={Styles.SponsorSection} data-animate>
+        <h1 className={Styles.SectionDescription}>Our Corporate Sponsors</h1>
+        <p className={Styles.SectionSubtext}>
+          {/* placeholder copy — swap in your own line */}
+          The companies backing our equipment, travel, and builds.
+        </p>
         <div className={Styles["carousel-container"]}>
           <div className={Styles["carousel-track"]}>
             {duplicatedClients.map((client, index) => (
