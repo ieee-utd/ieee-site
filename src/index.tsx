@@ -14,6 +14,7 @@ import Volunteer from "volunteer-page/volunteer-page";
 import DocumentationPage from "documentation-page/documentation-page";
 import EventsPage from "./events-page/events-page";
 import SocietiesPage from "societies/societies";
+import CustomCursor from "./shared/custom-cursor";
 //import Calendar from "./calendar/calendar";
 
 //import "./notification/notification.css";
@@ -38,6 +39,7 @@ root.render(
       </Routes>
       <NavBar />
       <Footer />
+      <CustomCursor />
     </Router>
   </React.StrictMode>
 );
