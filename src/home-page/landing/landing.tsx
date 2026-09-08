@@ -153,7 +153,7 @@ const Landing: React.FC = () => {
           alt="IEEE"
         />
 
-        <p className={Styles.eyebrow}>
+        <p className={Styles.eyebrow} data-cursor-ignore>
           Student Branch · UT Dallas
         </p>
 
@@ -161,18 +161,18 @@ const Landing: React.FC = () => {
           IEEE at UT Dallas
         </h1>
 
-        <p className={Styles.subhead}>
+        <p className={Styles.subhead} data-cursor-ignore>
           Institute of Electrical and Electronics Engineers
         </p>
 
-        <p className={Styles.motto} aria-live="polite">
+        <p className={Styles.motto} aria-live="polite" data-cursor-ignore>
           {typewriterText}
           {!prefersReducedMotion && (
             <span className={Styles.cursor} />
           )}
         </p>
 
-        <div className={Styles.actions}>
+        <div className={Styles.actions} data-cursor-ignore>
           <a href="#who-we-are" className={Styles.primaryBtn}>
             Find out more
           </a>

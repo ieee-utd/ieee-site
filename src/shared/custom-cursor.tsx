@@ -27,7 +27,11 @@ const CustomCursor: React.FC = () => {
 
     const handleMouseOver = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      setIsOverText(Boolean(target.closest && target.closest(TEXT_SELECTOR)));
+      if (!target.closest) return;
+
+      const isText = Boolean(target.closest(TEXT_SELECTOR));
+      const isIgnored = Boolean(target.closest("[data-cursor-ignore]"));
+      setIsOverText(isText && !isIgnored);
     };
 
     document.addEventListener("mousemove", handleMouseMove);
