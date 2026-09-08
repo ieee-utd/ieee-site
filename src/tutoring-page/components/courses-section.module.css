@@ -1,12 +1,12 @@
-.courses_section { padding: 5.5rem 2rem 6rem; background: #f4f8fb; min-height: 100vh; min-height: 100svh; box-sizing: border-box; scroll-snap-align: start; }
+.courses_section { padding: 5.5rem 2rem 6rem; background: var(--surface-muted); min-height: 100vh; min-height: 100svh; box-sizing: border-box; scroll-snap-align: start; }
 .courses_header { max-width: 1080px; margin: 0 auto 2.5rem; }
 .eyebrow { margin: 0 0 .8rem; color: #c85b12; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .courses_title { margin: 0; color: #2c6a9b; font-size: clamp(2.6rem, 4.5vw, 4.1rem); line-height: 1; letter-spacing: -.04em; }
-.courses_subtitle { margin: 1rem 0 0; color: #627d98; font-size: 1.05rem; line-height: 1.6; }
+.courses_subtitle { margin: 1rem 0 0; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; }
 .courses_list { width: min(1080px, 100%); margin: 0 auto; display: flex; flex-direction: column; gap: .85rem; }
-.course_card { overflow: hidden; border: 1px solid #d7e3ec; border-radius: 12px; background: #fff; box-shadow: 0 5px 16px rgba(18,62,95,.05); transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms ease; transform-origin: center top; will-change: transform; }
-.course_preview { width: 100%; min-height: 76px; padding: 1.2rem 1.4rem; display: flex; justify-content: space-between; align-items: center; border: 0; background: #fff; color: inherit; cursor: pointer; font: inherit; text-align: left; }
-.course_preview:hover { background: #fafcfd; }
+.course_card { overflow: hidden; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--surface-card); box-shadow: 0 5px 16px rgba(18,62,95,.05); transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms ease; transform-origin: center top; will-change: transform; }
+.course_preview { width: 100%; min-height: 76px; padding: 1.2rem 1.4rem; display: flex; justify-content: space-between; align-items: center; border: 0; background: var(--surface-card); color: inherit; cursor: pointer; font: inherit; text-align: left; }
+.course_preview:hover { background: var(--surface-hover); }
 .course_preview:focus-visible { outline: 3px solid #c85b12; outline-offset: -3px; }
 .course_main_info { display: flex; align-items: center; gap: 1rem; }
 .status_indicator { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
@@ -14,15 +14,15 @@
 .status_indicator.inactive { background: #c85b12; box-shadow: 0 0 0 5px rgba(200,91,18,.13); animation: statusPulseInactive 3s ease-in-out infinite; }
 .inactive_courses_list { display: flex; flex-direction: column; gap: .65rem; }
 .inactive_dropdown { margin-top: 1.25rem; }
-.course_name { margin: 0; color: #244f72; font-size: 1.05rem; line-height: 1.45; }
+.course_name { margin: 0; color: var(--text-primary-alt); font-size: 1.05rem; line-height: 1.45; }
 .expand_button { margin-left: 1rem; color: #2c6a9b; font-size: 1.8rem; font-weight: 400; line-height: 1; transition: transform .2s ease; }
 .expand_button.expanded { transform: rotate(45deg); }
-.course_details { padding: 1.25rem 1.4rem 1.4rem; border-top: 1px solid #d7e3ec; background: #f9fbfc; }
+.course_details { padding: 1.25rem 1.4rem 1.4rem; border-top: 1px solid var(--border-subtle); background: var(--surface-muted-alt); }
 .tutors_grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .8rem; }
-.tutor_card { padding: 1rem; border-radius: 9px; background: #fff; border: 1px solid #e2eaf0; }
+.tutor_card { padding: 1rem; border-radius: 9px; background: var(--surface-card); border: 1px solid var(--border-subtle-alt); }
 .tutor_card strong { display: block; margin-bottom: .35rem; color: #2c6a9b; font-size: .96rem; }
-.tutor_card div { color: #627d98; font-size: .86rem; line-height: 1.45; }
-.emptyState { color: #627d98; font-size: .92rem; line-height: 1.6; }
+.tutor_card div { color: var(--text-secondary); font-size: .86rem; line-height: 1.45; }
+.emptyState { color: var(--text-secondary); font-size: .92rem; line-height: 1.6; }
 @media (max-width: 700px) { .courses_section { padding: 4rem 1.5rem; } .course_preview { padding: 1rem; } .course_name { font-size: .95rem; } .course_main_info { gap: .75rem; } .course_details { padding: 1rem; } }
 
 @media (hover: hover) and (pointer: fine) {

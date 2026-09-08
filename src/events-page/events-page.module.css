@@ -1,5 +1,5 @@
 .page {
-  background: #ffffff;
+  background: var(--surface-page);
   color: #2c6a9b;
 }
 
@@ -132,7 +132,7 @@
 
 .intro > p {
   margin: 1.6rem 0 0;
-  color: #627696;
+  color: var(--text-secondary);
   font-size: 1.08rem;
   line-height: 1.8;
 }

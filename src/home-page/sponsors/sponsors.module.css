@@ -3,8 +3,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  color: black;
+  background-color: var(--surface-page);
+  color: var(--text-primary);
   text-align: center;
   height: max-content;
   width: 100%;
@@ -46,6 +46,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
 }
 
 @keyframes scroll {

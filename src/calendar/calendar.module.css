@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     min-height: 600px;
-    background: white;
+    background: var(--surface-page);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -14,9 +14,9 @@
     display: flex;
     flex-direction: column;
     padding-top: calc(var(--row-height) / 2);
-    background: linear-gradient(to right, white 95%, rgba(255, 255, 255, 0));
-    border-right: 1px solid #eee;
-}   
+    background: linear-gradient(to right, var(--surface-page) 95%, rgba(255, 255, 255, 0));
+    border-right: 1px solid var(--border-subtle);
+}
 
 .event {
     position: absolute;
@@ -54,7 +54,7 @@
 .timeSlot {
     height: 50px;
     font-size: 0.8rem;
-    color: #666;
+    color: var(--text-secondary);
     padding-right: 0.5rem;
     text-align: right;
     display: flex;
@@ -69,14 +69,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .daysWrapper {
     position: relative;
     overflow-x: auto;
     overflow-y: hidden;
-    background: white;
+    background: var(--surface-page);
     z-index: 0;
 }
 
@@ -84,9 +84,9 @@
     display: none; /* Visible on mobile */
     position: sticky;
     top: 0;
-    background: white;
+    background: var(--surface-page);
     z-index: 2;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-subtle);
     white-space: nowrap;
     position: relative;
     overflow-x: scroll;
@@ -114,7 +114,7 @@
     display: grid;
     grid-template-columns: repeat(5, minmax(350px, 1fr)); /* Ensure each column has a minimum width */
     position: relative;
-    background: white;
+    background: var(--surface-page);
     grid-template-rows: auto 1fr; /* First row for day headers, rest for columns */
 }
 
@@ -122,7 +122,7 @@
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(5, minmax(350px, 1fr));
-    background: white;
+    background: var(--surface-page);
     border-bottom: none;
     position: sticky;
     top: 0;
@@ -136,7 +136,7 @@
     color: #2c6a9b;
     font-size: 0.95rem;
     border-left: 1px solid #2c6a9b;
-    background-color: white;
+    background-color: var(--surface-page);
 }
 
 .dayHeaderCell:first-child {
@@ -147,7 +147,7 @@
     position: relative;
     min-height: calc(var(--row-height) * 18);
     padding: 0 0.5rem;
-    border-left: 1px solid #eee;
+    border-left: 1px solid var(--border-subtle);
 }
 
 .dayColumn:first-child {
@@ -180,14 +180,14 @@
   
   .modalContent {
     position: relative; /* Required for absolute positioning of .modalClose */
-    background: white;
+    background: var(--surface-card);
     padding: 2rem;
     border-radius: 8px;
     max-width: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 2020;
   }
-  
+
   .modalClose {
     position: absolute;
     top: 1rem; /* Distance from the top of the modal content */
@@ -196,7 +196,7 @@
     background: none; /* Ensure no background color */
     font-size: 2rem; /* Size of the "×" symbol */
     cursor: pointer; /* Pointer cursor for better UX */
-    color: #333; /* Default color */
+    color: var(--text-primary); /* Default color */
     padding: 0; /* Remove padding */
     line-height: 1; /* Align the "×" symbol properly */
   }
@@ -217,7 +217,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-subtle);
     width: 100%;
     min-width: 1620px;
 }

@@ -1,6 +1,7 @@
 import styles from "./nav-bar.module.css";
 import ieeeLogo from "../assets/ieeelogotransparent.png";
 import accountIcon from "../assets/account-white-icon.png";
+import ThemeToggle from "../shared/theme-toggle";
 
 function NavBar() {
   const signedIn = false;
@@ -55,6 +56,9 @@ function NavBar() {
                     Sign In
                   </a>
                 )}
+              </li>
+              <li>
+                <ThemeToggle />
               </li>
             </ul>
           </div>
@@ -117,6 +121,9 @@ function NavBar() {
                   <button className={styles["sign-in-btn"]}>Sign In</button>
                 </a>
               )}
+            </li>
+            <li>
+              <ThemeToggle />
             </li>
           </ul>
         </nav>

@@ -62,7 +62,7 @@
 }
 .officers_section {
   padding: 6rem 2rem;
-  background: #f4f8fb;
+  background: var(--surface-muted);
   scroll-snap-align: start;
 }
 .section_heading {
@@ -118,9 +118,9 @@
   position: relative;
   height: 100%;
   overflow: hidden;
-  border: 1px solid #dce7ee;
+  border: 1px solid var(--border-card);
   border-radius: 15px;
-  background: #fff;
+  background: var(--surface-card);
   box-shadow: 0 10px 24px rgba(18, 62, 95, 0.08);
   transition:
     transform 0.2s ease,
@@ -168,7 +168,7 @@
 }
 .member__title {
   margin: 0.35rem 0 0;
-  color: #627d98;
+  color: var(--text-secondary);
   font-size: 0.92rem;
   font-weight: 600;
   line-height: 1.45;
@@ -184,7 +184,7 @@
   height: 2.15rem;
   place-items: center;
   border-radius: 50%;
-  background: #edf4f8;
+  background: var(--surface-chip);
   color: #2c6a9b;
   transition:
     color 0.18s ease,
@@ -241,8 +241,8 @@
 .supervisor_card {
   padding: 0.85rem;
   border-radius: 9px;
-  background: #f9fbfc;
-  border: 1px solid #e2eaf0;
+  background: var(--surface-muted-alt);
+  border: 1px solid var(--border-subtle-alt);
 }
 .supervisor_card strong {
   display: block;
@@ -251,7 +251,7 @@
   font-size: 0.9rem;
 }
 .supervisor_card div {
-  color: #627d98;
+  color: var(--text-secondary);
   font-size: 0.84rem;
   line-height: 1.4;
 }
@@ -266,9 +266,6 @@
   }
 }
 @media (max-width: 650px) {
-  .group__container {
-    min-height: 570px;
-  }
   .group__container::after {
     background: linear-gradient(
       90deg,

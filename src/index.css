@@ -6,6 +6,42 @@ html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
   html { scroll-snap-type: none; }
 }
 
+:root {
+  --surface-page: #ffffff;
+  --surface-card: #ffffff;
+  --surface-muted: #f4f8fb;
+  --surface-muted-alt: #f9fbfc;
+  --surface-hover: #fafcfd;
+  --surface-chip: #edf4f8;
+  --text-primary: #173f5f;
+  --text-primary-alt: #244f72;
+  --text-secondary: #627d98;
+  --text-secondary-alt: #385d7a;
+  --text-muted: #64748b;
+  --border-subtle: #d7e3ec;
+  --border-subtle-alt: #e2eaf0;
+  --border-card: #dce7ee;
+  --border-input: #cbd5e1;
+}
+
+html[data-theme="dark"] {
+  --surface-page: #12181f;
+  --surface-card: #1b232c;
+  --surface-muted: #161d24;
+  --surface-muted-alt: #1a222a;
+  --surface-hover: #202a33;
+  --surface-chip: #202a33;
+  --text-primary: #e6edf3;
+  --text-primary-alt: #cfe0ee;
+  --text-secondary: #9fb2c4;
+  --text-secondary-alt: #8fa8bc;
+  --text-muted: #93a2b1;
+  --border-subtle: #2a3540;
+  --border-subtle-alt: #2a3540;
+  --border-card: #2a3540;
+  --border-input: #3a4650;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat';

@@ -1,0 +1,18 @@
+.themeToggle {
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-2px);
+}

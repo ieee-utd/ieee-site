@@ -115,7 +115,7 @@
 
 .mobileLink {
   text-decoration: none;
-  color: #1E1E23;
+  color: var(--text-primary);
   opacity:1;
   font-size: 1.5em;
   font-weight: 400;
@@ -238,7 +238,7 @@
   margin: -50px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
-  background-color: #F5F6FA;
+  background-color: var(--surface-muted);
   -webkit-font-smoothing: antialiased;
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);

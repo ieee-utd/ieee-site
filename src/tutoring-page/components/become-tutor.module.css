@@ -11,7 +11,7 @@
 }
 .become_tutor_section {
   padding: 6rem 2rem;
-  background: #fff;
+  background: var(--surface-page);
   min-height: 100vh;
   min-height: 100svh;
   box-sizing: border-box;
