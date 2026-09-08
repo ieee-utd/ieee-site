@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-snap-type: none; }
+}
 
 body {
   margin: 0;

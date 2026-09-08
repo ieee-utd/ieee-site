@@ -4,11 +4,14 @@
 }
 
 .hero {
-  min-height: 560px;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
   background: #2c6a9b;
   color: white;
+  scroll-snap-align: start;
 }
 
 .heroContent {
@@ -95,10 +98,15 @@
 .intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-content: center;
   gap: 4rem;
   max-width: 1120px;
   margin: 0 auto;
   padding: 6rem 2rem 4rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  scroll-snap-align: start;
 }
 
 .intro h2,
@@ -117,10 +125,15 @@
 .highlights {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-content: center;
   gap: 1.25rem;
   max-width: 1120px;
   margin: 0 auto;
   padding: 0 2rem 6rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  scroll-snap-align: start;
 }
 
 .highlight {
@@ -158,6 +171,10 @@
 .calendarSection {
   padding: 5.5rem clamp(1rem, 5vw, 4rem) 6rem;
   background: #2c6a9b;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  scroll-snap-align: start;
 }
 
 .calendarHeading {

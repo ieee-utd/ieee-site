@@ -10,6 +10,13 @@
   max-width: 920px;
   margin: 0 auto 1.5rem;
   text-align: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start;
 }
 
 .eyebrow {
@@ -76,6 +83,10 @@
   padding: 2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   scroll-margin-top: 6.5rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+  scroll-snap-align: start;
 }
 
 .section h2 {

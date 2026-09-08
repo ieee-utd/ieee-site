@@ -1,4 +1,4 @@
-.location_section { padding: 0 2rem 6rem; background: #fff; }
+.location_section { padding: 0 2rem 6rem; background: #fff; min-height: 100vh; min-height: 100svh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; scroll-snap-align: start; }
 .location_heading { max-width: 1080px; margin: 0 auto 1.5rem; }
 .location_heading p { margin: 0 0 .45rem; color: #c85b12; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .location_heading h2 { margin: 0; color: #2c6a9b; font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -.03em; }
