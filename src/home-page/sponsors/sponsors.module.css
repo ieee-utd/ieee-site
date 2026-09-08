@@ -70,7 +70,7 @@
 }
 
 :global([data-theme="dark"]) .Client-item {
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(0.55);
 }
 
 /* Responsive Styles */
