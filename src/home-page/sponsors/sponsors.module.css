@@ -46,14 +46,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 1rem 1.5rem;
   box-sizing: border-box;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 :global([data-theme="dark"]) .carousel-item {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
 }
 
