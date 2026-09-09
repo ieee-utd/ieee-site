@@ -15,7 +15,9 @@ const TutoringPage = () => {
         <div className={styles.hero_content}>
           <p className={styles.eyebrow}>IEEE at UT Dallas</p>
           <h1 className={styles.hero_header}>Tutoring</h1>
-          <a className={styles.hero_cta} href="#courses">Explore available courses</a>
+          <a className={styles.hero_cta} href="#courses">
+            Explore available courses
+          </a>
         </div>
         <img
           className={styles.hero_img}
@@ -23,17 +25,21 @@ const TutoringPage = () => {
           alt="Tutoring Session"
         />
       </section>
-      <RevealOnScroll>
-        <section className={styles.title_container} data-nav-surface="light">
-          <CometField count={2} cycleSeconds={9} />
-          <p className={styles.section_label}>Your study space</p>
-          <h2 className={styles.title}>Find the tutoring room</h2>
-          <p className={styles.title_copy}>Come by ECSN 2.318 for help, study time, and a welcoming community of fellow engineers.</p>
-        </section>
-      </RevealOnScroll>
-      <RevealOnScroll>
-        <LocationSection />
-      </RevealOnScroll>
+      <section>
+        <RevealOnScroll>
+          <section className={styles.title_container} data-nav-surface="light">
+            <p className={styles.section_label}>Your study space</p>
+            <h2 className={styles.title}>Find the tutoring room</h2>
+            <p className={styles.title_copy}>
+              Come by ECSN 2.318 for help, study time, and a welcoming community
+              of fellow engineers.
+            </p>
+          </section>
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <LocationSection />
+        </RevealOnScroll>
+      </section>
       <RevealOnScroll>
         <CoursesSection />
       </RevealOnScroll>
@@ -43,7 +49,9 @@ const TutoringPage = () => {
           <div className={styles.calendar_heading}>
             <p className={styles.section_label}>Plan your visit</p>
             <h2>Tutoring hours this week</h2>
-            <p>Choose a time that works for you and stop by the tutoring room.</p>
+            <p>
+              Choose a time that works for you and stop by the tutoring room.
+            </p>
           </div>
           <Calendar
             config={{ startTime: "10:00", endTime: "18:30", rowHeight: 50 }}
@@ -53,6 +61,8 @@ const TutoringPage = () => {
       <RevealOnScroll>
         <BecomeTutor />
       </RevealOnScroll>
+                    <CometField count={10} cycleSeconds={2} />
+
     </div>
   );
 };
