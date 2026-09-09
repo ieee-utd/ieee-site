@@ -61,7 +61,7 @@ const officerData = [
             {
                 name: "Charlie Wang",
                 title: "Director of Outreach",
-                image: '/Officer_Photos/Charlie_Wang.jpg',
+                image: '/Officer_Photos/Charlie_Wang.JPG',
                 linkedin: 'https://www.linkedin.com/in/charlieewangg/',
                 email: 'dal282052@utdallas.edu',
             },
@@ -94,7 +94,7 @@ const officerData = [
             {
                 name: "Gauri Ippalli",
                 title: "Engineering Coordinator",
-                image: "/Officer_Photos/Gauri_Ippalli.jpg",
+                image: "/Officer_Photos/Gauri_Ippalli.JPG",
                 linkedin: 'https://www.linkedin.com/in/gauri-ippalli-6017902bb/',
                 email: 'dal530819@utdallas.edu',
             },
