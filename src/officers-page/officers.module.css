@@ -149,7 +149,7 @@
 }
 
 .member__container:hover .image_wrapper img {
-  transform: scale(1.6);
+  transform: scale(1.1);
 }
 .member__info {
   position: relative;
