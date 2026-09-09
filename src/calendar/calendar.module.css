@@ -1,282 +1,276 @@
 /* calendar.module.css */
 .schedule {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    min-height: 600px;
-    background: var(--surface-page);
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --day-col-min: 350px;
+  --day-col-count: 5;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  min-height: 600px;
+  background: var(--surface-page);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .timeline {
-    display: flex;
-    flex-direction: column;
-    padding-top: calc(var(--row-height) / 2);
-    background: linear-gradient(to right, var(--surface-page) 95%, rgba(255, 255, 255, 0));
-    border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--row-height) / 2);
+  background: linear-gradient(
+    to right,
+    var(--surface-page) 95%,
+    rgba(255, 255, 255, 0)
+  );
+  border-right: 1px solid var(--border-subtle);
 }
 
 .event {
-    position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
-    border-radius: 10px;
-    padding: 0.8rem;
-    cursor: pointer;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    outline: 2px solid var(--surface-page);
-    outline-offset: -2px;
-    transition: transform 0.2s;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  border-radius: 10px;
+  padding: 0.8rem;
+  cursor: pointer;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  outline: 2px solid var(--surface-page);
+  outline-offset: -2px;
+  transition: transform 0.2s;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .event:hover {
-    transform: scale(1.02);
-    z-index: 1;
-}
-
-
-.modalContent {
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 600px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+  z-index: 1;
 }
 
 /* Keep original styles for other elements */
 .timeSlot {
-    height: 50px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    padding-right: 0.5rem;
-    text-align: right;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: relative;
+  height: 50px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  padding-right: 0.5rem;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
 }
 
 .timeSlot::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-bottom: 1px solid var(--border-subtle);
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .daysWrapper {
-    position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    background: var(--surface-page);
-    z-index: 0;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: var(--surface-page);
+  z-index: 0;
 }
 
 .daysHeader {
-    display: none; /* Visible on mobile */
-    position: sticky;
-    top: 0;
-    background: var(--surface-page);
-    z-index: 2;
-    border-bottom: 1px solid var(--border-subtle);
-    white-space: nowrap;
-    position: relative;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+  display: none; /* Visible on mobile */
+  position: sticky;
+  top: 0;
+  background: var(--surface-page);
+  z-index: 2;
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .dayTab {
-    padding: 1rem;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--brand-blue);
-    font-family: 'Montserrat';
+  padding: 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--brand-blue);
+  font-family: "Montserrat";
 }
 
 .dayTab.active {
-    font-weight: bold;
-    color: var(--brand-blue);
-    border-bottom: 2px solid var(--brand-blue);
+  font-weight: bold;
+  color: var(--brand-blue);
+  border-bottom: 2px solid var(--brand-blue);
 }
 
 .daysGrid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(350px, 1fr)); /* Ensure each column has a minimum width */
-    position: relative;
-    background: var(--surface-page);
-    grid-template-rows: auto 1fr; /* First row for day headers, rest for columns */
+  display: grid;
+  grid-template-columns: repeat(var(--day-col-count), minmax(var(--day-col-min), 1fr));
+  position: relative;
+  background: var(--surface-page);
+  grid-template-rows: auto 1fr; /* First row for day headers, rest for columns */
 }
 
 .dayHeaderRow {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(350px, 1fr));
-    background: var(--surface-page);
-    border-bottom: none;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--day-col-count), minmax(var(--day-col-min), 1fr));
+  background: var(--surface-page);
+  border-bottom: none;
+  position: sticky;
+  top: 0;
 }
 
 .dayHeaderCell {
-    padding: 1rem 0.5rem;
-    text-align: center;
-    font-weight: 600;
-    color: var(--brand-blue);
-    font-size: 0.95rem;
-    border-left: 1px solid var(--brand-blue);
-    background-color: var(--surface-page);
+  padding: 1rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--brand-blue);
+  font-size: 0.95rem;
+  background-color: var(--surface-page);
 }
 
 .dayHeaderCell:first-child {
-    border-left: none;
+  border-left: none;
 }
 
 .dayColumn {
-    position: relative;
-    min-height: calc(var(--row-height) * 18);
-    padding: 0 0.5rem;
-    border-left: 1px solid var(--border-subtle);
+  position: relative;
+  min-height: calc(var(--row-height) * 18);
+  padding: 0 0.5rem;
+  border-left: 1px solid var(--border-subtle);
 }
 
 .dayColumn:first-child {
-    border-left: none; /* Remove border for the first column to align with timeline */
+  border-left: none; /* Remove border for the first column to align with timeline */
 }
 
 .eventTime {
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
-    font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
 }
 
 .eventTitle {
-    font-size: 0.9rem;
-    font-weight: bold;
-    word-wrap: break-word;
+  font-size: 0.9rem;
+  font-weight: bold;
+  word-wrap: break-word;
 }
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modalContent {
-    position: relative; /* Required for absolute positioning of .modalClose */
-    background: var(--surface-card);
-    padding: 2rem;
-    border-radius: 8px;
-    max-width: 600px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 2020;
-  }
 
-  .modalClose {
-    position: absolute;
-    top: 1rem; /* Distance from the top of the modal content */
-    right: 1rem; /* Distance from the right edge of the modal content */
-    border: none; /* Remove default button styling */
-    background: none; /* Ensure no background color */
-    font-size: 2rem; /* Size of the "×" symbol */
-    cursor: pointer; /* Pointer cursor for better UX */
-    color: var(--text-primary); /* Default color */
-    padding: 0; /* Remove padding */
-    line-height: 1; /* Align the "×" symbol properly */
-  }
-  
-  .modalClose:hover {
-    color: var(--brand-blue-strong); /* Change color on hover for better UX */
-  }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative; /* Required for absolute positioning of .modalClose */
+  background: var(--surface-card);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2020;
+}
+
+.modalClose {
+  position: absolute;
+  top: 1rem; /* Distance from the top of the modal content */
+  right: 1rem; /* Distance from the right edge of the modal content */
+  border: none; /* Remove default button styling */
+  background: none; /* Ensure no background color */
+  font-size: 2rem; /* Size of the "×" symbol */
+  cursor: pointer; /* Pointer cursor for better UX */
+  color: var(--text-primary); /* Default color */
+  padding: 0; /* Remove padding */
+  line-height: 1; /* Align the "×" symbol properly */
+}
+
+.modalClose:hover {
+  color: var(--brand-blue-strong); /* Change color on hover for better UX */
+}
+
 .gridLines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Make grid lines not interfere with events */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Make grid lines not interfere with events */
 }
 
 .gridLine {
-    position: absolute;
-    left: 0;
-    right: 0;
-    border-bottom: 1px solid var(--border-subtle);
-    width: 100%;
-    min-width: 1620px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  width: 100%;
+  min-width: calc(var(--day-col-count) * var(--day-col-min));
 }
 
-@media (max-width: 1620px) {
-    .schedule {
-        overflow-x: scroll; /* Enable horizontal scrolling */
-        overflow-y: hidden;
-    }
+@media (max-width: 1750px) {
+  .schedule {
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    overflow-y: hidden;
+  }
 }
 
 @media (max-width: 1000px) {
-    .daysGrid {
-        grid-template-columns: 1fr;
-    }
+  .daysGrid {
+    grid-template-columns: 1fr;
+  }
 
-    .dayHeaderRow {
-        grid-template-columns: 1fr;
-    }
+  .dayHeaderRow {
+    grid-template-columns: 1fr;
+  }
 
-    .dayColumn:not(.active) {
-        display: none;
-    }
+  .dayColumn:not(.active) {
+    display: none;
+  }
 
-    .timeline {
-        margin-top: 50px;
-    }
+  .daysHeader {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .daysHeader {
-        display: flex;
-        justify-content: space-between;
-    }
+  .schedule {
+    overflow-x: none; /* Enable horizontal scrolling */
+    overflow-y: auto;
+  }
 
-    .schedule {
-        overflow-x: none; /* Enable horizontal scrolling */
-        overflow-y: auto;
-    }
+  .dayLabel {
+    display: none;
+  }
 
-    .dayLabel {
-        display: none;
-    }
-
-    .dayHeaderRow {
-        display: none;
-    }
-    .gridLine {
-        width: 100%;
-        min-width: 0px;
-    }
+  .dayHeaderRow {
+    display: none;
+  }
+  .gridLine {
+    width: 100%;
+    min-width: 0px;
+  }
 }
 
 .dayLabel {
-    font-size: 1rem;
-    font-weight: bold;
-    text-align: center;
-    padding: 0.5rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1001;
-    color: rgb(247, 247, 247);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  color: rgb(247, 247, 247);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
