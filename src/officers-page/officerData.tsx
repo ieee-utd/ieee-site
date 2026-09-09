@@ -61,7 +61,7 @@ const officerData = [
             {
                 name: "Charlie Wang",
                 title: "Director of Outreach",
-                image: '/Officer_Photos/Charlie_Wang.JPG',
+                image: '/Officer_Photos/Charlie_Wang.jpg',
                 linkedin: 'https://www.linkedin.com/in/charlieewangg/',
                 email: 'dal282052@utdallas.edu',
             },
