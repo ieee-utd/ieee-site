@@ -94,7 +94,7 @@ const officerData = [
             {
                 name: "Gauri Ippalli",
                 title: "Engineering Coordinator",
-                image: "/Officer_Photos/Gauri_Ippalli.JPG",
+                image: "/Officer_Photos/Gauri_Ippalli.jpg",
                 linkedin: 'https://www.linkedin.com/in/gauri-ippalli-6017902bb/',
                 email: 'dal530819@utdallas.edu',
             },
