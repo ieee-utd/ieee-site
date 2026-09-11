@@ -7,11 +7,31 @@ import instagramLogo from "../assets/instagram-white-logo.png";
 
 export default function Footer() {
   const images = [
-    { src: discordLogo, alt: "Discord Logo", href: "https://discord.gg/8SXQe9pGu9"},
-    { src: facebookLogo, alt: "Facebook Logo", href: "https://www.facebook.com/IEEEUTD/"},
-    { src: linkedinLogo, alt: "LinkedIn Logo", href: "https://www.linkedin.com/company/ieee-utdallas/posts/?feedView=all"},
-    { src: youtubeLogo, alt: "YouTube Logo", href: "https://www.youtube.com/channel/UCvJGaNTtvCTX8kcpKVgo9rQ"},
-    { src: instagramLogo, alt: "Instagram Logo", href: "https://www.instagram.com/ieeeutd/"},
+    {
+      src: discordLogo,
+      alt: "Discord Logo",
+      href: "https://discord.gg/TZYaZKYYTx",
+    },
+    {
+      src: facebookLogo,
+      alt: "Facebook Logo",
+      href: "https://www.facebook.com/IEEEUTD/",
+    },
+    {
+      src: linkedinLogo,
+      alt: "LinkedIn Logo",
+      href: "https://www.linkedin.com/company/ieee-utdallas/posts/?feedView=all",
+    },
+    {
+      src: youtubeLogo,
+      alt: "YouTube Logo",
+      href: "https://www.youtube.com/channel/UCvJGaNTtvCTX8kcpKVgo9rQ",
+    },
+    {
+      src: instagramLogo,
+      alt: "Instagram Logo",
+      href: "https://www.instagram.com/ieeeutd/",
+    },
   ];
 
   /*
@@ -39,7 +59,6 @@ export default function Footer() {
   return (
     <footer>
       <div className={styles["footer"]}>
-
         <ul className={styles.ul}>
           {images.map((image, index) => (
             <li key={index}>

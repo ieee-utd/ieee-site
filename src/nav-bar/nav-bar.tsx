@@ -16,7 +16,7 @@ function NavBar() {
   // so it stays readable instead of white-on-white.
   useEffect(() => {
     const targets = Array.from(
-      document.querySelectorAll('[data-nav-surface="light"]')
+      document.querySelectorAll('[data-nav-surface="light"]'),
     );
     if (targets.length === 0) return;
 
@@ -32,7 +32,10 @@ function NavBar() {
         });
         setIsOverLightSection(intersecting.size > 0);
       },
-      { rootMargin: `-${NAV_DETECTION_OFFSET_PX}px 0px -100% 0px`, threshold: 0 }
+      {
+        rootMargin: `-${NAV_DETECTION_OFFSET_PX}px 0px -100% 0px`,
+        threshold: 0,
+      },
     );
 
     targets.forEach((el) => observer.observe(el));
@@ -77,7 +80,12 @@ function NavBar() {
                 </a>
               </li>
               <li>
-                <a className={styles.mobileLink} target="_blank" rel="noopener noreferrer" href="https://discord.gg/8SXQe9pGu9">
+                <a
+                  className={styles.mobileLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://discord.gg/TZYaZKYYTx"
+                >
                   Join
                 </a>
               </li>
@@ -135,7 +143,12 @@ function NavBar() {
               </a>
             </li>
             <li>
-              <a className={styles.link} target="_blank" rel="noopener noreferrer" href="https://discord.gg/8SXQe9pGu9">
+              <a
+                className={styles.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://discord.gg/TZYaZKYYTx"
+              >
                 Join
               </a>
             </li>

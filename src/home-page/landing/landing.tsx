@@ -41,12 +41,10 @@ const usePrefersReducedMotion = (): boolean => {
 const useTypewriter = (
   texts: string[],
   speed: number,
-  enabled: boolean
+  enabled: boolean,
 ): string => {
   const [textIndex, setTextIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState(
-    enabled ? "" : texts[0]
-  );
+  const [displayedText, setDisplayedText] = useState(enabled ? "" : texts[0]);
   const [index, setIndex] = useState(enabled ? 0 : texts[0].length);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -105,11 +103,7 @@ const Landing: React.FC = () => {
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const typewriterText = useTypewriter(
-    MOTTOS,
-    42,
-    !prefersReducedMotion
-  );
+  const typewriterText = useTypewriter(MOTTOS, 42, !prefersReducedMotion);
 
   useEffect(() => {
     if (paused || prefersReducedMotion) {
@@ -117,9 +111,7 @@ const Landing: React.FC = () => {
     }
 
     const interval = setInterval(() => {
-      setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % images.length
-      );
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -147,19 +139,11 @@ const Landing: React.FC = () => {
       <div className={Styles.overlay} />
 
       <div className={Styles.content}>
-        <img
-          className={Styles.brandMark}
-          src={ieeeLogo}
-          alt="IEEE"
-        />
+        <img className={Styles.brandMark} src={ieeeLogo} alt="IEEE" />
 
-        <p className={Styles.eyebrow}>
-          Student Branch · UT Dallas
-        </p>
+        <p className={Styles.eyebrow}>Student Branch · UT Dallas</p>
 
-        <h1 className={Styles.title}>
-          IEEE at UT Dallas
-        </h1>
+        <h1 className={Styles.title}>IEEE at UT Dallas</h1>
 
         <p className={Styles.subhead}>
           Institute of Electrical and Electronics Engineers
@@ -167,9 +151,7 @@ const Landing: React.FC = () => {
 
         <p className={Styles.motto} aria-live="polite">
           {typewriterText}
-          {!prefersReducedMotion && (
-            <span className={Styles.cursor} />
-          )}
+          {!prefersReducedMotion && <span className={Styles.cursor} />}
         </p>
 
         <div className={Styles.actions}>
@@ -178,7 +160,7 @@ const Landing: React.FC = () => {
           </a>
 
           <a
-            href="https://discord.gg/8SXQe9pGu9"
+            href="https://discord.gg/TZYaZKYYTx"
             className={Styles.secondaryBtn}
             target="_blank"
             rel="noreferrer"
@@ -186,21 +168,12 @@ const Landing: React.FC = () => {
             Join Discord
           </a>
         </div>
-
       </div>
 
-      <img
-        className={Styles.watermark}
-        src={UtdSeal}
-        alt=""
-      />
+      <img className={Styles.watermark} src={UtdSeal} alt="" />
 
       <div className={Styles.controls}>
-        <div
-          className={Styles.dots}
-          role="tablist"
-          aria-label="Hero photos"
-        >
+        <div className={Styles.dots} role="tablist" aria-label="Hero photos">
           {images.map((_, index) => (
             <button
               key={index}
@@ -209,9 +182,7 @@ const Landing: React.FC = () => {
               aria-selected={index === currentImageIndex}
               aria-label={`Show photo ${index + 1}`}
               className={`${Styles.dot} ${
-                index === currentImageIndex
-                  ? Styles.dotActive
-                  : ""
+                index === currentImageIndex ? Styles.dotActive : ""
               }`}
               onClick={() => setCurrentImageIndex(index)}
             />
