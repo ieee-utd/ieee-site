@@ -180,6 +180,8 @@
 .calendarSection {
   padding: 5.5rem clamp(1rem, 5vw, 4rem) 6rem;
   background: var(--brand-blue);
+  min-height: 100vh;
+  min-height: 100svh;
   box-sizing: border-box;
   scroll-snap-align: start;
 }
