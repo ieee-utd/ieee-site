@@ -143,13 +143,16 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  /* Set a baseline scale > 1 to zoom in (e.g., 1.25 for 25% zoom) */
-  transform: scale(1.25);
+  /* Set a baseline scale > 1 to zoom in (e.g., 1.25 for 25% zoom).
+     --photo-zoom lets an individual member override this (see Member's
+     imageZoom prop) without breaking the hover effect below. */
+  --photo-zoom: 1.25;
+  transform: scale(var(--photo-zoom));
   transition: transform 0.35s ease;
 }
 
 .member__container:hover .image_wrapper img {
-  transform: scale(1.1);
+  transform: scale(calc(var(--photo-zoom) - 0.15));
 }
 .member__info {
   position: relative;

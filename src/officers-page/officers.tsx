@@ -60,6 +60,7 @@ const Committees: React.FC = () => {
                 (member as { supervisors?: { label?: string; name: string }[] })
                   .supervisors
               }
+              imageZoom={(member as { imageZoom?: number }).imageZoom}
               key={member.name}
             />
           </FadeInSection>

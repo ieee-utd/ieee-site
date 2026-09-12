@@ -17,6 +17,8 @@ interface MemberProps {
   image?: string;
   showSupervisor?: boolean;
   supervisors?: Supervisor[];
+  /** Overrides the default headshot zoom (baseline 1.25) for this member. */
+  imageZoom?: number;
 }
 
 const MIN_FIT_FONT_SIZE_REM = 0.55;
@@ -53,6 +55,7 @@ export default function Member({
   image,
   showSupervisor = false,
   supervisors = [{ name: "Filler" }, { name: "Filler" }],
+  imageZoom,
 }: MemberProps) {
   const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
   
@@ -64,6 +67,11 @@ export default function Member({
             src={image}
             alt={`${name}, ${title}`}
             className={styles.member__image}
+            style={
+              imageZoom !== undefined
+                ? ({ "--photo-zoom": imageZoom } as React.CSSProperties)
+                : undefined
+            }
             onError={(e) => {
               // Swap to alternative imported placeholder image on error
               if (e.currentTarget.src !== blank) {
