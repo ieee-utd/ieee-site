@@ -49,6 +49,10 @@
   transform: scale(1);
 }
 
+.imageWrap {
+  position: relative;
+}
+
 .cardImage {
   display: block;
   width: 100%;
@@ -56,6 +60,20 @@
      visible instead of being cropped off by a fixed-height cover fit. */
   aspect-ratio: 1800 / 1010;
   object-fit: cover;
+}
+
+.locationBadge {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  color: white;
+  background: rgba(20, 22, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 99px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
 }
 
 .imagePlaceholder {

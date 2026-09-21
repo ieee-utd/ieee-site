@@ -94,11 +94,14 @@ function EventsCarousel() {
             }}
           >
             {(event as { image?: string }).image ? (
-              <img
-                className={styles.cardImage}
-                src={(event as { image?: string }).image}
-                alt={event.title}
-              />
+              <div className={styles.imageWrap}>
+                <img
+                  className={styles.cardImage}
+                  src={(event as { image?: string }).image}
+                  alt={event.title}
+                />
+                <span className={styles.locationBadge}>{event.location}</span>
+              </div>
             ) : (
               <div className={styles.imagePlaceholder} aria-label={event.imageLabel} role="img">
                 <span>{event.location}</span>
