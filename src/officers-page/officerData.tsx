@@ -74,11 +74,11 @@ const officerData = [
                 email: 'nxk230100@utdallas.edu',
             },
             {
-                name: "Deston Muo",
+                name: "Danish Ejaz",
                 title: "Director of Web Development",
-                image: '/Officer_Photos/Deston_Muo.png',
-                linkedin: 'https://www.linkedin.com/in/deston-muo/',
-                email: 'dkm220002@utdallas.edu',
+                image: "/Officer_Photos/Danish_Ejaz.jpg",
+                linkedin: 'https://www.linkedin.com/in/danishejaz1/',
+                email: 'dxe240002@utdallas.edu',
             },
         ]
     },
@@ -121,11 +121,11 @@ const officerData = [
                 email: 'dal336509@utdallas.edu',
             },
             {
-                name: "Danish Ejaz",
+                name: "Deston Muo",
                 title: "Web Development Coordinator",
-                image: "/Officer_Photos/Danish_Ejaz.jpg",
-                linkedin: 'https://www.linkedin.com/in/danishejaz1/',
-                email: 'dxe240002@utdallas.edu',
+                image: '/Officer_Photos/Deston_Muo.png',
+                linkedin: 'https://www.linkedin.com/in/deston-muo/',
+                email: 'dkm220002@utdallas.edu',
             },
         ]
     },
