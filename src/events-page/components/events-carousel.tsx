@@ -8,7 +8,7 @@ const upcomingEvents = [
     time: "Day, Time",
     description: "Brief description for Event 1 goes here.",
     imageLabel: "Placeholder Image 1",
-    location: "Location / Venue 1",
+    location: "JO 4.102",
     image: arduinoWorkshop,
   },
   {
