@@ -42,6 +42,10 @@
 
 .joinItem {
   position: relative;
+  /* Extra breathing room on both sides so the dropdown below it has room
+     to open without visually overlapping Societies or Sign In. */
+  margin-left: 4.5vw !important;
+  margin-right: 2rem;
 }
 
 .joinItem .link {
