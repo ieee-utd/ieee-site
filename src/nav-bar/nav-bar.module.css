@@ -40,6 +40,64 @@
   transition: all ease-in-out 250ms;
 }
 
+.joinItem {
+  position: relative;
+}
+
+.joinItem .link {
+  cursor: default;
+}
+
+.joinDropdown {
+  /* top:100% with no gap (spacing comes from padding-top instead) keeps the
+     hoverable area continuous between the trigger and the dropdown, so
+     moving the mouse down to it doesn't cross a dead zone that closes it. */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  display: flex !important;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 !important;
+  padding: 1.1rem .5rem .5rem !important;
+  transform: translateX(-50%) translateY(-6px);
+  background: rgba(20, 22, 26, 0.94);
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 10;
+}
+
+.joinDropdown li {
+  margin-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+.joinItem:hover .joinDropdown,
+.joinItem:focus-within .joinDropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.joinDropdownLink {
+  display: block;
+  white-space: nowrap;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: .5rem .9rem;
+  border-radius: 6px;
+  transition: background-color .15s ease;
+}
+
+.joinDropdownLink:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
 .link::before {
   content: '';
   position: absolute;

@@ -86,7 +86,19 @@ function NavBar() {
                   rel="noopener noreferrer"
                   href="https://discord.gg/TZYaZKYYTx"
                 >
-                  Join
+                  Discord
+                </a>
+              </li>
+              <li>
+                {/* TODO: replace with the real Committee link */}
+                <a className={styles.mobileLink} href="#">
+                  Committee
+                </a>
+              </li>
+              <li>
+                {/* TODO: replace with the real Projects link */}
+                <a className={styles.mobileLink} href="#">
+                  Projects
                 </a>
               </li>
               <li>
@@ -142,15 +154,34 @@ function NavBar() {
                 Societies
               </a>
             </li>
-            <li>
-              <a
-                className={styles.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://discord.gg/TZYaZKYYTx"
-              >
+            <li className={styles.joinItem}>
+              <span className={styles.link} tabIndex={0}>
                 Join
-              </a>
+              </span>
+              <ul className={styles.joinDropdown}>
+                <li>
+                  <a
+                    className={styles.joinDropdownLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://discord.gg/TZYaZKYYTx"
+                  >
+                    Discord
+                  </a>
+                </li>
+                <li>
+                  {/* TODO: replace with the real Committee link */}
+                  <a className={styles.joinDropdownLink} href="#">
+                    Committee
+                  </a>
+                </li>
+                <li>
+                  {/* TODO: replace with the real Projects link */}
+                  <a className={styles.joinDropdownLink} href="#">
+                    Projects
+                  </a>
+                </li>
+              </ul>
             </li>
             <li>
               {signedIn ? (
