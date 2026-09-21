@@ -58,7 +58,7 @@
   width: 100%;
   /* Matches the flyer's native ratio so its top/bottom border stays fully
      visible instead of being cropped off by a fixed-height cover fit. */
-  aspect-ratio: 1800 / 1010;
+  aspect-ratio: 1798 / 1010;
   object-fit: cover;
 }
 
