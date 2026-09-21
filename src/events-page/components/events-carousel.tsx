@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./events-carousel.module.css";
+import arduinoWorkshop from "../../assets/events/arduino-workshop.png";
 
 const upcomingEvents = [
   {
@@ -8,6 +9,7 @@ const upcomingEvents = [
     description: "Brief description for Event 1 goes here.",
     imageLabel: "Placeholder Image 1",
     location: "Location / Venue 1",
+    image: arduinoWorkshop,
   },
   {
     title: "Event Title 2",
@@ -91,10 +93,18 @@ function EventsCarousel() {
               cardRefs.current[index] = element;
             }}
           >
-            <div className={styles.imagePlaceholder} aria-label={event.imageLabel} role="img">
-              <span>{event.location}</span>
-              <p>{event.imageLabel}</p>
-            </div>
+            {(event as { image?: string }).image ? (
+              <img
+                className={styles.cardImage}
+                src={(event as { image?: string }).image}
+                alt={event.title}
+              />
+            ) : (
+              <div className={styles.imagePlaceholder} aria-label={event.imageLabel} role="img">
+                <span>{event.location}</span>
+                <p>{event.imageLabel}</p>
+              </div>
+            )}
             <div className={styles.cardBody}>
               <p className={styles.time}>{event.time}</p>
               <h3>{event.title}</h3>
