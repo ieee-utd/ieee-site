@@ -6,7 +6,7 @@ const upcomingEvents = [
   {
     title: "Microcontroller 101 Workshop",
     time: "September 28th, 6:00 – 8:30 PM",
-    description: "Brief description for Event 1 goes here.",
+    description: "Come learn to use an Arduino, breadboard, electrical components, and software to build and program your own circuits! NO EXPERIENCE NEEDED! Materials will be provided.",
     imageLabel: "Placeholder Image 1",
     location: "JO 4.102",
     image: arduinoWorkshop,
