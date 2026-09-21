@@ -5,7 +5,7 @@ import arduinoWorkshop from "../../assets/events/arduino-workshop.png";
 const upcomingEvents = [
   {
     title: "Microcontroller 101 Workshop",
-    time: "Day, Time",
+    time: "Monday, September 28th, 6:00 – 8:30 PM",
     description: "Brief description for Event 1 goes here.",
     imageLabel: "Placeholder Image 1",
     location: "JO 4.102",
