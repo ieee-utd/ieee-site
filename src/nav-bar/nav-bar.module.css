@@ -42,10 +42,19 @@
 
 .joinItem {
   position: relative;
-  /* Extra breathing room on both sides so the dropdown below it has room
-     to open without visually overlapping Societies or Sign In. */
+  /* Normal nav spacing at rest; the gap only widens on hover/focus so the
+     dropdown has room without overlapping Societies or Sign In. */
+  margin-right: 0;
+  transition: margin .25s ease, transform .25s ease;
+}
+
+.joinItem:hover,
+.joinItem:focus-within {
   margin-left: 4.5vw !important;
   margin-right: 2rem;
+  /* Widening margin-right would slide Join left out from under the cursor;
+     shifting it back keeps it in place while the items to its left move. */
+  transform: translateX(2rem);
 }
 
 .joinItem .link {
