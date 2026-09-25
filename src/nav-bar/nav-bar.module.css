@@ -50,10 +50,10 @@
 
 .joinItem:hover,
 .joinItem:focus-within {
-  margin-left: calc(2.6vw + 0.75rem) !important;
   margin-right: 1.5rem;
-  /* Widening margin-right slides Join left; shifting it back by half keeps
-     most of it under the cursor while still opening a gap toward Sign In. */
+  /* Widening margin-right slides Join left, so the shift below halves that:
+     Join ends up 0.75rem farther from Sign In and 0.75rem farther from
+     Societies (which moves the full 1.5rem), keeping both gaps equal. */
   transform: translateX(0.75rem);
 }
 
