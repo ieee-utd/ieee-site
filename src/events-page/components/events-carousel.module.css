@@ -131,6 +131,12 @@
   line-height: 1.65;
 }
 
+.rsvp {
+  display: block;
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
 @media (max-width: 600px) {
   .carousel {
     gap: 0.9rem;
