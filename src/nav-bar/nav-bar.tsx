@@ -84,21 +84,9 @@ function NavBar() {
                   className={styles.mobileLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://discord.gg/TZYaZKYYTx"
+                  href="https://linktr.ee/ieeeutdallas"
                 >
-                  Discord
-                </a>
-              </li>
-              <li>
-                {/* TODO: replace with the real Committee link */}
-                <a className={styles.mobileLink} href="#">
-                  Committee
-                </a>
-              </li>
-              <li>
-                {/* TODO: replace with the real Projects link */}
-                <a className={styles.mobileLink} href="#">
-                  Projects
+                  Join
                 </a>
               </li>
               <li>
@@ -154,34 +142,15 @@ function NavBar() {
                 Societies
               </a>
             </li>
-            <li className={styles.joinItem}>
-              <span className={styles.link} tabIndex={0}>
+            <li>
+              <a
+                className={styles.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://linktr.ee/ieeeutdallas"
+              >
                 Join
-              </span>
-              <ul className={styles.joinDropdown}>
-                <li>
-                  <a
-                    className={styles.joinDropdownLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://discord.gg/TZYaZKYYTx"
-                  >
-                    Discord
-                  </a>
-                </li>
-                <li>
-                  {/* TODO: replace with the real Committee link */}
-                  <a className={styles.joinDropdownLink} href="#">
-                    Committee
-                  </a>
-                </li>
-                <li>
-                  {/* TODO: replace with the real Projects link */}
-                  <a className={styles.joinDropdownLink} href="#">
-                    Projects
-                  </a>
-                </li>
-              </ul>
+              </a>
             </li>
             <li>
               {signedIn ? (
