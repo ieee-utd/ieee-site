@@ -7,6 +7,7 @@ const upcomingEvents = [
     title: "Microcontroller 101 Workshop",
     time: "September 28th, 6:00 – 8:30 PM",
     description: "Come learn to use an Arduino, breadboard, electrical components, and software to build and program your own circuits! NO EXPERIENCE NEEDED! Materials will be provided.",
+    rsvpUrl: "https://forms.gle/Sut6rx9Fc1QGtmwP8",
     imageLabel: "Placeholder Image 1",
     location: "JO 4.102",
     image: arduinoWorkshop,
@@ -111,7 +112,15 @@ function EventsCarousel() {
             <div className={styles.cardBody}>
               <p className={styles.time}>{event.time}</p>
               <h3>{event.title}</h3>
-              <p className={styles.description}>{event.description}</p>
+              <p className={styles.description}>
+                {event.description}
+                {event.rsvpUrl && (
+                  <>
+                    <br />
+                    <a href={event.rsvpUrl}>RSVP here: {event.rsvpUrl}</a>
+                  </>
+                )}
+              </p>
             </div>
           </article>
         ))}
