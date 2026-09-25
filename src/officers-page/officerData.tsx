@@ -78,7 +78,7 @@ const officerData = [
                 title: "Director of Web Development",
                 image: "/Officer_Photos/Danish_Ejaz.jpg",
                 imagePosition: "50% 0%",
-                imageZoom: 1.0,
+                imageZoom: 1.12,
                 linkedin: 'https://www.linkedin.com/in/danishejaz1/',
                 email: 'dxe240002@utdallas.edu',
             },
