@@ -18,7 +18,7 @@ export interface Pose {
 export const FOV = 35;
 /** How much of the map the opening shot fills; <1 keeps the map's edge out of frame. */
 export const START_FILL = 0.84;
-export const LOOP_SECONDS = 40;
+export const LOOP_SECONDS = 28;
 const EYE = FLOOR_Y + 0.038;
 
 export const ROOM_CX = planX(622);
@@ -54,8 +54,7 @@ export function cameraPath(fitY: number): Key[] {
     { t: 0.31, pos: [ex + 0.35, 2.1, ez + 1.45], look: [ex, 0.12, ez], fov: FOV },
     { t: 0.4, pos: [ROOM_CX - 0.3, 1.0, ROOM_CZ + 0.95], look: [ROOM_CX, 0.09, ROOM_CZ], fov: 38 },
     { t: 0.48, pos: [ROOM_CX + 0.6, 0.42, ROOM_CZ + 0.62], look: [ROOM_CX - 0.05, 0.09, ROOM_CZ + 0.03], fov: 44 },
-    // Drop into the hallway in front of the left doorway. Coming from above rather
-    // than along the hallway keeps the camera clear of the two open door leaves.
+    // Drop into the hallway in front of the left doorway.
     { t: 0.55, pos: pl(584, 452, FLOOR_Y + 0.13), look: pl(584, 410, EYE), fov: 50 },
     { t: 0.62, pos: pl(583, 438, EYE), look: pl(584, 395, EYE - 0.004), fov: 56 },
     { t: 0.68, pos: pl(583, 420, EYE), look: pl(590, 372, EYE - 0.006), fov: 58 },

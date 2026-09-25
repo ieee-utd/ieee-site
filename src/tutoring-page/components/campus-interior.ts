@@ -460,7 +460,7 @@ export function buildInterior(
   const north = RM.y0 + 2;
   const south = RM.y1 - 2;
 
-  // south wall: two doorways with a wall stub between them, doors swing outward
+  // south wall: two open doorways with a wall stub between them
   {
     const seg = (a: number, b: number) =>
       box(planX(b) - planX(a), WALL_H, tk, (planX(a) + planX(b)) / 2, FLOOR_Y + WALL_H / 2, rz1, wallMat);
@@ -478,28 +478,6 @@ export function buildInterior(
     );
     const doorSign = track(canvasTex(THREE, signCanvas("door"), aniso));
     plane(0.052, 0.0195, doorSign, planX(DOORWAYS[1][1] + 26), FLOOR_Y + WALL_H * 0.62, rz1 + 0.0035);
-    // glass leaves, hinged on the outer jambs and swung open into the hallway
-    [
-      { hinge: DOORWAYS[0][0], width: DOORWAYS[0][1] - DOORWAYS[0][0], dir: 1 },
-      { hinge: DOORWAYS[1][1], width: DOORWAYS[1][1] - DOORWAYS[1][0], dir: -1 },
-    ].forEach(({ hinge: hx, width, dir }) => {
-      const hinge = new THREE.Group();
-      hinge.position.set(planX(hx), FLOOR_Y, rz1);
-      hinge.rotation.y = -dir * 1.45;
-      const leafW = planLen(width);
-      const lm = new THREE.Mesh(track(new THREE.BoxGeometry(leafW, WALL_H * 0.78, 0.0012)), glassMat);
-      lm.position.set((dir * leafW) / 2, (WALL_H * 0.78) / 2, 0);
-      hinge.add(lm);
-      [0, 1].forEach((k) => {
-        const fr = new THREE.Mesh(track(new THREE.BoxGeometry(0.0014, WALL_H * 0.78, 0.0012)), steel);
-        fr.position.set(dir * (k ? leafW : 0), (WALL_H * 0.78) / 2, 0);
-        hinge.add(fr);
-      });
-      const bar = new THREE.Mesh(track(new THREE.BoxGeometry(leafW, 0.0014, 0.0012)), steel);
-      bar.position.set((dir * leafW) / 2, WALL_H * 0.78, 0);
-      hinge.add(bar);
-      group.add(hinge);
-    });
   }
 
   // east wall + posters
