@@ -117,7 +117,7 @@ function EventsCarousel() {
                 {event.rsvpUrl && (
                   <>
                     <br />
-                    <a href={event.rsvpUrl}>RSVP here: {event.rsvpUrl}</a>
+                    RSVP here: <a href={event.rsvpUrl}>{event.rsvpUrl}</a>
                   </>
                 )}
               </p>
