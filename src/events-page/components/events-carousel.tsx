@@ -13,25 +13,11 @@ const upcomingEvents = [
     image: arduinoWorkshop,
   },
   {
-    title: "Event Title 2",
+    title: "More Events Coming Soon",
     time: "Day, Time",
-    description: "Brief description for Event 2 goes here.",
+    description: "We’ve got something great in the works for you, stay tuned!",
     imageLabel: "Placeholder Image 2",
-    location: "Location / Venue 2",
-  },
-  {
-    title: "Event Title 3",
-    time: "Day, Time",
-    description: "Brief description for Event 3 goes here.",
-    imageLabel: "Placeholder Image 3",
-    location: "Location / Venue 3",
-  },
-  {
-    title: "Event Title 4",
-    time: "Day, Time",
-    description: "Brief description for Event 4 goes here.",
-    imageLabel: "Placeholder Image 4",
-    location: "Location / Venue 4",
+    location: "coming Soon",
   },
 ];
 
