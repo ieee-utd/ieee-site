@@ -50,11 +50,11 @@
 
 .joinItem:hover,
 .joinItem:focus-within {
-  margin-left: 4.5vw !important;
-  margin-right: 2rem;
-  /* Widening margin-right would slide Join left out from under the cursor;
-     shifting it back keeps it in place while the items to its left move. */
-  transform: translateX(2rem);
+  margin-left: calc(2.6vw + 0.75rem) !important;
+  margin-right: 1.5rem;
+  /* Widening margin-right slides Join left; shifting it back by half keeps
+     most of it under the cursor while still opening a gap toward Sign In. */
+  transform: translateX(0.75rem);
 }
 
 .joinItem .link {
