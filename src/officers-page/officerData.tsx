@@ -77,6 +77,7 @@ const officerData = [
                 name: "Danish Ejaz",
                 title: "Director of Web Development",
                 image: "/Officer_Photos/Danish_Ejaz.jpg",
+                imagePosition: "50% 25%",
                 linkedin: 'https://www.linkedin.com/in/danishejaz1/',
                 email: 'dxe240002@utdallas.edu',
             },
