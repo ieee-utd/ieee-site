@@ -70,7 +70,7 @@ const officerData = [
                 name: "Nana Kakeue",
                 title: "Director of Tutoring",
                 image: '/Officer_Photos/Nana_Kakeue.jpg',
-                imageZoom: 1.0,
+                imageZoom: 1.2,
                 linkedin: 'https://www.linkedin.com/in/nana-kakeue-5ba701334/',
                 email: 'nxk230100@utdallas.edu',
             },
