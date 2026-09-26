@@ -92,6 +92,8 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* dense: while a card is open and spans the row, the next card fills the space beside its neighbour */
+  grid-auto-flow: row dense;
   gap: 1.25rem;
 }
 
@@ -145,11 +147,12 @@
   line-height: 1.6;
 }
 
-/* Button */
+/* Learn more */
 
-.viewButton {
-  margin-top: auto;
-  padding: 0.7rem 1rem;
+.learnButton {
+  margin-top: 1.25rem;
+  align-self: flex-start;
+  padding: 0.65rem 1.1rem;
   border: none;
   border-radius: 0.7rem;
   background: var(--brand-blue-strong);
@@ -160,17 +163,202 @@
   transition: background 0.2s, transform 0.2s;
 }
 
-.viewButton:hover {
+.learnButton:hover {
   background: var(--brand-blue-hover);
 }
 
-.viewButton:active {
+.learnButton:active {
   transform: scale(0.98);
 }
 
 .arrow {
+  display: inline-block;
   margin-left: 0.5rem;
   font-size: 1rem;
+  transition: transform 0.35s ease;
+}
+
+/* The arrow turns to point down while the section is open. */
+.societyCardOpen .arrow {
+  transform: rotate(90deg);
+}
+
+/* An open card takes the full row and gets an orange accent; the panel below it
+   unfolds by animating its grid row from 0fr to 1fr, which needs no fixed height, so
+   it opens smoothly however much content it holds. */
+.societyCardOpen {
+  grid-column: 1 / -1;
+  box-shadow:
+    0 0 0 2px var(--brand-orange-alt),
+    0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+.detailsWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.societyCardOpen .detailsWrap {
+  grid-template-rows: 1fr;
+}
+
+.details {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.detailsInner {
+  padding-top: 1.5rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle-alt);
+}
+
+/* Each block fades and rises in one after another once the panel is open. */
+.detailsInner > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.societyCardOpen .detailsInner > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.societyCardOpen .detailsInner > *:nth-child(1) { transition-delay: 0.12s; }
+.societyCardOpen .detailsInner > *:nth-child(2) { transition-delay: 0.19s; }
+.societyCardOpen .detailsInner > *:nth-child(3) { transition-delay: 0.26s; }
+.societyCardOpen .detailsInner > *:nth-child(4) { transition-delay: 0.33s; }
+.societyCardOpen .detailsInner > *:nth-child(5) { transition-delay: 0.4s; }
+.societyCardOpen .detailsInner > *:nth-child(6) { transition-delay: 0.47s; }
+.societyCardOpen .detailsInner > *:nth-child(7) { transition-delay: 0.54s; }
+
+.detailsAbout {
+  margin: 0 0 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  padding: 0.9rem 0.5rem;
+  border-radius: 0.8rem;
+  background: var(--surface-muted);
+  text-align: center;
+}
+
+.statValue {
+  display: block;
+  color: var(--brand-orange);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.statLabel {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.detailsHeading {
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  padding: 1rem;
+  border: 1px solid var(--border-card);
+  border-radius: 0.8rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.highlight:hover {
+  transform: translateY(-2px);
+  border-color: var(--brand-orange-alt);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.highlight h4 {
+  margin: 0 0 0.35rem;
+  color: var(--brand-blue-strong);
+  font-size: 0.9rem;
+}
+
+.highlight p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.upcoming {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.upcoming li {
+  position: relative;
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  border-bottom: 1px solid var(--border-subtle-alt);
+  color: var(--text-secondary-alt);
+  font-size: 0.9rem;
+}
+
+.upcoming li::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: -0.25rem;
+  border-radius: 50%;
+  background: var(--brand-orange-alt);
+}
+
+.joinButton {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border-radius: 0.7rem;
+  background: var(--brand-orange-alt);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.joinButton:hover {
+  background: var(--brand-orange-strong);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detailsWrap,
+  .arrow,
+  .detailsInner > * {
+    transition: none;
+  }
 }
 
 /* No results */
@@ -220,5 +408,10 @@
 
   .societyCard {
     min-height: 220px;
+  }
+
+  .stats,
+  .highlights {
+    grid-template-columns: 1fr;
   }
 }

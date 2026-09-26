@@ -41,8 +41,30 @@ const societies: Society[] = [
   },
 ];
 
+/**
+ * Placeholder "learn more" content, shared by every society for now. Replace the
+ * text (or give each society its own copy in the `societies` list) once the real
+ * details are ready; the layout will hold whatever length you drop in.
+ */
+const PLACEHOLDER = {
+  about:
+    "A longer description of this society goes here: what it is, who it is for, and what members get out of being part of it. This is placeholder text.",
+  stats: [
+    { value: "—", label: "Members" },
+    { value: "—", label: "Events a year" },
+    { value: "—", label: "Projects" },
+  ],
+  highlights: [
+    { title: "Workshops", text: "Hands-on sessions run by members and industry guests." },
+    { title: "Projects", text: "Build something real with a team, from idea to demo." },
+    { title: "Community", text: "Meet people who share your interests and goals." },
+  ],
+  upcoming: ["Upcoming event one", "Upcoming event two", "Upcoming event three"],
+};
+
 export default function Societies() {
   const [search, setSearch] = useState("");
+  const [openSociety, setOpenSociety] = useState<string | null>(null);
 
   // The site snaps scrolling to sections (see index.css), but this page is one
   // continuous list with no sections. Its only snap point is the footer, which sits
@@ -100,7 +122,13 @@ export default function Societies() {
         <div className={styles.results}>
           {filteredSocieties.length > 0 ? (
             filteredSocieties.map((society) => (
-              <div className={styles.societyCard} key={society.name}>
+              <div
+                className={`${styles.societyCard} ${
+                  openSociety === society.name ? styles.societyCardOpen : ""
+                }`}
+                key={society.name}
+                data-society-card
+              >
                 <div className={styles.cardTop}>
                   <span className={styles.category}>
                     {society.category}
@@ -113,10 +141,76 @@ export default function Societies() {
                   {society.description}
                 </p>
 
-                {/* <button className={styles.viewButton}>
-                  View Society
-                  <span className={styles.arrow}>→</span>
-                </button>*/}
+                <button
+                  type="button"
+                  className={styles.learnButton}
+                  aria-expanded={openSociety === society.name}
+                  aria-controls={`society-${society.category}`}
+                  onClick={(e) => {
+                    const opening = openSociety !== society.name;
+                    setOpenSociety(opening ? society.name : null);
+                    if (opening) {
+                      // Bring the card to the top once the row has re-flowed.
+                      const card = e.currentTarget.closest("[data-society-card]");
+                      window.setTimeout(() => {
+                        if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+                      }, 60);
+                    }
+                  }}
+                >
+                  {openSociety === society.name ? "Show less" : "Learn more"}
+                  <span className={styles.arrow} aria-hidden="true">
+                    →
+                  </span>
+                </button>
+
+                <div
+                  className={styles.detailsWrap}
+                  id={`society-${society.category}`}
+                  aria-hidden={openSociety !== society.name}
+                >
+                  <div className={styles.details}>
+                    <div className={styles.detailsInner}>
+                      <p className={styles.detailsAbout}>{PLACEHOLDER.about}</p>
+
+                      <div className={styles.stats}>
+                        {PLACEHOLDER.stats.map((stat) => (
+                          <div className={styles.stat} key={stat.label}>
+                            <span className={styles.statValue}>{stat.value}</span>
+                            <span className={styles.statLabel}>{stat.label}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <h3 className={styles.detailsHeading}>What you can do</h3>
+                      <div className={styles.highlights}>
+                        {PLACEHOLDER.highlights.map((item) => (
+                          <div className={styles.highlight} key={item.title}>
+                            <h4>{item.title}</h4>
+                            <p>{item.text}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      <h3 className={styles.detailsHeading}>Coming up</h3>
+                      <ul className={styles.upcoming}>
+                        {PLACEHOLDER.upcoming.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+
+                      <a
+                        className={styles.joinButton}
+                        href="https://linktr.ee/ieeeutdallas"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        tabIndex={openSociety === society.name ? 0 : -1}
+                      >
+                        Join this society
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))
           ) : (
