@@ -97,21 +97,23 @@ function EventsCarousel() {
             )}
             <div className={styles.cardBody}>
               <p className={styles.time}>{event.time}</p>
-              <h3>{event.title}</h3>
+              <div className={styles.titleRow}>
+                <h3>{event.title}</h3>
+                {event.rsvpUrl && (
+                  <a
+                    className={styles.rsvpButton}
+                    href={event.rsvpUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    RSVP
+                    <span className={styles.rsvpArrow} aria-hidden="true">
+                      →
+                    </span>
+                  </a>
+                )}
+              </div>
               <p className={styles.description}>{event.description}</p>
-              {event.rsvpUrl && (
-                <a
-                  className={styles.rsvpButton}
-                  href={event.rsvpUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  RSVP
-                  <span className={styles.rsvpArrow} aria-hidden="true">
-                    →
-                  </span>
-                </a>
-              )}
             </div>
           </article>
         ))}

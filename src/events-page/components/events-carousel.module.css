@@ -131,14 +131,24 @@
   line-height: 1.65;
 }
 
+/* The title and the RSVP button share a row: the title takes the space, the button
+   stays compact on the right, level with the first line of the title. */
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
 .rsvpButton {
+  flex: none;
   display: inline-block;
-  margin-top: 1rem;
-  padding: 0.6rem 1.25rem;
+  margin-top: 0.15rem;
+  padding: 0.38rem 0.85rem;
   border-radius: 999px;
   background: var(--brand-orange);
   color: #ffffff;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 750;
   letter-spacing: 0.04em;
   text-decoration: none;
