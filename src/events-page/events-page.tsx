@@ -1,7 +1,6 @@
 import eventImage from "../assets/gridimages/events.jpg";
 import EventsCarousel from "./components/events-carousel";
 import RevealOnScroll from "../shared/reveal-on-scroll";
-import CometField from "../shared/comet-field";
 import styles from "./events-page.module.css";
 
 const eventHighlights = [
@@ -46,7 +45,6 @@ function EventsPage() {
 
       <RevealOnScroll>
         <section className={styles.introScene} data-nav-surface="light">
-          <CometField count={2} cycleSeconds={9} />
           <div className={styles.intro}>
             <div>
               <p className={styles.sectionLabel}>More than a meeting</p>

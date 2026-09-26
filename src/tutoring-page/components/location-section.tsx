@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import styles from "./location-section.module.css";
 import utdMap from "../../assets/gridimages/utdmap-clean.png";
 import escnMap from "../../assets/gridimages/escnmap-clean.png";
-import CometField from "../../shared/comet-field";
 
 // three.js is only pulled down once the map scrolls into view.
 const CampusScene = lazy(() => import("./campus-scene"));
@@ -64,7 +63,6 @@ const LocationSection = () => {
   if (still) {
     return (
       <section className={styles.location_section} data-nav-surface="light">
-        <CometField count={2} cycleSeconds={10} />
         <div className={styles.location_heading}>
           <p>Where to find us</p>
           <h2>ECSN 2.318</h2>
