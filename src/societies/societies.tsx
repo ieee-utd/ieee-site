@@ -12,10 +12,22 @@ interface BlogPost {
   url?: string;
 }
 
+/** A titled paragraph in a society's expanded "Learn more" section. */
+interface AboutSection {
+  heading: string;
+  text: string;
+}
+
 interface Society {
   name: string;
+  /** Short blurb shown on the card, and searched. */
   description: string;
   category: string;
+  /**
+   * The full write-up shown when the card is opened. Leave it out and the shared
+   * placeholder paragraph is used instead.
+   */
+  about?: AboutSection[];
   /**
    * The society's monthly blog, newest first. Leave empty until the first post is
    * written; the card then shows a "coming soon" placeholder in its place.
@@ -53,6 +65,20 @@ const societies: Society[] = [
     description:
       "Discover artificial intelligence, machine learning, computational intelligence, and intelligent systems.",
     category: "Computer Intelligence",
+    about: [
+      {
+        heading: "What it is",
+        text: "CIS is a technical community within IEEE UTD focused on AI, software, and intelligent hardware systems. We create opportunities for students to take what they learn in the classroom and apply it through hands-on projects, workshops, and technical events.",
+      },
+      {
+        heading: "Who it is for",
+        text: "CIS is for students who are interested in AI, software development, embedded systems, hardware, or simply want to explore these areas. No prior experience is required. Whether someone is completely new or already has technical experience, they can find opportunities to learn, contribute, and grow.",
+      },
+      {
+        heading: "What members get out of it",
+        text: "Members get the chance to build real projects from start to finish, strengthen their technical and problem-solving skills, and gain experience working as part of a team. They can build projects for their resume, have meaningful experiences to talk about in interviews, learn from other students, and connect with a community of people who share similar technical interests.",
+      },
+    ],
     blogPosts: [],
   },
   {
@@ -201,7 +227,18 @@ export default function Societies() {
                 >
                   <div className={styles.details}>
                     <div className={styles.detailsInner}>
-                      <p className={styles.detailsAbout}>{PLACEHOLDER.about}</p>
+                      {society.about ? (
+                        <div className={styles.aboutSections}>
+                          {society.about.map((section) => (
+                            <div key={section.heading}>
+                              <h3 className={styles.aboutHeading}>{section.heading}</h3>
+                              <p className={styles.detailsAbout}>{section.text}</p>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className={styles.detailsAbout}>{PLACEHOLDER.about}</p>
+                      )}
 
                       <div className={styles.stats}>
                         {PLACEHOLDER.stats.map((stat) => (

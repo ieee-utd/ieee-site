@@ -243,6 +243,27 @@
   line-height: 1.7;
 }
 
+.aboutSections {
+  margin-bottom: 1.5rem;
+}
+
+.aboutHeading {
+  margin: 0 0 0.35rem;
+  color: var(--brand-orange);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aboutSections .detailsAbout {
+  margin-bottom: 1.1rem;
+}
+
+.aboutSections > div:last-child .detailsAbout {
+  margin-bottom: 0;
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
