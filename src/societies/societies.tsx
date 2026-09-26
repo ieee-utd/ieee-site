@@ -205,7 +205,7 @@ export default function Societies() {
 
                 <button
                   type="button"
-                  className={styles.learnButton}
+                  className={`${styles.learnButton} flow-blue`}
                   aria-expanded={openSociety === society.name}
                   aria-controls={`society-${society.category}`}
                   onClick={(e) => {
@@ -315,7 +315,7 @@ export default function Societies() {
                       </ul>
 
                       <a
-                        className={styles.joinButton}
+                        className={`${styles.joinButton} flow-orange`}
                         href="https://linktr.ee/ieeeutdallas"
                         target="_blank"
                         rel="noopener noreferrer"

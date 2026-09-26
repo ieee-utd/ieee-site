@@ -230,7 +230,7 @@ export default function Branch() {
 
                 <button
                   type="button"
-                  className={styles.learnButton}
+                  className={`${styles.learnButton} flow-orange`}
                   aria-expanded={openTeam === team.name}
                   aria-controls={`team-${team.category}`}
                   onClick={(e) => {
@@ -340,7 +340,7 @@ export default function Branch() {
                       </ul>
 
                       <a
-                        className={styles.joinButton}
+                        className={`${styles.joinButton} flow-orange`}
                         href="https://linktr.ee/ieeeutdallas"
                         target="_blank"
                         rel="noopener noreferrer"

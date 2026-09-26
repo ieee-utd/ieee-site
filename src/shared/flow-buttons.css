@@ -1,0 +1,61 @@
+/*
+ * Hover "flow" for solid buttons: while the pointer is over the button, a soft lighter
+ * band of the button's own colour glides across it, endlessly. The gradient is one tile
+ * that starts and ends fully transparent, repeated, and the animation shifts it by exactly
+ * one tile per loop, so there is no gap and no seam.
+ *
+ * Add `flow-orange` to an orange button or `flow-blue` to a blue one, next to its usual
+ * class. The band is a translucent overlay, so it sits on top of whatever the button's own
+ * hover colour is, and the label stays put.
+ */
+
+.flow-orange {
+  --flow-band: linear-gradient(
+    100deg,
+    rgba(255, 190, 130, 0) 0%,
+    rgba(255, 190, 130, 0.1) 14%,
+    rgba(255, 196, 140, 0.32) 32%,
+    rgba(255, 206, 152, 0.5) 50%,
+    rgba(255, 196, 140, 0.32) 68%,
+    rgba(255, 190, 130, 0.1) 86%,
+    rgba(255, 190, 130, 0) 100%
+  );
+}
+
+.flow-blue {
+  --flow-band: linear-gradient(
+    100deg,
+    rgba(150, 205, 255, 0) 0%,
+    rgba(150, 205, 255, 0.1) 14%,
+    rgba(150, 205, 255, 0.3) 32%,
+    rgba(170, 215, 255, 0.5) 50%,
+    rgba(150, 205, 255, 0.3) 68%,
+    rgba(150, 205, 255, 0.1) 86%,
+    rgba(150, 205, 255, 0) 100%
+  );
+}
+
+.flow-orange:hover:not(:disabled),
+.flow-blue:hover:not(:disabled) {
+  /* !important so it also wins over a button's own `background:` shorthand on hover */
+  background-image: var(--flow-band) !important;
+  background-size: 200% 100% !important;
+  background-repeat: repeat-x !important;
+  animation: flow-button-shift 3.2s linear infinite;
+}
+
+@keyframes flow-button-shift {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-orange:hover,
+  .flow-blue:hover {
+    animation: none;
+  }
+}

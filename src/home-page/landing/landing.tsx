@@ -155,7 +155,7 @@ const Landing: React.FC = () => {
         </p>
 
         <div className={Styles.actions}>
-          <a href="#who-we-are" className={Styles.primaryBtn}>
+          <a href="#who-we-are" className={`${Styles.primaryBtn} flow-orange`}>
             Find out more
           </a>
 

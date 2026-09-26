@@ -105,7 +105,7 @@ export default function SignIn() {
             />
 
             <button
-              className={styles.primaryBtn}
+              className={`${styles.primaryBtn} flow-blue`}
               disabled={isLoading}
               onClick={handleSubmit}
             >

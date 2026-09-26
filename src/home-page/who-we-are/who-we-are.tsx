@@ -58,7 +58,7 @@ const WhoWeAre = () => {
               ))}
             </ul>
             <a href="#what-we-do" className={styles.learnMoreButton}>
-              See what we do
+              <span className={styles.learnMoreText}>See what we do</span>
             </a>
           </div>
 

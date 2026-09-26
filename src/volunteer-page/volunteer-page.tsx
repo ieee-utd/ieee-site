@@ -126,7 +126,7 @@ const formatSessionString = (
       <h1 className={styles.title}>Volunteer Hours Tracker</h1>
 
       <button
-        className={styles.addBtn}
+        className={`${styles.addBtn} flow-blue`}
         onClick={() => setShowForm(!showForm)}
       >
         {showForm ? "Cancel" : "Add Session"}

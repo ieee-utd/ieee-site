@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./index.css";
+import "./shared/flow-buttons.css";
 
 import NavBar from "./nav-bar/nav-bar";
 import Footer from "./footer/footer";

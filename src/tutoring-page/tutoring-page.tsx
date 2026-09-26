@@ -14,7 +14,7 @@ const TutoringPage = () => {
         <div className={styles.hero_content}>
           <p className={styles.eyebrow}>IEEE at UT Dallas</p>
           <h1 className={styles.hero_header}>Tutoring</h1>
-          <a className={styles.hero_cta} href="#courses">
+          <a className={`${styles.hero_cta} flow-orange`} href="#courses">
             Explore available courses
           </a>
         </div>

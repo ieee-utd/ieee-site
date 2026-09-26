@@ -105,10 +105,52 @@
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.learnMoreButton:hover {
-  background-color: #fff4ea;
-  transform: translateY(-1px);
+/* On hover the button's colour flows, endlessly: a very light orange band glides across
+   the white and immediately another follows, with no gap or restart. The gradient is one
+   tile that starts and ends on the same white, repeated, and the animation shifts it by
+   exactly one tile per loop, so the seam never shows. It stops (and the button returns to
+   plain white) as soon as the pointer leaves. */
+.learnMoreButton {
+  position: relative;
+  overflow: hidden;
 }
+
+.learnMoreButton:hover {
+  transform: translateY(-1px);
+  background-image: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #fffaf5 12%,
+    #fff1e3 28%,
+    #ffe4cb 50%,
+    #fff1e3 72%,
+    #fffaf5 88%,
+    #ffffff 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: repeat-x;
+  background-position: 0% 0;
+  animation: learnMoreFlow 3.2s linear infinite;
+}
+
+.learnMoreButton:hover .learnMoreText {
+  color: var(--brand-orange-strong);
+}
+
+.learnMoreText {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes learnMoreFlow {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
 
 .learnMoreButton:focus-visible {
   outline: 2px solid #ffffff;
@@ -194,6 +236,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .learnMoreButton:hover {
+    animation: none;
+  }
+
   .copy,
   .photoBleed,
   .photoBleed img {

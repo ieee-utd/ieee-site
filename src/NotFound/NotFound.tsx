@@ -15,7 +15,7 @@ const NotFound: React.FC = () => {
         className="not-found-image"
       />
       <h1 className="not-found-code">404</h1>
-      <button className="home-button" onClick={handleGoHome}>
+      <button className="home-button flow-blue" onClick={handleGoHome}>
         Go Back to Home
       </button>
     </div>

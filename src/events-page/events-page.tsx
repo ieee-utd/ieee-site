@@ -32,7 +32,7 @@ function EventsPage() {
             From workshops to tech talks, there is always a place to learn,
             connect, and create with IEEE.
           </p>
-          <a className={styles.calendarLink} href="#upcoming-events">
+          <a className={`${styles.calendarLink} flow-orange`} href="#upcoming-events">
             View this week&apos;s events
           </a>
         </div>

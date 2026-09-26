@@ -102,7 +102,7 @@ function EventsCarousel() {
                 {event.description}
                 {event.rsvpUrl && (
                   <a
-                    className={styles.rsvpButton}
+                    className={`${styles.rsvpButton} flow-orange`}
                     href={event.rsvpUrl}
                     target="_blank"
                     rel="noopener noreferrer"
