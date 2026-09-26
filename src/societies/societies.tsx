@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./societies.module.css";
 import ieeeLogo from "assets/ieeelogotransparent.png";
 
@@ -43,6 +43,19 @@ const societies: Society[] = [
 
 export default function Societies() {
   const [search, setSearch] = useState("");
+
+  // The site snaps scrolling to sections (see index.css), but this page is one
+  // continuous list with no sections. Its only snap point is the footer, which sits
+  // past the reachable bottom, so mandatory snapping keeps dragging the page back
+  // down and it gets stuck there. Turn snapping off while this page is showing.
+  useEffect(() => {
+    const root = document.documentElement;
+    const previous = root.style.scrollSnapType;
+    root.style.scrollSnapType = "none";
+    return () => {
+      root.style.scrollSnapType = previous;
+    };
+  }, []);
 
   const filteredSocieties = societies.filter((society) => {
     const query = search.toLowerCase();
