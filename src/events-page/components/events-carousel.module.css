@@ -131,25 +131,24 @@
   line-height: 1.65;
 }
 
-/* The title and the RSVP button share a row: the title takes the space, the button
-   stays compact on the right, level with the first line of the title. */
-.titleRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem;
+/* The RSVP button is a compact pill at the bottom-right of the card. It floats to the
+   right at the end of the description, so it sits on the description's last line when
+   there is room and drops just below it when there is not. */
+.description {
+  display: flow-root;
 }
 
 .rsvpButton {
-  flex: none;
+  float: right;
   display: inline-block;
-  margin-top: 0.15rem;
+  margin: 0.35rem 0 0 0.75rem;
   padding: 0.38rem 0.85rem;
   border-radius: 999px;
   background: var(--brand-orange);
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 750;
+  line-height: 1.4;
   letter-spacing: 0.04em;
   text-decoration: none;
   transition: background 0.2s, transform 0.2s;

@@ -97,8 +97,9 @@ function EventsCarousel() {
             )}
             <div className={styles.cardBody}>
               <p className={styles.time}>{event.time}</p>
-              <div className={styles.titleRow}>
-                <h3>{event.title}</h3>
+              <h3>{event.title}</h3>
+              <p className={styles.description}>
+                {event.description}
                 {event.rsvpUrl && (
                   <a
                     className={styles.rsvpButton}
@@ -112,8 +113,7 @@ function EventsCarousel() {
                     </span>
                   </a>
                 )}
-              </div>
-              <p className={styles.description}>{event.description}</p>
+              </p>
             </div>
           </article>
         ))}
