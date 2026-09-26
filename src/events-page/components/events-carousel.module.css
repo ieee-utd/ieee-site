@@ -131,10 +131,37 @@
   line-height: 1.65;
 }
 
-.rsvp {
-  display: block;
-  font-size: 0.68rem;
-  white-space: nowrap;
+.rsvpButton {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: var(--brand-orange);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.rsvpButton:hover {
+  background: var(--brand-orange-strong);
+  transform: translateY(-1px);
+}
+
+.rsvpButton:active {
+  transform: scale(0.98);
+}
+
+.rsvpArrow {
+  display: inline-block;
+  margin-left: 0.4rem;
+  transition: transform 0.2s;
+}
+
+.rsvpButton:hover .rsvpArrow {
+  transform: translateX(3px);
 }
 
 @media (max-width: 600px) {
