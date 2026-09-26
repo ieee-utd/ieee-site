@@ -84,6 +84,10 @@ function NavBar() {
                 <span className={styles.mobileLink}>Branch</span>
               </li>
               <li>
+                {/* TODO: point this at the About Us page once it exists */}
+                <span className={styles.mobileLink}>About Us</span>
+              </li>
+              <li>
                 <a
                   className={styles.mobileLink}
                   target="_blank"
@@ -149,6 +153,10 @@ function NavBar() {
             <li>
               {/* TODO: point this at the Branch page once it exists */}
               <span className={styles.link}>Branch</span>
+            </li>
+            <li>
+              {/* TODO: point this at the About Us page once it exists */}
+              <span className={styles.link}>About Us</span>
             </li>
             <li>
               <a
