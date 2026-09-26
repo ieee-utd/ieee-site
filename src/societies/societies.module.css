@@ -1,7 +1,8 @@
 .page {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--brand-orange), var(--brand-orange));
-  padding: 3rem 1.5rem;
+  /* extra room at the top so the logo clears the fixed nav bar */
+  padding: 7.5rem 1.5rem 3rem;
   font-family: system-ui, sans-serif;
   box-sizing: border-box;
 }
@@ -471,7 +472,7 @@
 
 @media (max-width: 700px) {
   .page {
-    padding: 2rem 1rem;
+    padding: 6rem 1rem 2rem;
   }
 
   .ieeeLogo {
