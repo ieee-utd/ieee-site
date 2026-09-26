@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./footer.module.css";
 import discordLogo from "../assets/discord-white-logo.png";
 import facebookLogo from "../assets/facebook-app-round-white-icon.png";
@@ -6,6 +8,18 @@ import youtubeLogo from "../assets/youtube-app-white-icon.png";
 import instagramLogo from "../assets/instagram-white-logo.png";
 
 export default function Footer() {
+  // The Branch page is blue, so the links strip and the page colour under it are too.
+  const onBranch = useLocation().pathname.indexOf("/branch") === 0;
+
+  useEffect(() => {
+    if (!onBranch) return;
+    const previous = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = "var(--brand-blue)";
+    return () => {
+      document.body.style.backgroundColor = previous;
+    };
+  }, [onBranch]);
+
   const images = [
     {
       src: discordLogo,
@@ -58,7 +72,7 @@ export default function Footer() {
   */
   return (
     <footer>
-      <div className={styles["footer"]}>
+      <div className={`${styles["footer"]} ${onBranch ? styles.footerBlue : ""}`}>
         <ul className={styles.ul}>
           {images.map((image, index) => (
             <li key={index}>

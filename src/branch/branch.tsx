@@ -28,6 +28,8 @@ interface Team {
    * placeholder paragraph is used instead.
    */
   about?: AboutSection[];
+  /** What this branch does, as three short cards. Falls back to a shared placeholder. */
+  highlights?: { title: string; text: string }[];
   /**
    * The team's monthly blog, newest first. Leave empty until the first post is
    * written; the card then shows a "coming soon" placeholder in its place.
@@ -40,45 +42,75 @@ interface Team {
 
 const branches: Team[] = [
   {
-    name: "Engineering",
+    name: "Engineering Branch",
     description:
       "Design, build, and program hardware and software projects with a hands-on team.",
     category: "Engineering",
+    highlights: [
+      { title: "Design & build", text: "Design and build the hardware and software the branch uses and shows off." },
+      { title: "Maintain", text: "Look after the tools, kits, and equipment that members rely on." },
+      { title: "Teach", text: "Prepare the technical material other members learn from." },
+    ],
     blogPosts: [],
   },
   {
-    name: "Initiatives",
+    name: "Initiatives Branch",
     description:
       "Plan and launch the projects, programs, and ideas that grow IEEE at UT Dallas.",
     category: "Initiatives",
+    highlights: [
+      { title: "Plan", text: "Turn ideas into programs and campaigns for IEEE at UT Dallas." },
+      { title: "Organize", text: "Coordinate people, dates, and budgets so plans actually happen." },
+      { title: "Follow through", text: "Track results and improve what we run each semester." },
+    ],
     blogPosts: [],
   },
   {
-    name: "Marketing",
+    name: "Marketing Branch",
     description:
       "Tell IEEE's story through design, social media, photography, and campaigns.",
     category: "Marketing",
+    highlights: [
+      { title: "Design", text: "Create the graphics, flyers, and branding people see." },
+      { title: "Promote", text: "Run social media and announcements for events and opportunities." },
+      { title: "Capture", text: "Photograph and film events for the community and our archive." },
+    ],
     blogPosts: [],
   },
   {
-    name: "Outreach",
+    name: "Outreach Branch",
     description:
       "Connect IEEE with students, schools, and the community through events and partnerships.",
     category: "Outreach",
+    highlights: [
+      { title: "Connect", text: "Build relationships with students, clubs, and partner organizations." },
+      { title: "Represent", text: "Speak for IEEE at events, fairs, and school visits." },
+      { title: "Recruit", text: "Bring new members and volunteers into the community." },
+    ],
     blogPosts: [],
   },
   {
-    name: "Tutoring",
+    name: "Tutoring Branch",
     description:
       "Help fellow students succeed by running and supporting IEEE's tutoring program.",
     category: "Tutoring",
+    highlights: [
+      { title: "Schedule", text: "Plan the weekly tutoring calendar and keep sessions covered." },
+      { title: "Support", text: "Help tutors and students with questions and requests." },
+      { title: "Recruit tutors", text: "Find, train, and onboard new tutors each semester." },
+    ],
     blogPosts: [],
   },
   {
-    name: "Web Development",
+    name: "Web Development Branch",
     description:
       "Build and maintain the IEEE at UT Dallas website and the tools behind it.",
     category: "Web Development",
+    highlights: [
+      { title: "Build", text: "Add new pages and features to the IEEE at UT Dallas site." },
+      { title: "Maintain", text: "Keep the site fast, accessible, and up to date." },
+      { title: "Collaborate", text: "Work with other branches to publish what they need online." },
+    ],
     blogPosts: [],
   },
 ];
@@ -93,22 +125,22 @@ const PLACEHOLDER = {
     "A longer description of this team goes here: what it does, who it is for, and what members get out of being part of it. This is placeholder text.",
   stats: [
     { value: "—", label: "Members" },
-    { value: "—", label: "Events a year" },
-    { value: "—", label: "Projects" },
+    { value: "—", label: "Meetings a month" },
+    { value: "—", label: "Open roles" },
   ],
   highlights: [
-    { title: "Workshops", text: "Hands-on sessions run by members and industry guests." },
-    { title: "Projects", text: "Build something real with a team, from idea to demo." },
-    { title: "Community", text: "Meet people who share your interests and goals." },
+    { title: "Responsibilities", text: "What this branch is responsible for across IEEE at UT Dallas." },
+    { title: "Who we need", text: "The skills and interests that fit well on this team." },
+    { title: "What you gain", text: "Experience, connections, and leadership you can point to." },
   ],
-  upcoming: ["Upcoming event one", "Upcoming event two", "Upcoming event three"],
+  upcoming: ["Next branch meeting", "Open role announcements", "Branch social"],
 };
 
 const BLOG_PLACEHOLDER: BlogPost = {
   month: "This month",
   title: "Our first monthly post is on the way",
   summary:
-    "Each month this team will share what it has been working on, what members learned, and what is coming next.",
+    "Each month this branch will share what it has been working on and what is coming next.",
 };
 
 export default function Branch() {
@@ -242,9 +274,9 @@ export default function Branch() {
                         ))}
                       </div>
 
-                      <h3 className={styles.detailsHeading}>What you can do</h3>
+                      <h3 className={styles.detailsHeading}>What this branch does</h3>
                       <div className={styles.highlights}>
-                        {PLACEHOLDER.highlights.map((item) => (
+                        {(team.highlights || PLACEHOLDER.highlights).map((item) => (
                           <div className={styles.highlight} key={item.title}>
                             <h4>{item.title}</h4>
                             <p>{item.text}</p>
@@ -294,7 +326,7 @@ export default function Branch() {
                         })}
                       </div>
 
-                      <h3 className={styles.detailsHeading}>Coming up</h3>
+                      <h3 className={styles.detailsHeading}>Branch meetings</h3>
                       <ul className={styles.upcoming}>
                         {PLACEHOLDER.upcoming.map((item) => (
                           <li key={item}>{item}</li>
@@ -308,7 +340,7 @@ export default function Branch() {
                         rel="noopener noreferrer"
                         tabIndex={openTeam === team.name ? 0 : -1}
                       >
-                        Join this team
+                        Join this branch
                       </a>
                     </div>
                   </div>

@@ -9,6 +9,10 @@
   scroll-snap-align: start;
 }
 
+.footerBlue {
+  background-color: var(--brand-blue);
+}
+
 .copyright {
   color: white;
   font-size: 0.8em;
