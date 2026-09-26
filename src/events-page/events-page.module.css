@@ -41,11 +41,16 @@
 .eyebrow,
 .sectionLabel {
   margin: 0 0 1rem;
-  color: var(--brand-sky);
+  color: var(--brand-orange);
   font-size: 0.8rem;
   font-weight: 750;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+/* "Plan your week" sits on the blue band, so it takes the light blue instead. */
+.sectionLabelLight {
+  color: var(--brand-sky);
 }
 
 .heroContent .eyebrow {

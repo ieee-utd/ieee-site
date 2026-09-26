@@ -80,8 +80,9 @@ function NavBar() {
                 </a>
               </li>
               <li>
-                {/* TODO: point this at the Branch page once it exists */}
-                <span className={styles.mobileLink}>Branch</span>
+                <a className={styles.mobileLink} href="/branch">
+                  Branch
+                </a>
               </li>
               <li>
                 {/* TODO: point this at the About Us page once it exists */}
@@ -151,8 +152,9 @@ function NavBar() {
               </a>
             </li>
             <li>
-              {/* TODO: point this at the Branch page once it exists */}
-              <span className={styles.link}>Branch</span>
+              <a className={styles.link} href="/branch">
+                Branch
+              </a>
             </li>
             <li>
               {/* TODO: point this at the About Us page once it exists */}

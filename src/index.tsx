@@ -14,6 +14,7 @@ import Volunteer from "volunteer-page/volunteer-page";
 import DocumentationPage from "documentation-page/documentation-page";
 import EventsPage from "./events-page/events-page";
 import SocietiesPage from "societies/societies";
+import BranchPage from "branch/branch";
 import CustomCursor from "./shared/custom-cursor";
 //import Calendar from "./calendar/calendar";
 
@@ -36,6 +37,7 @@ root.render(
         <Route path="/documentation" element={<DocumentationPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/societies" element={<SocietiesPage />} />
+        <Route path="/branch" element={<BranchPage />} />
       </Routes>
       <NavBar />
       <Footer />
