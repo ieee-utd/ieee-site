@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./branch.module.css";
-import ieeeLogo from "assets/ieeelogotransparent.png";
+import ieeeLogo1x from "assets/ieee-logo-140.png";
+import ieeeLogo2x from "assets/ieee-logo-280.png";
+import ieeeLogo3x from "assets/ieee-logo-420.png";
 
 /** One monthly blog post. Add new ones to a team's `blogPosts`, newest first. */
 interface BlogPost {
@@ -173,14 +175,18 @@ export default function Branch() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
+        {/* Pre-scaled copies of the logo: the original is ~1,400px wide, and letting the
+            browser shrink it ten-fold leaves ragged, shimmering edges. */}
         <img
-          src={ieeeLogo}
+          src={ieeeLogo1x}
+          srcSet={`${ieeeLogo1x} 1x, ${ieeeLogo2x} 2x, ${ieeeLogo3x} 3x`}
           alt="IEEE Logo"
+          width={140}
           className={styles.ieeeLogo}
         />
 
         <header className={styles.header}>
-          <h1 className={styles.title}>Branch</h1>
+          <h1 className={styles.title}>Branches</h1>
 
           <p className={styles.subtitle}>
             Explore the teams that run IEEE at UT Dallas and find where you

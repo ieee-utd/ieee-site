@@ -81,7 +81,7 @@ function NavBar() {
               </li>
               <li>
                 <a className={styles.mobileLink} href="/branch">
-                  Branch
+                  Branches
                 </a>
               </li>
               <li>
@@ -153,7 +153,7 @@ function NavBar() {
             </li>
             <li>
               <a className={styles.link} href="/branch">
-                Branch
+                Branches
               </a>
             </li>
             <li>
