@@ -40,12 +40,65 @@ const FadeInSection: React.FC<FadeInSectionProps> = (props) => {
   );
 };
 
+/** Distance, in px, over which a section title fades in and out at its ends. */
+const TITLE_FADE_PX = 240;
+
+const clamp01 = (v: number) => Math.min(Math.max(v, 0), 1);
+
+interface OfficerSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+/**
+ * One titled group of members. The title is pinned to the corner by CSS while the
+ * group is on screen; here it is also faded in as the group's top arrives and
+ * faded out just before its bottom leaves, so it cross-fades with the next
+ * group's title instead of the two overlapping.
+ */
+const OfficerSection: React.FC<OfficerSectionProps> = ({ title, children }) => {
+  const groupRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const group = groupRef.current;
+      const heading = titleRef.current;
+      if (!group || !heading) return;
+      const { top, bottom } = group.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const fadeIn = clamp01((vh - top) / TITLE_FADE_PX);
+      const fadeOut = clamp01((bottom - vh) / TITLE_FADE_PX);
+      heading.style.opacity = String(Math.min(fadeIn, fadeOut));
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <div ref={groupRef}>
+      <div className={styles.section_subheading} ref={titleRef}>
+        <h3>{title}</h3>
+      </div>
+      {children}
+    </div>
+  );
+};
+
 const Committees: React.FC = () => {
   const sections = officerData.map((section) => (
-    <div key={section.section}>
-      <div className={styles.section_subheading}>
-        <h3>{section.section}</h3>
-      </div>
+    <OfficerSection key={section.section} title={section.section}>
       <div className={styles.member__grid}>
         {section.members.map((member) => (
           <FadeInSection key={member.name}>
@@ -67,7 +120,7 @@ const Committees: React.FC = () => {
           </FadeInSection>
         ))}
       </div>
-    </div>
+    </OfficerSection>
   ));
 
   return (
