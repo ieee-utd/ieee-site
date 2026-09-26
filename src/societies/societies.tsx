@@ -2,10 +2,28 @@ import React, { useEffect, useState } from "react";
 import styles from "./societies.module.css";
 import ieeeLogo from "assets/ieeelogotransparent.png";
 
+/** One monthly blog post. Add new ones to a society's `blogPosts`, newest first. */
+interface BlogPost {
+  /** Month the post covers, e.g. "October 2026". */
+  month: string;
+  title: string;
+  summary: string;
+  /** Where the full post lives. Omit it and the card shows without a link. */
+  url?: string;
+}
+
 interface Society {
   name: string;
   description: string;
   category: string;
+  /**
+   * The society's monthly blog, newest first. Leave empty until the first post is
+   * written; the card then shows a "coming soon" placeholder in its place.
+   * Example:
+   *   { month: "October 2026", title: "What we built this month",
+   *     summary: "A short recap.", url: "https://example.com/post" }
+   */
+  blogPosts: BlogPost[];
 }
 
 const societies: Society[] = [
@@ -14,30 +32,35 @@ const societies: Society[] = [
     description:
       "Explore electrical power systems, renewable energy, smart grids, and the technologies shaping the future of energy.",
     category: "Power & Energy",
+    blogPosts: [],
   },
   {
     name: "Radio Frequencies Society - MTT-S/AP-S",
     description:
       "Learn about radio frequency technology, wireless communication, antennas, and high-frequency electronic systems.",
     category: "Radio Frequencies",
+    blogPosts: [],
   },
   {
     name: "Robotics & Automation Society",
     description:
       "Explore robotics, automation, intelligent systems, and the technologies driving the future of autonomous machines.",
     category: "Robotics & Automation",
+    blogPosts: [],
   },
   {
     name: "Computer Intelligence Society",
     description:
       "Discover artificial intelligence, machine learning, computational intelligence, and intelligent systems.",
     category: "Computer Intelligence",
+    blogPosts: [],
   },
   {
     name: "Solid-State Circuits Society",
     description:
       "Explore integrated circuits, semiconductor technology, chip design, and the hardware powering modern electronics.",
     category: "Solid-State Circuits",
+    blogPosts: [],
   },
 ];
 
@@ -60,6 +83,13 @@ const PLACEHOLDER = {
     { title: "Community", text: "Meet people who share your interests and goals." },
   ],
   upcoming: ["Upcoming event one", "Upcoming event two", "Upcoming event three"],
+};
+
+const BLOG_PLACEHOLDER: BlogPost = {
+  month: "This month",
+  title: "Our first monthly post is on the way",
+  summary:
+    "Each month this society will share what it has been working on, what members learned, and what is coming next.",
 };
 
 export default function Societies() {
@@ -190,6 +220,48 @@ export default function Societies() {
                             <p>{item.text}</p>
                           </div>
                         ))}
+                      </div>
+
+                      <h3 className={styles.detailsHeading}>Monthly blog</h3>
+                      <div className={styles.blog}>
+                        {(society.blogPosts.length > 0
+                          ? society.blogPosts
+                          : [BLOG_PLACEHOLDER]
+                        ).map((post) => {
+                          const card = (
+                            <>
+                              <span className={styles.blogMonth}>{post.month}</span>
+                              <h4>{post.title}</h4>
+                              <p>{post.summary}</p>
+                              {post.url && (
+                                <span className={styles.blogRead}>
+                                  Read post <span aria-hidden="true">→</span>
+                                </span>
+                              )}
+                            </>
+                          );
+                          return post.url ? (
+                            <a
+                              className={`${styles.blogPost} ${styles.blogLink}`}
+                              href={post.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              tabIndex={openSociety === society.name ? 0 : -1}
+                              key={post.month + post.title}
+                            >
+                              {card}
+                            </a>
+                          ) : (
+                            <div
+                              className={`${styles.blogPost} ${
+                                society.blogPosts.length === 0 ? styles.blogSoon : ""
+                              }`}
+                              key={post.month + post.title}
+                            >
+                              {card}
+                            </div>
+                          );
+                        })}
                       </div>
 
                       <h3 className={styles.detailsHeading}>Coming up</h3>
