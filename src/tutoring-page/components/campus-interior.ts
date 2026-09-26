@@ -108,21 +108,55 @@ function floorCanvas() {
   return c;
 }
 
-function plankCanvas() {
+/** Polished charcoal floor tiles: a 2 x 2 patch with a slightly different tone per tile. */
+function tileCanvas() {
   const c = mk(512, 512);
   const g = c.getContext("2d")!;
-  const r = rng(7);
-  for (let y = 0; y < 512; y += 64) {
-    for (let x = -((y / 64) % 2) * 128; x < 512; x += 256) {
-      const l = 58 + r() * 8;
-      g.fillStyle = `hsl(30, 32%, ${l}%)`;
-      g.fillRect(x, y, 254, 62);
-      g.fillStyle = "rgba(0,0,0,0.05)";
-      for (let i = 0; i < 6; i++) g.fillRect(x, y + 6 + i * 9, 254, 1);
+  const tones = ["#575a61", "#5e6168", "#5a5d64", "#53565d"];
+  for (let i = 0; i < 4; i++) {
+    const x = (i % 2) * 256;
+    const y = Math.floor(i / 2) * 256;
+    const grad = g.createLinearGradient(x, y, x + 256, y + 256);
+    grad.addColorStop(0, tones[i]);
+    grad.addColorStop(1, "#4a4d54");
+    g.fillStyle = grad;
+    g.fillRect(x, y, 256, 256);
+    // faint stone veining
+    g.strokeStyle = "rgba(255,255,255,0.06)";
+    g.lineWidth = 1.5;
+    for (let k = 0; k < 3; k++) {
+      g.beginPath();
+      g.moveTo(x + 20 + k * 70, y);
+      g.bezierCurveTo(x + 90 + k * 40, y + 90, x + 30 + k * 60, y + 170, x + 120 + k * 50, y + 256);
+      g.stroke();
     }
   }
-  g.fillStyle = "rgba(60,40,20,0.35)";
-  for (let y = 0; y < 512; y += 64) g.fillRect(0, y + 62, 512, 2);
+  // grout
+  g.fillStyle = "#33353a";
+  g.fillRect(0, 0, 512, 3);
+  g.fillRect(0, 254, 512, 4);
+  g.fillRect(0, 509, 512, 3);
+  g.fillRect(0, 0, 3, 512);
+  g.fillRect(254, 0, 4, 512);
+  g.fillRect(509, 0, 3, 512);
+  return c;
+}
+
+/** Vertical wood boards for the counters' bases. */
+function woodCanvas() {
+  const c = mk(256, 256);
+  const g = c.getContext("2d")!;
+  const r = rng(11);
+  for (let x = 0; x < 256; x += 32) {
+    g.fillStyle = `hsl(28, 42%, ${34 + r() * 8}%)`;
+    g.fillRect(x, 0, 31, 256);
+    g.fillStyle = "rgba(0,0,0,0.10)";
+    for (let i = 0; i < 7; i++) g.fillRect(x + 3 + i * 4, 0, 1, 256);
+    g.fillStyle = "rgba(255,220,170,0.06)";
+    g.fillRect(x + 12, 0, 3, 256);
+  }
+  g.fillStyle = "rgba(20,10,0,0.45)";
+  for (let x = 31; x < 256; x += 32) g.fillRect(x, 0, 1.5, 256);
   return c;
 }
 
@@ -430,10 +464,11 @@ export function buildInterior(
   {
     const geo = track(new THREE.PlaneGeometry(rx1 - rx0, planZ(RM.y1) - planZ(RM.y0)));
     geo.rotateX(-Math.PI / 2);
-    const t = track(canvasTex(THREE, plankCanvas(), aniso));
+    const t = track(canvasTex(THREE, tileCanvas(), aniso));
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
-    t.repeat.set((rx1 - rx0) / 0.08, (planZ(RM.y1) - planZ(RM.y0)) / 0.08);
-    const f = new THREE.Mesh(geo, std({ map: t, roughness: 0.42 }));
+    // each repeat holds 2 x 2 tiles, so a tile is 0.03 world units (about 1.3 m)
+    t.repeat.set((rx1 - rx0) / 0.06, (planZ(RM.y1) - planZ(RM.y0)) / 0.06);
+    const f = new THREE.Mesh(geo, std({ map: t, roughness: 0.3, metalness: 0.05 }));
     f.position.set(rcx, FLOOR_Y + 0.0012, rcz);
     f.receiveShadow = true;
     group.add(f);
@@ -462,13 +497,18 @@ export function buildInterior(
 
   // south wall: two open doorways with a wall stub between them
   {
+    // Only the room-facing side of this wall is navy (#242B64). Box faces run
+    // +x, -x, +y, -y, +z, -z, and the room lies on the -z side of this wall, so
+    // the hallway side (+z), the tops and the ends stay white.
+    const navy = std({ color: "#242B64", roughness: 0.85 });
+    const southMat = [wallMat, wallMat, wallMat, wallMat, wallMat, navy];
     const seg = (a: number, b: number) =>
-      box(planX(b) - planX(a), WALL_H, tk, (planX(a) + planX(b)) / 2, FLOOR_Y + WALL_H / 2, rz1, wallMat);
+      box(planX(b) - planX(a), WALL_H, tk, (planX(a) + planX(b)) / 2, FLOOR_Y + WALL_H / 2, rz1, southMat);
     seg(RM.x0, DOORWAYS[0][0]);
     seg(DOORWAYS[1][1], RM.x1);
     const left = DOORWAYS[0][0];
     const right = DOORWAYS[1][1];
-    box(planX(right) - planX(left), WALL_H * 0.22, tk, (planX(left) + planX(right)) / 2, FLOOR_Y + WALL_H * 0.89, rz1, wallMat);
+    box(planX(right) - planX(left), WALL_H * 0.22, tk, (planX(left) + planX(right)) / 2, FLOOR_Y + WALL_H * 0.89, rz1, southMat);
     // the partition that divides the two doors, running into the room
     const stub0 = DOORWAYS[0][1];
     const stub1 = DOORWAYS[1][0];
@@ -492,20 +532,42 @@ export function buildInterior(
   // west end wall
   box(tk, WALL_H, rz1 - rz0, rx0, FLOOR_Y + WALL_H / 2, rcz, wallMat);
 
-  // whiteboards along the south wall, right of the doors
-  [[706, 40], [768, 40]].forEach(([x, w]) => {
-    box(planLen(w), 0.03, 0.0016, planX(x), FLOOR_Y + WALL_H * 0.6, rz1 - 0.0036, std({ color: "#fdfdfb", roughness: 0.25 }), false);
-    box(planLen(w) + 0.003, 0.0022, 0.0022, planX(x), FLOOR_Y + WALL_H * 0.6 - 0.0162, rz1 - 0.0036, trimMat, false);
-  });
+  // Two large, connected whiteboards on each side of the doors. The pair on a side
+  // shares one frame and one marker tray, with a thin divider where the boards meet.
+  {
+    const boardMat = std({ color: "#fbfbf9", roughness: 0.22 });
+    const frameMat = std({ color: "#b9bec4", roughness: 0.35, metalness: 0.7 });
+    const bh = 0.044;
+    const cy = FLOOR_Y + WALL_H * 0.56;
+    const zf = rz1 - tk / 2 - 0.0009; // just proud of the wall's inner face
+    const pair = (x0: number, x1: number) => {
+      const cx = (planX(x0) + planX(x1)) / 2;
+      const w = planX(x1) - planX(x0);
+      box(w, bh, 0.0016, cx, cy, zf, boardMat, false);
+      // outer frame
+      box(w + 0.0024, 0.0013, 0.0022, cx, cy + bh / 2 + 0.0004, zf - 0.0002, frameMat, false);
+      box(w + 0.0024, 0.0013, 0.0022, cx, cy - bh / 2 - 0.0004, zf - 0.0002, frameMat, false);
+      [x0, x1].forEach((x) => box(0.0013, bh + 0.0022, 0.0022, planX(x), cy, zf - 0.0002, frameMat, false));
+      // the join between the two boards
+      box(0.0009, bh, 0.0019, cx, cy, zf - 0.0001, frameMat, false);
+      // marker tray along the bottom
+      box(w, 0.0011, 0.0034, cx, cy - bh / 2 - 0.0016, zf - 0.0012, frameMat, false);
+    };
+    pair(RM.x0 + 4, DOORWAYS[0][0] - 4);
+    pair(DOORWAYS[1][1] + 4, RM.x1 - 4);
+  }
 
   // ---- furniture ----------------------------------------------------------
-  const tableMat = std({ color: "#e9dfcf", roughness: 0.5 });
-  const counterMat = std({ color: "#f2f0ea", roughness: 0.4 });
+  const tableMat = std({ color: "#d6c3a0", roughness: 0.55 });
+  const woodTex = track(canvasTex(THREE, woodCanvas(), aniso));
+  woodTex.wrapS = woodTex.wrapT = THREE.RepeatWrapping;
+  woodTex.repeat.set(1.4, 0.4);
+  const counterMat = std({ map: woodTex, roughness: 0.6 });
   const counterTop = std({ color: "#20262d", roughness: 0.3 });
   const TABLE_H = 0.0195;
 
   /** A table or desk between two plan-pixel corners. */
-  const tableFrom = (x0: number, y0: number, x1: number, y1: number) => {
+  const tableFrom = (x0: number, y0: number, x1: number, y1: number, mat: any = tableMat) => {
     const w = planLen(x1 - x0);
     const d = planLen(y1 - y0);
     const cx = planX((x0 + x1) / 2);
@@ -523,7 +585,7 @@ export function buildInterior(
     );
     const geo = track(mergeGeometries(parts));
     parts.forEach((g) => g.dispose());
-    const m = new THREE.Mesh(geo, tableMat);
+    const m = new THREE.Mesh(geo, mat);
     m.castShadow = m.receiveShadow = true;
     group.add(m);
   };
@@ -541,8 +603,34 @@ export function buildInterior(
   const stubFrom = (x0: number, y0: number, x1: number, y1: number) =>
     box(planLen(x1 - x0), WALL_H, planLen(y1 - y0), planX((x0 + x1) / 2), FLOOR_Y + WALL_H / 2, planZ((y0 + y1) / 2), wallMat);
 
-  // long desk against the west wall
-  tableFrom(RM.x0 + 2, north, sx(112), south);
+  // long black desk against the west wall, with four monitors along it
+  {
+    const deskX0 = RM.x0 + 2;
+    const deskX1 = sx(112);
+    tableFrom(deskX0, north, deskX1, south, std({ color: "#17181b", roughness: 0.4 }));
+    const bezel = std({ color: "#0d0e10", roughness: 0.35, metalness: 0.3 });
+    const glow = std({ color: "#0b1118", emissive: "#4f8fd0", emissiveIntensity: 0.7, roughness: 0.15 });
+    const deskTop = FLOOR_Y + 0.0012 + TABLE_H + 0.0013;
+    const cx = planX((deskX0 + deskX1) / 2);
+    [0.14, 0.38, 0.62, 0.86].forEach((f) => {
+      const cz = planZ(north + (south - north) * f);
+      const g = new THREE.Group();
+      g.position.set(cx, deskTop, cz);
+      // stand: foot, neck, then the panel facing east, into the room
+      const foot = new THREE.Mesh(track(new THREE.BoxGeometry(0.0045, 0.0005, 0.0055)), bezel);
+      foot.position.set(0.0004, 0.00025, 0);
+      const neck = new THREE.Mesh(track(new THREE.BoxGeometry(0.0009, 0.0052, 0.0009)), bezel);
+      neck.position.set(-0.0002, 0.003, 0);
+      const panel = new THREE.Mesh(track(new THREE.BoxGeometry(0.0007, 0.0078, 0.0128)), bezel);
+      panel.position.set(0, 0.0074, 0);
+      const screen = new THREE.Mesh(track(new THREE.PlaneGeometry(0.0118, 0.0068)), glow);
+      screen.rotation.y = Math.PI / 2;
+      screen.position.set(0.00039, 0.0074, 0);
+      g.add(foot, neck, panel, screen);
+      g.traverse((o: any) => (o.castShadow = true));
+      group.add(g);
+    });
+  }
   // counters under the window, and the wall stubs between them
   counterFrom(sx(125), sx(415), 7);
   stubFrom(sx(418), north - 1, sx(465), sy(330));
@@ -562,9 +650,11 @@ export function buildInterior(
 
   // chairs: [x, y, heading]. Heading 0 faces south, PI north, PI/2 east, -PI/2 west.
   const H = Math.PI / 2;
+  // the two lab-height chairs pulled in tight to the monitor desk (its east edge is at plan x ~472)
+  const labChairs: [number, number, number][] = [[480, sy(425), -H], [480, sy(500), -H]];
   const chairs: [number, number, number][] = [
     // left cluster
-    [sx(165), sy(382), H], [sx(165), sy(425), H], [sx(165), sy(500), H], [sx(165), sy(558), H],
+    [sx(165), sy(382), H], [sx(165), sy(558), H],
     [sx(292), sy(370), 0], [sx(355), sy(370), 0],
     [sx(303), sy(547), Math.PI], [sx(378), sy(548), Math.PI],
     // right cluster
@@ -578,30 +668,105 @@ export function buildInterior(
     [sx(497), sy(340), Math.PI],
   ];
   {
-    const cParts: any[] = [];
-    const seat = new THREE.BoxGeometry(0.0105, 0.0022, 0.0105);
-    seat.translate(0, 0.0115, 0);
-    const back = new THREE.BoxGeometry(0.0105, 0.011, 0.0018);
-    back.translate(0, 0.0185, -0.0043);
-    cParts.push(seat, back);
-    [-1, 1].forEach((a) => [-1, 1].forEach((b) => {
-      const g = new THREE.BoxGeometry(0.0013, 0.0115, 0.0013);
-      g.translate(a * 0.0042, 0.00575, b * 0.0042);
-      cParts.push(g);
-    }));
-    const chairGeo = track(mergeGeometries(cParts));
-    cParts.forEach((g) => g.dispose());
-    const cIM = new THREE.InstancedMesh(chairGeo, std({ color: "#2f5f88", roughness: 0.6 }), chairs.length);
+    // Standard rolling chair: five-star base on casters, gas lift, seat, tilted back, arms.
+    const standard = () => {
+      const parts: any[] = [];
+      for (let i = 0; i < 5; i++) {
+        const a = (i / 5) * Math.PI * 2;
+        const leg = new THREE.BoxGeometry(0.0058, 0.0007, 0.0008);
+        leg.translate(0.0029, 0, 0);
+        leg.rotateY(a);
+        leg.translate(0, 0.0026, 0);
+        parts.push(leg);
+        const caster = new THREE.SphereGeometry(0.00095, 8, 6);
+        caster.translate(Math.cos(a) * 0.0058, 0.001, -Math.sin(a) * 0.0058);
+        parts.push(caster);
+      }
+      const lift = new THREE.CylinderGeometry(0.0008, 0.0011, 0.0075, 8);
+      lift.translate(0, 0.0064, 0);
+      parts.push(lift);
+      const seat = new THREE.BoxGeometry(0.0108, 0.0028, 0.0108);
+      seat.translate(0, 0.0112, 0);
+      parts.push(seat);
+      const back = new THREE.BoxGeometry(0.0098, 0.0118, 0.0018);
+      back.rotateX(-0.12);
+      back.translate(0, 0.0192, -0.0049);
+      parts.push(back);
+      const head = new THREE.BoxGeometry(0.0052, 0.0028, 0.0016);
+      head.rotateX(-0.12);
+      head.translate(0, 0.0272, -0.0055);
+      parts.push(head);
+      [-1, 1].forEach((sd) => {
+        const arm = new THREE.BoxGeometry(0.0013, 0.0011, 0.0058);
+        arm.translate(sd * 0.0059, 0.0158, -0.0004);
+        parts.push(arm);
+        const post = new THREE.BoxGeometry(0.0011, 0.0034, 0.0011);
+        post.translate(sd * 0.0059, 0.0135, 0.0012);
+        parts.push(post);
+      });
+      return parts;
+    };
+
+    // Lab-height rolling chair: tall gas lift, footring, round seat and a low back.
+    const lab = () => {
+      const parts: any[] = [];
+      for (let i = 0; i < 5; i++) {
+        const a = (i / 5) * Math.PI * 2;
+        const leg = new THREE.BoxGeometry(0.0062, 0.0007, 0.0008);
+        leg.translate(0.0031, 0, 0);
+        leg.rotateY(a);
+        leg.translate(0, 0.0026, 0);
+        parts.push(leg);
+        const caster = new THREE.SphereGeometry(0.00095, 8, 6);
+        caster.translate(Math.cos(a) * 0.0062, 0.001, -Math.sin(a) * 0.0062);
+        parts.push(caster);
+      }
+      const lift = new THREE.CylinderGeometry(0.0008, 0.0012, 0.0112, 8);
+      lift.translate(0, 0.0086, 0);
+      parts.push(lift);
+      const ring = new THREE.TorusGeometry(0.0046, 0.0004, 6, 20);
+      ring.rotateX(Math.PI / 2);
+      ring.translate(0, 0.0078, 0);
+      parts.push(ring);
+      for (let i = 0; i < 3; i++) {
+        const spoke = new THREE.BoxGeometry(0.0046, 0.0005, 0.0006);
+        spoke.translate(0.0023, 0, 0);
+        spoke.rotateY((i / 3) * Math.PI * 2);
+        spoke.translate(0, 0.0078, 0);
+        parts.push(spoke);
+      }
+      const seat = new THREE.CylinderGeometry(0.0057, 0.0057, 0.0028, 20);
+      seat.translate(0, 0.0156, 0);
+      parts.push(seat);
+      const back = new THREE.BoxGeometry(0.0084, 0.0064, 0.0016);
+      back.rotateX(-0.1);
+      back.translate(0, 0.0216, -0.0053);
+      parts.push(back);
+      const stem = new THREE.BoxGeometry(0.0012, 0.0036, 0.0012);
+      stem.translate(0, 0.0182, -0.0046);
+      parts.push(stem);
+      return parts;
+    };
+
+    const chairMat = std({ color: "#17181b", roughness: 0.55 });
     const e = new THREE.Euler();
-    chairs.forEach(([x, y, r], i) => {
-      p.set(planX(x), FLOOR_Y + 0.0012, planZ(y));
-      e.set(0, r + (rand() - 0.5) * 0.18, 0);
-      q.setFromEuler(e);
-      s.set(1, 1, 1);
-      cIM.setMatrixAt(i, m4.compose(p, q, s));
-    });
-    cIM.castShadow = cIM.receiveShadow = true;
-    group.add(cIM);
+    const place = (parts: any[], list: [number, number, number][], swivel: number) => {
+      const geo = track(mergeGeometries(parts));
+      parts.forEach((g) => g.dispose());
+      const im = new THREE.InstancedMesh(geo, chairMat, list.length);
+      list.forEach(([x, y, r], i) => {
+        p.set(planX(x), FLOOR_Y + 0.0012, planZ(y));
+        e.set(0, r + (rand() - 0.5) * swivel, 0);
+        q.setFromEuler(e);
+        s.set(1, 1, 1);
+        im.setMatrixAt(i, m4.compose(p, q, s));
+      });
+      im.castShadow = im.receiveShadow = true;
+      group.add(im);
+    };
+    place(standard(), chairs, 0.6);
+    // the monitor chairs stay square to the desk
+    place(lab(), labChairs, 0.1);
   }
 
   // laptops at the two clusters, screens facing whoever sits behind them
