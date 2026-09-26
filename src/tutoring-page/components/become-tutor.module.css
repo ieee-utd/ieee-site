@@ -38,7 +38,7 @@
 }
 .subtitle {
   margin: 1rem 0 1.6rem;
-  color: var(--brand-gold);
+  color: var(--brand-sky);
   font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -91,5 +91,5 @@
   font-size: 0.95rem;
   font-weight: 600;
   font-style: italic;
-  color: var(--brand-orange);
+  color: var(--brand-gold);
 }
