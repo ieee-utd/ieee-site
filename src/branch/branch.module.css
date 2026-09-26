@@ -156,7 +156,7 @@
   padding: 0.65rem 1.1rem;
   border: none;
   border-radius: 0.7rem;
-  background: var(--brand-orange-alt);
+  background: var(--brand-orange);
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
@@ -189,8 +189,9 @@
    it opens smoothly however much content it holds. */
 .societyCardOpen {
   grid-column: 1 / -1;
+  /* light blue ring: a mid-blue one would vanish against this page's blue background */
   box-shadow:
-    0 0 0 2px var(--brand-orange-alt),
+    0 0 0 2px var(--brand-sky),
     0 16px 40px rgba(0, 0, 0, 0.14);
 }
 
