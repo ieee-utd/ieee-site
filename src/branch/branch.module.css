@@ -125,8 +125,8 @@
   display: inline-block;
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  background: var(--surface-chip);
-  color: var(--brand-blue-strong);
+  background: var(--brand-orange-alt);
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
 }
