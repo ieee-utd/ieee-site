@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./who-we-are.module.css";
-import conferenceImage from "../../assets/gridimages/grid3.jpg";
-import matchaImage from "../../assets/gridimages/grid4.jpg";
+import teamPhoto from "../../assets/gridimages/who-we-are-hackutd.jpg";
 
 const highlights = [
   "Peer tutoring",
@@ -40,6 +39,9 @@ const WhoWeAre = () => {
       id="who-we-are"
       ref={sectionRef}
     >
+      <div className={styles.photoBleed}>
+        <img src={teamPhoto} alt="IEEE UTD members at the IEEE table at HackUTD" />
+      </div>
       <div className={styles.container}>
         <div className={styles.layout}>
           <div className={styles.copy}>
@@ -60,14 +62,6 @@ const WhoWeAre = () => {
             </a>
           </div>
 
-          <div className={styles.photos}>
-            <div className={`${styles.photo} ${styles.photoPrimary}`}>
-              <img src={conferenceImage} alt="IEEE UTD members at a conference" />
-            </div>
-            <div className={`${styles.photo} ${styles.photoSecondary}`}>
-              <img src={matchaImage} alt="IEEE UTD Matcha with Murata event" />
-            </div>
-          </div>
         </div>
       </div>
     </section>

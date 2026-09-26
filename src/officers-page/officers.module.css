@@ -206,6 +206,9 @@
   border-radius: 15px;
   background: var(--surface-card);
   box-shadow: 0 10px 24px rgba(18, 62, 95, 0.08);
+  /* Give the card its own layer up front. If the browser only creates it when the hover
+     starts, the card's edges are redrawn mid-lift and a stray row of the photo flashes. */
+  will-change: transform;
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -215,8 +218,40 @@
   box-shadow: 0 18px 32px rgba(18, 62, 95, 0.16);
 }
 .outer_image {
-  overflow: hidden;
-  background: var(--surface-muted);
+  position: relative;
+  background: var(--surface-card);
+  /* No overflow clip here: the zoomed photo is cut off by the fade's mask on the wrapper and
+     by the card's own edges, and a clip on this box flickered when the card lifted. */
+}
+/* A short fade at the bottom of each photo, from the photo into the white of the card
+   below. The photo itself is faded with a mask (rather than a white layer drawn over it),
+   so there is no second layer to fall out of step with the zooming photo: the last row
+   of the photo is simply transparent and the white behind it shows through. */
+.image_wrapper {
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 74%,
+    rgba(0, 0, 0, 0.96) 76%,
+    rgba(0, 0, 0, 0.87) 80%,
+    rgba(0, 0, 0, 0.7) 85%,
+    rgba(0, 0, 0, 0.45) 90%,
+    rgba(0, 0, 0, 0.2) 93%,
+    rgba(0, 0, 0, 0.05) 96.5%,
+    transparent 98.5%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 74%,
+    rgba(0, 0, 0, 0.96) 76%,
+    rgba(0, 0, 0, 0.87) 80%,
+    rgba(0, 0, 0, 0.7) 85%,
+    rgba(0, 0, 0, 0.45) 90%,
+    rgba(0, 0, 0, 0.2) 93%,
+    rgba(0, 0, 0, 0.05) 96.5%,
+    transparent 98.5%
+  );
 }
 .image_wrapper {
   aspect-ratio: 4 / 3;
@@ -232,6 +267,7 @@
      imageZoom prop) without breaking the hover effect below. */
   --photo-zoom: 1.25;
   transform: scale(var(--photo-zoom));
+  will-change: transform;
   transition: transform 0.35s ease;
 }
 
@@ -240,6 +276,8 @@
 }
 .member__info {
   position: relative;
+  z-index: 1;
+  background: var(--surface-card);
   min-height: 115px;
   padding: 1.35rem 1.4rem 1.5rem;
   display: flex;
