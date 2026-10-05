@@ -4,16 +4,6 @@ import ieeeLogo1x from "assets/ieee-logo-140.png";
 import ieeeLogo2x from "assets/ieee-logo-280.png";
 import ieeeLogo3x from "assets/ieee-logo-420.png";
 
-/** One monthly blog post. Add new ones to a team's `blogPosts`, newest first. */
-interface BlogPost {
-  /** Month the post covers, e.g. "October 2026". */
-  month: string;
-  title: string;
-  summary: string;
-  /** Where the full post lives. Omit it and the card shows without a link. */
-  url?: string;
-}
-
 /** A titled paragraph in a team's expanded "Learn more" section. */
 interface AboutSection {
   heading: string;
@@ -32,14 +22,6 @@ interface Team {
   about?: AboutSection[];
   /** What this branch does, as three short cards. Falls back to a shared placeholder. */
   highlights?: { title: string; text: string }[];
-  /**
-   * The team's monthly blog, newest first. Leave empty until the first post is
-   * written; the card then shows a "coming soon" placeholder in its place.
-   * Example:
-   *   { month: "October 2026", title: "What we built this month",
-   *     summary: "A short recap.", url: "https://example.com/post" }
-   */
-  blogPosts: BlogPost[];
 }
 
 const branches: Team[] = [
@@ -53,7 +35,6 @@ const branches: Team[] = [
       { title: "Maintain", text: "Look after the tools, kits, and equipment that members rely on." },
       { title: "Teach", text: "Prepare the technical material other members learn from." },
     ],
-    blogPosts: [],
   },
   {
     name: "Initiatives Branch",
@@ -65,7 +46,6 @@ const branches: Team[] = [
       { title: "Organize", text: "Coordinate people, dates, and budgets so plans actually happen." },
       { title: "Follow through", text: "Track results and improve what we run each semester." },
     ],
-    blogPosts: [],
   },
   {
     name: "Marketing Branch",
@@ -77,7 +57,6 @@ const branches: Team[] = [
       { title: "Promote", text: "Run social media and announcements for events and opportunities." },
       { title: "Capture", text: "Photograph and film events for the community and our archive." },
     ],
-    blogPosts: [],
   },
   {
     name: "Outreach Branch",
@@ -89,7 +68,6 @@ const branches: Team[] = [
       { title: "Represent", text: "Speak for IEEE at events, fairs, and school visits." },
       { title: "Recruit", text: "Bring new members and volunteers into the community." },
     ],
-    blogPosts: [],
   },
   {
     name: "Tutoring Branch",
@@ -101,7 +79,6 @@ const branches: Team[] = [
       { title: "Support", text: "Help tutors and students with questions and requests." },
       { title: "Recruit tutors", text: "Find, train, and onboard new tutors each semester." },
     ],
-    blogPosts: [],
   },
   {
     name: "Web Development Branch",
@@ -113,7 +90,6 @@ const branches: Team[] = [
       { title: "Maintain", text: "Keep the site fast, accessible, and up to date." },
       { title: "Collaborate", text: "Work with other branches to publish what they need online." },
     ],
-    blogPosts: [],
   },
 ];
 
@@ -136,13 +112,6 @@ const PLACEHOLDER = {
     { title: "What you gain", text: "Experience, connections, and leadership you can point to." },
   ],
   upcoming: ["Next branch meeting", "Open role announcements", "Branch social"],
-};
-
-const BLOG_PLACEHOLDER: BlogPost = {
-  month: "This month",
-  title: "Our first monthly post is on the way",
-  summary:
-    "Each month this branch will share what it has been working on and what is coming next.",
 };
 
 export default function Branch() {
@@ -288,48 +257,6 @@ export default function Branch() {
                             <p>{item.text}</p>
                           </div>
                         ))}
-                      </div>
-
-                      <h3 className={styles.detailsHeading}>Monthly blog</h3>
-                      <div className={styles.blog}>
-                        {(team.blogPosts.length > 0
-                          ? team.blogPosts
-                          : [BLOG_PLACEHOLDER]
-                        ).map((post) => {
-                          const card = (
-                            <>
-                              <span className={styles.blogMonth}>{post.month}</span>
-                              <h4>{post.title}</h4>
-                              <p>{post.summary}</p>
-                              {post.url && (
-                                <span className={styles.blogRead}>
-                                  Read post <span aria-hidden="true">→</span>
-                                </span>
-                              )}
-                            </>
-                          );
-                          return post.url ? (
-                            <a
-                              className={`${styles.blogPost} ${styles.blogLink}`}
-                              href={post.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              tabIndex={openTeam === team.name ? 0 : -1}
-                              key={post.month + post.title}
-                            >
-                              {card}
-                            </a>
-                          ) : (
-                            <div
-                              className={`${styles.blogPost} ${
-                                team.blogPosts.length === 0 ? styles.blogSoon : ""
-                              }`}
-                              key={post.month + post.title}
-                            >
-                              {card}
-                            </div>
-                          );
-                        })}
                       </div>
 
                       <h3 className={styles.detailsHeading}>Branch meetings</h3>

@@ -13,6 +13,10 @@
   background-color: var(--brand-blue);
 }
 
+.footerInk {
+  background-color: #06080d;
+}
+
 .copyright {
   color: white;
   font-size: 0.8em;

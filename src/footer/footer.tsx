@@ -8,17 +8,19 @@ import youtubeLogo from "../assets/youtube-app-white-icon.png";
 import instagramLogo from "../assets/instagram-white-logo.png";
 
 export default function Footer() {
-  // The Branch page is blue, so the links strip and the page colour under it are too.
-  const onBranch = useLocation().pathname.indexOf("/branch") === 0;
+  // Some pages have their own colour (Branch is blue, About Us is near-black), so the links
+  // strip and the page colour under it follow the page.
+  const path = useLocation().pathname;
+  const theme = path.indexOf("/branch") === 0 ? "blue" : path.indexOf("/about") === 0 ? "ink" : null;
 
   useEffect(() => {
-    if (!onBranch) return;
+    if (!theme) return;
     const previous = document.body.style.backgroundColor;
-    document.body.style.backgroundColor = "var(--brand-blue)";
+    document.body.style.backgroundColor = theme === "blue" ? "var(--brand-blue)" : "#06080d";
     return () => {
       document.body.style.backgroundColor = previous;
     };
-  }, [onBranch]);
+  }, [theme]);
 
   const images = [
     {
@@ -72,7 +74,11 @@ export default function Footer() {
   */
   return (
     <footer>
-      <div className={`${styles["footer"]} ${onBranch ? styles.footerBlue : ""}`}>
+      <div
+        className={`${styles["footer"]} ${
+          theme === "blue" ? styles.footerBlue : theme === "ink" ? styles.footerInk : ""
+        }`}
+      >
         <ul className={styles.ul}>
           {images.map((image, index) => (
             <li key={index}>

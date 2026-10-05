@@ -22,6 +22,19 @@
   );
 }
 
+.flow-gold {
+  --flow-band: linear-gradient(
+    100deg,
+    rgba(255, 244, 214, 0) 0%,
+    rgba(255, 244, 214, 0.12) 14%,
+    rgba(255, 244, 214, 0.36) 32%,
+    rgba(255, 248, 226, 0.6) 50%,
+    rgba(255, 244, 214, 0.36) 68%,
+    rgba(255, 244, 214, 0.12) 86%,
+    rgba(255, 244, 214, 0) 100%
+  );
+}
+
 .flow-blue {
   --flow-band: linear-gradient(
     100deg,
@@ -36,6 +49,7 @@
 }
 
 .flow-orange:hover:not(:disabled),
+.flow-gold:hover:not(:disabled),
 .flow-blue:hover:not(:disabled) {
   /* !important so it also wins over a button's own `background:` shorthand on hover */
   background-image: var(--flow-band) !important;
@@ -55,6 +69,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .flow-orange:hover,
+  .flow-gold:hover,
   .flow-blue:hover {
     animation: none;
   }

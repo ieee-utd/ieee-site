@@ -16,6 +16,7 @@ import DocumentationPage from "documentation-page/documentation-page";
 import EventsPage from "./events-page/events-page";
 import SocietiesPage from "societies/societies";
 import BranchPage from "branch/branch";
+import AboutPage from "about-page/about-page";
 import CustomCursor from "./shared/custom-cursor";
 //import Calendar from "./calendar/calendar";
 
@@ -39,6 +40,7 @@ root.render(
         <Route path="/events" element={<EventsPage />} />
         <Route path="/societies" element={<SocietiesPage />} />
         <Route path="/branch" element={<BranchPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <NavBar />
       <Footer />

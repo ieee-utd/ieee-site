@@ -131,7 +131,9 @@ const officerData = [
             {
                 name: "Deston Muo",
                 title: "Web Development Coordinator",
-                image: '/Officer_Photos/Deston_Muo.png',
+                image: '/Officer_Photos/Deston_Muo.jpg',
+                imagePosition: "50% 0%",
+                imageZoom: 1.3,
                 linkedin: 'https://www.linkedin.com/in/deston-muo/',
                 email: 'dkm220002@utdallas.edu',
             },

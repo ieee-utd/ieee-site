@@ -73,6 +73,69 @@
   opacity: 0.5;
 }
 
+/* The page-forward/page-back control for the paginated tab list above
+   (see navPage in nav-bar.tsx). Same look as the links themselves (color,
+   weight, hover underline sweep) since it's a `<button>` standing in for
+   one, just reset back to plain button defaults first. Sits on the side it
+   actually points toward: back on the left of the tabs, forward on the right. */
+.navArrow {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.navArrow:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* The 4 visible tabs slide in from the direction the page just moved toward
+   (see navDirection in nav-bar.tsx), so paging through them reads as a
+   scroll/slide rather than the list just snapping to new labels. */
+@keyframes tabEnterNext {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tabEnterPrev {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tabEnterNext {
+  animation: tabEnterNext 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tabEnterPrev {
+  animation: tabEnterPrev 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabEnterNext,
+  .tabEnterPrev {
+    animation: none;
+  }
+}
+
 .sign-in-btn {
   outline: none;
   cursor: pointer;

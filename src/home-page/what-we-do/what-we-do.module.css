@@ -103,6 +103,32 @@
   aspect-ratio: 16 / 10;
   overflow: hidden;
   position: relative;
+  /* The same short fade the officer photos have, but into the card's blue: the photo's own
+     bottom edge is masked away, so the card's dark blue shows through it. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 74%,
+    rgba(0, 0, 0, 0.96) 76%,
+    rgba(0, 0, 0, 0.87) 80%,
+    rgba(0, 0, 0, 0.7) 85%,
+    rgba(0, 0, 0, 0.45) 90%,
+    rgba(0, 0, 0, 0.2) 93%,
+    rgba(0, 0, 0, 0.05) 96.5%,
+    transparent 98.5%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 74%,
+    rgba(0, 0, 0, 0.96) 76%,
+    rgba(0, 0, 0, 0.87) 80%,
+    rgba(0, 0, 0, 0.7) 85%,
+    rgba(0, 0, 0, 0.45) 90%,
+    rgba(0, 0, 0, 0.2) 93%,
+    rgba(0, 0, 0, 0.05) 96.5%,
+    transparent 98.5%
+  );
 }
 
 .imageWrap::before {

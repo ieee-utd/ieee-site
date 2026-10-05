@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./what-we-do.module.css";
-import eventsImage from "../../assets/gridimages/events.png";
+import eventsImage from "../../assets/gridimages/what-we-do-events.jpg";
 import tutoringImage from "../../assets/gridimages/tutoring.png";
-import workshopsImage from "../../assets/gridimages/workshops.png";
-import societiesImage from "../../assets/gridimages/Societies.png";
+import workshopsImage from "../../assets/gridimages/what-we-do-workshops.jpg";
+import societiesImage from "../../assets/gridimages/what-we-do-societies.jpg";
 
 const offerings = [
   {

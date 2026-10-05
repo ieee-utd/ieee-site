@@ -181,10 +181,10 @@
   );
 }
 .member__grid {
-  width: min(1150px, 100%);
+  width: min(1400px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
 }
 .fade-in-section {
