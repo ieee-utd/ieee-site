@@ -73,6 +73,16 @@
   opacity: 0.5;
 }
 
+/* A tab with no page yet (see `disabled` in nav-bar.tsx): same look as the
+   rest, just not clickable, so it doesn't invite a click that goes nowhere. */
+.linkDisabled {
+  cursor: default;
+}
+
+.linkDisabled::before {
+  display: none;
+}
+
 /* The page-forward/page-back control for the paginated tab list above
    (see navPage in nav-bar.tsx). Same look as the links themselves (color,
    weight, hover underline sweep) since it's a `<button>` standing in for

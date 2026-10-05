@@ -11,10 +11,15 @@ interface NavLink {
   label: string;
   href: string;
   external?: boolean;
+  /** No page for this one yet — rendered styled the same as the rest but
+   * un-clickable (a <span> instead of an <a>), not routed anywhere. */
+  disabled?: boolean;
 }
 
-// The desktop nav's own links, paginated 4 at a time with the arrow button
-// below rather than shown all at once (see navPage state).
+// The desktop nav's own links, paginated with the arrow button below rather
+// than shown all at once (see navPage state). Not an even split — 4 on the
+// first page, the rest on the second — so NAV_PAGE_SIZES spells out how many
+// of NAV_LINKS land on each page instead of chunking it uniformly.
 const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
@@ -22,11 +27,14 @@ const NAV_LINKS: NavLink[] = [
   { label: "Officers", href: "/officers" },
   { label: "Societies", href: "/societies" },
   { label: "Branches", href: "/branch" },
+  { label: "HKN", href: "", disabled: true },
   { label: "About Us", href: "/about" },
   { label: "Join", href: "https://linktr.ee/ieeeutdallas", external: true },
 ];
-const NAV_PAGE_SIZE = 4;
-const NAV_PAGE_COUNT = Math.ceil(NAV_LINKS.length / NAV_PAGE_SIZE);
+const NAV_PAGE_SIZES = [4, 5];
+const NAV_PAGE_COUNT = NAV_PAGE_SIZES.length;
+const navPageStart = (page: number) =>
+  NAV_PAGE_SIZES.slice(0, page).reduce((sum, n) => sum + n, 0);
 
 function NavBar() {
   const signedIn = false;
@@ -122,6 +130,11 @@ function NavBar() {
                 </a>
               </li>
               <li>
+                <span className={`${styles.mobileLink} ${styles.linkDisabled}`}>
+                  HKN
+                </span>
+              </li>
+              <li>
                 <a className={styles.mobileLink} href="/about">
                   About Us
                 </a>
@@ -177,8 +190,8 @@ function NavBar() {
               </li>
             )}
             {NAV_LINKS.slice(
-              navPage * NAV_PAGE_SIZE,
-              navPage * NAV_PAGE_SIZE + NAV_PAGE_SIZE,
+              navPageStart(navPage),
+              navPageStart(navPage) + NAV_PAGE_SIZES[navPage],
             ).map((link, i) => {
               const animClass =
                 navDirection === "next" ? styles.tabEnterNext : styles.tabEnterPrev;
@@ -187,6 +200,15 @@ function NavBar() {
               // changes, which is what makes the entrance animation replay.
               const key = `${navPage}-${link.label}`;
               const style = { animationDelay: `${i * 35}ms` };
+              if (link.disabled) {
+                return (
+                  <li key={key} className={animClass} style={style}>
+                    <span className={`${styles.link} ${styles.linkDisabled}`}>
+                      {link.label}
+                    </span>
+                  </li>
+                );
+              }
               return link.external ? (
                 <li key={key} className={animClass} style={style}>
                   <a
