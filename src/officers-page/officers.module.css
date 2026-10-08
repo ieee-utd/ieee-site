@@ -268,7 +268,12 @@
   --photo-zoom: 1.25;
   transform: scale(var(--photo-zoom));
   will-change: transform;
-  transition: transform 0.35s ease;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.35s ease;
+}
+
+.image_wrapper img.loaded {
+  opacity: 1;
 }
 
 .member__container:hover .image_wrapper img {
@@ -422,5 +427,12 @@
   }
   .group__img {
     object-position: center 20%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image_wrapper img {
+    transition: none;
+    opacity: 1;
   }
 }

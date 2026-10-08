@@ -1,6 +1,8 @@
 import { useState } from "react";
 import aboutImage from "../assets/gridimages/who-we-are-hackutd.jpg";
 import RevealOnScroll from "../shared/reveal-on-scroll";
+import Skeleton from "../shared/skeleton";
+import skeletonStyles from "../shared/skeleton.module.css";
 import styles from "./about-page.module.css";
 
 // TODO: replace with the real alumni registration form link once it exists.
@@ -60,14 +62,18 @@ const faqs = [
 
 function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [heroLoaded, setHeroLoaded] = useState(false);
 
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
+        {!heroLoaded && <Skeleton className={styles.heroImg} />}
         <img
-          className={styles.heroImg}
+          className={`${styles.heroImg} ${skeletonStyles.fadeImg} ${heroLoaded ? skeletonStyles.loaded : ""}`}
           src={aboutImage}
           alt="IEEE UT Dallas members together at the IEEE table"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
         />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>IEEE at UT Dallas</p>

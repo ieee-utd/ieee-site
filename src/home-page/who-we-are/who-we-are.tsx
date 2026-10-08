@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./who-we-are.module.css";
 import teamPhoto from "../../assets/gridimages/who-we-are-hackutd.jpg";
+import Skeleton from "../../shared/skeleton";
+import skeletonStyles from "../../shared/skeleton.module.css";
 
 const highlights = [
   "Peer tutoring",
@@ -12,6 +14,7 @@ const highlights = [
 const WhoWeAre = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
+  const [photoLoaded, setPhotoLoaded] = useState(false);
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -40,7 +43,14 @@ const WhoWeAre = () => {
       ref={sectionRef}
     >
       <div className={styles.photoBleed}>
-        <img src={teamPhoto} alt="IEEE UTD members at the IEEE table at HackUTD" />
+        {!photoLoaded && <Skeleton />}
+        <img
+          src={teamPhoto}
+          alt="IEEE UTD members at the IEEE table at HackUTD"
+          className={`${skeletonStyles.fadeImg} ${photoLoaded ? skeletonStyles.loaded : ""}`}
+          onLoad={() => setPhotoLoaded(true)}
+          onError={() => setPhotoLoaded(true)}
+        />
       </div>
       <div className={styles.container}>
         <div className={styles.layout}>

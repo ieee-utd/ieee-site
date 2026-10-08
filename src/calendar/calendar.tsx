@@ -256,7 +256,10 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
         <div style={{ padding: "20px", color: "red", textAlign: "center" }}>
           Error: {error}
           <button
-            onClick={refetch}
+            // explicit {force:true}, not just `onClick={refetch}` — a manual
+            // retry should always hit the network, not quietly serve
+            // whatever's still in the cache
+            onClick={() => refetch({ force: true })}
             disabled={rateLimited}
             style={{ marginLeft: "10px" }}
           >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./tutoring-page.module.css";
 import tutorialImage from "../assets/gridimages/grid2.jpg";
 import CoursesSection from "./components/courses-section";
@@ -6,8 +6,12 @@ import LocationSection from "./components/location-section";
 import BecomeTutor from "./components/become-tutor";
 import Calendar from "../calendar/calendar";
 import RevealOnScroll from "../shared/reveal-on-scroll";
+import Skeleton from "../shared/skeleton";
+import skeletonStyles from "../shared/skeleton.module.css";
 
 const TutoringPage = () => {
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
   return (
     <div className={styles.container}>
       <section className={styles.hero_container}>
@@ -18,10 +22,13 @@ const TutoringPage = () => {
             Explore available courses
           </a>
         </div>
+        {!heroLoaded && <Skeleton className={styles.hero_img} />}
         <img
-          className={styles.hero_img}
+          className={`${styles.hero_img} ${skeletonStyles.fadeImg} ${heroLoaded ? skeletonStyles.loaded : ""}`}
           src={tutorialImage}
           alt="Tutoring Session"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
         />
       </section>
       <RevealOnScroll>

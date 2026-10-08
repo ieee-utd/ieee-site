@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./nav-bar.module.css";
 import ieeeLogo from "../assets/ieeelogotransparent.png";
 import accountIcon from "../assets/account-white-icon.png";
@@ -27,7 +28,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "Officers", href: "/officers" },
   { label: "Societies", href: "/societies" },
   { label: "Branches", href: "/branch" },
-  { label: "HKN", href: "", disabled: true },
+  { label: "HKN", href: "/hkn" },
   { label: "About Us", href: "/about" },
   { label: "Join", href: "https://linktr.ee/ieeeutdallas", external: true },
 ];
@@ -36,10 +37,27 @@ const NAV_PAGE_COUNT = NAV_PAGE_SIZES.length;
 const navPageStart = (page: number) =>
   NAV_PAGE_SIZES.slice(0, page).reduce((sum, n) => sum + n, 0);
 
+// Which page a given path's tab lives on, so arriving at a page-2 tab (e.g.
+// clicking HKN while on page 2, which reloads the whole site since these are
+// plain links) lands back on page 2 instead of resetting to page 1.
+const pageForPath = (pathname: string): number => {
+  let cursor = 0;
+  for (let page = 0; page < NAV_PAGE_SIZES.length; page++) {
+    const pageSize = NAV_PAGE_SIZES[page];
+    const onThisPage = NAV_LINKS.slice(cursor, cursor + pageSize).some(
+      (link) => !link.external && link.href === pathname,
+    );
+    if (onThisPage) return page;
+    cursor += pageSize;
+  }
+  return 0;
+};
+
 function NavBar() {
   const signedIn = false;
+  const location = useLocation();
   const [isOverLightSection, setIsOverLightSection] = useState(false);
-  const [navPage, setNavPage] = useState(0);
+  const [navPage, setNavPage] = useState(() => pageForPath(location.pathname));
   // Which way the tab strip last moved, so the newly-shown tabs can slide in
   // from the side they conceptually came from instead of just popping in.
   const [navDirection, setNavDirection] = useState<"next" | "prev">("next");
@@ -55,6 +73,13 @@ function NavBar() {
     setNavDirection("next");
     setNavPage((page) => Math.min(page + 1, NAV_PAGE_COUNT - 1));
   };
+
+  // Belt and braces alongside the lazy initial state above: keeps the active
+  // tab's page in view if the route ever changes without a full reload (back/
+  // forward navigation, or future client-side routing).
+  useEffect(() => {
+    setNavPage(pageForPath(location.pathname));
+  }, [location.pathname]);
 
   // Sections marked data-nav-surface="light" (white/off-white backgrounds)
   // make the nav switch to dark grey text/icons while scrolled behind them,
@@ -130,9 +155,9 @@ function NavBar() {
                 </a>
               </li>
               <li>
-                <span className={`${styles.mobileLink} ${styles.linkDisabled}`}>
+                <a className={styles.mobileLink} href="/hkn">
                   HKN
-                </span>
+                </a>
               </li>
               <li>
                 <a className={styles.mobileLink} href="/about">

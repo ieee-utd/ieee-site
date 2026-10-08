@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { readCache, writeCache } from '../shared/fetch-cache';
 
 export interface CalendarEvent {
   id: string;
@@ -26,6 +27,11 @@ interface GoogleCalendarEvent {
 
 const MAX_REQUESTS_PER_WINDOW = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+// The schedule for a given week is cached for this long, so navigating
+// between the home page and the tutoring page — both of which render this
+// same calendar — doesn't re-fetch from Google every time, and a burst of
+// page loads can't run into the rate limit above.
+const CACHE_TTL_MS = 10 * 60 * 1000;
 const CALENDAR_ID = 'cfe917af9f13b486cd7fb60a5ce55a091b2999b87a265a7b8e4523d96764d082@group.calendar.google.com';
 const API_KEY = 'AIzaSyAGGIRAwgSowT72FRQ4CaIvtWwELFBhtws';
 
@@ -84,7 +90,22 @@ export const useCalendarEvents = () => {
   const [rateLimited, setRateLimited] = useState(false);
   const requestTimestampsRef = useRef<number[]>([]);
 
-  const fetchCalendarEvents = useCallback(async () => {
+  const fetchCalendarEvents = useCallback(async (options?: { force?: boolean }) => {
+    const { monday, friday } = getCurrentWeekBounds();
+    // Keyed by the week's Monday, so the cache naturally starts fresh once
+    // a new week begins instead of needing its own expiry logic for that.
+    const cacheKey = `calendar-events:${monday.toISOString().slice(0, 10)}`;
+
+    if (!(options && options.force)) {
+      const cached = readCache<CalendarEvent[]>(cacheKey, CACHE_TTL_MS);
+      if (cached) {
+        setEvents(cached);
+        setLoading(false);
+        setError(null);
+        return;
+      }
+    }
+
     const now = Date.now();
     requestTimestampsRef.current = requestTimestampsRef.current.filter(
       (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
@@ -104,7 +125,6 @@ export const useCalendarEvents = () => {
       setLoading(true);
       setError(null);
 
-      const { monday, friday } = getCurrentWeekBounds();
       const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
         CALENDAR_ID
       )}/events?key=${API_KEY}&timeMin=${monday.toISOString()}&timeMax=${friday.toISOString()}&singleEvents=true&orderBy=startTime`;
@@ -115,7 +135,9 @@ export const useCalendarEvents = () => {
       }
 
       const data = await response.json();
-      setEvents(transformGoogleEvents(data.items || []));
+      const transformed = transformGoogleEvents(data.items || []);
+      setEvents(transformed);
+      writeCache(cacheKey, transformed);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load calendar events');
       console.error('Error fetching calendar events:', err);

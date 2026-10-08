@@ -157,7 +157,6 @@ export default function CampusScene({
       ro = new ResizeObserver(resize);
       ro.observe(host);
 
-      const lidBaseY = world.lid.position.y;
       let spanIndex = SPANS.length - 1;
       let lastSpan = 0;
 
@@ -198,18 +197,26 @@ export default function CampusScene({
         sun.target.position.copy(sunCentre);
         sun.position.copy(sunCentre).addScaledVector(sunDir, 14);
 
-        // ECSN's upper floors lift clear (far enough that their shadow leaves
-        // the interior too), then settle back once the camera has climbed out.
+        // ECSN's upper floors dissolve away in place as the camera dives down
+        // into the roof — rather than physically lifting off and flying clear
+        // — then rebuild the same way once the camera has climbed back out.
+        // Shadow-casting is switched off for the same window (not just tied
+        // to opacity, since a shadow map doesn't fade with material opacity)
+        // so a half-transparent roof doesn't still darken the interior below
+        // it the way its old, fully-opaque self did.
         const off = ramp(t, BEATS.roofOff) * (1 - ramp(t, BEATS.roofOn));
         const fade =
           ramp(t, [BEATS.roofOff[0] + 0.03, BEATS.roofOff[1]]) *
           (1 - ramp(t, [BEATS.roofOn[0], BEATS.roofOn[1] - 0.02]));
-        world.lid.position.y = lidBaseY + off * 2.6;
         world.lidMaterials.forEach((m) => {
           m.opacity = 1 - fade;
           m.depthWrite = fade < 0.02;
         });
         world.lid.visible = fade < 0.995;
+        const lidCastsShadow = off < 0.5;
+        world.lidMeshes.forEach((m) => {
+          m.castShadow = lidCastsShadow;
+        });
 
         // Room lights come up as the camera comes down into the building.
         const glow = ramp(t, BEATS.lightsUp) * (1 - ramp(t, BEATS.lightsDown));

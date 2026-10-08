@@ -2,6 +2,7 @@ import styles from "./officers.module.css";
 import { FaLinkedin } from "react-icons/fa";
 import { SiMicrosoftoutlook } from "react-icons/si";
 import blank from "../assets/IEEE/placeholder.jpeg";
+import Skeleton from "../shared/skeleton";
 import { useLayoutEffect, useRef, useState } from "react";
 
 interface Supervisor {
@@ -61,15 +62,19 @@ export default function Member({
   imagePosition,
 }: MemberProps) {
   const [isSupervisorOpen, setIsSupervisorOpen] = useState(false);
-  
+  // Starts "loaded" when there's no image at all (nothing to wait on, so no
+  // skeleton would ever clear) — real photos start unloaded and fade in.
+  const [loaded, setLoaded] = useState(!image);
+
   return (
     <div className={styles.member__container}>
       <div className={styles.outer_image}>
         <div className={styles.image_wrapper}>
+          {!loaded && <Skeleton />}
           <img
             src={image}
             alt={`${name}, ${title}`}
-            className={styles.member__image}
+            className={`${styles.member__image} ${loaded ? styles.loaded : ""}`}
             style={
               imageZoom !== undefined || imagePosition !== undefined
                 ? ({
@@ -78,6 +83,7 @@ export default function Member({
                   } as React.CSSProperties)
                 : undefined
             }
+            onLoad={() => setLoaded(true)}
             onError={(e) => {
               // Swap to alternative imported placeholder image on error
               if (e.currentTarget.src !== blank) {

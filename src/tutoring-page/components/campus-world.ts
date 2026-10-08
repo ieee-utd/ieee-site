@@ -33,9 +33,16 @@ export const ECSN_LID_H = STOREY * 3;
 type FacadeKind = "brick" | "panel";
 
 /**
- * A repeating storey-and-bay facade. The tile is `tileW` wide and two storeys
- * tall in world units, which is what ExtrudeGeometry's side UVs are measured
- * in, so windows line up with the storeys on every wall.
+ * A repeating storey-and-bay facade, plus a matching bump map so the wall
+ * reads as genuinely coming forward of the recessed glass under the scene's
+ * directional light, instead of the depth being only a painted-on shadow
+ * that doesn't react to light or camera angle. Both canvases are drawn in
+ * the same loop from the same coordinates, so the relief lines up exactly
+ * with the windows it belongs to.
+ *
+ * The tile is `tileW` wide and two storeys tall in world units, which is
+ * what ExtrudeGeometry's side UVs are measured in, so windows line up with
+ * the storeys on every wall.
  */
 function facadeTexture(
   THREE: any,
@@ -51,30 +58,47 @@ function facadeTexture(
   g.fillStyle = wall;
   g.fillRect(0, 0, 512, 512);
 
+  // Bump map: brighter = pushed toward the camera (the wall's own brick/panel
+  // face and the sills it casts light onto), darker = pushed back (the glass
+  // sitting behind its frame). Mid-grey is the wall's own resting height.
+  const bc = document.createElement("canvas");
+  bc.width = 512;
+  bc.height = 512;
+  const bg = bc.getContext("2d")!;
+  bg.fillStyle = "#9a9a9a";
+  bg.fillRect(0, 0, 512, 512);
+
   if (kind === "brick") {
     g.fillStyle = "rgba(0,0,0,0.055)";
     for (let y = 0; y < 512; y += 8) g.fillRect(0, y, 512, 1);
     g.fillStyle = "rgba(255,255,255,0.05)";
     for (let y = 4; y < 512; y += 16) g.fillRect(0, y, 512, 2);
+    // coursing reads as a faint ridge in the relief too, not just a tint
+    bg.fillStyle = "#8c8c8c";
+    for (let y = 0; y < 512; y += 8) bg.fillRect(0, y, 512, 1);
   }
 
   const bays = 6;
   const bayW = 512 / bays;
   for (let s = 0; s < 2; s++) {
     const top = s * 256;
-    // slab band between storeys
+    // slab band between storeys — a ledge, so it sits proud like the wall
     g.fillStyle = "rgba(0,0,0,0.12)";
     g.fillRect(0, top + 238, 512, 18);
     g.fillStyle = "rgba(255,255,255,0.18)";
     g.fillRect(0, top + 236, 512, 3);
+    bg.fillStyle = "#d6d6d6";
+    bg.fillRect(0, top + 236, 512, 20);
     for (let b = 0; b < bays; b++) {
-      const x = b * bayW + 13;
-      const w = bayW - 26;
+      // wide piers, narrow windows — this is a wall with punched openings
+      // in it, not a glass curtain wall with a frame around it
+      const x = b * bayW + 24;
+      const w = bayW - 48;
       const y = top + 58;
       const h = 132;
       // recessed frame
-      g.fillStyle = "rgba(0,0,0,0.28)";
-      g.fillRect(x - 4, y - 4, w + 8, h + 8);
+      g.fillStyle = "rgba(0,0,0,0.36)";
+      g.fillRect(x - 6, y - 6, w + 12, h + 12);
       // glass with a soft sky reflection
       const grad = g.createLinearGradient(0, y, 0, y + h);
       grad.addColorStop(0, "#c5dbe8");
@@ -87,21 +111,43 @@ function facadeTexture(
       g.fillRect(x + w / 2 - 2, y, 4, h);
       g.fillRect(x, y + h * 0.42, w, 3);
       // sill
-      g.fillStyle = "rgba(255,255,255,0.35)";
-      g.fillRect(x - 6, y + h + 4, w + 12, 5);
+      g.fillStyle = "rgba(255,255,255,0.45)";
+      g.fillRect(x - 8, y + h + 4, w + 16, 7);
+
+      // the whole window opening steps well back from the wall face...
+      bg.fillStyle = "#333333";
+      bg.fillRect(x - 6, y - 6, w + 12, h + 12);
+      // ...the glass itself sits further back still, deep behind its frame...
+      bg.fillStyle = "#080808";
+      bg.fillRect(x, y, w, h);
+      // ...and the mullions and sill are proud of the glass, level with the wall
+      bg.fillStyle = "#b8b8b8";
+      bg.fillRect(x + w / 2 - 2, y, 4, h);
+      bg.fillRect(x, y + h * 0.42, w, 3);
+      bg.fillStyle = "#f2f2f2";
+      bg.fillRect(x - 8, y + h + 4, w + 16, 7);
     }
   }
 
-  const tex = new THREE.CanvasTexture(c);
-  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.anisotropy = aniso;
-  tex.flipY = false; // side UVs run v = 1 - z, so row 0 is the storey's top
-  const tileW = 0.24;
-  const tileH = STOREY * 2;
-  tex.repeat.set(1 / tileW, 1 / tileH);
-  return tex;
+  const makeTex = (canvas: HTMLCanvasElement, srgb: boolean) => {
+    const t = new THREE.CanvasTexture(canvas);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    if (srgb) t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = aniso;
+    t.flipY = false; // side UVs run v = 1 - z, so row 0 is the storey's top
+    const tileW = 0.24;
+    const tileH = STOREY * 2;
+    t.repeat.set(1 / tileW, 1 / tileH);
+    return t;
+  };
+
+  return { map: makeTex(c, true), bump: makeTex(bc, false) };
 }
+
+// How far the bump map pushes the wall's piers/sills out from the recessed
+// glass, in world units. Small relative to a storey (STOREY = 0.085), but
+// enough for the sun to carve real highlight/shadow across each facade.
+const FACADE_BUMP_SCALE = 0.042;
 
 function mix(hex: string, to: string, t: number) {
   const a = parseInt(hex.slice(1), 16);
@@ -298,23 +344,22 @@ export function buildWorld(
     }
   };
 
-  const facades = new Map<string, any>();
+  const facades = new Map<string, { map: any; bump: any }>();
   const facadeFor = (roof: string, kind: FacadeKind) => {
     const key = roof + kind;
-    let tex = facades.get(key);
-    if (!tex) {
-      tex = track(
-        facadeTexture(
-          THREE,
-          kind === "brick" ? mix(roof, "#e9dccf", 0.45) : mix(roof, "#f4f1ec", 0.55),
-          "#5f7f96",
-          kind,
-          aniso,
-        ),
+    let pair = facades.get(key);
+    if (!pair) {
+      const built = facadeTexture(
+        THREE,
+        kind === "brick" ? mix(roof, "#e9dccf", 0.45) : mix(roof, "#f4f1ec", 0.55),
+        "#5f7f96",
+        kind,
+        aniso,
       );
-      facades.set(key, tex);
+      pair = { map: track(built.map), bump: track(built.bump) };
+      facades.set(key, pair);
     }
-    return tex;
+    return pair;
   };
 
   const extrude = (
@@ -350,9 +395,12 @@ export function buildWorld(
     const roofMat = track(
       new THREE.MeshStandardMaterial({ color: b.roof, roughness: 0.85 }),
     );
+    const facade = facadeFor(b.roof, kind);
     const wallMat = track(
       new THREE.MeshStandardMaterial({
-        map: facadeFor(b.roof, kind),
+        map: facade.map,
+        bumpMap: facade.bump,
+        bumpScale: FACADE_BUMP_SCALE,
         roughness: 0.8,
       }),
     );
@@ -367,9 +415,12 @@ export function buildWorld(
   });
 
   // ---- ECSN: shell, open to the sky, plus a liftable lid ------------------
+  const ecsnFacade = facadeFor(ECSN_ROOF, "brick");
   const ecsnWall = track(
     new THREE.MeshStandardMaterial({
-      map: facadeFor(ECSN_ROOF, "brick"),
+      map: ecsnFacade.map,
+      bumpMap: ecsnFacade.bump,
+      bumpScale: FACADE_BUMP_SCALE,
       roughness: 0.8,
       side: THREE.DoubleSide,
     }),
@@ -392,7 +443,9 @@ export function buildWorld(
   );
   const lidWall = track(
     new THREE.MeshStandardMaterial({
-      map: facadeFor(ECSN_ROOF, "brick"),
+      map: ecsnFacade.map,
+      bumpMap: ecsnFacade.bump,
+      bumpScale: FACADE_BUMP_SCALE,
       roughness: 0.8,
       transparent: true,
     }),

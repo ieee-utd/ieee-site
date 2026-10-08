@@ -4,6 +4,7 @@ import eventsImage from "../../assets/gridimages/what-we-do-events.jpg";
 import tutoringImage from "../../assets/gridimages/tutoring.png";
 import workshopsImage from "../../assets/gridimages/what-we-do-workshops.jpg";
 import societiesImage from "../../assets/gridimages/what-we-do-societies.jpg";
+import Skeleton from "../../shared/skeleton";
 
 const offerings = [
   {
@@ -43,6 +44,11 @@ const offerings = [
 const WhatWeDo = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
+  // One loaded flag per card, keyed by title, so each image's skeleton
+  // clears independently instead of waiting on all four.
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+  const markLoaded = (title: string) =>
+    setLoadedImages((prev) => ({ ...prev, [title]: true }));
 
   useEffect(() => {
     const node = sectionRef.current;
@@ -84,7 +90,18 @@ const WhatWeDo = () => {
           {offerings.map((item) => (
             <article className={styles.card} key={item.title}>
               <div className={styles.imageWrap}>
-                <img src={item.image} alt={item.alt} />
+                {!loadedImages[item.title] && <Skeleton />}
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  // .loaded here combines with .imageWrap img's own opacity +
+                  // hover-zoom transition in what-we-do.module.css (keeping
+                  // this a className, not an inline style, is what lets
+                  // prefers-reduced-motion still turn both off there)
+                  className={loadedImages[item.title] ? styles.loaded : ""}
+                  onLoad={() => markLoaded(item.title)}
+                  onError={() => markLoaded(item.title)}
+                />
               </div>
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{item.title}</h3>

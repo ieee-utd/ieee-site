@@ -1,0 +1,60 @@
+/* The grey placeholder bar/block, shown wherever a photo or other async
+   content hasn't loaded in yet. A sweeping shimmer gives it a "still working
+   on it" feel instead of reading as a dead grey box. */
+.skeleton {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: #e4e9ef;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+    /* Still reads as "placeholder, not final content" without the sweep. */
+    opacity: 0.5;
+  }
+}
+
+/* Pair for the real `<img>` next to a Skeleton: invisible until it loads,
+   then a quick fade-in. Only safe to use on an element with no transition
+   of its own already (a hover-zoom transform, for instance) — where one
+   exists, combine the two transitions in that file's own CSS instead, since
+   a second `transition` declaration doesn't merge with the first, it wins
+   or loses outright based on selector specificity. */
+.fadeImg {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.fadeImg.loaded {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fadeImg {
+    transition: none;
+  }
+}

@@ -278,13 +278,21 @@ export function buildInterior(
     z: number,
     ry = 0,
     transparent = true,
+    // Signage read correctly from only one side in reality — from the back
+    // you'd see a blank panel, not a mirrored copy of the text. DoubleSide
+    // stays the default (fine for icons/posters the camera only ever passes
+    // on their front), but anything the loop views from both sides (like the
+    // window sign the camera later looks back at from inside the room) should
+    // pass `oneSided: true` so it simply isn't drawn from behind instead of
+    // showing backwards text.
+    oneSided = false,
   ) => {
     const geo = track(new THREE.PlaneGeometry(w, h));
     const mat = std({
       map: tex,
       transparent,
       roughness: 0.6,
-      side: THREE.DoubleSide,
+      side: oneSided ? THREE.FrontSide : THREE.DoubleSide,
     });
     const m = new THREE.Mesh(geo, mat);
     m.position.set(x, y, z);
@@ -483,9 +491,13 @@ export function buildInterior(
     for (let x = RM.x0; x <= RM.x1; x += 46.4) {
       box(0.0022, WALL_H - 0.026, 0.0028, planX(x), FLOOR_Y + 0.018 + (WALL_H - 0.026) / 2, rz0, trimMat, false);
     }
+    // oneSided: the camera comes back past this window from inside the room
+    // later in the loop (see BEATS in campus-camera.ts); without this it would
+    // show the text mirrored from that side instead of just the blank back
+    // of the sign.
     const ieee = track(canvasTex(THREE, signCanvas("ieee"), aniso));
-    plane(0.13, 0.065, ieee, planX(660), FLOOR_Y + WALL_H * 0.56, rz0 - 0.0018, Math.PI);
-    plane(0.13, 0.065, ieee, planX(520), FLOOR_Y + WALL_H * 0.56, rz0 - 0.0018, Math.PI);
+    plane(0.13, 0.065, ieee, planX(660), FLOOR_Y + WALL_H * 0.56, rz0 - 0.0018, Math.PI, true, true);
+    plane(0.13, 0.065, ieee, planX(520), FLOOR_Y + WALL_H * 0.56, rz0 - 0.0018, Math.PI, true, true);
   }
 
   // ---- layout, taken from the hand-drawn plan of the real room -------------

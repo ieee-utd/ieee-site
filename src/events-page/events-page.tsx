@@ -1,6 +1,9 @@
+import { useState } from "react";
 import eventImage from "../assets/gridimages/events.jpg";
 import EventsCarousel from "./components/events-carousel";
 import RevealOnScroll from "../shared/reveal-on-scroll";
+import Skeleton from "../shared/skeleton";
+import skeletonStyles from "../shared/skeleton.module.css";
 import styles from "./events-page.module.css";
 
 const eventHighlights = [
@@ -22,6 +25,8 @@ const eventHighlights = [
 ];
 
 function EventsPage() {
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
@@ -36,10 +41,13 @@ function EventsPage() {
             View this week&apos;s events
           </a>
         </div>
+        {!heroLoaded && <Skeleton className={styles.heroImg} />}
         <img
-          className={styles.heroImg}
+          className={`${styles.heroImg} ${skeletonStyles.fadeImg} ${heroLoaded ? skeletonStyles.loaded : ""}`}
           src={eventImage}
           alt="Students attending an IEEE event"
+          onLoad={() => setHeroLoaded(true)}
+          onError={() => setHeroLoaded(true)}
         />
       </section>
 
