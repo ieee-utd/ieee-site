@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import styles from "./calendar.module.css";
 import { CalendarEvent, useCalendarEvents } from "./use-calendar-events";
+import { COURSES, courseCodePatterns } from "../tutoring-page/courseMappings";
 
 interface CalendarProps {
   config?: {
@@ -17,7 +18,7 @@ interface EventLayout extends CalendarEvent {
   width: number;
   zIndex: number;
   hasOverlappingLonger: boolean;
-  tutorGradient: string;
+  courseGradient: string;
 }
 
 const parseDurationToMinutes = (duration: string): number => {
@@ -27,12 +28,24 @@ const parseDurationToMinutes = (duration: string): number => {
   return hours * 60 + minutes;
 };
 
-const extractTutorName = (title: string): string => {
-  const normalized = title.replace(/\s+/g, " ").trim();
-  return normalized.split(/\s*\(/)[0].trim();
+// Same match used on the Courses section (courses-section.tsx) to group
+// tutor schedules by class, reused here so a session is colored by the same
+// course it's filed under there.
+const matchCourseCode = (title: string): string | null => {
+  const match = courseCodePatterns.find(({ pattern }) => pattern.test(title));
+  return match ? match.code : null;
 };
 
-const TUTOR_COLOR_PALETTE = [
+// Index into COLOR_PALETTE for a given course code, fixed by that course's
+// own position in COURSES rather than by which courses happen to have
+// events in a given week — so a class keeps the same color every week.
+const courseIndex = (courseCode: string | null): number => {
+  if (!courseCode) return 0;
+  const index = COURSES.findIndex((c) => c.code === courseCode);
+  return index === -1 ? 0 : index;
+};
+
+const COLOR_PALETTE = [
   "#b0e2ff", // light sky blue
   "#87ceff", // sky blue
   "#6495ed", // cornflower blue
@@ -72,13 +85,11 @@ const hexToHsl = (hex: string): [number, number, number] => {
   return [h * 360, s * 100, l * 100];
 };
 
-// Deterministic per-tutor gradient keyed by that tutor's position in the
-// full, sorted tutor roster. Each tutor is assigned one of the named colors
-// in TUTOR_COLOR_PALETTE, then a light/dark pair of that same hue is used
-// as the gradient stops so the gradient stays clearly visible.
-const getTutorGradient = (tutorIndex: number): string => {
-  const baseColor =
-    TUTOR_COLOR_PALETTE[tutorIndex % TUTOR_COLOR_PALETTE.length];
+// Deterministic per-course gradient keyed by that course's fixed position in
+// COURSES — so every tutor teaching the same class gets the same color,
+// using the same light/dark pairing of one palette hue as before.
+const getCourseGradient = (index: number): string => {
+  const baseColor = COLOR_PALETTE[index % COLOR_PALETTE.length];
   const [hue, saturation, lightness] = hexToHsl(baseColor);
   const lightnessStart = Math.max(0, lightness - 10);
   const lightnessEnd = Math.min(100, lightness + 10);
@@ -97,13 +108,6 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
   );
   const [hoveredEventId, setHoveredEventId] = useState<string | null>(null);
   const { events, loading, error, rateLimited, refetch } = useCalendarEvents();
-
-  const tutorIndexByName = useMemo(() => {
-    const uniqueTutors = Array.from(
-      new Set(events.map((event) => extractTutorName(event.title))),
-    ).sort();
-    return new Map(uniqueTutors.map((tutor, index) => [tutor, index]));
-  }, [events]);
 
   const convertTo12HourFormat = (hour: number, minute: number): string => {
     const period = hour >= 12 ? "PM" : "AM";
@@ -175,19 +179,16 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
           }
         }
 
-        const foundTutorIndex = tutorIndexByName.get(
-          extractTutorName(event.title),
-        );
-        const tutorGradient = getTutorGradient(
-          foundTutorIndex !== undefined ? foundTutorIndex : 0,
+        const courseGradient = getCourseGradient(
+          courseIndex(matchCourseCode(event.title)),
         );
 
-        return { ...event, hasOverlappingLonger, tutorGradient };
+        return { ...event, hasOverlappingLonger, courseGradient };
       });
 
       const columns: (CalendarEvent & {
         hasOverlappingLonger: boolean;
-        tutorGradient: string;
+        courseGradient: string;
       })[][] = [];
       const endTimes: number[] = [];
 
@@ -223,7 +224,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
             width: 100 / totalCols,
             zIndex,
             hasOverlappingLonger: event.hasOverlappingLonger || false,
-            tutorGradient: event.tutorGradient,
+            courseGradient: event.courseGradient,
           };
         }),
       );
@@ -320,7 +321,7 @@ const Calendar: React.FC<CalendarProps> = ({ config = {} }) => {
                           left: `calc(${event.left}% - 2px)`,
                           width: `calc(${event.width}% - 2px)`,
                           zIndex: event.zIndex,
-                          backgroundImage: event.tutorGradient,
+                          backgroundImage: event.courseGradient,
                         }}
                         onClick={() => setSelectedEvent(event)}
                         onMouseEnter={() => setHoveredEventId(event.id)}
