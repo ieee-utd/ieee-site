@@ -52,20 +52,20 @@ const offerings: Offering[] = [
       "Join a technical society and work with students who care about the same topics.",
   },
   {
-    title: "Branches",
-    image: branchesImage,
-    href: "/branch",
-    alt: "IEEE UTD branch team",
-    description:
-      "Pick a branch — Engineering, Initiatives, and more — and work with a team on something ongoing.",
-  },
-  {
     title: "HKN",
     image: hknImage,
     href: "/hkn",
     alt: "IEEE-HKN members tabling at UT Dallas",
     description:
       "Eta Kappa Nu is IEEE's honor society, recognizing Scholarship, Character, and Attitude.",
+  },
+  {
+    title: "Branches",
+    image: branchesImage,
+    href: "/branch",
+    alt: "IEEE UTD branch team",
+    description:
+      "Pick a branch — Engineering, Initiatives, and more — and work with a team on something ongoing.",
   },
 ];
 
