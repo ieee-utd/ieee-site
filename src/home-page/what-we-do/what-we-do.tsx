@@ -4,7 +4,8 @@ import eventsImage from "../../assets/gridimages/what-we-do-events.jpg";
 import tutoringImage from "../../assets/gridimages/tutoring.png";
 import workshopsImage from "../../assets/gridimages/what-we-do-workshops.jpg";
 import societiesImage from "../../assets/gridimages/what-we-do-societies.jpg";
-import hknImage from "../../assets/gridimages/hkn-tabling.jpg";
+import hknImage from "../../assets/gridimages/hkn-tabling-2.jpg";
+import branchesImage from "../../assets/gridimages/branches-group.jpg";
 import Skeleton from "../../shared/skeleton";
 
 interface Offering {
@@ -52,6 +53,7 @@ const offerings: Offering[] = [
   },
   {
     title: "Branches",
+    image: branchesImage,
     href: "/branch",
     alt: "IEEE UTD branch team",
     description:
