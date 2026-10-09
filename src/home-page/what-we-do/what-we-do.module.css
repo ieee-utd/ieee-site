@@ -55,7 +55,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.35rem;
 }
 
@@ -91,6 +91,14 @@
 
 .revealed .card:nth-child(4) {
   transition-delay: 0.32s;
+}
+
+.revealed .card:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+.revealed .card:nth-child(6) {
+  transition-delay: 0.48s;
 }
 
 .card:hover {
@@ -156,6 +164,28 @@
   transform: scale(1.05);
 }
 
+/* A clearly-marked spot for a card with no real photo yet (Branches). */
+.photoSpot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+}
+
+.photoSpot span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+}
+
 .cardBody {
   display: flex;
   flex-direction: column;
@@ -211,6 +241,10 @@
 @media screen and (max-width: 900px) {
   .whatWeDo {
     padding: 4.5rem 6%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

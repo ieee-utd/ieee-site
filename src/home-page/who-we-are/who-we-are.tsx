@@ -67,8 +67,8 @@ const WhoWeAre = () => {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <a href="#what-we-do" className={styles.learnMoreButton}>
-              <span className={styles.learnMoreText}>See what we do</span>
+            <a href="/about" className={styles.learnMoreButton}>
+              <span className={styles.learnMoreText}>Learn more about us</span>
             </a>
           </div>
 

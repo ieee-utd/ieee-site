@@ -46,6 +46,20 @@ const societies: Society[] = [
     description:
       "Explore electrical power systems, renewable energy, smart grids, and the technologies shaping the future of energy.",
     category: "Power & Energy",
+    about: [
+      {
+        heading: "What it is",
+        text: "PES is a technical community within IEEE UTD focused on power, energy, and the technologies that make modern electrical systems possible. We aim to expose students to projects and workshops involving renewable energy, power electronics, energy storage, power generation, and the electrical grid.",
+      },
+      {
+        heading: "Who it is for",
+        text: "PES is for students interested in energy, electrical engineering, electronics, renewable energy, sustainability, or simply learning how the systems that power the world actually work. No prior experience is required. Students with any background in engineering or just interested in PES are welcome.",
+      },
+      {
+        heading: "What members get out of it",
+        text: "Members receive experience designing and building real energy-related projects while developing solid engineering, problem-solving, and teamwork skills. They are expected to gain experience with electrical hardware and power systems, build a resume project portfolio, and connect with other students interested in energy and engineering. PES also aims to get students exposed to power and energy industries and the different career paths within it.",
+      },
+    ],
     blogPosts: [],
   },
   {
@@ -60,6 +74,20 @@ const societies: Society[] = [
     description:
       "Explore robotics, automation, intelligent systems, and the technologies driving the future of autonomous machines.",
     category: "Robotics & Automation",
+    about: [
+      {
+        heading: "What it is",
+        text: "The Robotics and Automation Society (RAS) is an engineering branch of IEEE UTD that focuses on the embedded hardware and software side of engineering, where students can learn how to apply concepts about mechanical design, electrical fabrication, and software programming into a full-scale project. Members learn how to work hands-on with elements of robotics and face technical problems in a group environment.",
+      },
+      {
+        heading: "Who it is for",
+        text: "RAS is open to students across any discipline with an interest in embedded, electrical, mechanical, or software engineering. Projects introduced through RAS are designed to help students build their skills from the ground up, making the organization accessible to beginners in electrical or mechanical engineering, as well as experienced students from other majors who want to develop their EE/ME skills.",
+      },
+      {
+        heading: "What members get out of it",
+        text: "Whether that be an autonomous race car, object organizer, maze speedrunner, or another robotics project, members of RAS will learn every step that goes into developing a robotics-focused electrical project. Everything including research, design, and implementation will be taught as part of RAS, so students can complete the school year knowing they played a crucial role in a real embedded project while also picking up new knowledge in various software programs (KiCad, SolidWorks, etc.) and developing the soft skills needed to work effectively as a multidisciplinary team.",
+      },
+    ],
     blogPosts: [],
   },
   {
@@ -88,6 +116,20 @@ const societies: Society[] = [
     description:
       "Explore integrated circuits, semiconductor technology, chip design, and the hardware powering modern electronics.",
     category: "Solid-State Circuits",
+    about: [
+      {
+        heading: "What it is",
+        text: "IEEE SSCS at UTD focuses on digital design, hardware accelerators, and FPGAs, with plans to expand into VLSI and mixed-signal design as the branch grows. We aim to build an industry-ready chip design community through collaborative projects, reusable educational infrastructure, and participation in hardware competitions.",
+      },
+      {
+        heading: "Who it is for",
+        text: "SSCS is for students interested in chip design and digital hardware at any experience level. We offer beginner-friendly projects that require no prior experience, as well as intermediate, exploratory projects for students interested in open-ended hardware accelerator design and helping shape the future direction of the club.",
+      },
+      {
+        heading: "What members get out of it",
+        text: "Members gain hands-on experience through real hardware design projects that can be developed into strong portfolio and resume projects. Leadership works closely with members to help them pursue their individual interests, develop practical skills, and get the most out of their time with SSCS.",
+      },
+    ],
     blogPosts: [],
   },
 ];

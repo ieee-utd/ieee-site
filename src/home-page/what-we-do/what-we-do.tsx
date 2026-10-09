@@ -4,9 +4,20 @@ import eventsImage from "../../assets/gridimages/what-we-do-events.jpg";
 import tutoringImage from "../../assets/gridimages/tutoring.png";
 import workshopsImage from "../../assets/gridimages/what-we-do-workshops.jpg";
 import societiesImage from "../../assets/gridimages/what-we-do-societies.jpg";
+import hknImage from "../../assets/gridimages/hkn-tabling.jpg";
 import Skeleton from "../../shared/skeleton";
 
-const offerings = [
+interface Offering {
+  title: string;
+  /** Left out for a card with no real photo yet — a placeholder spot is
+   * shown instead of mismatching it to an unrelated existing photo. */
+  image?: string;
+  href: string;
+  alt: string;
+  description: string;
+}
+
+const offerings: Offering[] = [
   {
     title: "Events",
     image: eventsImage,
@@ -38,6 +49,21 @@ const offerings = [
     alt: "IEEE UTD societies",
     description:
       "Join a technical society and work with students who care about the same topics.",
+  },
+  {
+    title: "Branches",
+    href: "/branch",
+    alt: "IEEE UTD branch team",
+    description:
+      "Pick a branch — Engineering, Initiatives, and more — and work with a team on something ongoing.",
+  },
+  {
+    title: "HKN",
+    image: hknImage,
+    href: "/hkn",
+    alt: "IEEE-HKN members tabling at UT Dallas",
+    description:
+      "Eta Kappa Nu is IEEE's honor society, recognizing Scholarship, Character, and Attitude.",
   },
 ];
 
@@ -81,7 +107,7 @@ const WhatWeDo = () => {
           <p className={styles.eyebrow}>Get involved</p>
           <h2 className={styles.title}>What we do</h2>
           <p className={styles.lede}>
-            Four ways to plug in, whether you want help in a class, a project
+            Six ways to plug in, whether you want help in a class, a project
             team, or a reason to show up on campus.
           </p>
         </header>
@@ -90,18 +116,26 @@ const WhatWeDo = () => {
           {offerings.map((item) => (
             <article className={styles.card} key={item.title}>
               <div className={styles.imageWrap}>
-                {!loadedImages[item.title] && <Skeleton />}
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  // .loaded here combines with .imageWrap img's own opacity +
-                  // hover-zoom transition in what-we-do.module.css (keeping
-                  // this a className, not an inline style, is what lets
-                  // prefers-reduced-motion still turn both off there)
-                  className={loadedImages[item.title] ? styles.loaded : ""}
-                  onLoad={() => markLoaded(item.title)}
-                  onError={() => markLoaded(item.title)}
-                />
+                {item.image ? (
+                  <>
+                    {!loadedImages[item.title] && <Skeleton />}
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      // .loaded here combines with .imageWrap img's own opacity +
+                      // hover-zoom transition in what-we-do.module.css (keeping
+                      // this a className, not an inline style, is what lets
+                      // prefers-reduced-motion still turn both off there)
+                      className={loadedImages[item.title] ? styles.loaded : ""}
+                      onLoad={() => markLoaded(item.title)}
+                      onError={() => markLoaded(item.title)}
+                    />
+                  </>
+                ) : (
+                  <div className={styles.photoSpot} aria-label={item.alt} role="img">
+                    <span>Photo</span>
+                  </div>
+                )}
               </div>
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{item.title}</h3>
