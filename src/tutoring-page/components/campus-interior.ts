@@ -615,34 +615,9 @@ export function buildInterior(
   const counterFrom = (x0: number, x1: number, depth: number) => {
     const w = planLen(x1 - x0);
     const cx = planX((x0 + x1) / 2);
-    const bodyD = planLen(depth);
     const cz = planZ(north + depth / 2);
-    // The carcass is set back by the door's thickness, so the door (frame
-    // and glass together) fills that gap flush with the cabinet's true
-    // front face, instead of the glass floating in front of a still-solid,
-    // already-opaque wall like a fence.
-    const doorThk = 0.0016;
-    box(w, 0.022, bodyD - doorThk, cx, FLOOR_Y + 0.011, cz - doorThk / 2, counterMat);
-    box(w + 0.001, 0.0022, bodyD + 0.001, cx, FLOOR_Y + 0.0231, cz, counterTop, false);
-
-    // Glass-fronted cabinet doors: a frame outlines each door and the glass
-    // pane sits recessed inside that frame's opening, like a real window
-    // pane, rather than a sheet of glass with trim lines drawn over it.
-    const frontZ = planZ(north + depth) - doorThk / 2;
-    const doorH = 0.0188;
-    const doorY = FLOOR_Y + 0.0096;
-    const rail = 0.0022;
-    const doors = Math.max(2, Math.round(w / 0.03));
-    const doorW = w / doors;
-    for (let i = 0; i < doors; i++) {
-      const ddx = cx - w / 2 + doorW * (i + 0.5);
-      const fw = doorW - 0.0006;
-      box(fw, rail, doorThk, ddx, doorY + doorH / 2 - rail / 2, frontZ, trimMat, false);
-      box(fw, rail, doorThk, ddx, doorY - doorH / 2 + rail / 2, frontZ, trimMat, false);
-      box(rail, doorH, doorThk, ddx - fw / 2 + rail / 2, doorY, frontZ, trimMat, false);
-      box(rail, doorH, doorThk, ddx + fw / 2 - rail / 2, doorY, frontZ, trimMat, false);
-      box(fw - rail * 2, doorH - rail * 2, 0.0008, ddx, doorY, frontZ, glassMat, false);
-    }
+    box(w, 0.022, planLen(depth), cx, FLOOR_Y + 0.011, cz, counterMat);
+    box(w + 0.001, 0.0022, planLen(depth) + 0.001, cx, FLOOR_Y + 0.0231, cz, counterTop, false);
   };
 
   /** A solid full-height wall stub, between two plan-pixel corners. */
