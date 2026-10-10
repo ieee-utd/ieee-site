@@ -67,6 +67,20 @@ const societies: Society[] = [
     description:
       "Learn about radio frequency technology, wireless communication, antennas, and high-frequency electronic systems.",
     category: "Radio Frequencies",
+    about: [
+      {
+        heading: "What it is",
+        text: "The RF Society is the technical group within IEEE UTD that focuses on Radio Frequency technology such as antennas, radios, and other wireless communication systems. We not only give students opportunities to improve their preexisting RF skills, but we also teach them concepts that they won't learn in their classes.",
+      },
+      {
+        heading: "Who it is for",
+        text: "RF is for all students with an interest in wireless communication technologies, regardless of their major or existing skills/experience. Whether someone is already an RF pro or a complete beginner, IEEE RF will provide ample opportunities for technical and personal growth and learning.",
+      },
+      {
+        heading: "What members get out of it",
+        text: "Members in RF will have many opportunities to get real-world experience by building projects to develop their skills in many areas. Members gain skills in RF fundamentals, embedded systems, circuit design, and soft skills such as collaboration and task coordination. These projects appear very strong on resumes, giving members a permanent boost to their career prospects.",
+      },
+    ],
     blogPosts: [],
   },
   {
