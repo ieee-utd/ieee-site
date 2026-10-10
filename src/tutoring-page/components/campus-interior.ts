@@ -829,38 +829,40 @@ export function buildInterior(
       const parts: any[] = [];
       for (let i = 0; i < 5; i++) {
         const a = (i / 5) * Math.PI * 2;
-        const leg = new THREE.CylinderGeometry(0.0004, 0.0004, 0.0058, 6);
+        const leg = new THREE.CylinderGeometry(0.0004, 0.0004, 0.0058, 8);
         leg.rotateZ(Math.PI / 2);
         leg.translate(0.0029, 0, 0);
         leg.rotateY(a);
         leg.translate(0, 0.0022, 0);
         parts.push(leg);
-        const caster = new THREE.SphereGeometry(0.0009, 8, 6);
+        const caster = new THREE.SphereGeometry(0.0009, 10, 8);
         caster.translate(Math.cos(a) * 0.0058, 0.0009, -Math.sin(a) * 0.0058);
         parts.push(caster);
       }
-      const lift = new THREE.CylinderGeometry(0.0007, 0.001, 0.007, 10);
+      const lift = new THREE.CylinderGeometry(0.0007, 0.001, 0.007, 12);
       lift.translate(0, 0.006, 0);
       parts.push(lift);
       // Seat: a near-sphere capsule, squashed flat into a rounded cushion disc.
-      const seat = new THREE.CapsuleGeometry(0.0054, 0.0006, 4, 14);
+      const seat = new THREE.CapsuleGeometry(0.0054, 0.0006, 4, 16);
       seat.scale(1, 0.32, 1);
       seat.translate(0, 0.0108, 0);
       parts.push(seat);
-      // Back: a tall capsule, widened and flattened into a single moulded
-      // shell instead of a separate flat back panel and headrest.
-      const back = new THREE.CapsuleGeometry(0.0046, 0.0096, 4, 12);
+      // Back: a shorter capsule than before (no more headrest-height shell),
+      // widened and flattened into a single moulded back.
+      const back = new THREE.CapsuleGeometry(0.0044, 0.0058, 4, 16);
       back.scale(1.18, 1, 0.5);
-      back.rotateX(-0.16);
-      back.translate(0, 0.0238, -0.0062);
+      back.rotateX(-0.14);
+      back.translate(0, 0.0206, -0.0058);
       parts.push(back);
+      // Armrests: a horizontal bar running front-to-back (not out to the
+      // side), on a post down to the seat, like a real armrest reads.
       [-1, 1].forEach((sd) => {
-        const arm = new THREE.CylinderGeometry(0.0007, 0.0007, 0.0062, 8);
-        arm.rotateZ(Math.PI / 2);
-        arm.translate(sd * 0.0062, 0.0156, 0.0004);
+        const arm = new THREE.CylinderGeometry(0.0007, 0.0007, 0.0066, 10);
+        arm.rotateX(Math.PI / 2);
+        arm.translate(sd * 0.0061, 0.0146, -0.0004);
         parts.push(arm);
-        const post = new THREE.CylinderGeometry(0.0006, 0.0006, 0.0032, 8);
-        post.translate(sd * 0.0062, 0.0137, 0.0025);
+        const post = new THREE.CylinderGeometry(0.0006, 0.0006, 0.0028, 10);
+        post.translate(sd * 0.0061, 0.0131, -0.0004);
         parts.push(post);
       });
       // CapsuleGeometry is indexed, unlike mixing it with every other part
@@ -915,7 +917,10 @@ export function buildInterior(
       return parts;
     };
 
-    const chairMat = std({ color: "#17181b", roughness: 0.55 });
+    // Higher roughness than before: the old value read fine on the flat
+    // panels of the previous design, but shows up as an obvious sheen on
+    // this chair's curved, rounded surfaces.
+    const chairMat = std({ color: "#17181b", roughness: 0.92 });
     const e = new THREE.Euler();
     const place = (parts: any[], list: [number, number, number][], swivel: number) => {
       const geo = track(mergeGeometries(parts));
