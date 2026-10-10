@@ -221,6 +221,82 @@ export function buildWorld(
   scene.add(shadow);
 
   // ---- ground cover -------------------------------------------------------
+  /** A dense, hand-painted-looking scatter of grass blades, tiled seamlessly. */
+  const grassCanvas = () => {
+    const w = 512;
+    const c = document.createElement("canvas");
+    c.width = c.height = w;
+    const g = c.getContext("2d")!;
+    g.fillStyle = "#5f9b47";
+    g.fillRect(0, 0, w, w);
+    const r = rng(7781);
+    const palette = ["#4f8a3c", "#5f9b47", "#73b558", "#447530", "#86c86a"];
+    const blade = (x: number, y: number) => {
+      const len = 11 + r() * 15;
+      const ang = -Math.PI / 2 + (r() - 0.5) * 1.3;
+      const bend = (r() - 0.5) * 7;
+      const x2 = x + Math.cos(ang) * len;
+      const y2 = y + Math.sin(ang) * len;
+      g.strokeStyle = palette[Math.floor(r() * palette.length)];
+      g.lineWidth = 2 + r() * 2.2;
+      g.lineCap = "round";
+      g.beginPath();
+      g.moveTo(x, y);
+      g.quadraticCurveTo((x + x2) / 2 + bend, (y + y2) / 2, x2, y2);
+      g.stroke();
+    };
+    // Every blade is drawn up to 4 times, wrapped across whichever edges it's
+    // near, so the tile has no visible seam when it repeats.
+    for (let i = 0; i < 1100; i++) {
+      const x = r() * w;
+      const y = r() * w;
+      const dx = x < w / 2 ? w : -w;
+      const dy = y < w / 2 ? w : -w;
+      blade(x, y);
+      blade(x + dx, y);
+      blade(x, y + dy);
+      blade(x + dx, y + dy);
+    }
+    return c;
+  };
+  const grassTex = track(new THREE.CanvasTexture(grassCanvas()));
+  grassTex.colorSpace = THREE.SRGBColorSpace;
+  grassTex.wrapS = grassTex.wrapT = THREE.RepeatWrapping;
+  grassTex.anisotropy = aniso;
+  grassTex.repeat.set(5, 5);
+
+  /** Banded concrete paving, like the striped promenade sections on campus. */
+  const asphaltCanvas = () => {
+    const w = 128;
+    const h = 512;
+    const c = document.createElement("canvas");
+    c.width = w;
+    c.height = h;
+    const g = c.getContext("2d")!;
+    const bands = 18;
+    const bandH = h / bands;
+    const r = rng(4120);
+    for (let i = 0; i < bands; i++) {
+      const light = i % 2 === 0;
+      g.fillStyle = light ? "#6b7078" : "#53575e";
+      g.fillRect(0, i * bandH, w, bandH);
+      // a soft seam line between bands
+      g.fillStyle = "rgba(0,0,0,0.18)";
+      g.fillRect(0, i * bandH, w, 2);
+    }
+    // light speckle so each band doesn't read as a flat, perfect fill
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = `rgba(255,255,255,${0.02 + r() * 0.03})`;
+      g.fillRect(r() * w, r() * h, 1.5, 1.5);
+    }
+    return c;
+  };
+  const asphaltTex = track(new THREE.CanvasTexture(asphaltCanvas()));
+  asphaltTex.colorSpace = THREE.SRGBColorSpace;
+  asphaltTex.wrapS = asphaltTex.wrapT = THREE.RepeatWrapping;
+  asphaltTex.anisotropy = aniso;
+  asphaltTex.repeat.set(3, 2.4);
+
   const layer = (rings: Pt[][][], lift: number, mat: any) => {
     const geos = rings.map((r) => {
       const g = new THREE.ShapeGeometry(shapeFrom(THREE, r));
@@ -237,12 +313,12 @@ export function buildWorld(
   layer(
     GRASS,
     0.0012,
-    track(new THREE.MeshStandardMaterial({ color: "#7dae5c", roughness: 1 })),
+    track(new THREE.MeshStandardMaterial({ map: grassTex, roughness: 1 })),
   );
   layer(
     ASPHALT,
     0.0016,
-    track(new THREE.MeshStandardMaterial({ color: "#4a4f57", roughness: 0.92 })),
+    track(new THREE.MeshStandardMaterial({ map: asphaltTex, roughness: 0.92 })),
   );
   layer(
     WATER,

@@ -336,7 +336,7 @@ export function buildInterior(
   // detector also picked up their icons as wall segments, which would stand
   // inside them and poke through their tops.
   const solids: [number, number, number, number][] = [
-    [362, 313, 72, 70],
+    [376, 313, 62, 70],
     [1174, 313, 72, 70],
     [457, 218, 71, 69],
     ...PLAN_PADS,
@@ -393,10 +393,14 @@ export function buildInterior(
   });
 
   // ---- lifts --------------------------------------------------------------
-  // The west lift sat only 2 plan-px shy of the IEEE room's west wall (450),
-  // close enough to visibly poke into the room; it's nudged further west.
-  [362, 1174].forEach((x) => {
-    const w = 72;
+  // The west lift car stays flush with the hallway wall it's built against
+  // (x unchanged); only its width is trimmed so its east face no longer
+  // pokes into the IEEE room next door, which starts just 2 plan-px past
+  // its old east edge.
+  [
+    { x: 376, w: 62 },
+    { x: 1174, w: 72 },
+  ].forEach(({ x, w }) => {
     const h = 70;
     const cx = planX(x + w / 2);
     const cz = planZ(313 + h / 2);
@@ -614,6 +618,15 @@ export function buildInterior(
     const cz = planZ(north + depth / 2);
     box(w, 0.022, planLen(depth), cx, FLOOR_Y + 0.011, cz, counterMat);
     box(w + 0.001, 0.0022, planLen(depth) + 0.001, cx, FLOOR_Y + 0.0231, cz, counterTop, false);
+    // glass-fronted cabinet doors below the worktop, with a frame between
+    // each pane so it reads as a run of doors rather than one long window
+    const frontZ = planZ(north + depth) + 0.001;
+    box(w - 0.0016, 0.0188, 0.0012, cx, FLOOR_Y + 0.0096, frontZ, glassMat, false);
+    const doors = Math.max(2, Math.round(w / 0.03));
+    for (let i = 0; i <= doors; i++) {
+      const dx = cx - w / 2 + (w * i) / doors;
+      box(0.0012, 0.02, 0.0016, dx, FLOOR_Y + 0.0098, frontZ, trimMat, false);
+    }
   };
 
   /** A solid full-height wall stub, between two plan-pixel corners. */
@@ -772,6 +785,26 @@ export function buildInterior(
   tableFrom(sx(198), sy(352), sx(258), sy(585));
   tableFrom(sx(260), sy(395), sx(392), sy(460));
   tableFrom(sx(260), sy(460), sx(392), sy(520));
+  // a drawer pedestal tucked under each of those two tables, right at the
+  // seam where they meet: the first table's sits on its (south) side of the
+  // seam, the second's on its (north) side.
+  {
+    const drawerMat = std({ color: "#20242a", roughness: 0.5, metalness: 0.15 });
+    const handleMat = std({ color: "#aeb4bb", roughness: 0.35, metalness: 0.7 });
+    const dcx = planX((sx(260) + sx(392)) / 2);
+    const w = planLen(30);
+    const d = planLen(12);
+    const drawerUnit = (yMid: number) => {
+      const cz = planZ(yMid);
+      box(w, TABLE_H, d, dcx, FLOOR_Y + 0.0012 + TABLE_H / 2, cz, drawerMat);
+      const faceX = dcx + w / 2 + 0.0008;
+      [0.33, 0.67].forEach((f) => {
+        box(0.0012, 0.0016, d - 0.0006, faceX, FLOOR_Y + 0.0012 + TABLE_H * f, cz, handleMat, false);
+      });
+    };
+    drawerUnit(sy(460) - 7);
+    drawerUnit(sy(460) + 7);
+  }
   // right cluster, mirrored
   tableFrom(sx(862), sy(380), sx(945), sy(582));
   tableFrom(sx(722), sy(425), sx(866), sy(490));
@@ -798,47 +831,50 @@ export function buildInterior(
   ];
   {
     // Standard rolling chair: five-star base on casters, gas lift, seat, tilted back, arms.
+    // A completely different silhouette from the old boxy executive chair:
+    // a moulded "bucket" shell (flattened-capsule seat, tall capsule back)
+    // on slim tube arms, rather than flat cushions on flat arm pads.
     const standard = () => {
       const parts: any[] = [];
       for (let i = 0; i < 5; i++) {
         const a = (i / 5) * Math.PI * 2;
-        const leg = new THREE.BoxGeometry(0.0058, 0.0007, 0.0008);
+        const leg = new THREE.CylinderGeometry(0.0004, 0.0004, 0.0058, 6);
+        leg.rotateZ(Math.PI / 2);
         leg.translate(0.0029, 0, 0);
         leg.rotateY(a);
-        leg.translate(0, 0.0026, 0);
+        leg.translate(0, 0.0022, 0);
         parts.push(leg);
-        const caster = new THREE.SphereGeometry(0.00095, 8, 6);
-        caster.translate(Math.cos(a) * 0.0058, 0.001, -Math.sin(a) * 0.0058);
+        const caster = new THREE.SphereGeometry(0.0009, 8, 6);
+        caster.translate(Math.cos(a) * 0.0058, 0.0009, -Math.sin(a) * 0.0058);
         parts.push(caster);
       }
-      const lift = new THREE.CylinderGeometry(0.0008, 0.0011, 0.0075, 8);
-      lift.translate(0, 0.0064, 0);
+      const lift = new THREE.CylinderGeometry(0.0007, 0.001, 0.007, 10);
+      lift.translate(0, 0.006, 0);
       parts.push(lift);
-      // Seat, back, headrest and arms are rounded boxes (extra segments plus
-      // a small edge radius), so the chair reads as upholstered and more
-      // finished instead of flat-cut foam.
-      const seat = new RoundedBoxGeometry(0.0108, 0.0028, 0.0108, 2, 0.0007);
-      seat.translate(0, 0.0112, 0);
+      // Seat: a near-sphere capsule, squashed flat into a rounded cushion disc.
+      const seat = new THREE.CapsuleGeometry(0.0054, 0.0006, 4, 14);
+      seat.scale(1, 0.32, 1);
+      seat.translate(0, 0.0108, 0);
       parts.push(seat);
-      const back = new RoundedBoxGeometry(0.0098, 0.0118, 0.0018, 2, 0.0006);
-      back.rotateX(-0.12);
-      back.translate(0, 0.0192, -0.0049);
+      // Back: a tall capsule, widened and flattened into a single moulded
+      // shell instead of a separate flat back panel and headrest.
+      const back = new THREE.CapsuleGeometry(0.0046, 0.0096, 4, 12);
+      back.scale(1.18, 1, 0.5);
+      back.rotateX(-0.16);
+      back.translate(0, 0.0238, -0.0062);
       parts.push(back);
-      const head = new RoundedBoxGeometry(0.0052, 0.0028, 0.0016, 2, 0.0005);
-      head.rotateX(-0.12);
-      head.translate(0, 0.0272, -0.0055);
-      parts.push(head);
       [-1, 1].forEach((sd) => {
-        const arm = new RoundedBoxGeometry(0.0013, 0.0011, 0.0058, 1, 0.0003);
-        arm.translate(sd * 0.0059, 0.0158, -0.0004);
+        const arm = new THREE.CylinderGeometry(0.0007, 0.0007, 0.0062, 8);
+        arm.rotateZ(Math.PI / 2);
+        arm.translate(sd * 0.0062, 0.0156, 0.0004);
         parts.push(arm);
-        const post = new RoundedBoxGeometry(0.0011, 0.0034, 0.0011, 1, 0.0003);
-        post.translate(sd * 0.0059, 0.0135, 0.0012);
+        const post = new THREE.CylinderGeometry(0.0006, 0.0006, 0.0032, 8);
+        post.translate(sd * 0.0062, 0.0137, 0.0025);
         parts.push(post);
       });
-      // RoundedBoxGeometry (the seat/back/head/arms/posts) builds non-indexed
-      // geometry, unlike the plain Box/Sphere/Cylinder parts above, and
-      // mergeGeometries refuses to mix indexed with non-indexed inputs.
+      // CapsuleGeometry is indexed, unlike mixing it with every other part
+      // directly would require; mergeGeometries needs all-or-nothing, so
+      // everything is normalised to non-indexed before merging.
       return parts.map((g) => {
         if (!g.index) return g;
         const ng = g.toNonIndexed();
