@@ -286,7 +286,10 @@ export function buildWorld(
   layer(
     ASPHALT,
     0.0016,
-    track(new THREE.MeshStandardMaterial({ color: "#4a4f57", roughness: 0.92 })),
+    // Matches the diorama base slab's top face (#dcd8cf) showing through
+    // everywhere else, so these patches blend into the walkway instead of
+    // standing out as dark spots.
+    track(new THREE.MeshStandardMaterial({ color: "#dcd8cf", roughness: 0.92 })),
   );
   layer(
     WATER,
