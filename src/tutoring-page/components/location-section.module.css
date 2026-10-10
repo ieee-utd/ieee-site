@@ -6,9 +6,12 @@
 .fullscreen { position: relative; width: 100%; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; isolation: isolate; scroll-snap-align: start; background: #dbe4ea; }
 .stage { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: linear-gradient(160deg, #e8eef3 0%, #dbe4ea 55%, #cfdae2 100%); }
 
-/* Shown until the WebGL scene has its textures, so the panel is never blank. */
-.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .6s ease; }
-.hidden { opacity: 0; }
+/* Shown until the WebGL scene has its textures, so the panel is never blank.
+   Once hidden it also drops out of the paint order (after the fade finishes,
+   via the delayed visibility transition) so it can never show through a
+   transparent gap in the canvas above it again. */
+.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .6s ease, visibility 0s linear .6s; }
+.hidden { opacity: 0; visibility: hidden; }
 
 .vignette { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(ellipse at center, transparent 62%, rgba(10, 30, 50, .22) 100%); }
 

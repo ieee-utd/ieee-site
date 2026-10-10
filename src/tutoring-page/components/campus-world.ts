@@ -257,7 +257,27 @@ export function buildWorld(
   );
 
   // ---- trees --------------------------------------------------------------
+  // A plain icosahedron reads as a geometric ball, so its corners are nudged
+  // in and out (by a hash of their own position, so coincident corners from
+  // neighbouring faces move together and the shell stays sealed) into a
+  // lumpy, irregular clump before it's ever instanced.
   const canopyGeo = track(new THREE.IcosahedronGeometry(1, 1));
+  {
+    const posAttr = canopyGeo.attributes.position;
+    const v = new THREE.Vector3();
+    const hashNoise = (x: number, y: number, z: number) => {
+      const s = Math.sin(x * 12.9898 + y * 78.233 + z * 37.719) * 43758.5453;
+      return s - Math.floor(s);
+    };
+    for (let i = 0; i < posAttr.count; i++) {
+      v.fromBufferAttribute(posAttr, i);
+      const n = 0.78 + hashNoise(v.x, v.y, v.z) * 0.4;
+      v.multiplyScalar(n);
+      posAttr.setXYZ(i, v.x, v.y, v.z);
+    }
+    posAttr.needsUpdate = true;
+    canopyGeo.computeVertexNormals();
+  }
   const trunkGeo = track(new THREE.CylinderGeometry(0.16, 0.24, 1, 6));
   trunkGeo.translate(0, 0.5, 0);
   const canopyMat = track(
@@ -267,9 +287,12 @@ export function buildWorld(
     new THREE.MeshStandardMaterial({ color: "#6b5340", roughness: 1 }),
   );
   const canopies = new THREE.InstancedMesh(canopyGeo, canopyMat, TREES.length);
+  // A second, smaller lobe offset to one side of each tree breaks the
+  // single-blob silhouette into an irregular, multi-lobed clump of foliage.
+  const lobes = new THREE.InstancedMesh(canopyGeo, canopyMat, TREES.length);
   const trunks = new THREE.InstancedMesh(trunkGeo, trunkMat, TREES.length);
-  canopies.castShadow = trunks.castShadow = true;
-  canopies.receiveShadow = true;
+  canopies.castShadow = trunks.castShadow = lobes.castShadow = true;
+  canopies.receiveShadow = lobes.receiveShadow = true;
   const m4 = new THREE.Matrix4();
   const q = new THREE.Quaternion();
   const e = new THREE.Euler();
@@ -285,15 +308,121 @@ export function buildWorld(
     p.set(toX(x), 0, toZ(y));
     s.set(R * 0.13, trunkH, R * 0.13);
     trunks.setMatrixAt(i, m4.compose(p, q, s));
-    p.set(toX(x), trunkH + R * 0.62, toZ(y));
+    const mainCY = trunkH + R * 0.62;
+    e.set(0, rand() * 6.28, 0);
+    q.setFromEuler(e);
+    p.set(toX(x), mainCY, toZ(y));
     s.set(R, R * (0.78 + rand() * 0.12), R);
     canopies.setMatrixAt(i, m4.compose(p, q, s));
     col.set(palette[Math.floor(rand() * palette.length)]);
     col.offsetHSL(0, 0, (rand() - 0.5) * 0.05);
     canopies.setColorAt(i, col);
+
+    const lobeAngle = rand() * Math.PI * 2;
+    const lobeDist = R * (0.42 + rand() * 0.26);
+    const lobeR = R * (0.5 + rand() * 0.22);
+    e.set(0, rand() * 6.28, 0);
+    q.setFromEuler(e);
+    p.set(
+      toX(x) + Math.cos(lobeAngle) * lobeDist,
+      mainCY + (rand() - 0.35) * R * 0.32,
+      toZ(y) + Math.sin(lobeAngle) * lobeDist,
+    );
+    s.set(lobeR, lobeR * (0.82 + rand() * 0.18), lobeR);
+    lobes.setMatrixAt(i, m4.compose(p, q, s));
+    col.offsetHSL(0, 0, (rand() - 0.5) * 0.04);
+    lobes.setColorAt(i, col);
   });
   scene.add(canopies);
+  scene.add(lobes);
   scene.add(trunks);
+
+  // ---- grass tufts: a light, short scatter for a bit of ambient motion ----
+  // A flat tapered triangle, instanced a few times per grass patch and swayed
+  // in the vertex shader by a time uniform the caller updates each frame.
+  let grassMaterial: any = null;
+  {
+    const bladeGeo = track(new THREE.BufferGeometry());
+    bladeGeo.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute([-0.5, 0, 0, 0.5, 0, 0, 0, 1, 0], 3),
+    );
+    bladeGeo.setIndex([0, 1, 2]);
+    bladeGeo.computeVertexNormals();
+
+    const bladeMat = track(
+      new THREE.MeshStandardMaterial({
+        color: "#86b85f",
+        roughness: 0.85,
+        side: THREE.DoubleSide,
+        flatShading: true,
+      }),
+    );
+    bladeMat.onBeforeCompile = (shader: any) => {
+      shader.uniforms.uTime = { value: 0 };
+      shader.vertexShader =
+        "uniform float uTime;\n" +
+        shader.vertexShader.replace(
+          "#include <begin_vertex>",
+          `#include <begin_vertex>
+  #ifdef USE_INSTANCING
+  float windPhase = instanceMatrix[3].x * 9.0 + instanceMatrix[3].z * 7.0;
+  #else
+  float windPhase = 0.0;
+  #endif
+  float sway = sin(uTime * 1.6 + windPhase) * 0.05 * max(transformed.y, 0.0);
+  transformed.x += sway;
+  transformed.z += sway * 0.4;`,
+        );
+      bladeMat.userData.shader = shader;
+    };
+    grassMaterial = bladeMat;
+
+    const spots: Pt[] = [];
+    GRASS.forEach((patch) => {
+      const [outer, ...holes] = patch;
+      const area = polygonArea(outer);
+      const count = Math.min(18, Math.round(area / 1200));
+      if (count <= 0) return;
+      const xs = outer.map((v) => v[0]);
+      const ys = outer.map((v) => v[1]);
+      const x0 = Math.min(...xs);
+      const x1 = Math.max(...xs);
+      const y0 = Math.min(...ys);
+      const y1 = Math.max(...ys);
+      let tries = 0;
+      let placed = 0;
+      while (placed < count && tries++ < count * 14) {
+        const px = x0 + rand() * (x1 - x0);
+        const py = y0 + rand() * (y1 - y0);
+        if (!pointInPolygon(px, py, outer)) continue;
+        if (holes.some((h) => pointInPolygon(px, py, h))) continue;
+        spots.push([px, py]);
+        placed++;
+      }
+    });
+
+    const BLADES_PER_TUFT = 3;
+    const blades = new THREE.InstancedMesh(
+      bladeGeo,
+      bladeMat,
+      spots.length * BLADES_PER_TUFT,
+    );
+    blades.receiveShadow = true;
+    let bi = 0;
+    spots.forEach(([gx, gy]) => {
+      for (let k = 0; k < BLADES_PER_TUFT; k++) {
+        const ang = rand() * Math.PI * 2;
+        const off = rand() * 0.01;
+        e.set(0, ang, 0);
+        q.setFromEuler(e);
+        p.set(toX(gx) + Math.cos(ang) * off, 0.0014, toZ(gy) + Math.sin(ang) * off);
+        s.set(0.011 + rand() * 0.006, 0.016 + rand() * 0.012, 1);
+        blades.setMatrixAt(bi++, m4.compose(p, q, s));
+      }
+    });
+    scene.add(blades);
+  }
 
   // ---- buildings ----------------------------------------------------------
   const roofUnits: {
@@ -307,17 +436,17 @@ export function buildWorld(
     kind: "box" | "stack" | "sky";
   }[] = [];
 
-  const scatterUnits = (poly: Pt[], top: number, lid: boolean) => {
+  const scatterUnits = (poly: Pt[], top: number, lid: boolean, density = 1) => {
     const xs = poly.map((v) => v[0]);
     const ys = poly.map((v) => v[1]);
     const x0 = Math.min(...xs);
     const x1 = Math.max(...xs);
     const y0 = Math.min(...ys);
     const y1 = Math.max(...ys);
-    const want = Math.min(16, Math.round(polygonArea(poly) / 1900) + 1);
+    const want = Math.min(28, Math.round((polygonArea(poly) / 1900) * density) + 1);
     let tries = 0;
     let placed = 0;
-    while (placed < want && tries++ < 60) {
+    while (placed < want && tries++ < Math.round(60 * density)) {
       const px = x0 + rand() * (x1 - x0);
       const py = y0 + rand() * (y1 - y0);
       const hw = 5 + rand() * 7;
@@ -457,7 +586,9 @@ export function buildWorld(
   );
   lidMesh.castShadow = true;
   lid.add(lidMesh);
-  scatterUnits(ECSN_FOOTPRINT, ECSN_SHELL_H + ECSN_LID_H, true);
+  // ECSN is the building the camera actually lands on, so its roof gets a
+  // denser scatter of vents/units/skylights than the backdrop buildings.
+  scatterUnits(ECSN_FOOTPRINT, ECSN_SHELL_H + ECSN_LID_H, true, 2.4);
 
   // ---- rooftop plant: units, vent stacks and skylights ---------------------
   const boxGeo = track(new THREE.BoxGeometry(1, 1, 1));
@@ -581,5 +712,6 @@ export function buildWorld(
     lid,
     lidMaterials: [lidRoof, lidWall, ...lidMats],
     lidMeshes,
+    grassMaterial,
   };
 }

@@ -454,7 +454,9 @@ export function buildInterior(
     }
   });
   const benchWood = std({ color: "#a47a52", roughness: 0.65 });
-  [[500, 476], [1140, 476]].forEach(([x, y]) => {
+  // Only the east bench: the west spot sat right on top of the corridor
+  // partition wall and clipped through it.
+  [[1140, 476]].forEach(([x, y]) => {
     box(planLen(36), 0.003, planLen(11), planX(x), FLOOR_Y + 0.0155, planZ(y), benchWood);
     [-1, 1].forEach((sd) => box(0.0016, 0.0155, planLen(9), planX(x) + sd * planLen(15), FLOOR_Y + 0.00775, planZ(y), steel));
   });

@@ -78,6 +78,10 @@ export default function CampusScene({
       host.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
+      // Opaque, so no camera angle (including straight up, past a roofline)
+      // ever lets the transparent-by-default canvas show the poster image or
+      // page behind it through a gap in the geometry.
+      scene.background = new THREE.Color("#dde6ec");
       const camera = new THREE.PerspectiveCamera(FOV, 1, 0.008, 90);
 
       const disposables: { dispose: () => void }[] = [];
@@ -253,6 +257,9 @@ export default function CampusScene({
       // away and back resumes where it left off instead of snapping to the start.
       let last = 0;
       let elapsed = 0;
+      // Unbounded (never wraps, unlike the camera's loop-relative `elapsed`)
+      // so the grass sway doesn't visibly snap once a lap.
+      let windClock = 0;
       const frame = (now: number) => {
         raf = requestAnimationFrame(frame);
         if (!playingRef.current) {
@@ -262,7 +269,11 @@ export default function CampusScene({
         const dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
         last = now;
         elapsed = (elapsed + dt) % LOOP_SECONDS;
+        windClock += dt;
         apply(elapsed / LOOP_SECONDS);
+        if (world.grassMaterial && world.grassMaterial.userData.shader) {
+          world.grassMaterial.userData.shader.uniforms.uTime.value = windClock;
+        }
         renderer.render(scene, camera);
       };
       raf = requestAnimationFrame(frame);
