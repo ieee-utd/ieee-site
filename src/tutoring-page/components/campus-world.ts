@@ -265,38 +265,6 @@ export function buildWorld(
   grassTex.anisotropy = aniso;
   grassTex.repeat.set(5, 5);
 
-  /** Banded concrete paving, like the striped promenade sections on campus. */
-  const asphaltCanvas = () => {
-    const w = 128;
-    const h = 512;
-    const c = document.createElement("canvas");
-    c.width = w;
-    c.height = h;
-    const g = c.getContext("2d")!;
-    const bands = 18;
-    const bandH = h / bands;
-    const r = rng(4120);
-    for (let i = 0; i < bands; i++) {
-      const light = i % 2 === 0;
-      g.fillStyle = light ? "#6b7078" : "#53575e";
-      g.fillRect(0, i * bandH, w, bandH);
-      // a soft seam line between bands
-      g.fillStyle = "rgba(0,0,0,0.18)";
-      g.fillRect(0, i * bandH, w, 2);
-    }
-    // light speckle so each band doesn't read as a flat, perfect fill
-    for (let i = 0; i < 900; i++) {
-      g.fillStyle = `rgba(255,255,255,${0.02 + r() * 0.03})`;
-      g.fillRect(r() * w, r() * h, 1.5, 1.5);
-    }
-    return c;
-  };
-  const asphaltTex = track(new THREE.CanvasTexture(asphaltCanvas()));
-  asphaltTex.colorSpace = THREE.SRGBColorSpace;
-  asphaltTex.wrapS = asphaltTex.wrapT = THREE.RepeatWrapping;
-  asphaltTex.anisotropy = aniso;
-  asphaltTex.repeat.set(3, 2.4);
-
   const layer = (rings: Pt[][][], lift: number, mat: any) => {
     const geos = rings.map((r) => {
       const g = new THREE.ShapeGeometry(shapeFrom(THREE, r));
@@ -318,7 +286,7 @@ export function buildWorld(
   layer(
     ASPHALT,
     0.0016,
-    track(new THREE.MeshStandardMaterial({ map: asphaltTex, roughness: 0.92 })),
+    track(new THREE.MeshStandardMaterial({ color: "#4a4f57", roughness: 0.92 })),
   );
   layer(
     WATER,
