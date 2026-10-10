@@ -51,10 +51,11 @@ export default function CampusScene({
     let cleanup = () => {};
 
     (async () => {
-      const [THREE, utils, env] = await Promise.all([
+      const [THREE, utils, env, roundedGeo] = await Promise.all([
         import("three"),
         import("three/examples/jsm/utils/BufferGeometryUtils.js"),
         import("three/examples/jsm/environments/RoomEnvironment.js"),
+        import("three/examples/jsm/geometries/RoundedBoxGeometry.js"),
       ]);
       if (disposed || !hostRef.current) return;
 
@@ -134,7 +135,13 @@ export default function CampusScene({
       const world = buildWorld(THREE, utils.mergeGeometries, scene, aniso, track);
       await nextFrame();
       if (disposed) return;
-      const interior = buildInterior(THREE, utils.mergeGeometries, aniso, track);
+      const interior = buildInterior(
+        THREE,
+        utils.mergeGeometries,
+        aniso,
+        track,
+        roundedGeo.RoundedBoxGeometry,
+      );
       scene.add(interior.group);
       await nextFrame();
       if (disposed) return;

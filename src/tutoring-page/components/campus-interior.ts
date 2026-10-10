@@ -233,6 +233,7 @@ export function buildInterior(
   mergeGeometries: (g: any[]) => any,
   aniso: number,
   track: <T extends { dispose: () => void }>(item: T) => T,
+  RoundedBoxGeometry: any,
 ): Interior {
   const group = new THREE.Group();
   const lights: any[] = [];
@@ -335,7 +336,7 @@ export function buildInterior(
   // detector also picked up their icons as wall segments, which would stand
   // inside them and poke through their tops.
   const solids: [number, number, number, number][] = [
-    [376, 313, 72, 70],
+    [362, 313, 72, 70],
     [1174, 313, 72, 70],
     [457, 218, 71, 69],
     ...PLAN_PADS,
@@ -392,7 +393,9 @@ export function buildInterior(
   });
 
   // ---- lifts --------------------------------------------------------------
-  [376, 1174].forEach((x) => {
+  // The west lift sat only 2 plan-px shy of the IEEE room's west wall (450),
+  // close enough to visibly poke into the room; it's nudged further west.
+  [362, 1174].forEach((x) => {
     const w = 72;
     const h = 70;
     const cx = planX(x + w / 2);
@@ -645,10 +648,122 @@ export function buildInterior(
       group.add(g);
     });
   }
+
+  // floating shelf on the west wall, above the monitor desk: a bit of bench
+  // equipment on display rather than bare wall over the lab chairs.
+  {
+    const shelfMat = std({ color: "#15171a", roughness: 0.5, metalness: 0.2 });
+    const shelfY = FLOOR_Y + 0.05;
+    const shelfX = rx0 + tk / 2 + 0.0065;
+    const shelfZ0 = planZ(north + 4);
+    const shelfZ1 = planZ(south - 4);
+    const shelfLen = shelfZ1 - shelfZ0;
+    box(0.012, 0.0016, shelfLen, shelfX, shelfY, (shelfZ0 + shelfZ1) / 2, shelfMat);
+
+    const caseMat = std({ color: "#1c1e22", roughness: 0.4, metalness: 0.35 });
+    const knobMat = std({ color: "#3a3f46", roughness: 0.5, metalness: 0.5 });
+    const traceMat = std({
+      color: "#041008",
+      emissive: "#4ee07a",
+      emissiveIntensity: 1.1,
+      roughness: 0.3,
+    });
+    const dispMat = std({
+      color: "#07131c",
+      emissive: "#5ec2ff",
+      emissiveIntensity: 0.9,
+      roughness: 0.3,
+    });
+    const topY = shelfY + 0.0008;
+
+    // Oscilloscope: squat case, a glowing trace on its face, three knobs.
+    const oscilloscope = (z: number) => {
+      const g = new THREE.Group();
+      g.position.set(shelfX, topY, z);
+      const body = new THREE.Mesh(
+        track(new RoundedBoxGeometry(0.009, 0.0068, 0.007, 1, 0.0006)),
+        caseMat,
+      );
+      body.position.set(0, 0.0034, 0);
+      const screen = new THREE.Mesh(track(new THREE.PlaneGeometry(0.0054, 0.004)), traceMat);
+      screen.rotation.y = Math.PI / 2;
+      screen.position.set(0.0046, 0.0042, 0);
+      g.add(body, screen);
+      for (let i = 0; i < 3; i++) {
+        const knob = new THREE.Mesh(
+          track(new THREE.CylinderGeometry(0.0005, 0.0005, 0.0006, 10)),
+          knobMat,
+        );
+        knob.rotation.z = Math.PI / 2;
+        knob.position.set(0.0046, 0.0014, -0.0022 + i * 0.0022);
+        g.add(knob);
+      }
+      g.traverse((o: any) => (o.castShadow = true));
+      group.add(g);
+    };
+
+    // Waveform generator: low, wide case, a small readout and a row of knobs.
+    const wavegen = (z: number) => {
+      const g = new THREE.Group();
+      g.position.set(shelfX, topY, z);
+      const body = new THREE.Mesh(
+        track(new RoundedBoxGeometry(0.0115, 0.0036, 0.0062, 1, 0.0005)),
+        caseMat,
+      );
+      body.position.set(0, 0.0018, 0);
+      const disp = new THREE.Mesh(track(new THREE.PlaneGeometry(0.004, 0.0016)), dispMat);
+      disp.rotation.y = Math.PI / 2;
+      disp.position.set(0.0059, 0.0024, -0.0016);
+      g.add(body, disp);
+      for (let i = 0; i < 4; i++) {
+        const knob = new THREE.Mesh(
+          track(new THREE.CylinderGeometry(0.0004, 0.0004, 0.0005, 10)),
+          knobMat,
+        );
+        knob.rotation.z = Math.PI / 2;
+        knob.position.set(0.006, 0.0022, 0.0004 + i * 0.0014);
+        g.add(knob);
+      }
+      g.traverse((o: any) => (o.castShadow = true));
+      group.add(g);
+    };
+
+    const at = (f: number) => shelfZ0 + shelfLen * f;
+    oscilloscope(at(0.16));
+    wavegen(at(0.4));
+    oscilloscope(at(0.63));
+    wavegen(at(0.85));
+  }
+
   // counters under the window, and the wall stubs between them
   counterFrom(sx(125), sx(415), 7);
   stubFrom(sx(418), north - 1, sx(465), sy(330));
-  counterFrom(sx(465), sx(548), 8);
+  // the middle bay is a free-standing black table (same footprint as the
+  // counter it replaces) with a single monitor, for the lone chair in front of it
+  {
+    const tblX0 = sx(465);
+    const tblX1 = sx(548);
+    tableFrom(tblX0, north, tblX1, north + 8, std({ color: "#17181b", roughness: 0.4 }));
+    const bezel2 = std({ color: "#0d0e10", roughness: 0.35, metalness: 0.3 });
+    const glow2 = std({ color: "#0b1118", emissive: "#4f8fd0", emissiveIntensity: 0.7, roughness: 0.15 });
+    const topY = FLOOR_Y + 0.0012 + TABLE_H + 0.0013;
+    const mx = planX((tblX0 + tblX1) / 2);
+    const mz = planZ(north + 4);
+    const g = new THREE.Group();
+    g.position.set(mx, topY, mz);
+    // stand: foot, neck, then the panel facing south, into the room
+    const foot = new THREE.Mesh(track(new THREE.BoxGeometry(0.0055, 0.0005, 0.0045)), bezel2);
+    foot.position.set(0, 0.00025, 0.0004);
+    const neck = new THREE.Mesh(track(new THREE.BoxGeometry(0.0009, 0.0052, 0.0009)), bezel2);
+    neck.position.set(0, 0.003, -0.0002);
+    const panel = new THREE.Mesh(track(new THREE.BoxGeometry(0.0128, 0.0078, 0.0007)), bezel2);
+    panel.position.set(0, 0.0074, 0);
+    const screen = new THREE.Mesh(track(new THREE.PlaneGeometry(0.0118, 0.0068)), glow2);
+    screen.position.set(0, 0.0074, 0.00039);
+    g.add(foot, neck, panel, screen);
+    g.traverse((o: any) => (o.castShadow = true));
+    group.add(g);
+  }
   stubFrom(sx(713), north - 1, sx(770), sy(360));
   counterFrom(sx(770), sx(1005), 8);
   // table jutting out from the north wall, chairs either side
@@ -699,26 +814,37 @@ export function buildInterior(
       const lift = new THREE.CylinderGeometry(0.0008, 0.0011, 0.0075, 8);
       lift.translate(0, 0.0064, 0);
       parts.push(lift);
-      const seat = new THREE.BoxGeometry(0.0108, 0.0028, 0.0108);
+      // Seat, back, headrest and arms are rounded boxes (extra segments plus
+      // a small edge radius), so the chair reads as upholstered and more
+      // finished instead of flat-cut foam.
+      const seat = new RoundedBoxGeometry(0.0108, 0.0028, 0.0108, 2, 0.0007);
       seat.translate(0, 0.0112, 0);
       parts.push(seat);
-      const back = new THREE.BoxGeometry(0.0098, 0.0118, 0.0018);
+      const back = new RoundedBoxGeometry(0.0098, 0.0118, 0.0018, 2, 0.0006);
       back.rotateX(-0.12);
       back.translate(0, 0.0192, -0.0049);
       parts.push(back);
-      const head = new THREE.BoxGeometry(0.0052, 0.0028, 0.0016);
+      const head = new RoundedBoxGeometry(0.0052, 0.0028, 0.0016, 2, 0.0005);
       head.rotateX(-0.12);
       head.translate(0, 0.0272, -0.0055);
       parts.push(head);
       [-1, 1].forEach((sd) => {
-        const arm = new THREE.BoxGeometry(0.0013, 0.0011, 0.0058);
+        const arm = new RoundedBoxGeometry(0.0013, 0.0011, 0.0058, 1, 0.0003);
         arm.translate(sd * 0.0059, 0.0158, -0.0004);
         parts.push(arm);
-        const post = new THREE.BoxGeometry(0.0011, 0.0034, 0.0011);
+        const post = new RoundedBoxGeometry(0.0011, 0.0034, 0.0011, 1, 0.0003);
         post.translate(sd * 0.0059, 0.0135, 0.0012);
         parts.push(post);
       });
-      return parts;
+      // RoundedBoxGeometry (the seat/back/head/arms/posts) builds non-indexed
+      // geometry, unlike the plain Box/Sphere/Cylinder parts above, and
+      // mergeGeometries refuses to mix indexed with non-indexed inputs.
+      return parts.map((g) => {
+        if (!g.index) return g;
+        const ng = g.toNonIndexed();
+        g.dispose();
+        return ng;
+      });
     };
 
     // Lab-height rolling chair: tall gas lift, footring, round seat and a low back.
