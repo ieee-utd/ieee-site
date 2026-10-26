@@ -20,6 +20,10 @@ interface Team {
    * placeholder paragraph is used instead.
    */
   about?: AboutSection[];
+  /** Plain paragraphs shown as the long description. Used when `about` is not set. */
+  longDescription?: string[];
+  /** Overrides the shared placeholder stats for this branch. */
+  stats?: { value: string; label: string }[];
   /** What this branch does, as three short cards. Falls back to a shared placeholder. */
   highlights?: { title: string; text: string }[];
 }
@@ -41,6 +45,16 @@ const branches: Team[] = [
     description:
       "Plan and launch the projects, programs, and ideas that grow IEEE at UT Dallas.",
     category: "Initiatives",
+    longDescription: [
+      "The Initiatives Branch is IEEE UTD's event-planning arm, organizing technical workshops, networking events, club collaborations, and socials to engage with the ECE community and the broader UTD community, helping grow the chapter's impact through meaningful engagement.",
+      "The Initiatives Branch is for those who are looking to help plan, coordinate, and bring IEEE UTD events and experiences to life.",
+      "Members take away organizational, planning, leadership, and communications/social skills while learning how events are put together end-to-end.",
+    ],
+    stats: [
+      { value: "—", label: "Members" },
+      { value: "4", label: "Meetings a month" },
+      { value: "0", label: "Open roles" },
+    ],
     highlights: [
       { title: "Plan", text: "Turn ideas into programs and campaigns for IEEE at UT Dallas." },
       { title: "Organize", text: "Coordinate people, dates, and budgets so plans actually happen." },
@@ -236,12 +250,20 @@ export default function Branch() {
                             </div>
                           ))}
                         </div>
+                      ) : team.longDescription ? (
+                        <div className={styles.aboutSections}>
+                          {team.longDescription.map((paragraph) => (
+                            <p className={styles.detailsAbout} key={paragraph}>
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
                       ) : (
                         <p className={styles.detailsAbout}>{PLACEHOLDER.about}</p>
                       )}
 
                       <div className={styles.stats}>
-                        {PLACEHOLDER.stats.map((stat) => (
+                        {(team.stats || PLACEHOLDER.stats).map((stat) => (
                           <div className={styles.stat} key={stat.label}>
                             <span className={styles.statValue}>{stat.value}</span>
                             <span className={styles.statLabel}>{stat.label}</span>
