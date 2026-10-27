@@ -88,6 +88,25 @@ const branches: Team[] = [
     description:
       "Help fellow students succeed by running and supporting IEEE's tutoring program.",
     category: "Tutoring",
+    about: [
+      {
+        heading: "What it does",
+        text: "The IEEE Tutoring Branch provides academic support to students through tutoring sessions, exam reviews, and open-hour sessions where students can ask questions and receive help with challenging course material. Our goal is to help students strengthen their understanding of engineering concepts and succeed academically.",
+      },
+      {
+        heading: "Who it is for",
+        text: "The tutoring branch is open to all students who need additional academic support, particularly those taking electrical and computer engineering courses. Whether students are struggling with a topic, preparing for an exam, or simply looking to reinforce their understanding, they are welcome to attend our sessions.",
+      },
+      {
+        heading: "What members get out of being part of it",
+        text: "Students who attend our sessions can gain a better understanding of course material, improve their problem-solving skills, and build confidence in their academic abilities. For those who join as tutors, it's an opportunity to strengthen their own knowledge, develop communication and leadership skills, and gain experience helping fellow students succeed.",
+      },
+    ],
+    stats: [
+      { value: "12", label: "Tutors" },
+      { value: "0", label: "Meetings a month" },
+      { value: "1", label: "Open roles" },
+    ],
     highlights: [
       { title: "Schedule", text: "Plan the weekly tutoring calendar and keep sessions covered." },
       { title: "Support", text: "Help tutors and students with questions and requests." },
