@@ -11,9 +11,6 @@ const SHADOW_SIZE = 4096;
 // sizes instead (with hysteresis) and is snapped to whole shadow texels.
 const SPANS = [0.3, 0.55, 1.0, 1.9, 3.6, 7.5];
 
-/** Fastest the animation ever plays, as a share of the whole move per second. */
-const MAX_SPEED = 0.07;
-
 const smooth = (t: number) => t * t * (3 - 2 * t);
 /** Eases 0 below `a`, 1 above `b`. */
 function ramp(t: number, [a, b]: number[]) {
@@ -297,11 +294,10 @@ export default function CampusScene({
         last = now;
         windClock += dt;
         const target = Math.min(Math.max(scrollRef.current || 0, 0), 0.999);
-        // Eased, but capped at one top speed in both directions, so scrolling
-        // back plays at exactly the pace of scrolling forward however hard the wheel is flicked.
-        const step = (target - current) * (1 - Math.exp(-dt * 5));
-        const cap = MAX_SPEED * dt;
-        current += Math.min(Math.max(step, -cap), cap);
+        // The animation is a pure function of scroll position, so forward and reverse
+        // are identical and it never keeps drifting after you stop. A short ease only
+        // takes the stepping out of mouse-wheel notches.
+        current += (target - current) * (1 - Math.exp(-dt * 16));
         if (Math.abs(target - current) < 0.0002) current = target;
         const moving = current !== drawn;
         const swaying = !!(world.grassMaterial && world.grassMaterial.userData.shader);

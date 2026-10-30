@@ -20,9 +20,9 @@ const prefersReducedMotion = () =>
 
 const LocationSection = () => {
   const stageRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
-  // How far through the pinned scroll track the page is, 0..1. Read by the scene.
+  // How far through the animation we are, 0..1. Read by the scene.
   const scrollRef = useRef(0);
   const [inView, setInView] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -54,45 +54,121 @@ const LocationSection = () => {
     };
   }, [still]);
 
-  // The map is pinned while a tall track scrolls past, and that scroll drives
-  // the animation. The site's mandatory scroll snapping would drag the page out
-  // of the track mid-animation, so it is switched off while the track is showing.
+  // The map locks the page while it plays. Wheel, touch and keys drive the
+  // animation instead of scrolling, so it always runs to the end before the page
+  // moves on (and back to the start before it lets you up). The animation is a
+  // pure function of `scrollRef`, so forward and reverse run identically.
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track || still) return;
-    const root = document.documentElement;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      const rect = track.getBoundingClientRect();
-      const span = rect.height - window.innerHeight;
-      scrollRef.current = span > 0 ? Math.min(Math.max(-rect.top / span, 0), 1) : 0;
+    const section = sectionRef.current;
+    if (!section || still) return;
+
+    const WHEEL_SPAN = 4200; // px of wheel travel for the whole animation
+    const TOUCH_SPAN = 1500; // px of finger travel
+    const KEY_STEP = 0.06;
+    const DWELL = 450; // ms a finished animation holds before the page may move on
+
+    let engaged = false;
+    let canEngage = true;
+    let lastTop = section.getBoundingClientRect().top;
+    let heldUntil = 0;
+    let touchY = 0;
+    let leaving = false;
+
+    const top = () => section.getBoundingClientRect().top + window.scrollY;
+    const hold = () => {
+      heldUntil = performance.now() + DWELL;
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+
+    const engage = (fromBelow: boolean) => {
+      engaged = true;
+      canEngage = false;
+      leaving = false;
+      scrollRef.current = fromBelow ? 1 : 0;
+      window.scrollTo({ top: top(), behavior: "instant" as ScrollBehavior });
+      hold();
     };
-    let previous = "";
-    let snapOff = false;
-    const snap = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !snapOff) {
-        previous = root.style.scrollSnapType;
-        root.style.scrollSnapType = "none";
-        snapOff = true;
-      } else if (!entry.isIntersecting && snapOff) {
-        root.style.scrollSnapType = previous;
-        snapOff = false;
+
+    const release = (forward: boolean) => {
+      engaged = false;
+      leaving = true;
+      window.scrollTo({
+        top: forward ? top() + section.offsetHeight : top() - window.innerHeight,
+        behavior: "smooth",
+      });
+    };
+
+    /** Moves the animation by `delta` (a share of the whole). Returns false once it is done. */
+    const advance = (delta: number) => {
+      if (performance.now() < heldUntil) return;
+      const next = scrollRef.current + delta;
+      if (next >= 1 && delta > 0) {
+        if (scrollRef.current >= 1) release(true);
+        else {
+          scrollRef.current = 1;
+          hold();
+        }
+      } else if (next <= 0 && delta < 0) {
+        if (scrollRef.current <= 0) release(false);
+        else {
+          scrollRef.current = 0;
+          hold();
+        }
+      } else {
+        scrollRef.current = next;
       }
-    });
-    snap.observe(track);
-    update();
+    };
+
+    const onScroll = () => {
+      const t = section.getBoundingClientRect().top;
+      if (engaged) {
+        // a scrollbar drag or anything else that moved the page: pull it back
+        if (Math.abs(t) > 1) window.scrollTo({ top: top(), behavior: "instant" as ScrollBehavior });
+      } else {
+        if (!canEngage && Math.abs(t) > window.innerHeight * 0.5) canEngage = true;
+        if (canEngage && !leaving && Math.abs(t) < 6) engage(lastTop < 0);
+        if (leaving && Math.abs(t) >= window.innerHeight * 0.95) leaving = false;
+      }
+      lastTop = t;
+    };
+
+    const onWheel = (e: WheelEvent) => {
+      if (!engaged) return;
+      e.preventDefault();
+      const px = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
+      advance(px / WHEEL_SPAN);
+    };
+    const onTouchStart = (e: TouchEvent) => {
+      touchY = e.touches[0].clientY;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (!engaged) return;
+      e.preventDefault();
+      const y = e.touches[0].clientY;
+      advance((touchY - y) / TOUCH_SPAN);
+      touchY = y;
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (!engaged) return;
+      const forward = ["ArrowDown", "PageDown", " ", "End"].includes(e.key) && !(e.key === " " && e.shiftKey);
+      const backward = ["ArrowUp", "PageUp", "Home"].includes(e.key) || (e.key === " " && e.shiftKey);
+      if (!forward && !backward) return;
+      e.preventDefault();
+      advance(forward ? KEY_STEP : -KEY_STEP);
+    };
+
+    // Landing here already (a reload, or a link straight to it).
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      snap.disconnect();
-      if (raf) cancelAnimationFrame(raf);
-      if (snapOff) root.style.scrollSnapType = previous;
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
     };
   }, [still]);
 
@@ -122,8 +198,7 @@ const LocationSection = () => {
   }
 
   return (
-    <div className={styles.track} ref={trackRef}>
-    <section className={styles.fullscreen} data-nav-surface="light">
+    <section className={styles.fullscreen} data-nav-surface="light" ref={sectionRef}>
       <div className={styles.stage} ref={stageRef}>
         <img
           src={utdMap}
@@ -161,7 +236,6 @@ const LocationSection = () => {
       </div>
       <div className={styles.progress} ref={progressRef} />
     </section>
-    </div>
   );
 };
 export default LocationSection;
