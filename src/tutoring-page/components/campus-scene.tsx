@@ -292,7 +292,7 @@ export default function CampusScene({
         last = now;
         windClock += dt;
         const target = Math.min(Math.max(scrollRef.current || 0, 0), 0.999);
-        current += (target - current) * (1 - Math.exp(-dt * 9));
+        current += (target - current) * (1 - Math.exp(-dt * 5));
         if (Math.abs(target - current) < 0.0002) current = target;
         const moving = current !== drawn;
         const swaying = !!(world.grassMaterial && world.grassMaterial.userData.shader);
