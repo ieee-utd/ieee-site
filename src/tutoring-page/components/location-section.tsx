@@ -62,9 +62,9 @@ const LocationSection = () => {
     const section = sectionRef.current;
     if (!section || still) return;
 
-    const WHEEL_SPAN = 4200; // px of wheel travel for the whole animation
-    const TOUCH_SPAN = 1500; // px of finger travel
-    const KEY_STEP = 0.06;
+    const WHEEL_SPAN = 14000; // px of wheel travel for the whole animation
+    const TOUCH_SPAN = 5000; // px of finger travel
+    const KEY_STEP = 0.02;
     const DWELL = 450; // ms a finished animation holds before the page may move on
 
     let engaged = false;
@@ -135,7 +135,8 @@ const LocationSection = () => {
       if (!engaged) return;
       e.preventDefault();
       const px = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;
-      advance(px / WHEEL_SPAN);
+      // one event never moves it far, so a hard flick can't speed it up, either way
+      advance(Math.max(-90, Math.min(90, px)) / WHEEL_SPAN);
     };
     const onTouchStart = (e: TouchEvent) => {
       touchY = e.touches[0].clientY;
