@@ -11,8 +11,8 @@ const ROUTE: [number, number][] = [
   [584, 432],
   [584, 346],
 ];
-const WIDTH = 13; // plan px
-const CORNER = 26; // plan px, how round the turns are
+const WIDTH = 8; // plan px
+const CORNER = 30; // plan px, how round the turns are
 const LIFT = 0.0014;
 
 /** Polyline with its corners rounded off, as dense points. */
@@ -117,11 +117,16 @@ export function buildRoute(
       .replace(
         "#include <color_fragment>",
         `#include <color_fragment>
-        float edge = smoothstep(0.62, 0.9, abs(vSide));
-        diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.1, 0.32, 0.8), edge);
-        float flow = smoothstep(0.55, 1.0, sin((vDist - uTime * 0.35) * 70.0));
-        diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.62, 0.8, 1.0), flow * 0.45 * (1.0 - edge));
-        diffuseColor.a *= 1.0 - smoothstep(0.92, 1.0, abs(vSide));`,
+        // frosted glass: translucent body, brighter toward the middle, a thin
+        // light rim, and one slow soft sheen that glides along the line
+        float a = abs(vSide);
+        float body = 1.0 - smoothstep(0.0, 1.0, a);
+        float rim = smoothstep(0.72, 0.9, a) * (1.0 - smoothstep(0.9, 1.0, a));
+        float sheen = pow(0.5 + 0.5 * sin((vDist - uTime * 0.12) * 14.0), 6.0);
+        vec3 deep = vec3(0.16, 0.42, 0.95);
+        vec3 light = vec3(0.62, 0.82, 1.0);
+        diffuseColor.rgb = mix(deep, light, body * 0.45 + rim * 0.55 + sheen * 0.18);
+        diffuseColor.a *= (0.5 + 0.2 * body + 0.3 * rim) * (1.0 - smoothstep(0.94, 1.0, a));`,
       );
     mat.userData.shader = shader;
   };
@@ -131,11 +136,11 @@ export function buildRoute(
 
   // destination pin where the line ends inside the room
   const end = ROUTE[ROUTE.length - 1];
-  const pinR = planLen(WIDTH) * 0.95;
+  const pinR = planLen(WIDTH) * 1.05;
   const ringGeo = track(new THREE.CircleGeometry(pinR, 32));
   const dotGeo = track(new THREE.CircleGeometry(pinR * 0.62, 32));
   const ringMat = track(
-    new THREE.MeshBasicMaterial({ color: "#ffffff", transparent: true, depthWrite: false, toneMapped: false }),
+    new THREE.MeshBasicMaterial({ color: "#cfe3ff", transparent: true, depthWrite: false, toneMapped: false }),
   );
   const dotMat = track(
     new THREE.MeshBasicMaterial({ color: "#2f7bff", transparent: true, depthWrite: false, toneMapped: false }),
@@ -165,8 +170,8 @@ export function buildRoute(
         sh.uniforms.uTime.value = time;
       }
       mat.opacity = fade;
-      ringMat.opacity = fade;
-      dotMat.opacity = fade;
+      ringMat.opacity = fade * 0.55;
+      dotMat.opacity = fade * 0.9;
       const pop = Math.min(Math.max((progress - 0.94) / 0.06, 0), 1);
       pin.visible = pop > 0;
       const s = 0.4 + 0.6 * pop * (2 - pop);
