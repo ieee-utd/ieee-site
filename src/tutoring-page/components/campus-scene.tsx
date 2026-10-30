@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { W, D } from "./campus-space";
 import { buildWorld } from "./campus-world";
 import { buildInterior } from "./campus-interior";
+import { buildRoute } from "./campus-route";
 import { BEATS, FOV, LOOP_SECONDS, Pose, cameraUp, makeRig } from "./campus-camera";
 
 const SHADOW_SIZE = 4096;
@@ -143,6 +144,8 @@ export default function CampusScene({
         roundedGeo.RoundedBoxGeometry,
       );
       scene.add(interior.group);
+      const route = buildRoute(THREE, track);
+      scene.add(route.group);
       await nextFrame();
       if (disposed) return;
 
@@ -232,6 +235,14 @@ export default function CampusScene({
         // Room lights come up as the camera comes down into the building.
         const glow = ramp(t, BEATS.lightsUp) * (1 - ramp(t, BEATS.lightsDown));
         interior.lights.forEach((l) => (l.intensity = glow * 0.022));
+
+        // The blue route line draws itself in as the camera looks down into the
+        // opened-up floor, and is gone again before the roof comes back.
+        route.update(
+          ramp(t, BEATS.route),
+          1 - ramp(t, BEATS.roofOn),
+          t * LOOP_SECONDS,
+        );
 
         if (progressRef.current) {
           progressRef.current.style.transform = "scaleX(" + t + ")";

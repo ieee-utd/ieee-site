@@ -32,6 +32,8 @@ export const BEATS = {
   roofOn: [0.955, 0.995],
   lightsUp: [0.42, 0.56],
   lightsDown: [0.84, 0.9],
+  // the blue directions line draws itself while the roof is off and the camera looks down
+  route: [0.4, 0.54],
   captions: [0.17, 0.35, 0.52, 0.86],
 };
 
