@@ -41,9 +41,9 @@ const TutoringPage = () => {
           </p>
         </section>
       </RevealOnScroll>
-      <RevealOnScroll>
-        <LocationSection />
-      </RevealOnScroll>
+      {/* Not wrapped in RevealOnScroll: its track is taller than the screen, so the
+          reveal's visibility threshold could never be met and it would stay hidden. */}
+      <LocationSection />
       <RevealOnScroll>
         <CoursesSection />
       </RevealOnScroll>
