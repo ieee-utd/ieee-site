@@ -62,9 +62,9 @@ const LocationSection = () => {
     const section = sectionRef.current;
     if (!section || still) return;
 
-    const WHEEL_SPAN = 14000; // px of wheel travel for the whole animation
-    const TOUCH_SPAN = 5000; // px of finger travel
-    const KEY_STEP = 0.02;
+    const WHEEL_SPAN = 22000; // px of wheel travel for the whole animation
+    const TOUCH_SPAN = 8000; // px of finger travel
+    const KEY_STEP = 0.012;
     const DWELL = 450; // ms a finished animation holds before the page may move on
 
     let engaged = false;

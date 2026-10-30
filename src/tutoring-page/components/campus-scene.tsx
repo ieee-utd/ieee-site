@@ -11,6 +11,9 @@ const SHADOW_SIZE = 4096;
 // sizes instead (with hysteresis) and is snapped to whole shadow texels.
 const SPANS = [0.3, 0.55, 1.0, 1.9, 3.6, 7.5];
 
+/** Seconds the camera takes to settle on the scroll position; bigger is silkier but laggier. */
+const SMOOTH_TIME = 0.55;
+
 const smooth = (t: number) => t * t * (3 - 2 * t);
 /** Eases 0 below `a`, 1 above `b`. */
 function ramp(t: number, [a, b]: number[]) {
@@ -281,6 +284,7 @@ export default function CampusScene({
       // The target is eased so wheel notches glide instead of stepping.
       let last = 0;
       let current = 0;
+      let velocity = 0;
       // Unbounded so the grass sway doesn't visibly snap once a lap.
       let windClock = 0;
       let drawn = -1;
@@ -295,10 +299,20 @@ export default function CampusScene({
         windClock += dt;
         const target = Math.min(Math.max(scrollRef.current || 0, 0), 0.999);
         // The animation is a pure function of scroll position, so forward and reverse
-        // are identical and it never keeps drifting after you stop. A short ease only
-        // takes the stepping out of mouse-wheel notches.
-        current += (target - current) * (1 - Math.exp(-dt * 16));
-        if (Math.abs(target - current) < 0.0002) current = target;
+        // are identical and it never keeps drifting after you stop. Wheel notches and
+        // trackpad bursts arrive as steps, so the camera follows through a critically
+        // damped spring: its speed changes smoothly, with no visible step per event.
+        const omega = 2 / SMOOTH_TIME;
+        const x = omega * dt;
+        const damp = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+        const change = current - target;
+        const temp = (velocity + omega * change) * dt;
+        velocity = (velocity - omega * temp) * damp;
+        current = target + (change + temp) * damp;
+        if (Math.abs(target - current) < 0.00005 && Math.abs(velocity) < 0.0005) {
+          current = target;
+          velocity = 0;
+        }
         const moving = current !== drawn;
         const swaying = !!(world.grassMaterial && world.grassMaterial.userData.shader);
         if (moving) {
