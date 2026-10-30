@@ -3,7 +3,7 @@ import { W, D } from "./campus-space";
 import { buildWorld } from "./campus-world";
 import { buildInterior } from "./campus-interior";
 import { buildRoute } from "./campus-route";
-import { BEATS, FOV, LOOP_SECONDS, Pose, cameraUp, makeRig } from "./campus-camera";
+import { BEATS, FOV, LOOP_SECONDS, Pose, cameraUp, makeRig, makeScrollRemap } from "./campus-camera";
 
 const SHADOW_SIZE = 4096;
 // The shadow frustum only ever takes these half-widths. A continuously
@@ -154,6 +154,7 @@ export default function CampusScene({
 
       // ---- camera ---------------------------------------------------------
       let rig = makeRig(13);
+      let remap = makeScrollRemap(rig);
       const pose: Pose = { pos: [0, 13, 0], look: [0, 0, 0], fov: FOV };
       const camPos = new THREE.Vector3();
       const camLook = new THREE.Vector3();
@@ -169,6 +170,7 @@ export default function CampusScene({
         // tighter axis so the map covers the view and no empty space shows.
         const half = Math.tan((FOV * Math.PI) / 360);
         rig = makeRig(Math.min(D / 2 / half, W / 2 / (half * aspect)) + 0.06);
+        remap = makeScrollRemap(rig);
       };
       resize();
       ro = new ResizeObserver(resize);
@@ -297,7 +299,7 @@ export default function CampusScene({
         const moving = current !== drawn;
         const swaying = !!(world.grassMaterial && world.grassMaterial.userData.shader);
         if (moving) {
-          apply(current);
+          apply(remap(current));
           drawn = current;
         }
         if (swaying) {

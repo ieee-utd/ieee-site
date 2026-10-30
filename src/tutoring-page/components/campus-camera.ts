@@ -197,3 +197,61 @@ export function makeRig(startY: number): CameraRig {
     },
   };
 }
+
+/**
+ * Scroll position -> loop time, so a scroll step always moves the view about
+ * the same amount. The keys are timed for a clock, so some stretches cover far
+ * more of the screen per unit of time than others (the plunge from the top-down
+ * shot, say) and would race by under a steady scroll. Each step is weighed by
+ * how much the picture changes: camera and target travel relative to how far
+ * the target is, plus the zoom. A share of plain time is kept in the mix so the
+ * stretches where only the roof or lights change still get some scroll.
+ */
+export function makeScrollRemap(rig: CameraRig, end = 0.999): (s: number) => number {
+  const N = 1600;
+  const a: Pose = { pos: [0, 0, 0], look: [0, 0, 0], fov: FOV };
+  const b: Pose = { pos: [0, 0, 0], look: [0, 0, 0], fov: FOV };
+  const raw: number[] = [];
+  rig.sample(0, a);
+  for (let i = 1; i <= N; i++) {
+    rig.sample((i / N) * end, b);
+    const dist = Math.hypot(b.look[0] - b.pos[0], b.look[1] - b.pos[1], b.look[2] - b.pos[2]) + 0.04;
+    const move =
+      Math.hypot(b.pos[0] - a.pos[0], b.pos[1] - a.pos[1], b.pos[2] - a.pos[2]) / dist +
+      Math.hypot(b.look[0] - a.look[0], b.look[1] - a.look[1], b.look[2] - a.look[2]) / dist +
+      Math.abs(Math.log(b.fov / a.fov)) * 2;
+    raw.push(move);
+    a.pos = [...b.pos] as V3;
+    a.look = [...b.look] as V3;
+    a.fov = b.fov;
+  }
+  // blur the cost so the pace changes gradually instead of in steps
+  const blurred = raw.map((_, i) => {
+    let sum = 0;
+    let n = 0;
+    for (let k = -40; k <= 40; k++) {
+      const j = i + k;
+      if (j >= 0 && j < N) {
+        sum += raw[j];
+        n++;
+      }
+    }
+    return sum / n;
+  });
+  const total = blurred.reduce((x, y) => x + y, 0) || 1;
+  const cum = [0];
+  blurred.forEach((c) => cum.push(cum[cum.length - 1] + 0.75 * (c / total) + 0.25 / N));
+
+  return (s) => {
+    const target = Math.min(Math.max(s, 0), 1) * cum[N];
+    let lo = 0;
+    let hi = N;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (cum[mid] <= target) lo = mid;
+      else hi = mid;
+    }
+    const span = cum[hi] - cum[lo] || 1;
+    return ((lo + (target - cum[lo]) / span) / N) * end;
+  };
+}
