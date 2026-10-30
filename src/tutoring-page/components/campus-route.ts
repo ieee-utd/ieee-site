@@ -2,13 +2,12 @@ import { planX, planZ, planLen } from "./campus-space";
 import { FLOOR_Y } from "./campus-interior";
 
 /**
- * The walking route to room 2.318, in plan pixels: from the main lobby, round the
- * west lift core, along the hallway, and in through the left-hand doorway.
+ * The walking route to room 2.318, in plan pixels: in from the bottom left, up past
+ * the two restrooms on the left, along the hallway, and in through the left-hand doorway.
  */
 const ROUTE: [number, number][] = [
-  [790, 272],
-  [355, 272],
-  [355, 432],
+  [358, 842],
+  [358, 432],
   [584, 432],
   [584, 346],
 ];
