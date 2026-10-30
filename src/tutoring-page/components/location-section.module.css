@@ -3,7 +3,7 @@
 .location_heading p { margin: 0 0 .45rem; color: var(--brand-orange); font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .location_heading h2 { margin: 0; color: var(--brand-blue); font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -.03em; }
 /* ---- full-screen scene ------------------------------------------------- */
-.track { position: relative; height: 1200vh; }
+.track { position: relative; height: 2000vh; }
 .fullscreen { position: sticky; top: 0; width: 100%; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; isolation: isolate; background: #dbe4ea; }
 .stage { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: linear-gradient(160deg, #e8eef3 0%, #dbe4ea 55%, #cfdae2 100%); }
 
