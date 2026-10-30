@@ -25,6 +25,8 @@ interface CampusSceneProps {
   onPhase: (phase: number) => void;
   onReady: () => void;
   progressRef: React.RefObject<HTMLDivElement>;
+  /** 0..1 through the pinned scroll track; the camera follows it instead of a clock. */
+  scrollRef: React.RefObject<number>;
 }
 
 export default function CampusScene({
@@ -32,6 +34,7 @@ export default function CampusScene({
   onPhase,
   onReady,
   progressRef,
+  scrollRef,
 }: CampusSceneProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   // Kept in refs so changing them never tears down the WebGL context.
@@ -271,13 +274,14 @@ export default function CampusScene({
       onReadyRef.current();
 
       // ---- run ------------------------------------------------------------
-      // Loop time only advances while the scene is on screen, so scrolling
-      // away and back resumes where it left off instead of snapping to the start.
+      // The loop is scrubbed by scroll: scrolling forward plays it forward,
+      // scrolling back plays it in reverse, and it holds still when scrolling stops.
+      // The target is eased so wheel notches glide instead of stepping.
       let last = 0;
-      let elapsed = 0;
-      // Unbounded (never wraps, unlike the camera's loop-relative `elapsed`)
-      // so the grass sway doesn't visibly snap once a lap.
+      let current = 0;
+      // Unbounded so the grass sway doesn't visibly snap once a lap.
       let windClock = 0;
+      let drawn = -1;
       const frame = (now: number) => {
         raf = requestAnimationFrame(frame);
         if (!playingRef.current) {
@@ -286,10 +290,17 @@ export default function CampusScene({
         }
         const dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
         last = now;
-        elapsed = (elapsed + dt) % LOOP_SECONDS;
         windClock += dt;
-        apply(elapsed / LOOP_SECONDS);
-        if (world.grassMaterial && world.grassMaterial.userData.shader) {
+        const target = Math.min(Math.max(scrollRef.current || 0, 0), 0.999);
+        current += (target - current) * (1 - Math.exp(-dt * 9));
+        if (Math.abs(target - current) < 0.0002) current = target;
+        const moving = current !== drawn;
+        const swaying = !!(world.grassMaterial && world.grassMaterial.userData.shader);
+        if (moving) {
+          apply(current);
+          drawn = current;
+        }
+        if (swaying) {
           world.grassMaterial.userData.shader.uniforms.uTime.value = windClock;
         }
         renderer.render(scene, camera);
@@ -301,7 +312,7 @@ export default function CampusScene({
       disposed = true;
       cleanup();
     };
-  }, [progressRef]);
+  }, [progressRef, scrollRef]);
 
   return <div ref={hostRef} style={{ position: "absolute", inset: 0 }} />;
 }

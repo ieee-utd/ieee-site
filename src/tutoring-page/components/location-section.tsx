@@ -20,7 +20,10 @@ const prefersReducedMotion = () =>
 
 const LocationSection = () => {
   const stageRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  // How far through the pinned scroll track the page is, 0..1. Read by the scene.
+  const scrollRef = useRef(0);
   const [inView, setInView] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
@@ -51,6 +54,48 @@ const LocationSection = () => {
     };
   }, [still]);
 
+  // The map is pinned while a tall track scrolls past, and that scroll drives
+  // the animation. The site's mandatory scroll snapping would drag the page out
+  // of the track mid-animation, so it is switched off while the track is showing.
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || still) return;
+    const root = document.documentElement;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const rect = track.getBoundingClientRect();
+      const span = rect.height - window.innerHeight;
+      scrollRef.current = span > 0 ? Math.min(Math.max(-rect.top / span, 0), 1) : 0;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    let previous = "";
+    let snapOff = false;
+    const snap = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !snapOff) {
+        previous = root.style.scrollSnapType;
+        root.style.scrollSnapType = "none";
+        snapOff = true;
+      } else if (!entry.isIntersecting && snapOff) {
+        root.style.scrollSnapType = previous;
+        snapOff = false;
+      }
+    });
+    snap.observe(track);
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      snap.disconnect();
+      if (raf) cancelAnimationFrame(raf);
+      if (snapOff) root.style.scrollSnapType = previous;
+    };
+  }, [still]);
+
   const description = (
     <p className={styles.location_text}>
       The tutoring room is located at ECSN 2.318. It is the room in the main
@@ -77,6 +122,7 @@ const LocationSection = () => {
   }
 
   return (
+    <div className={styles.track} ref={trackRef}>
     <section className={styles.fullscreen} data-nav-surface="light">
       <div className={styles.stage} ref={stageRef}>
         <img
@@ -91,6 +137,7 @@ const LocationSection = () => {
               onPhase={setPhase}
               onReady={() => setReady(true)}
               progressRef={progressRef}
+              scrollRef={scrollRef}
             />
           </Suspense>
         )}
@@ -114,6 +161,7 @@ const LocationSection = () => {
       </div>
       <div className={styles.progress} ref={progressRef} />
     </section>
+    </div>
   );
 };
 export default LocationSection;
